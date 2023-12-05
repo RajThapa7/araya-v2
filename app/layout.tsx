@@ -1,3 +1,4 @@
+import { Navbar } from "@/features";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
@@ -16,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} debug-screens `}>
+      <body
+        className={`${montserrat.className} debug-screens green-background`}
+      >
+        <Navbar />
         {children}
       </body>
     </html>
