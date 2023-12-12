@@ -23,7 +23,7 @@ const navItems = [
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
-    <nav className="flex flex-row justify-between pt-6 pb-4 px-6">
+    <nav className="flex flex-row justify-between pt-10 pb-4 px-6">
       <Image src={"/next.svg"} width={100} height={100} alt="logo" />
       <div className="gap-8 flex flex-row items-center justify-center">
         {navItems.map(({ icon, id, link, title }) => (

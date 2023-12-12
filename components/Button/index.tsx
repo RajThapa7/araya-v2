@@ -1,12 +1,20 @@
 "use client";
+import classNames from "@/utils/classNames";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function Button() {
+interface IButtonProps {
+  className?: string;
+}
+
+export default function Button({ className }: IButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <button
-      className="relative group outline outline-2 outline-primary text-primary rounded-md px-24 uppercase h-[68px]"
+      className={classNames(
+        className,
+        `relative group outline outline-2 outline-primary text-primary rounded-md px-24 uppercase h-[68px]`
+      )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
