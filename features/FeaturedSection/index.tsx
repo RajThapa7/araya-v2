@@ -20,9 +20,9 @@ export default function FeaturedSection() {
   return (
     <div className="px-6 bg-primary-dark py-20 lg:py-32">
       <div className="mx-auto max-w-screen-xl">
-        <div className="flex flex-col items-center gap-8 pb-24 lg:pb-48">
+        <div className="flex flex-col items-center gap-8 pb-24 lg:pb-44">
           <FaTree className="text-body text-4xl" />
-          <p className="text-body text-center text-xl md:text-2xl lg:text-3xl">
+          <p className="text-body text-center text-xl md:text-2xl lg:text-3xl max-w-2xl">
             Araya Arts is an ode to discovery, a love letter to life lived on
             the borderlands.
           </p>
