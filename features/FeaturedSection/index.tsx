@@ -1,4 +1,5 @@
 "use client";
+import { merriweather } from "@/app/fonts";
 import { Button } from "@/components";
 import Image from "next/image";
 import { FaTree } from "react-icons/fa";
@@ -20,19 +21,21 @@ export default function FeaturedSection() {
   return (
     <div className="px-6 bg-primary-dark py-20 lg:py-32">
       <div className="mx-auto max-w-screen-xl">
-        <div className="flex flex-col items-center gap-8 pb-24 lg:pb-44">
+        <div className="flex flex-col items-center gap-8 pb-24 lg:pb-40">
           <FaTree className="text-body text-4xl" />
-          <p className="text-body text-center text-xl md:text-2xl lg:text-3xl max-w-2xl">
+          <p
+            className={`text-body text-center text-xl md:text-2xl lg:text-3xl max-w-2xl ${merriweather.className}`}
+          >
             Araya Arts is an ode to discovery, a love letter to life lived on
             the borderlands.
           </p>
         </div>
         <section>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
-            <div className="grid place-content-center rounded bg-gray-100 pb-6">
+            <div className="grid place-content-center rounded pb-6">
               <div className="mx-auto max-w-md text-center lg:text-left">
                 <header>
-                  <h2 className="text-xl font-semibold text-header sm:text-3xl lg:text-4xl">
+                  <h2 className="text-2xl font-semibold text-header sm:text-3xl lg:text-4xl">
                     Watches
                   </h2>
 

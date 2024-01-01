@@ -52,7 +52,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className="pb-12">
+    <div className="pb-6 md:pb-8">
       <Slider {...settings}>
         {data?.map(({ _id, title, url }) => (
           <>
@@ -60,7 +60,7 @@ export default function Carousel() {
           </>
         ))}
       </Slider>
-      <div className="inline-flex pt-2 md:pt-4 pl-4 gap-4 text-sm">
+      <div className="inline-flex pt-2 md:pt-4 pl-8 gap-4 text-sm text-header">
         <p>
           {activeIndex + 1}/{data.length}
         </p>

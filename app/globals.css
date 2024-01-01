@@ -7,8 +7,20 @@
 }
 
 .green-background {
-  background: url("https://images.unsplash.com/photo-1476553986076-d59060d397e4?q=80&w=1516&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    no-repeat;
+  /* background: url("https://images.unsplash.com/photo-1476553986076-d59060d397e4?q=80&w=1516&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    no-repeat; */
+  /* background: linear-gradient(#0b1d17, #0b1d17), url("../public/araya.png"); */
+  /* background: linear-gradient(#143429, #143429), url("../public/araya.png"); */
+  background: linear-gradient(#0e251d, #0e251d), url("../public/araya.png");
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
+  background-blend-mode: color;
+}
+
+.green-background1 {
+  background-image: url("../public/img2.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
