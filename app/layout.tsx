@@ -1,5 +1,6 @@
-import Navbar from "@/features/Navbar";
-import type { Metadata } from "next";
+import { ScrollUp } from "@/components";
+import { Navbar } from "@/features";
+import { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={`${montserrat.className} debug-screens`}>
         <Navbar />
         {children}
+        <ScrollUp />
       </body>
     </html>
   );

@@ -35,7 +35,9 @@ export default function FeaturedSection() {
             <div className="grid place-content-center rounded pb-6">
               <div className="mx-auto max-w-md text-center lg:text-left">
                 <header>
-                  <h2 className="text-2xl font-semibold text-header sm:text-3xl lg:text-4xl">
+                  <h2
+                    className={`text-2xl !font-semibold text-header sm:text-3xl lg:text-4xl ${merriweather.className}`}
+                  >
                     Watches
                   </h2>
 

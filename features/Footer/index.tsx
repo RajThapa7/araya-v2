@@ -1,3 +1,6 @@
+import { FaFacebook, FaPhoneAlt, FaPinterest, FaTiktok } from "react-icons/fa";
+import { IoIosMail } from "react-icons/io";
+import { RiInstagramFill } from "react-icons/ri";
 const footerLinks = [
   {
     id: 0,
@@ -34,6 +37,29 @@ const footerLinks = [
         link: "#",
       },
     ],
+  },
+];
+
+const socialMediaData = [
+  {
+    id: 0,
+    link: "#",
+    icon: <FaFacebook size={26} />,
+  },
+  {
+    id: 1,
+    link: "#",
+    icon: <RiInstagramFill size={30} />,
+  },
+  {
+    id: 2,
+    link: "#",
+    icon: <FaPinterest size={26} />,
+  },
+  {
+    id: 3,
+    link: "#",
+    icon: <FaTiktok size={26} />,
   },
 ];
 
@@ -197,6 +223,38 @@ export default function Footer() {
             </div>
 
             <div className="mt-8 border-t border-primary-dark pt-8 text-primary">
+              <div className="flex flex-col gap-6 mb-6 sm:mb-10 sm:flex-row items-center">
+                <div className="flex flex-row gap-6 items-center">
+                  {socialMediaData.map(({ icon, link, id }) => (
+                    <a
+                      key={id}
+                      href={link}
+                      target="_blank"
+                      className="transition-smooth hover:opacity-70"
+                    >
+                      {icon}
+                    </a>
+                  ))}
+                </div>
+                <div className="flex  flex-col sm:flex-row gap-4 items-center sm:items-start">
+                  <div className="inline-flex gap-3 items-center">
+                    <IoIosMail size={22} className="text-accent" />
+                    <a
+                      href="mailto:jyangoraj@gmail.com"
+                      target="_blank"
+                      className="text-primary font-medium text-sm"
+                    >
+                      demo@gmail.com
+                    </a>
+                  </div>
+                  <div className="inline-flex gap-3 items-center">
+                    <FaPhoneAlt size={20} className="text-accent" />
+                    <p className="text-primary font-medium text-sm">
+                      +977 9848741130
+                    </p>
+                  </div>
+                </div>
+              </div>
               <ul className="flex flex-wrap gap-4 text-xs">
                 <li>
                   <a href="#" className=" transition hover:opacity-75">
@@ -220,7 +278,7 @@ export default function Footer() {
                 </li>
               </ul>
 
-              <p className="mt-8 text-xs text-primary">
+              <p className="mt-6 text-xs text-primary">
                 &copy; 2024. Araya Arts . All rights reserved.
               </p>
             </div>

@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  /* scrollbar-gutter: stable; */
+}
+
 .transition-smooth {
   @apply transition-all duration-200 ease-in-out;
 }
 
 .green-background {
-  /* background: url("https://images.unsplash.com/photo-1476553986076-d59060d397e4?q=80&w=1516&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    no-repeat; */
-  /* background: linear-gradient(#0b1d17, #0b1d17), url("../public/araya.png"); */
-  /* background: linear-gradient(#143429, #143429), url("../public/araya.png"); */
   background: linear-gradient(#0e251d, #0e251d), url("../public/araya.png");
   background-position: center;
   background-size: cover;
@@ -23,4 +23,11 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.scroll-to-top {
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  right: 15px !important;
 }

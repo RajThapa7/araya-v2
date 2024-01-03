@@ -37,6 +37,8 @@ export default function Testimonials() {
     speed: 800,
     autoplay: true,
     autoplayspeed: 7000,
+    nextArrow: "",
+    prevArrow: "",
     responsive: [
       {
         breakpoint: 1280,

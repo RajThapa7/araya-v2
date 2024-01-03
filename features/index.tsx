@@ -1,7 +1,9 @@
-export * from "./CTA";
-export * from "./Carousel";
-export * from "./FeaturedSection";
-export * from "./Footer";
-export * from "./HeroSection";
-export * from "./Navbar";
-export * from "./Testimonials";
+export { default as CTA } from "./CTA";
+export { default as Carousel } from "./Carousel";
+export { default as ContactUs } from "./ContactUs";
+export { default as FeaturedSection } from "./FeaturedSection";
+export { default as Footer } from "./Footer";
+export { default as HeroSection } from "./HeroSection";
+export { default as Navbar } from "./Navbar";
+export { default as SecondFeaturedSection } from "./SecondFeaturedSection";
+export { default as Testimonials } from "./Testimonials";
