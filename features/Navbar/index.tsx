@@ -1,4 +1,5 @@
 "use client";
+import { merriweather } from "@/app/fonts";
 import { HamburgMenu } from "@/components";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -39,36 +40,36 @@ const navItems = [
   },
 ];
 
-// const list = {
-//   visible: {
-//     width: "100vw",
-//     x: 0,
-//     opacity: 1,
-//     transition: {
-//       when: "beforeChildren",
-//       staggerChildren: 0.05,
-//       duration: 0.4,
-//     },
-//   },
-//   hidden: {
-//     // width: "100px",
-//     x: -10000,
-//     opacity: 0,
-//     transition: {
-//       when: "afterChildren",
-//       staggerChildren: 0.05,
-//       duration: 0.6,
-//     },
-//   },
-// };
+const list = {
+  visible: {
+    width: "100vw",
+    // x: 0,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.05,
+      duration: 0.5,
+      ease: [0.5, 1, 0.89, 1],
+    },
+  },
+  hidden: {
+    width: 0,
+    // x: "-100vw",
+    transition: {
+      when: "afterChildren",
+      staggerChildren: 0.05,
+      duration: 0.7,
+      ease: [0.65, 0, 0.35, 1],
+    },
+  },
+};
 
-// const item = {
-//   visible: { opacity: 1, x: 0 },
-//   hidden: { opacity: 0, x: -100 },
-// };
+const item = {
+  visible: { opacity: 1, x: 0 },
+  hidden: { opacity: 0, x: 100 },
+};
 
 export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
 
   const scrollBarCompensation = useMemo(
     () => window.innerWidth - document.body.offsetWidth,
@@ -76,14 +77,14 @@ export default function Navbar() {
   );
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflowY = "hidden";
+      // document.body.style.overflowY = "hidden";
       // document.body.style.backgroundColor = "rgb(54 128 57)";
-      document.body.style.paddingRight = `${scrollBarCompensation}px`;
+      // document.body.style.paddingRight = `${scrollBarCompensation}px`;
     }
     return () => {
-      document.body.style.overflowY = "scroll";
+      // document.body.style.overflowY = "scroll";
       // document.body.style.backgroundColor = "";
-      document.body.style.paddingRight = "";
+      // document.body.style.paddingRight = "";
     };
   }, [isMobileMenuOpen, scrollBarCompensation]);
 
@@ -92,7 +93,8 @@ export default function Navbar() {
       className="flex flex-row justify-between pt-10 pb-4 px-6 bg-transparent absolute top-0 left-0 w-full"
       style={{
         paddingRight: isMobileMenuOpen
-          ? `${scrollBarCompensation + 24}px`
+          ? // ? `${scrollBarCompensation + 24}px`
+            `24px`
           : " 24px",
       }}
     >
@@ -111,25 +113,58 @@ export default function Navbar() {
         <HamburgMenu {...{ isMobileMenuOpen, setIsMobileMenuOpen }} />
       </div>
       <AnimatePresence>
-        <motion.div
-          transition={{ duration: 1 }}
-          animate={isMobileMenuOpen ? { width: "100vw" } : { width: 0 }}
-          // initial="hidden"
-          // animate="visible"
-          // exit="hidden"
-          // variants={list}
-          className=" bg-accent-dark fixed top-0 h-screen left-0 bg-opacity-90 z-40"
-        >
-          <div className="flex flex-col gap-y-6 text-center">
-            {navLinks.map(({ id, title, link, icon }) => (
-              <motion.div key={id} className="text-lg">
-                <Link href={link} onClick={() => setIsMobileMenuOpen(false)}>
-                  {title}
-                </Link>
+        {isMobileMenuOpen && (
+          <motion.div
+            layout
+            transition={{ duration: 1 }}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={list}
+            className=" fixed top-0 h-screen left-0 z-40"
+          >
+            <div className="flex">
+              <motion.div className="flex flex-col mobile-menu-background items-center justify-start w-full h-screen pt-32 lg:items-end">
+                <div className="flex flex-col gap-6">
+                  {navLinks.map(({ id, title, link, icon }) => (
+                    <motion.div
+                      key={id}
+                      className={`${merriweather.className} lg:pr-20 text-[22px] lg:text-2xl text-primary font-bold`}
+                      variants={item}
+                    >
+                      <Link
+                        href={link}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {title}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
-            ))}
-          </div>
-        </motion.div>
+              <motion.div className="h-screen hidden lg:flex lg:w-[45%] bg-accent-dark">
+                <div className="flex flex-col items-center justify-start w-full h-screen pt-32 lg:items-start">
+                  <div className="flex flex-col gap-6">
+                    {navLinks.map(({ id, title, link, icon }) => (
+                      <motion.div
+                        key={id}
+                        className={`${merriweather.className} text-[22px] lg:pl-20 lg:text-2xl text-primary font-bold`}
+                        variants={item}
+                      >
+                        <Link
+                          href={link}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {title}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </nav>
   );

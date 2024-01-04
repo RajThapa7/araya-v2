@@ -10,6 +10,17 @@ html {
   @apply transition-all duration-200 ease-in-out;
 }
 
+.mobile-menu-background {
+  background-color: #265e46;
+}
+@media only screen and (min-width: 1024px) {
+  .mobile-menu-background {
+    background: linear-gradient(#0e251d, #0e251d), url("../public/img1.jpeg");
+    background-blend-mode: color;
+    background-position: center;
+  }
+}
+
 .green-background {
   background: linear-gradient(#0e251d, #0e251d), url("../public/araya.png");
   background-position: center;
