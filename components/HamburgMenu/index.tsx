@@ -21,13 +21,16 @@ export default function HamburgMenu({
           rotate: isMobileMenuOpen ? 45 : 0,
           y: isMobileMenuOpen ? 14 : 0,
         }}
+        transition={{ duration: 0.5 }}
         className="h-[3px] bg-gray-300 w-10 rounded-full group-hover:bg-pink-400 transition-colors"
       ></motion.div>
       <motion.div
+        transition={{ duration: 0.2 }}
         animate={{ width: isMobileMenuOpen ? 0 : 40 }}
         className="group-hover:bg-pink-400 h-[3px] bg-gray-300 rounded-full w-10 transition-colors"
       ></motion.div>
       <motion.div
+        transition={{ duration: 0.5 }}
         animate={{
           rotate: isMobileMenuOpen ? 135 : 0,
           y: isMobileMenuOpen ? -3 : 0,
