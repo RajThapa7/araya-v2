@@ -9,16 +9,16 @@ export default function SecondFeaturedSection() {
       <div className="mx-auto max-w-screen-xl">
         <div
           className=" text-center
-         md:text-left flex flex-col-reverse md:flex-row justify-between gap-8 md:gap-24"
+         md:text-left flex flex-col-reverse md:flex-row md:items-center justify-between gap-8 md:gap-24"
         >
           <div className="flex-1">
             <h2
               className={`text-2xl !font-semibold text-header sm:text-3xl lg:text-4xl ${merriweather.className}`}
             >
-              Lorem, ipsum
+              Watches
             </h2>
 
-            <p className="text-body mt-5 mb-10">
+            <p className="text-body text-md md:text-lg mt-5 mb-10">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
               egestas tempus tellus etiam sed. Quam a scelerisque amet
               ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
@@ -28,14 +28,12 @@ export default function SecondFeaturedSection() {
             <Button isSecondary>Order Now</Button>
           </div>
 
-          <div className="relative flex flex-1 w-full aspect-video mx-auto">
+          <div className="relative w-full max-w-lg aspect-[4/3] mx-auto">
             <Image
               alt="Student"
               src="https://images.unsplash.com/photo-1464582883107-8adf2dca8a9f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              className="object-fill"
+              className="object-cover"
               fill
-              //   width={200}
-              //   height={200}
             />
           </div>
         </div>

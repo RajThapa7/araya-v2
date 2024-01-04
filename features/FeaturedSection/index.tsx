@@ -24,7 +24,7 @@ export default function FeaturedSection() {
         <div className="flex flex-col items-center gap-8 pb-24 lg:pb-40">
           <FaTree className="text-body text-4xl" />
           <p
-            className={`text-body text-center text-xl md:text-2xl lg:text-3xl max-w-2xl ${merriweather.className}`}
+            className={`text-body !leading-snug text-center text-2xl md:text-3xl lg:text-4xl max-w-3xl ${merriweather.className}`}
           >
             Araya Arts is an ode to discovery, a love letter to life lived on
             the borderlands.

@@ -40,7 +40,7 @@ const footerLinks = [
   },
 ];
 
-const socialMediaData = [
+export const socialMediaData = [
   {
     id: 0,
     link: "#",

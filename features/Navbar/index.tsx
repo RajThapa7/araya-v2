@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { FaStore } from "react-icons/fa";
+import { socialMediaData } from "../Footer";
 
 const navLinks = [
   {
@@ -59,6 +60,7 @@ const list = {
       staggerChildren: 0.05,
       duration: 0.7,
       ease: [0.65, 0, 0.35, 1],
+      // ease: "linear",
     },
   },
 };
@@ -69,7 +71,7 @@ const item = {
 };
 
 export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollBarCompensation = useMemo(
     () => window.innerWidth - document.body.offsetWidth,
@@ -124,7 +126,10 @@ export default function Navbar() {
             className=" fixed top-0 h-screen left-0 z-40"
           >
             <div className="flex">
-              <motion.div className="flex flex-col mobile-menu-background items-center justify-start w-full h-screen pt-32 lg:items-end">
+              <motion.div
+                layout
+                className="flex flex-col mobile-menu-background items-center justify-start w-full h-screen pt-32 lg:items-end"
+              >
                 <div className="flex flex-col gap-6">
                   {navLinks.map(({ id, title, link, icon }) => (
                     <motion.div
@@ -142,7 +147,10 @@ export default function Navbar() {
                   ))}
                 </div>
               </motion.div>
-              <motion.div className="h-screen hidden lg:flex lg:w-[45%] bg-accent-dark">
+              <motion.div
+                layout
+                className="h-screen hidden lg:flex lg:w-[45%] bg-accent-dark"
+              >
                 <div className="flex flex-col items-center justify-start w-full h-screen pt-32 lg:items-start">
                   <div className="flex flex-col gap-6">
                     {navLinks.map(({ id, title, link, icon }) => (
@@ -159,6 +167,21 @@ export default function Navbar() {
                         </Link>
                       </motion.div>
                     ))}
+                    <motion.div
+                      variants={item}
+                      className="flex flex-row gap-6 items-center lg:pl-20 text-primary"
+                    >
+                      {socialMediaData.map(({ icon, link, id }) => (
+                        <a
+                          key={id}
+                          href={link}
+                          target="_blank"
+                          className="transition-smooth hover:opacity-70"
+                        >
+                          {icon}
+                        </a>
+                      ))}
+                    </motion.div>{" "}
                   </div>
                 </div>
               </motion.div>
