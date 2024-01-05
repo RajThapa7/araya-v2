@@ -1,48 +1,4 @@
+@import url(./app.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html {
-  /* scrollbar-gutter: stable; */
-}
-
-.transition-smooth {
-  @apply transition-all duration-200 ease-in-out;
-}
-
-.mobile-menu-background {
-  background-color: #265e46;
-}
-@media only screen and (min-width: 1024px) {
-  .mobile-menu-background {
-    background: linear-gradient(#0e251d, #0e251d), url("../public/img1.jpeg");
-    background-blend-mode: color;
-  }
-}
-
-.green-background {
-  background: linear-gradient(#0e251d, #0e251d), url("../public/araya.png");
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  background-blend-mode: color;
-  height: 100%;
-  transition: height 1000000s ease;
-  -webkit-transition: height 1000000s ease;
-  -moz-transition: height 1000000s ease;
-  -o-transition: height 1000000s ease;
-}
-
-.green-background1 {
-  background-image: url("../public/img2.jpeg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.scroll-to-top {
-  width: auto !important;
-  height: auto !important;
-  background: transparent !important;
-  right: 15px !important;
-}

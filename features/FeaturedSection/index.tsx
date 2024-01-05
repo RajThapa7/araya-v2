@@ -1,6 +1,7 @@
 "use client";
 import { merriweather } from "@/app/fonts";
 import { Button } from "@/components";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaTree } from "react-icons/fa";
 
@@ -17,22 +18,81 @@ const data = [
   },
 ];
 
+const card = {
+  inView: {
+    y: 0,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.05,
+      duration: 0.5,
+      ease: [0.5, 1, 0.89, 1],
+    },
+  },
+  hidden: {
+    y: 300,
+  },
+};
+
+const title = {
+  inView: {
+    x: 0,
+    transition: {
+      duration: 0.3,
+      ease: [0.5, 1, 0.89, 1],
+    },
+  },
+  hidden: {
+    x: -600,
+  },
+};
+
+const quotes = {
+  inView: {
+    opacity: 1,
+    transition: {
+      ease: [0.5, 1, 0.89, 1],
+    },
+  },
+  hidden: {
+    opacity: 0,
+  },
+};
+
 export default function FeaturedSection() {
   return (
     <div className="px-6 bg-primary-dark py-20 lg:py-32">
-      <div className="mx-auto max-w-screen-xl">
-        <div className="flex flex-col items-center gap-8 pb-24 lg:pb-40">
-          <FaTree className="text-body text-4xl" />
+      <motion.div
+        variants={card}
+        initial="hidden"
+        whileInView="inView"
+        viewport={{ once: true }}
+        className="mx-auto max-w-screen-xl"
+      >
+        <motion.div
+          viewport={{ once: true }}
+          variants={quotes}
+          className="flex flex-col items-center gap-8 pb-24 lg:pb-40"
+        >
+          <FaTree className="text-body text-4xl md:text-5xl" />
           <p
             className={`text-body !leading-snug text-center text-2xl md:text-3xl lg:text-4xl max-w-3xl ${merriweather.className}`}
           >
             Araya Arts is an ode to discovery, a love letter to life lived on
             the borderlands.
           </p>
-        </div>
+        </motion.div>
         <section>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
-            <div className="grid place-content-center rounded pb-6">
+          <motion.div
+            // variants={card}
+            // initial="hidden"
+            // whileInView="inView"
+            // viewport={{ once: true }}
+            className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch"
+          >
+            <motion.div
+              variants={title}
+              className="grid place-content-center rounded pb-6"
+            >
               <div className="mx-auto max-w-md text-center lg:text-left">
                 <header>
                   <h2
@@ -51,7 +111,7 @@ export default function FeaturedSection() {
                   shop all{" "}
                 </Button>
               </div>
-            </div>
+            </motion.div>
 
             <div className="lg:col-span-2 lg:py-8">
               <ul className="grid grid-cols-2 gap-4">
@@ -79,9 +139,9 @@ export default function FeaturedSection() {
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         </section>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 import { merriweather } from "@/app/fonts";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { MutableRefObject, useRef } from "react";
 import Slider from "react-slick";
@@ -28,6 +29,34 @@ const data = [
     title: "Nature123",
   },
 ];
+
+const slider = {
+  inView: {
+    y: 0,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.05,
+      duration: 0.5,
+      ease: [0.5, 1, 0.89, 1],
+    },
+  },
+  hidden: {
+    y: 200,
+  },
+};
+
+const title = {
+  inView: {
+    x: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.5, 1, 0.89, 1],
+    },
+  },
+  hidden: {
+    x: -800,
+  },
+};
 
 export default function Testimonials() {
   const sliderRef = useRef(null);
@@ -60,8 +89,17 @@ export default function Testimonials() {
 
   return (
     <div className="pb-12 px-6 bg-primary-dark py-20 lg:py-32">
-      <div className="mx-auto max-w-screen-xl">
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between mb-8 md:mb-12">
+      <motion.div
+        variants={slider}
+        initial="hidden"
+        whileInView={"inView"}
+        viewport={{ once: true }}
+        className="mx-auto max-w-screen-xl"
+      >
+        <motion.div
+          variants={title}
+          className="flex flex-col gap-4 sm:flex-row sm:justify-between mb-8 md:mb-12"
+        >
           <p
             className={`font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-header max-w-xl ${merriweather.className}`}
           >
@@ -71,7 +109,7 @@ export default function Testimonials() {
             <LeftArrow {...{ sliderRef }} />
             <RightArrow {...{ sliderRef }} />
           </div>
-        </div>
+        </motion.div>
         <Slider {...settings} ref={sliderRef}>
           {data?.map(({ _id, title, url }) => (
             <>
@@ -79,7 +117,7 @@ export default function Testimonials() {
             </>
           ))}
         </Slider>
-      </div>
+      </motion.div>
     </div>
   );
 }

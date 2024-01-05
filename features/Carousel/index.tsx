@@ -52,7 +52,13 @@ export default function Carousel() {
   };
 
   return (
-    <div className="pb-6 md:pb-8">
+    <motion.div
+      initial={{ x: "-100%" }}
+      whileInView={{ x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1 }}
+      className="pb-6 md:pb-8"
+    >
       <Slider {...settings}>
         {data?.map(({ _id, title, url }) => (
           <>
@@ -68,7 +74,7 @@ export default function Carousel() {
           {data[activeIndex].title}
         </motion.p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
