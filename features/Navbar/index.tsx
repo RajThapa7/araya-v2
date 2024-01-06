@@ -137,7 +137,7 @@ export default function Navbar() {
                   {navLinks.map(({ id, title, link, icon }) => (
                     <motion.div
                       key={id}
-                      className={`${merriweather.className} lg:pr-20 text-[22px] lg:text-2xl text-primary font-bold`}
+                      className={`${merriweather.className} lg:even:hidden lg:pr-20 text-[22px] lg:text-2xl text-primary font-bold`}
                       variants={item}
                     >
                       <Link
@@ -149,18 +149,33 @@ export default function Navbar() {
                       </Link>
                     </motion.div>
                   ))}
+                  <motion.div
+                    variants={item}
+                    className="flex flex-row gap-6 items-center lg:hidden text-primary"
+                  >
+                    {socialMediaData.map(({ icon, link, id }) => (
+                      <a
+                        key={id}
+                        href={link}
+                        target="_blank"
+                        className="transition-smooth hover:opacity-70"
+                      >
+                        {icon}
+                      </a>
+                    ))}
+                  </motion.div>{" "}
                 </div>
               </motion.div>
               <motion.div
                 layout
-                className="h-screen hidden lg:flex lg:w-[45%] bg-accent-dark"
+                className="h-screen hidden lg:flex lg:w-[45%] bg-[#265e46]"
               >
                 <div className="flex flex-col items-center justify-start w-full h-screen pt-32 lg:items-start">
                   <div className="flex flex-col gap-6">
                     {navLinks.map(({ id, title, link, icon }) => (
                       <motion.div
                         key={id}
-                        className={`${merriweather.className} text-[22px] lg:pl-20 lg:text-2xl text-primary font-bold`}
+                        className={`${merriweather.className} text-[22px] lg:pl-20 lg:text-2xl text-primary font-bold odd:hidden`}
                         variants={item}
                       >
                         <Link

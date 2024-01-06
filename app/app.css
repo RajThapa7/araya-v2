@@ -21,16 +21,9 @@ html {
   background: linear-gradient(#0e251d, #0e251d), url("../public/araya.png");
   background-position: center;
   background-size: cover;
-  /* background-attachment: fixed; */
+  background-attachment: initial;
   background-blend-mode: color;
   height: 100%;
-}
-
-.green-background1 {
-  background-image: url("../public/img2.jpeg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .scroll-to-top {
@@ -44,12 +37,8 @@ html {
   display: none !important;
 }
 
-.example::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.example {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+@media only screen and (min-width: 1024px) {
+  .green-background {
+    background-attachment: fixed;
+  }
 }
