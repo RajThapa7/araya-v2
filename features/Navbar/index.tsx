@@ -134,7 +134,7 @@ export default function Navbar() {
                 className="flex flex-col mobile-menu-background items-center justify-start w-full h-screen pt-32 lg:items-end"
               >
                 <div className="flex flex-col gap-6">
-                  {navLinks.map(({ id, title, link, icon }) => (
+                  {navLinks.map(({ id, title, link }) => (
                     <motion.div
                       key={id}
                       className={`${merriweather.className} lg:even:hidden lg:pr-20 text-[22px] lg:text-2xl text-primary font-bold`}
@@ -172,7 +172,7 @@ export default function Navbar() {
               >
                 <div className="flex flex-col items-center justify-start w-full h-screen pt-32 lg:items-start">
                   <div className="flex flex-col gap-6">
-                    {navLinks.map(({ id, title, link, icon }) => (
+                    {navLinks.map(({ id, title, link }) => (
                       <motion.div
                         key={id}
                         className={`${merriweather.className} text-[22px] lg:pl-20 lg:text-2xl text-primary font-bold odd:hidden`}
