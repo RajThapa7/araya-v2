@@ -2,7 +2,7 @@
 import { merriweather } from "@/app/fonts";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { MutableRefObject, useRef } from "react";
+import { RefObject, useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -59,8 +59,8 @@ const title = {
 };
 
 export default function Testimonials() {
-  const sliderRef = useRef(null);
-  const settings = {
+  const sliderRef = useRef<any>(null);
+  const settings: any = {
     dots: false,
     infinite: true,
     speed: 800,
@@ -73,12 +73,14 @@ export default function Testimonials() {
         breakpoint: 1280,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 767,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
       ,
@@ -122,7 +124,7 @@ export default function Testimonials() {
   );
 }
 
-function RightArrow({ sliderRef }: { sliderRef: MutableRefObject<null> }) {
+function RightArrow({ sliderRef }: { sliderRef: RefObject<any> }) {
   return (
     <button
       className="z-10 transition-colors "
@@ -145,11 +147,13 @@ function RightArrow({ sliderRef }: { sliderRef: MutableRefObject<null> }) {
   );
 }
 
-function LeftArrow({ sliderRef }: { sliderRef: MutableRefObject<null> }) {
+function LeftArrow({ sliderRef }: { sliderRef: RefObject<any> }) {
   return (
     <button
       className="rotate-180 z-10 transition-colors"
-      onClick={() => sliderRef.current.slickPrev()}
+      onClick={() => {
+        sliderRef.current.slickPrev();
+      }}
     >
       <svg
         version="1.1"

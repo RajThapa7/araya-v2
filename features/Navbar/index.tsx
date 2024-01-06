@@ -4,7 +4,7 @@ import { HamburgMenu } from "@/components";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStore } from "react-icons/fa";
 import { socialMediaData } from "../Footer";
 
@@ -49,7 +49,6 @@ const navItems = [
 const list = {
   visible: {
     width: "100vw",
-    // x: 0,
     transition: {
       when: "beforeChildren",
       staggerChildren: 0.05,
@@ -59,13 +58,11 @@ const list = {
   },
   hidden: {
     width: 0,
-    // x: "-100vw",
     transition: {
       when: "afterChildren",
       staggerChildren: 0.05,
       duration: 0.7,
       ease: [0.65, 0, 0.35, 1],
-      // ease: "linear",
     },
   },
 };
@@ -78,12 +75,8 @@ const item = {
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const scrollBarCompensation = useMemo(
-    () => window.innerWidth - document.body.offsetWidth,
-    []
-  );
-
-  const html = document.querySelector("html");
+  const html =
+    typeof document !== "undefined" && document.querySelector("html");
 
   useEffect(() => {
     if (!html) {
@@ -93,13 +86,11 @@ export default function Navbar() {
       setTimeout(() => {
         html.style.overflowY = "hidden";
       }, 500);
-      // html.classList.add("example");
     }
     return () => {
       html.style.overflowY = "scroll";
-      // html.classList.remove("example");
     };
-  }, [html, isMobileMenuOpen, scrollBarCompensation]);
+  }, [html, isMobileMenuOpen]);
 
   return (
     <nav className="flex flex-row justify-between pt-10 pb-4 px-6 bg-transparent absolute top-0 left-0 w-full">
