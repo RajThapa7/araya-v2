@@ -24,6 +24,11 @@ const navLinks = [
     title: "About Me",
     link: "/",
   },
+  {
+    id: 3,
+    title: "FAQ",
+    link: "/",
+  },
 ];
 
 const navItems = [
@@ -77,29 +82,27 @@ export default function Navbar() {
     () => window.innerWidth - document.body.offsetWidth,
     []
   );
+
+  const html = document.querySelector("html");
+
   useEffect(() => {
+    if (!html) {
+      return;
+    }
     if (isMobileMenuOpen) {
-      // document.body.style.overflowY = "hidden";
-      // document.body.style.backgroundColor = "rgb(54 128 57)";
-      // document.body.style.paddingRight = `${scrollBarCompensation}px`;
+      setTimeout(() => {
+        html.style.overflowY = "hidden";
+      }, 500);
+      // html.classList.add("example");
     }
     return () => {
-      // document.body.style.overflowY = "scroll";
-      // document.body.style.backgroundColor = "";
-      // document.body.style.paddingRight = "";
+      html.style.overflowY = "scroll";
+      // html.classList.remove("example");
     };
-  }, [isMobileMenuOpen, scrollBarCompensation]);
+  }, [html, isMobileMenuOpen, scrollBarCompensation]);
 
   return (
-    <nav
-      className="flex flex-row justify-between pt-10 pb-4 px-6 bg-transparent absolute top-0 left-0 w-full"
-      style={{
-        paddingRight: isMobileMenuOpen
-          ? // ? `${scrollBarCompensation + 24}px`
-            `24px`
-          : " 24px",
-      }}
-    >
+    <nav className="flex flex-row justify-between pt-10 pb-4 px-6 bg-transparent absolute top-0 left-0 w-full">
       <Image src={"/next.svg"} width={100} height={100} alt="logo" />
       <div className="gap-8 flex flex-row items-center justify-center">
         {navItems.map(({ icon, id, link, title }) => (
@@ -139,6 +142,7 @@ export default function Navbar() {
                     >
                       <Link
                         href={link}
+                        className="transition-smooth hover:text-[#ff8389]"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {title}
@@ -161,6 +165,7 @@ export default function Navbar() {
                       >
                         <Link
                           href={link}
+                          className="transition-smooth hover:text-[#ff8389]"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {title}
