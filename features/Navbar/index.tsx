@@ -4,8 +4,10 @@ import { HamburgMenu } from "@/components";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaStore } from "react-icons/fa";
+import { MdHome } from "react-icons/md";
 import { socialMediaData } from "../Footer";
 
 const navLinks = [
@@ -16,17 +18,27 @@ const navLinks = [
   },
   {
     id: 1,
-    title: "Category",
+    title: "Shop",
     link: "/",
   },
   {
     id: 2,
-    title: "About Me",
+    title: "About us",
     link: "/",
   },
   {
     id: 3,
+    title: "Blog",
+    link: "/",
+  },
+  {
+    id: 4,
     title: "FAQ",
+    link: "/",
+  },
+  {
+    id: 5,
+    title: "Portfolio",
     link: "/",
   },
 ];
@@ -34,13 +46,13 @@ const navLinks = [
 const navItems = [
   {
     id: 0,
-    title: "Store",
-    icon: <FaStore className="text-xl lg:text-base" />,
+    title: "Home",
+    icon: <MdHome className="text-xl lg:text-xl" />,
     link: "#",
   },
   {
     id: 1,
-    title: "Store",
+    title: "Shop",
     icon: <FaStore className="text-xl lg:text-base" />,
     link: "#",
   },
@@ -75,6 +87,8 @@ const item = {
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const router = useRouter();
+
   const html =
     typeof document !== "undefined" && document.querySelector("html");
 
@@ -93,8 +107,13 @@ export default function Navbar() {
   }, [html, isMobileMenuOpen]);
 
   return (
-    <nav className="flex flex-row justify-between pt-10 pb-4 px-6 bg-transparent absolute top-0 left-0 w-full">
-      <Image src={"/next.svg"} width={100} height={100} alt="logo" />
+    <nav className="flex flex-row justify-between items-center pt-6 pb-4 px-6 bg-transparent absolute top-0 left-0 w-full">
+      <Link
+        href={"/"}
+        className="relative z-50 w-24 aspect-video lg:w-28 cursor-pointer"
+      >
+        <Image src={"/logo.svg"} alt="logo" fill className="object-contain" />
+      </Link>
       <div className="gap-8 flex flex-row items-center justify-center">
         {navItems.map(({ icon, id, link, title }) => (
           <Link

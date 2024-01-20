@@ -9,24 +9,32 @@ import "slick-carousel/slick/slick.css";
 
 const data = [
   {
-    _id: 0,
-    url: "https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?q=80&w=1492&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Nature",
+    id: 0,
+    title: "Excellent Notes",
+    name: "Roj Thapa",
+    description:
+      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
   },
   {
-    _id: 1,
-    url: "https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?q=80&w=1492&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Nature123",
+    id: 1,
+    title: "Excellent Notes",
+    name: "Roj Thapa",
+    description:
+      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
   },
   {
-    _id: 2,
-    url: "https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?q=80&w=1492&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Nature",
+    id: 2,
+    title: "Excellent Notes",
+    name: "Roj Thapa",
+    description:
+      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
   },
   {
-    _id: 3,
-    url: "https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?q=80&w=1492&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Nature123",
+    id: 3,
+    title: "Excellent Notes",
+    name: "Roj Thapa",
+    description:
+      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
   },
 ];
 
@@ -113,9 +121,9 @@ export default function Testimonials() {
           </div>
         </motion.div>
         <Slider {...settings} ref={sliderRef}>
-          {data?.map(({ _id, title, url }) => (
+          {data?.map(({ _id, title, description, name }) => (
             <>
-              <CarouselCard key={_id} {...{ title, url }} />
+              <CarouselCard key={_id} {...{ title, name, description }} />
             </>
           ))}
         </Slider>
@@ -172,7 +180,17 @@ function LeftArrow({ sliderRef }: { sliderRef: RefObject<any> }) {
   );
 }
 
-function CarouselCard({ title, url }: { title: string; url: string }) {
+function CarouselCard({
+  title,
+  name,
+  description,
+  imageUrl,
+}: {
+  title: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+}) {
   return (
     <div className="md:mr-5">
       <blockquote className="rounded-md flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12">
@@ -232,20 +250,15 @@ function CarouselCard({ title, url }: { title: string; url: string }) {
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
-              <p className="text-header font-semibold text-lg">Michael Scott</p>
+              <p className="text-header font-semibold text-lg">{name}</p>
             </div>
           </div>
           <div className="mt-4">
             <p className="text-2xl font-bold text-accent sm:text-3xl">
-              Stayin' Alive
+              {title}
             </p>
 
-            <p className="mt-4 leading-relaxed text-body">
-              No, Rose, they are not breathing. And they have no arms or legs …
-              Where are they? You know what? If we come across somebody with no
-              arms or legs, do we bother resuscitating them? I mean, what
-              quality of life do we have there?
-            </p>
+            <p className="mt-4 leading-relaxed text-body">{description}</p>
           </div>
         </div>
       </blockquote>

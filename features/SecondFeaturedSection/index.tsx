@@ -48,19 +48,18 @@ export default function SecondFeaturedSection() {
         >
           <div className="flex-1">
             <h2
-              className={`text-2xl !font-semibold text-header sm:text-3xl lg:text-4xl ${merriweather.className}`}
+              className={`text-3xl !font-semibold text-header sm:text-4xl md:text-5xl ${merriweather.className}`}
             >
-              Watches
+              Journey through Pages
             </h2>
 
             <p className="text-body text-md md:text-lg mt-5 mb-10">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
-              egestas tempus tellus etiam sed. Quam a scelerisque amet
-              ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
-              quisque ut interdum tincidunt duis.
+              Want to learn more about books, arts, literature and creating in
+              general, then you will feel right at home with our blog. Check out
+              our blog now and be part of the artistic adventure
             </p>
 
-            <Button isSecondary>Order Now</Button>
+            <Button isSecondary>Check our blog</Button>
           </div>
 
           <motion.div

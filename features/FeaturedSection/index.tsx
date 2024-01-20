@@ -75,10 +75,10 @@ export default function FeaturedSection() {
         >
           <FaTree className="text-body text-4xl md:text-5xl" />
           <p
-            className={`text-body !leading-snug text-center text-2xl md:text-3xl lg:text-4xl max-w-3xl ${merriweather.className}`}
+            className={`text-body !leading-snug text-center text-2xl md:text-3xl lg:text-4xl max-w-5xl ${merriweather.className}`}
           >
-            Araya Arts is an ode to discovery, a love letter to life lived on
-            the borderlands.
+            I am captivated by the smell of books, the symphony of colors, the
+            ink on the paper and the stories they tell
           </p>
         </motion.div>
         <section>
@@ -96,19 +96,20 @@ export default function FeaturedSection() {
               <div className="mx-auto max-w-md text-center lg:text-left">
                 <header>
                   <h2
-                    className={`text-2xl !font-semibold text-header sm:text-3xl lg:text-4xl ${merriweather.className}`}
+                    className={`text-3xl !font-semibold text-header sm:text-4xl md:text-5xl ${merriweather.className}`}
                   >
-                    Watches
+                    Explore Our Shop
                   </h2>
 
-                  <p className="mt-5 text-body">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Quas rerum quam amet provident nulla error!
+                  <p className="text-body text-md md:text-lg mt-5 ">
+                    Explore your artistic side with our special handmade
+                    notebooks and art supplies. Made with care and love, just
+                    for you. Start your creative journey today
                   </p>
                 </header>
 
                 <Button isSecondary className="mt-8">
-                  shop all{" "}
+                  Explore us
                 </Button>
               </div>
             </motion.div>

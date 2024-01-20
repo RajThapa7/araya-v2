@@ -5,27 +5,43 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import one from "/public/1.png";
+import two from "/public/2.png";
+import three from "/public/3.png";
+import four from "/public/4.png";
+import five from "/public/5.png";
+import six from "/public/6.png";
 
 const data = [
   {
     _id: 0,
-    url: "https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?q=80&w=1492&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Nature",
+    url: one,
+    title: "BookBinding",
   },
   {
     _id: 1,
-    url: "https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?q=80&w=1492&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Nature123",
+    url: two,
+    title: "Stitches",
   },
   {
     _id: 2,
-    url: "https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?q=80&w=1492&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Nature",
+    url: three,
+    title: "Stitches",
   },
   {
     _id: 3,
-    url: "https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?q=80&w=1492&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Nature123",
+    url: four,
+    title: "Hardcover Books",
+  },
+  {
+    _id: 4,
+    url: five,
+    title: "Leather Books",
+  },
+  {
+    _id: 5,
+    url: six,
+    title: "Pocket Notebook",
   },
 ];
 
@@ -37,9 +53,9 @@ export default function Carousel() {
     infinite: true,
     speed: 800,
     autoplay: true,
-    autoplayspeed: 7000,
+    autoplaySpeed: 5000,
     slidesToShow: 1,
-    pauseonhover: true,
+    pauseOnHover: false,
     nextArrow: <RightArrow />,
     prevArrow: <LeftArrow />,
     beforeChange: () => {
@@ -126,7 +142,7 @@ function LeftArrow(props: any) {
 
 function CarouselCard({ title, url }: { title: string; url: string }) {
   return (
-    <div className="group cursor-pointer transition-all w-full aspect-video lg:aspect-auto lg:h-[620px] relative">
+    <div className="group cursor-pointer transition-all w-full aspect-video relative">
       <Image fill src={url} alt={title} className="w-full object-fill h-full" />
     </div>
   );

@@ -43,16 +43,16 @@ function CTA() {
       >
         <motion.p
           variants={header}
-          className={`text-primary text-2xl sm:text-3xl md:text-4xl font-medium !leading-tight flex-1 lg:text-5xl ${merriweather.className}`}
+          className={`text-primary text-4xl sm:text-5xl font-medium !leading-tight flex-1 lg:text-6xl ${merriweather.className}`}
         >
-          Relax and revive with one of La vitoria's rejuvenating spa treatments.
+          Discovering Passion, Our Story in Colors
         </motion.p>
         <div className="text-primary flex flex-col gap-8 flex-1">
           <p className="text-md !leading-relaxed sm:text-lg md:text-xl">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem
-            distinctio est, explicabo vel facilis a sit iste, dolorum illum quam
-            adipisci natus soluta ut pariatur. Consectetur voluptas tempore cum
-            sint.
+            {" "}
+            Our story begins with passion, humble origins evolving into a
+            symphony of creativity. Explore the intricate process, the trials,
+            and triumphs that shape our art
           </p>
           <Button className="w-fit">Learn More</Button>
         </div>
