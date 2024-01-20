@@ -9,32 +9,36 @@ import "slick-carousel/slick/slick.css";
 
 const data = [
   {
-    id: 0,
+    _id: 0,
     title: "Excellent Notes",
     name: "Roj Thapa",
     description:
       "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
+    imageUrl: "",
   },
   {
-    id: 1,
+    _id: 1,
     title: "Excellent Notes",
     name: "Roj Thapa",
     description:
       "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
+    imageUrl: "",
   },
   {
-    id: 2,
+    _id: 2,
     title: "Excellent Notes",
     name: "Roj Thapa",
     description:
       "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
+    imageUrl: "",
   },
   {
-    id: 3,
+    _id: 3,
     title: "Excellent Notes",
     name: "Roj Thapa",
     description:
       "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
+    imageUrl: "",
   },
 ];
 
@@ -121,9 +125,12 @@ export default function Testimonials() {
           </div>
         </motion.div>
         <Slider {...settings} ref={sliderRef}>
-          {data?.map(({ _id, title, description, name }) => (
+          {data?.map(({ _id, title, description, name, imageUrl }) => (
             <>
-              <CarouselCard key={_id} {...{ title, name, description }} />
+              <CarouselCard
+                key={_id}
+                {...{ title, name, description, imageUrl }}
+              />
             </>
           ))}
         </Slider>

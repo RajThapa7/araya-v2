@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
@@ -140,7 +140,7 @@ function LeftArrow(props: any) {
   );
 }
 
-function CarouselCard({ title, url }: { title: string; url: string }) {
+function CarouselCard({ title, url }: { title: string; url: StaticImageData }) {
   return (
     <div className="group cursor-pointer transition-all w-full aspect-video relative">
       <Image fill src={url} alt={title} className="w-full object-fill h-full" />
