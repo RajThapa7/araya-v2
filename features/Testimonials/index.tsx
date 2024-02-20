@@ -119,7 +119,7 @@ export default function Testimonials() {
           className="flex flex-col gap-4 sm:flex-row sm:justify-between mb-8 md:mb-12"
         >
           <p
-            className={`font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-header max-w-xl ${merriweather.className}`}
+            className={`font-semibold leading-[1.1] header-2 text-header max-w-xl ${merriweather.className}`}
           >
             Read trusted reviews from our customers
           </p>

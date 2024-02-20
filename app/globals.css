@@ -34,3 +34,21 @@
     --text-color-body: 75 85 99;
   }
 }
+
+@layer components {
+  .header-1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  .header-2 {
+    @apply text-3xl sm:text-4xl md:text-5xl;
+  }
+  .header-3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+  .header-4 {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+  .body {
+    @apply text-base md:text-lg;
+  }
+}

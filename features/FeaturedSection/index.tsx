@@ -75,7 +75,7 @@ export default function FeaturedSection() {
         >
           <FaTree className="text-body text-4xl md:text-5xl" />
           <p
-            className={`text-body !leading-snug text-center text-2xl md:text-3xl lg:text-4xl max-w-5xl ${merriweather.className}`}
+            className={`text-body !leading-snug text-center header-3 max-w-5xl ${merriweather.className}`}
           >
             I am captivated by the smell of books, the symphony of colors, the
             ink on the paper and the stories they tell
@@ -90,12 +90,12 @@ export default function FeaturedSection() {
               <div className="mx-auto max-w-md text-center lg:text-left">
                 <header>
                   <h2
-                    className={`text-3xl !font-semibold text-header sm:text-4xl md:text-5xl ${merriweather.className}`}
+                    className={`!font-semibold text-header header-2 ${merriweather.className}`}
                   >
                     Explore Our Shop
                   </h2>
 
-                  <p className="text-body text-md md:text-lg mt-5 ">
+                  <p className="text-body body mt-5 ">
                     Explore your artistic side with our special handmade
                     notebooks and art supplies. Made with care and love, just
                     for you. Start your creative journey today

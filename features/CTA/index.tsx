@@ -43,12 +43,12 @@ function CTA() {
       >
         <motion.p
           variants={header}
-          className={`text-primary text-4xl sm:text-5xl font-medium !leading-tight flex-1 lg:text-6xl ${merriweather.className}`}
+          className={`text-primary  font-medium !leading-tight flex-1 header-1 ${merriweather.className}`}
         >
           Discovering Passion, Our Story in Colors
         </motion.p>
         <div className="text-primary flex flex-col gap-8 flex-1">
-          <p className="text-md !leading-relaxed sm:text-lg md:text-xl">
+          <p className="header-4 leading-relaxed">
             {" "}
             Our story begins with passion, humble origins evolving into a
             symphony of creativity. Explore the intricate process, the trials,

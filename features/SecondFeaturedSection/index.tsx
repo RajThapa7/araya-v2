@@ -44,16 +44,16 @@ export default function SecondFeaturedSection() {
           whileInView="inView"
           viewport={{ once: true }}
           className=" text-center
-         md:text-left flex flex-col-reverse md:flex-row md:items-center justify-between gap-8 md:gap-24"
+         lg:text-left flex flex-col-reverse lg:flex-row lg:items-center justify-between gap-8 md:gap-16 lg:gap-24"
         >
           <div className="flex-1">
             <h2
-              className={`text-3xl !font-semibold text-header sm:text-4xl md:text-5xl ${merriweather.className}`}
+              className={`!font-semibold text-header header-2 ${merriweather.className}`}
             >
               Journey through Pages
             </h2>
 
-            <p className="text-body text-md md:text-lg mt-5 mb-10">
+            <p className="text-body body mt-5 mb-10">
               Want to learn more about books, arts, literature and creating in
               general, then you will feel right at home with our blog. Check out
               our blog now and be part of the artistic adventure
