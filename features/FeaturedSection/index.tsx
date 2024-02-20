@@ -82,13 +82,7 @@ export default function FeaturedSection() {
           </p>
         </motion.div>
         <section>
-          <motion.div
-            // variants={card}
-            // initial="hidden"
-            // whileInView="inView"
-            // viewport={{ once: true }}
-            className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch"
-          >
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
             <motion.div
               variants={title}
               className="grid place-content-center rounded pb-6"
@@ -140,7 +134,7 @@ export default function FeaturedSection() {
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </div>
         </section>
       </motion.div>
     </div>

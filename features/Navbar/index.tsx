@@ -47,7 +47,7 @@ const navItems = [
   {
     id: 0,
     title: "Home",
-    icon: <MdHome className="text-xl lg:text-xl" />,
+    icon: <MdHome className="text-2xl lg:text-xl" />,
     link: "#",
   },
   {

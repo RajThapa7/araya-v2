@@ -10,6 +10,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "plus.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "instagram.fktm10-1.fna.fbcdn.net",
+      },
+      {
+        protocol: "https",
+        hostname: "instagram.fktm7-1.fna.fbcdn.net",
+      },
     ],
   },
 };

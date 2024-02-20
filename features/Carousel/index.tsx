@@ -142,7 +142,7 @@ function LeftArrow(props: any) {
 
 function CarouselCard({ title, url }: { title: string; url: StaticImageData }) {
   return (
-    <div className="group cursor-pointer transition-all w-full aspect-video relative">
+    <div className="group cursor-pointer transition-all w-full aspect-video lg:aspect-[16/7] relative">
       <Image fill src={url} alt={title} className="w-full object-fill h-full" />
     </div>
   );

@@ -10,35 +10,39 @@ import "slick-carousel/slick/slick.css";
 const data = [
   {
     _id: 0,
-    title: "Excellent Notes",
-    name: "Roj Thapa",
+    title: "Magnificent",
+    name: "Samriddhi Laxmi Aryal",
     description:
-      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
-    imageUrl: "",
+      " The diary i got was very magnificent! The love we get from the handmade diary is insane. Not only the love, the build quality and the papers are also so nice. I love it so much. The binding techniques are also very unique including the colors too.",
+    imageUrl:
+      "https://instagram.fktm7-1.fna.fbcdn.net/v/t51.2885-19/403689730_857533736103285_5045379600265971032_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fktm7-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=VccIG_1qy3AAX_vZkgB&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfCc6FfMgOLh6CM8wswXiItw-oh8nkYmYP3yIhgL3sBSsQ&oe=65D8928C&_nc_sid=8b3546",
   },
   {
     _id: 1,
-    title: "Excellent Notes",
+    title: "Unique and Lovely",
     name: "Roj Thapa",
     description:
-      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
-    imageUrl: "",
+      "I wanted a cute small journal for myself and got exactly what I wanted . It was very unique and lovely. Also the paper was so good",
+    imageUrl:
+      "https://instagram.fktm10-1.fna.fbcdn.net/v/t51.2885-19/428340821_1087332819057410_199037800165218549_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fktm10-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=Y0pkXhdikcoAX9q46EM&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfAzrtFjxVj-dRKLunnyjEUVLWON-60iBr45s_SY2owkKQ&oe=65D8CB04&_nc_sid=8b3546",
   },
   {
     _id: 2,
     title: "Excellent Notes",
-    name: "Roj Thapa",
+    name: "Jashmine Basnet",
     description:
       "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
-    imageUrl: "",
+    imageUrl:
+      "https://instagram.fktm10-1.fna.fbcdn.net/v/t51.2885-19/426206507_691095196252890_2399989411644246671_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fktm10-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=RaMG6hmE3_oAX8yjCFN&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfCJ1JxRWKH3p7kfFikKCuaxwJ7ayqhOXVgIQCzC5f3CUw&oe=65D841ED&_nc_sid=8b3546",
   },
   {
     _id: 3,
-    title: "Excellent Notes",
-    name: "Roj Thapa",
+    title: "Exceeding Expectations",
+    name: "Raj Maharjan",
     description:
-      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
-    imageUrl: "",
+      "I highly recommend this business. The quality of products is consistently outstanding, exceeding my expectation every time. I have amazing experience with diary. I was so pleased with the service I received from Araya Arts",
+    imageUrl:
+      "https://instagram.fktm7-1.fna.fbcdn.net/v/t51.2885-19/404922067_772313821603270_8500373553306103191_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fktm7-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=tqzJu5hHNKMAX90ZrNF&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfAd3vfIzCZRvLsvoFEj9SrjfIhU2oTrnmwmIVEVX6j0pQ&oe=65D94781&_nc_sid=8b3546",
   },
 ];
 
@@ -199,13 +203,16 @@ function CarouselCard({
   imageUrl: string;
 }) {
   return (
-    <div className="md:mr-5">
-      <blockquote className="rounded-md flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12">
+    <div className="mr-2 md:mr-5">
+      <blockquote className="rounded-md flex h-full flex-col justify-between bg-primary p-6 shadow-sm sm:p-8 lg:p-12">
         <div>
           <div className="inline-flex items-center gap-4">
             <Image
               alt="Man"
-              src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+              src={
+                imageUrl ||
+                "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+              }
               className="rounded-full object-cover"
               width={56}
               height={56}

@@ -11,17 +11,17 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "white",
-          dark: "#f3f4f6",
+          DEFAULT: "rgb(var(--color-primary)/<alpha-value>)",
+          dark: "rgb(var(--color-primary-dark)/<alpha-value>)",
         },
         accent: {
-          DEFAULT: "#43a047",
-          dark: "#368039",
+          DEFAULT: "rgb(var(--color-accent)/<alpha-value>)",
+          dark: "rgb(var(--color-accent-dark)/<alpha-value>)",
         },
       },
       textColor: {
-        header: "#374151",
-        body: "#4b5563",
+        header: "rgb(var(--text-color-header)/<alpha-value>)",
+        body: "rgb(var(--text-color-body)/<alpha-value>)",
       },
     },
   },
