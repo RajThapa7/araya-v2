@@ -1,7 +1,5 @@
-"use client";
 import { merriweather } from "@/app/fonts";
-import { Button } from "@/components";
-import { motion } from "framer-motion";
+import { Button, MotionDiv, MotionP } from "@/components";
 
 const description = {
   inView: {
@@ -34,19 +32,19 @@ const header = {
 function CTA() {
   return (
     <div className="px-6 py-24 green-background md:py-32 lg:py-44">
-      <motion.div
+      <MotionDiv
         variants={description}
         initial="hidden"
         whileInView={"inView"}
         viewport={{ once: true }}
         className="flex flex-col mx-auto max-w-screen-xl gap-4 md:flex-row md:justify-between md:items-start lg:gap-24"
       >
-        <motion.p
+        <MotionP
           variants={header}
           className={`text-primary  font-medium !leading-tight flex-1 header-1 ${merriweather.className}`}
         >
           Discovering Passion, Our Story in Colors
-        </motion.p>
+        </MotionP>
         <div className="text-primary flex flex-col gap-8 flex-1">
           <p className="header-4 leading-relaxed">
             {" "}
@@ -56,7 +54,7 @@ function CTA() {
           </p>
           <Button className="w-fit">Learn More</Button>
         </div>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 }

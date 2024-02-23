@@ -1,4 +1,3 @@
-"use client";
 import { merriweather } from "@/app/fonts";
 import { Button, MyLink } from "@/components";
 import Image from "next/image";

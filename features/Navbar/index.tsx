@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaStore } from "react-icons/fa";
 import { MdHome } from "react-icons/md";
-import { socialMediaData } from "../Footer";
+import { socialMediaData } from "../Footer/data";
 
 const navLinks = [
   {

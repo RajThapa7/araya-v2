@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { MotionDiv, MotionP } from "@/components";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import Slider from "react-slick";
@@ -68,7 +68,7 @@ export default function Carousel() {
   };
 
   return (
-    <motion.div
+    <MotionDiv
       initial={{ x: "-100%" }}
       whileInView={{ x: 0 }}
       viewport={{ once: true }}
@@ -86,11 +86,11 @@ export default function Carousel() {
         <p>
           {activeIndex + 1}/{data.length}
         </p>
-        <motion.p animate={resetAnimation ? { opacity: 0 } : { opacity: 100 }}>
+        <MotionP animate={resetAnimation ? { opacity: 0 } : { opacity: 100 }}>
           {data[activeIndex].title}
-        </motion.p>
+        </MotionP>
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 }
 

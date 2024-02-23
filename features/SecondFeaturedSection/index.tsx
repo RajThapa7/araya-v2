@@ -1,7 +1,5 @@
-"use client";
 import { merriweather } from "@/app/fonts";
-import { Button } from "@/components";
-import { motion } from "framer-motion";
+import { Button, MotionDiv } from "@/components";
 import Image from "next/image";
 
 const card = {
@@ -38,7 +36,7 @@ export default function SecondFeaturedSection() {
   return (
     <section className="px-6 py-24 bg-primary-dark md:py-32 lg:py-44">
       <div className="mx-auto max-w-screen-xl">
-        <motion.div
+        <MotionDiv
           variants={card}
           initial="hidden"
           whileInView="inView"
@@ -62,18 +60,18 @@ export default function SecondFeaturedSection() {
             <Button isSecondary>Check our blog</Button>
           </div>
 
-          <motion.div
+          <MotionDiv
             variants={image}
             className="relative w-full max-w-lg aspect-[4/3] mx-auto"
           >
             <Image
               alt="Student"
-              src={require("/public/blog_title.jpeg")}
+              src={"/blog_title.jpeg"}
               className="object-cover rounded-sm"
               fill
             />
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </div>
     </section>
   );

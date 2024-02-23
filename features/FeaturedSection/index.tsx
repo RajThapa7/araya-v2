@@ -1,7 +1,5 @@
-"use client";
 import { merriweather } from "@/app/fonts";
-import { Button } from "@/components";
-import { motion } from "framer-motion";
+import { Button, MotionDiv } from "@/components";
 import Image from "next/image";
 import { FaTree } from "react-icons/fa";
 
@@ -63,14 +61,14 @@ const quotes = {
 export default function FeaturedSection() {
   return (
     <div className="px-6 bg-primary-dark py-20 lg:py-32">
-      <motion.div
+      <MotionDiv
         variants={card}
         initial="hidden"
         whileInView="inView"
         viewport={{ once: true }}
         className="mx-auto max-w-screen-xl"
       >
-        <motion.div
+        <MotionDiv
           viewport={{ once: true }}
           variants={quotes}
           className="flex flex-col items-center gap-8 pb-24 lg:pb-40"
@@ -82,10 +80,10 @@ export default function FeaturedSection() {
             I am captivated by the smell of books, the symphony of colors, the
             ink on the paper and the stories they tell
           </p>
-        </motion.div>
+        </MotionDiv>
         <section>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
-            <motion.div
+            <MotionDiv
               variants={title}
               className="grid place-content-center rounded pb-6"
             >
@@ -108,7 +106,7 @@ export default function FeaturedSection() {
                   Explore us
                 </Button>
               </div>
-            </motion.div>
+            </MotionDiv>
 
             <div className="lg:col-span-2 lg:py-8">
               <ul className="grid grid-cols-2 gap-4">
@@ -138,7 +136,7 @@ export default function FeaturedSection() {
             </div>
           </div>
         </section>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 }
