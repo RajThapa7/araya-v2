@@ -28,21 +28,30 @@ const data = [
   },
   {
     _id: 2,
-    title: "Excellent Notes",
-    name: "Jashmine Basnet",
-    description:
-      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
-    imageUrl:
-      "https://instagram.fktm10-1.fna.fbcdn.net/v/t51.2885-19/426206507_691095196252890_2399989411644246671_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fktm10-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=RaMG6hmE3_oAX8yjCFN&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfCJ1JxRWKH3p7kfFikKCuaxwJ7ayqhOXVgIQCzC5f3CUw&oe=65D841ED&_nc_sid=8b3546",
-  },
-  {
-    _id: 3,
     title: "Exceeding Expectations",
     name: "Raj Maharjan",
     description:
       "I highly recommend this business. The quality of products is consistently outstanding, exceeding my expectation every time. I have amazing experience with diary. I was so pleased with the service I received from Araya Arts",
     imageUrl:
       "https://instagram.fktm7-1.fna.fbcdn.net/v/t51.2885-19/404922067_772313821603270_8500373553306103191_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fktm7-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=tqzJu5hHNKMAX90ZrNF&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfAd3vfIzCZRvLsvoFEj9SrjfIhU2oTrnmwmIVEVX6j0pQ&oe=65D94781&_nc_sid=8b3546",
+  },
+  {
+    _id: 3,
+    title: "Excellent Notes",
+    name: "Megha Thapa",
+    description:
+      "I bought notebook from Araya Arts and i was very much impressed with the quality of the notebook and the detail they put into it. Definitely ordering another notebook from Araya Arts ",
+    imageUrl:
+      "https://instagram.fktm7-1.fna.fbcdn.net/v/t51.2885-19/427232115_764513091844176_7620604935695936085_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fktm7-1.fna.fbcdn.net&_nc_cat=100&_nc_ohc=iw2SefUb6sAAX8A0gq9&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfBuReKjIcMBYmEd09Sc3MfGUu02v2eMNPR4wBkW8zHFFg&oe=65DDF4BB&_nc_sid=8b3546",
+  },
+  {
+    _id: 4,
+    title: "High Quality",
+    name: "Jashmine Basnet",
+    description:
+      "I really liked the diary, especially its paper, which is of very high quality like i just used it yesterday and it was just really nice. Thanks, i really loved it a lot. Will shop more",
+    imageUrl:
+      "https://instagram.fktm10-1.fna.fbcdn.net/v/t51.2885-19/426206507_691095196252890_2399989411644246671_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fktm10-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=RaMG6hmE3_oAX8yjCFN&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfCJ1JxRWKH3p7kfFikKCuaxwJ7ayqhOXVgIQCzC5f3CUw&oe=65D841ED&_nc_sid=8b3546",
   },
 ];
 

@@ -27,7 +27,7 @@
   /* dark mode according to explicit selection by user */
   :root[data-theme="dark"] {
     --color-primary: 100 100 100;
-    --color-primary-dark: 100 100 100;
+    --color-primary-dark: 243 244 246;
     --color-accent: 67 160 71;
     --color-accent-dark: 54 128 57;
     --text-color-header: 55 65 81;
