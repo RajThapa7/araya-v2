@@ -8,13 +8,15 @@ import { FaTree } from "react-icons/fa";
 const data = [
   {
     id: 0,
-    title: "Simple Watch",
+    title: "Leather Journal",
     price: "500",
+    img: "/leather.jpg",
   },
   {
     id: 1,
-    title: "Simple Watch",
+    title: "The Gratitude Journal",
     price: "500",
+    img: "/hero.jpeg",
   },
 ];
 
@@ -110,12 +112,12 @@ export default function FeaturedSection() {
 
             <div className="lg:col-span-2 lg:py-8">
               <ul className="grid grid-cols-2 gap-4">
-                {data.map(({ id, price, title }) => (
+                {data.map(({ id, price, title, img }) => (
                   <li key={id}>
                     <a href="#" className="group block">
                       <div className="relative w-full h-44 sm:h-72 md:h-80 xl:h-96">
                         <Image
-                          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80"
+                          src={img}
                           alt=""
                           className="aspect-square w-full rounded object-cover"
                           fill
@@ -127,7 +129,7 @@ export default function FeaturedSection() {
                           {title}
                         </h3>
 
-                        <p className="mt-1 text-sm text-body">Rs. {price}</p>
+                        {/* <p className="mt-1 text-sm text-body">Rs. {price}</p> */}
                       </div>
                     </a>
                   </li>

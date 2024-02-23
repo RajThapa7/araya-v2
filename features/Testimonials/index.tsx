@@ -212,16 +212,13 @@ function CarouselCard({
   imageUrl: string;
 }) {
   return (
-    <div className="mr-2 md:mr-5">
+    <div className="mr-2 md:mr-5 shadow-sm shadow-primary-dark">
       <blockquote className="rounded-md flex h-full flex-col justify-between bg-primary p-6 shadow-sm sm:p-8 lg:p-12">
         <div>
           <div className="inline-flex items-center gap-4">
             <Image
               alt="Man"
-              src={
-                imageUrl ||
-                "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-              }
+              src={imageUrl || require("/public/user.jpg")}
               className="rounded-full object-cover"
               width={56}
               height={56}

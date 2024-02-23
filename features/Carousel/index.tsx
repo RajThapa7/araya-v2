@@ -73,7 +73,7 @@ export default function Carousel() {
       whileInView={{ x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1 }}
-      className="pb-6 md:pb-8"
+      className="bg-primary pb-4 md:pb-6"
     >
       <Slider {...settings}>
         {data?.map(({ _id, title, url }) => (

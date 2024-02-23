@@ -6,7 +6,7 @@
 @layer base {
   :root {
     --color-primary: 255 255 255;
-    --color-primary-dark: 243 244 246;
+    --color-primary-dark: 235 235 235;
     --color-accent: 67 160 71;
     --color-accent-dark: 54 128 57;
     --text-color-header: 55 65 81;
