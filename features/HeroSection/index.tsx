@@ -16,7 +16,7 @@ export default function HeroSection() {
           <MyLink link="#" title="watch video" />
         </div>
         <div className="relative w-full max-w-md sm:max-w-none md:w-[600px] lg:w-[800px] xl:w-[1000px] sm:aspect-video aspect-square mx-auto">
-          <Image src={"/notes.png"} alt="note" fill className="object-cover" />
+          <Image src={"/notes.webp"} alt="note" fill className="object-cover" />
         </div>
       </div>
     </div>

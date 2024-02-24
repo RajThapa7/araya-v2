@@ -11,13 +11,13 @@ html {
 }
 @media only screen and (min-width: 1024px) {
   .mobile-menu-background {
-    background: linear-gradient(#0e251d, #0e251d), url("../public/img1.jpeg");
+    background: linear-gradient(#0e251d, #0e251d), url("../public/img1.webp");
     background-blend-mode: color;
   }
 }
 
 .green-background {
-  background: linear-gradient(#0e251d, #0e251d), url("../public/araya.png");
+  background: linear-gradient(#0e251d, #0e251d), url("../public/araya.webp");
   background-position: center;
   background-size: cover;
   background-attachment: initial;
