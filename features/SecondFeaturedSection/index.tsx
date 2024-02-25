@@ -67,6 +67,7 @@ export default function SecondFeaturedSection() {
             <Image
               alt="Student"
               src={"/blog_title.jpeg"}
+              sizes="(min-width: 600px) 512px, calc(92.86vw - 27px)"
               className="object-cover rounded-sm"
               fill
             />

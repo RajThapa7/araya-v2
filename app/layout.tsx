@@ -18,7 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} debug-screens`}>
+      <body
+        className={`${montserrat.className} ${
+          process.env.NODE_ENV === "development" && "debug-screens"
+        }`}
+      >
         <Navbar />
         {children}
         <ScrollUp />
