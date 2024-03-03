@@ -2,7 +2,7 @@ import { ScrollUp } from "@/components";
 import { Navbar } from "@/features";
 import { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
