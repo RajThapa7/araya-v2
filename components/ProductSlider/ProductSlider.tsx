@@ -13,10 +13,34 @@ import CategoryTitle from "../CategoryTitle/CategoryTitle";
 import ProductCard from "../ProductCard/ProductCard";
 import SmallProductCard from "../SmallProductCard/SmallProductCard";
 
+type BreakPoint = { [width: number]: SwiperOptions };
+
+const defaultBreakpoint: BreakPoint = {
+  540: {
+    slidesPerView: 2,
+    grid: {
+      fill: "row",
+      rows: 1,
+    },
+  },
+  840: {
+    slidesPerView: 3,
+    grid: {
+      fill: "row",
+      rows: 1,
+    },
+  },
+  1160: {
+    slidesPerView: 4,
+    grid: {
+      fill: "row",
+      rows: 1,
+    },
+  },
+};
+
 interface IProductSliderProps {
-  breakpoints: {
-    [width: number]: SwiperOptions;
-  };
+  breakpoints?: BreakPoint;
   title: string;
   data: IProductCard[];
   cardType?: "small" | "default";
@@ -25,12 +49,12 @@ interface IProductSliderProps {
 }
 
 export default function ProductSlider({
-  breakpoints,
+  breakpoints = defaultBreakpoint,
   title,
   isCategoryTitle = true,
   data,
   cardType = "default",
-  spaceBetween = 30,
+  spaceBetween = 10,
 }: IProductSliderProps) {
   const swiperRef = useRef<Swiper>();
   const [isStart, setIsStart] = useState(true);
@@ -46,7 +70,7 @@ export default function ProductSlider({
           <button
             onClick={() => swiperRef.current?.swiper.slidePrev()}
             className={
-              isStart ? "cursor-not-allowed text-gray-600" : "text-orange-500"
+              isStart ? "cursor-not-allowed text-gray-600" : "text-accent"
             }
           >
             <FaChevronLeft size={16} className="transition-smooth" />
@@ -54,7 +78,7 @@ export default function ProductSlider({
           <button
             onClick={() => swiperRef.current?.swiper.slideNext()}
             className={
-              isEnd ? "cursor-not-allowed text-gray-600" : "text-orange-500"
+              isEnd ? "cursor-not-allowed text-gray-600" : "text-accent"
             }
           >
             <FaChevronRight size={16} />

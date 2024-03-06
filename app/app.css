@@ -83,5 +83,5 @@ html {
 
 .mySwiper .swiper-slide-thumb-active {
   opacity: 1;
-  border-top: 2px solid orange !important;
+  border-top: 2px solid rgb(67, 160, 71) !important;
 }

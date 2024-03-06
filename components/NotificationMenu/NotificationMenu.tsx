@@ -32,7 +32,10 @@ export function NotificationsMenu() {
   return (
     <Menu>
       <MenuHandler>
-        <BellIcon width={25} color="white" />
+        <BellIcon
+          width={22}
+          className="text-gray-500 hover:text-accent transition-smooth"
+        />
       </MenuHandler>
       <MenuList className="flex flex-col gap-2">
         <MenuItem className="flex items-center gap-4 py-2 pr-8 pl-2">

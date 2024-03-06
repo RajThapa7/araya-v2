@@ -6,10 +6,10 @@ import { IProductCard } from "@/types";
 
 export const data: IProductCard[] = [
   {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
+    img: "https://transvelo.github.io/electro12-html/2.0/assets/img/150X140/img1.jpg",
     price: 999,
     reducedPrice: 800,
-    title: "Ipad Pro 2023",
+    title: "Ipad Pro latest 10th gen 14' 2023",
     tag: "Latest",
   },
   {
@@ -59,23 +59,6 @@ const tabData = [
       <ProductSlider
         isCategoryTitle={false}
         title="Related Products"
-        spaceBetween={0}
-        breakpoints={{
-          540: {
-            slidesPerView: 3,
-            grid: {
-              fill: "row",
-              rows: 1,
-            },
-          },
-          840: {
-            slidesPerView: 4,
-            grid: {
-              fill: "row",
-              rows: 1,
-            },
-          },
-        }}
         data={data}
       />
     ),
@@ -104,39 +87,19 @@ export default function Page() {
 
       <MyTab data={tabData} />
 
-      <ProductSlider
-        title="Related Products"
-        breakpoints={{
-          540: {
-            slidesPerView: 3,
-            grid: {
-              fill: "row",
-              rows: 1,
-            },
-          },
-          840: {
-            slidesPerView: 4,
-            grid: {
-              fill: "row",
-              rows: 1,
-            },
-          },
-        }}
-        spaceBetween={10}
-        data={data}
-      />
+      <ProductSlider title="Related Products" data={data} />
       <ProductSlider
         title="Trending Products"
         cardType="small"
         breakpoints={{
-          540: {
+          850: {
             slidesPerView: 2,
             grid: {
               fill: "row",
               rows: 1,
             },
           },
-          840: {
+          1400: {
             slidesPerView: 3,
             grid: {
               fill: "row",
@@ -146,27 +109,7 @@ export default function Page() {
         }}
         data={data}
       />
-      <ProductSlider
-        title="Recommend for you"
-        spaceBetween={0}
-        breakpoints={{
-          540: {
-            slidesPerView: 3,
-            grid: {
-              fill: "row",
-              rows: 1,
-            },
-          },
-          840: {
-            slidesPerView: 4,
-            grid: {
-              fill: "row",
-              rows: 1,
-            },
-          },
-        }}
-        data={data}
-      />
+      <ProductSlider title="Recommend for you" data={data} />
     </div>
   );
 }

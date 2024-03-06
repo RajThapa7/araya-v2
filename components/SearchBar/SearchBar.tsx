@@ -11,12 +11,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import logo from "public/footer-logo.svg";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { IoSearch } from "react-icons/io5";
 import { RiCloseFill } from "react-icons/ri";
 import { BadgeIcon } from "../BadgeIcon";
 import MyButton from "../MyButton";
 import { NotificationsMenu } from "../NotificationMenu/NotificationMenu";
 import { Sidebar } from "../Sidebar/Sidebar";
-import { MyTooltip } from "../Tooltip/Tooltip";
 
 const data = {
   hello: "world",
@@ -33,11 +33,11 @@ const DemoTab = () => {
     useComponentVisible(false, inputRef);
 
   useEffect(() => {
-    if (searchTerm !== "") {
-      setIsComponentVisible(true);
-    } else {
+    if (searchTerm === "") {
       setIsComponentVisible(false);
+      return;
     }
+    setIsComponentVisible(true);
   }, [searchTerm, setIsComponentVisible]);
 
   return (
@@ -114,9 +114,9 @@ export const SearchTab = ({
           onChange={(e) => setSearchTerm(e.target.value)}
           value={searchTerm}
           placeholder="search karnali"
-          className="w-full rounded-lg border-none px-8 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-orange-500"
+          className="w-full rounded-lg border-none px-8 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-accent"
         />
-        <button className="transition-smooth absolute right-4 h-10 max-h-fit rounded-r-lg bg-orange-400 px-3 hover:bg-orange-500">
+        <button className="transition-smooth absolute right-4 h-10 max-h-fit rounded-r-lg bg-accent px-3 hover:bg-accent-dark">
           <MagnifyingGlassIcon width={20} color="white" strokeWidth={20} />
         </button>
         {searchTerm && (
@@ -160,11 +160,10 @@ export default function SearchBar() {
     <div>
       <div className="flex flex-row justify-between gap-x-12 bg-primary px-2 py-4 md:px-6 lg:justify-around">
         {/* mobile menu  */}
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-4">
           <IconButton
             variant="text"
-            color="white"
-            className="lg:hidden"
+            className="lg:hidden text-gray-500"
             onClick={() => setOpen((prev) => !prev)}
           >
             {open ? (
@@ -181,40 +180,43 @@ export default function SearchBar() {
         {/* buttons  */}
         <div className="flex justify-end">
           {/* <ProfileMenu /> */}
-          <MyButton
+          <button
             onClick={() => setIsComponentVisible((prev) => !prev)}
-            className="text-white lg:!hidden"
+            className="text-gray-500 lg:!hidden mr-1"
+          >
+            {isComponentVisible ? (
+              <RiCloseFill size={24} />
+            ) : (
+              <IoSearch className="text-xl" />
+            )}
+          </button>
+
+          <MyButton className="text-gray-500 !bg-primary group" variant="text">
+            <UserIcon
+              width={20}
+              className="group-hover:text-accent transition-smooth"
+            />
+          </MyButton>
+
+          <MyButton
+            className="!hidden text-gray-500 lg:!flex !bg-primary"
             variant="text"
           >
-            <MyTooltip content="Search">
-              {isComponentVisible ? (
-                <RiCloseFill size={24} />
-              ) : (
-                <MagnifyingGlassIcon width={20} />
-              )}
-            </MyTooltip>
-          </MyButton>
-
-          <MyButton className="text-gray-500" variant="text">
-            {/* <MyTooltip content="Profile"> */}
-            <UserIcon width={20} />
-            {/* </MyTooltip> */}
-          </MyButton>
-
-          <MyButton className="!hidden text-white lg:!flex" variant="text">
             <NotificationsMenu />
           </MyButton>
 
-          <MyButton className="!hidden text-white lg:!flex" variant="text">
-            <MyTooltip content="Wishlist">
-              <HeartIcon width={20} />
-            </MyTooltip>
+          <MyButton
+            className="!hidden text-gray-500 lg:!flex !bg-primary group"
+            variant="text"
+          >
+            <HeartIcon
+              width={20}
+              className="group-hover:text-accent transition-smooth"
+            />
           </MyButton>
 
-          <MyButton className="group text-white" variant="text">
-            <MyTooltip content="My Cart">
-              <BadgeIcon />
-            </MyTooltip>
+          <MyButton className="group text-white !bg-primary" variant="text">
+            <BadgeIcon />
           </MyButton>
         </div>
 

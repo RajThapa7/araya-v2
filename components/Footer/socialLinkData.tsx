@@ -1,38 +1,37 @@
-import { BsFacebook } from "react-icons/bs";
-import { RiTwitterXFill } from "react-icons/ri";
 import { AiFillInstagram } from "react-icons/ai";
-import { BsLinkedin } from "react-icons/bs";
+import { BsFacebook, BsLinkedin } from "react-icons/bs";
+import { RiTwitterXFill } from "react-icons/ri";
 
 export const socialLinkData = [
   {
     id: 0,
     title: "Facebook",
     icon: (
-      <BsFacebook className="text-2xl text-gray-800 transition-smooth hover:text-black" />
+      <BsFacebook className="text-2xl text-body transition-smooth hover:text-accent" />
     ),
     link: "#",
   },
   {
     id: 1,
-    title: "Facebook",
+    title: "Twitter",
     icon: (
-      <RiTwitterXFill className="text-2xl text-gray-800 transition-smooth hover:text-black" />
+      <RiTwitterXFill className="text-2xl text-body transition-smooth hover:text-accent" />
     ),
     link: "#",
   },
   {
     id: 2,
-    title: "Facebook",
+    title: "Instagram",
     icon: (
-      <AiFillInstagram className="text-2xl text-gray-800 transition-smooth hover:text-black" />
+      <AiFillInstagram className="text-2xl text-body transition-smooth hover:text-accent" />
     ),
     link: "#",
   },
   {
     id: 3,
-    title: "Fab",
+    title: "LinkedIn",
     icon: (
-      <BsLinkedin className="text-2xl text-gray-800 transition-smooth hover:text-black" />
+      <BsLinkedin className="text-2xl text-body transition-smooth hover:text-accent" />
     ),
     link: "#",
   },

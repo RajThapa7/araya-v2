@@ -21,7 +21,7 @@ export default function FlashCard() {
         </p>
         <div className="flex flex-row items-center gap-1">
           <p className="font-bold text-gray-800">Shop Now</p>
-          <PiCaretCircleRightFill className="text-xl text-orange-300" />
+          <PiCaretCircleRightFill className="text-xl text-accent" />
         </div>
       </div>
     </div>

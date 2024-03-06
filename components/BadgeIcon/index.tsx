@@ -7,8 +7,7 @@ export function BadgeIcon() {
       <ShoppingCartIcon
         width={25}
         height={30}
-        color="black"
-        className="transition-smooth group-hover:text-accent-dark"
+        className="text-gray-500 transition-smooth group-hover:text-accent"
       />
       <div className="absolute bg-accent -top-2 -right-3 w-6 h-6 rounded-full flex items-center justify-center">
         <p className="text-xs font-semibold text-white">99</p>

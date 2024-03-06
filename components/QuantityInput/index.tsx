@@ -7,13 +7,13 @@ export default function QuantityInput() {
   return (
     <div className="flex w-fit flex-row items-center gap-2">
       {/* <p>Quantity</p> */}
-      <div className="flex items-center rounded border border-gray-200">
+      <div className="flex items-center rounded-lg border border-gray-200">
         <MyButton
           onClick={() => setNumber((prev) => --prev)}
           disabled={number == 1}
-          className="h-10 w-fit rounded-none rounded-l-lg"
+          className="h-10 w-fit rounded-none rounded-l-lg !bg-gray-400/70"
         >
-          -
+          <span className="text-xl">-</span>
         </MyButton>
 
         <input
@@ -26,10 +26,10 @@ export default function QuantityInput() {
         />
 
         <MyButton
-          className="h-10 w-fit rounded-none rounded-r-lg"
+          className="h-10 w-fit rounded-none rounded-r-lg !bg-gray-400/70"
           onClick={() => setNumber((prev) => ++prev)}
         >
-          +
+          <span className="text-xl">+</span>
         </MyButton>
       </div>
     </div>

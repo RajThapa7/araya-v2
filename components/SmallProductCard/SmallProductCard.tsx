@@ -1,6 +1,7 @@
+import arayaLogo from "@/public/footer-logo.svg";
 import type { IProductCard } from "@/types";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
@@ -16,10 +17,15 @@ export default function SmallProductCard({
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
   const [isHover, setIsHover] = useState(false);
+  const [imageSrc, setImageSrc] = useState<string | StaticImageData>(img);
+
+  const handleError = () => {
+    setImageSrc(arayaLogo);
+  };
   return (
     <Link
       href={"/login"}
-      className="transition-smooth group relative flex h-fit w-full max-w-sm flex-row overflow-hidden bg-white outline outline-1 outline-gray-100 hover:shadow-xl"
+      className="transition-smooth group relative flex h-fit w-full max-w-xl flex-row overflow-hidden bg-white outline outline-1 outline-gray-100 hover:outline-accent-dark"
       onMouseOver={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
@@ -27,18 +33,18 @@ export default function SmallProductCard({
         <>
           <MyTooltip content="Add to wishlist">
             <button
-              className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
+              className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75 group/heart"
               onClick={(e) => e.preventDefault()}
             >
-              <AiOutlineHeart className="text-lg text-gray-500" />
+              <AiOutlineHeart className="text-lg text-gray-500 group-hover/heart:text-accent" />
             </button>
           </MyTooltip>
           <MyTooltip content="Quick View" placement="bottom">
             <button
-              className="absolute end-4 top-12 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
+              className="absolute end-4 top-12 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75 group/eye"
               onClick={(e) => e.preventDefault()}
             >
-              <AiOutlineEye className="text-lg text-gray-500" />
+              <AiOutlineEye className="text-lg text-gray-500 group-hover/eye:text-accent" />
             </button>
           </MyTooltip>
         </>
@@ -46,8 +52,8 @@ export default function SmallProductCard({
       <div className="flex w-1/2 flex-1">
         <div className="relative aspect-video w-full">
           <Image
-            src={img}
-            // src="https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80"
+            src={imageSrc}
+            onError={handleError}
             alt="profile"
             fill
             className="object-contain transition duration-500 group-hover:scale-105"
@@ -62,7 +68,7 @@ export default function SmallProductCard({
             {tag}
           </span>
 
-          <h3 className="transition-smooth mt-4 text-lg font-semibold text-blue-600 underline decoration-white group-hover:decoration-blue-600">
+          <h3 className="transition-smooth mt-4 text-lg font-semibold text-header group-hover:text-accent-dark text-left">
             {title}
           </h3>
 
@@ -82,7 +88,8 @@ export default function SmallProductCard({
             </p>
           )}
         </div>
-        <div className="transition-smooth h-fit w-fit rounded-full bg-orange-400 p-2 hover:bg-orange-600">
+
+        <div className="transition-smooth h-fit w-fit rounded-full bg-gray-200 p-2 group-hover:bg-accent">
           <MyTooltip content="Add to cart">
             <ShoppingCartIcon
               width={20}

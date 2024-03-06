@@ -24,7 +24,6 @@ import Image from "next/image";
 import logo from "public/logo.svg";
 import React from "react";
 import { RiCloseFill } from "react-icons/ri";
-import MyButton from "../MyButton";
 
 export function Sidebar({ closeDrawer }: { closeDrawer: () => void }) {
   const [open, setOpen] = React.useState(0);
@@ -37,9 +36,10 @@ export function Sidebar({ closeDrawer }: { closeDrawer: () => void }) {
     <Card className="z-100 relative h-[calc(100vh-2rem)] p-4 pr-10 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 flex items-center justify-between gap-4 py-4 pl-4">
         <Image src={logo} alt="logo" width={150} />
-        <MyButton variant="text" onClick={() => closeDrawer()}>
+
+        <button onClick={() => closeDrawer()}>
           <RiCloseFill size={24} />
-        </MyButton>
+        </button>
       </div>
       <List>
         <Accordion

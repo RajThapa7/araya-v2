@@ -1,5 +1,5 @@
 "use client";
-import MyButton from "@/components/Button/Button";
+import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import MyInput from "@/components/MyInput/MyInput";
 import QuantityInput from "@/components/QuantityInput";

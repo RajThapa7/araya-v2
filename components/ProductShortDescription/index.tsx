@@ -84,12 +84,14 @@ export default function ProductShortDescription({
             </div>
           </div>
         ) : (
-          <p className="mt-1.5 text-3xl text-yellow-900">Rs. {price}</p>
+          <p className="mt-1.5 text-3xl text-header">Rs. {price}</p>
         )}
         <QuantityInput />
         <div className="flex flex-row gap-4">
           <MyButton className="!py-4">Buy Now</MyButton>
-          <MyButton className="!py-4">Add to cart</MyButton>
+          <MyButton isSecondary className="!py-4">
+            Add to cart
+          </MyButton>
         </div>
       </div>
     </div>

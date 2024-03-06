@@ -1,5 +1,6 @@
 "use client";
 
+import { montserrat } from "@/app/fonts";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
   Collapse,
@@ -8,7 +9,6 @@ import {
   MenuHandler,
   MenuList,
   Navbar,
-  Typography,
 } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,15 +35,13 @@ function NavListMenu({ title, navListMenuData }: INavListMenuProps) {
   const renderItems = navListMenuData.map(({ title, items }, key) => (
     <div className="flex items-center gap-3 rounded-lg" key={key}>
       <div>
-        <p className="text-md flex items-center font-bold text-gray-800">
-          {title}
-        </p>
+        <p className="text-md flex items-center font-bold text-body">{title}</p>
         <div className="mt-5 flex flex-col gap-4">
           {items.map(({ id, title, link }) => (
             <Link
               href={link}
               key={id}
-              className="transition-smooth underline decoration-white hover:decoration-gray-600"
+              className="transition-smooth underline text-body/60 decoration-white hover:decoration-gray-600"
             >
               {title}
             </Link>
@@ -63,7 +61,7 @@ function NavListMenu({ title, navListMenuData }: INavListMenuProps) {
         allowHover={true}
       >
         <MenuHandler>
-          <Typography as={"div"}>
+          <div>
             <ListItem
               className="flex items-center gap-2 py-2 pr-4"
               selected={isMenuOpen || isMobileMenuOpen}
@@ -83,20 +81,19 @@ function NavListMenu({ title, navListMenuData }: INavListMenuProps) {
                 }`}
               />
             </ListItem>
-          </Typography>
+          </div>
         </MenuHandler>
         {/* menu items  */}
-        <MenuList className="hidden w-full items-start justify-between rounded-xl px-14 py-10 lg:flex lg:flex-row">
-          <div
-            className="grid w-1/2 grid-cols-3 place-items-start justify-between justify-items-center gap-y-8 xl:grid-cols-4"
-            tabIndex={-1}
-          >
+        <MenuList
+          className={`hidden w-full items-start justify-between rounded-xl px-14 py-10 lg:flex lg:flex-row ${montserrat.className}`}
+        >
+          <div className="grid w-1/2 grid-cols-3 place-items-start justify-between justify-items-center gap-y-8 xl:grid-cols-4">
             {renderItems}
           </div>
           <div className="relative aspect-video h-full w-1/2">
             <Image
               alt="logo"
-              src="https://itti.com.np/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/v/i/vivobook_16x_1_.png"
+              src="https://itti.com.np/_next/image?url=https%3A%2F%2Fadmin.itti.com.np%2Fstorage%2Fproduct%2Fsafescan-2000-portable-banknote-counter-price-nepal%2Fthumb%2Fd3aad0ad-d087-4645-9086-227b90882c43.jpeg&w=384&q=75"
               fill
               quality={100}
               className="object-contain "

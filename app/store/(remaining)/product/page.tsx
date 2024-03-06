@@ -33,7 +33,7 @@ export default function ProductPage() {
         </div>
         <ProductShortDescription className="w-full md:w-[50%] lg:w-[60%]" />
       </div>
-      <MyTab data={tabData} className="bg-white p-10" />
+      <MyTab data={tabData} className="bg-white p-10" isProductDescription />
       <div className="bg-transparent">
         <ProductSlider
           title="Related Products"

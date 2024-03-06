@@ -3,7 +3,6 @@ import classNames from "@/utils/classNames";
 import Image from "next/image";
 import { useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";

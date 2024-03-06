@@ -15,7 +15,7 @@ export function MyCarousel() {
             <span
               key={i}
               className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-                activeIndex === i ? "w-8 bg-orange-500" : "w-4 bg-gray-500"
+                activeIndex === i ? "w-8 bg-accent" : "w-4 bg-gray-500"
               }`}
               onClick={() => setActiveIndex(i)}
             />
@@ -56,7 +56,7 @@ export function MyCarousel() {
           />
           <div className="absolute inset-0 h-full w-full flex flex-row justify-between">
             <div className="px-12 md:px-24 flex flex-col items-start flex-1 justify-center w-full md:w-1/2">
-              <p className="text-orange-500 mb-4 lg:text-lg text-sm font-bold uppercase">
+              <p className="text-accent-dark mb-4 lg:text-lg text-sm font-bold uppercase">
                 {title}
               </p>
               <p className="mb-10 opacity-80 text-gray-900 uppercase text-2xl lg:text-4xl font-semibold leading-snug">
@@ -72,7 +72,7 @@ export function MyCarousel() {
               <div className="flex justify-center gap-2">
                 <Button
                   size="lg"
-                  className="bg-cyan-400 transition-smooth hover:bg-cyan-500"
+                  className="bg-accent transition-smooth hover:bg-accent-dark"
                 >
                   Shop Now
                 </Button>

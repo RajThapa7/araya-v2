@@ -1,6 +1,6 @@
 "use client";
-import MyButton from "@/components/Button/Button";
-import esewa from "@/public/esewa.png";
+import MyButton from "@/components/MyButton";
+import esewa from "@/public/logo.svg";
 import { Alert, Typography } from "@material-tailwind/react";
 import Image from "next/image";
 import { useState } from "react";

@@ -1,10 +1,10 @@
 import Image from "next/image";
-import logo from "public/logo.svg";
+import logo from "public/footer-logo.svg";
 import { footerMenuData, socialLinkData } from "./socialLinkData";
 
 export default function Footer() {
   return (
-    <footer className="bg-accent">
+    <footer className="bg-primary-dark">
       <div className="mx-auto w-full px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
@@ -12,7 +12,7 @@ export default function Footer() {
               <Image src={logo} width={200} alt="logo" />
             </div>
 
-            <p className="mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
+            <p className="mt-6 max-w-md text-center leading-relaxed text-body sm:max-w-xs sm:text-left">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
               consequuntur amet culpa cum itaque neque.
             </p>
@@ -28,12 +28,12 @@ export default function Footer() {
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2">
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-gray-900">About Us</p>
+              <p className="text-lg font-medium text-header">About Us</p>
 
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
                   <a
-                    className="text-gray-700 transition hover:text-gray-700/75"
+                    className="text-body transition hover:text-accent"
                     href="/"
                   >
                     Company History
@@ -42,7 +42,7 @@ export default function Footer() {
 
                 <li>
                   <a
-                    className="text-gray-700 transition hover:text-gray-700/75"
+                    className="text-body transition hover:text-accent"
                     href="/"
                   >
                     Meet the Team
@@ -51,7 +51,7 @@ export default function Footer() {
 
                 <li>
                   <a
-                    className="text-gray-700 transition hover:text-gray-700/75"
+                    className="text-body transition hover:text-accent"
                     href="/"
                   >
                     Employee Handbook
@@ -60,7 +60,7 @@ export default function Footer() {
 
                 <li>
                   <a
-                    className="text-gray-700 transition hover:text-gray-700/75"
+                    className="text-body transition hover:text-accent"
                     href="/"
                   >
                     Careers
@@ -70,13 +70,13 @@ export default function Footer() {
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-gray-900">Find it Fast</p>
+              <p className="text-lg font-medium text-header">Find it Fast</p>
               <div className="flex flex-row justify-center sm:justify-start">
                 <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
                   {footerMenuData.map(({ id, link, title }) => (
                     <li key={id} className="">
                       <a
-                        className="text-gray-700 transition hover:text-gray-700/75"
+                        className="text-body transition hover:text-accent"
                         href={link}
                       >
                         {title}
@@ -88,12 +88,12 @@ export default function Footer() {
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-gray-900">Helpful Links</p>
+              <p className="text-lg font-medium text-header">Helpful Links</p>
 
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
                   <a
-                    className="text-gray-700 transition hover:text-gray-700/75"
+                    className="text-body transition hover:text-accent"
                     href="/"
                   >
                     FAQs
@@ -102,7 +102,7 @@ export default function Footer() {
 
                 <li>
                   <a
-                    className="text-gray-700 transition hover:text-gray-700/75"
+                    className="text-body transition hover:text-accent"
                     href="/"
                   >
                     Support
@@ -112,7 +112,7 @@ export default function Footer() {
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-gray-900">Contact Us</p>
+              <p className="text-lg font-medium text-header">Contact Us</p>
 
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
@@ -122,7 +122,7 @@ export default function Footer() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 shrink-0 text-gray-900"
+                      className="h-5 w-5 shrink-0 text-accent"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -146,7 +146,7 @@ export default function Footer() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 shrink-0 text-gray-900"
+                      className="h-5 w-5 shrink-0 text-accent"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -166,7 +166,7 @@ export default function Footer() {
                 <li className="flex items-start justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 shrink-0 text-gray-900"
+                    className="h-5 w-5 shrink-0 text-accent"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -199,7 +199,7 @@ export default function Footer() {
               <span className="block sm:inline">All rights reserved.</span>
 
               <a
-                className="inline-block text-teal-600 underline transition hover:text-teal-600/75"
+                className="inline-block text-accent underline transition hover:text-accent-dark"
                 href="/"
               >
                 Terms & Conditions
@@ -208,7 +208,7 @@ export default function Footer() {
               <span>&middot;</span>
 
               <a
-                className="inline-block text-teal-600 underline transition hover:text-teal-600/75"
+                className="inline-block text-accent underline transition hover:text-teal-accent-dark"
                 href="/"
               >
                 Privacy Policy

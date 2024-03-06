@@ -11,6 +11,7 @@ interface MyButtonProps
   variant?: "filled" | "outlined" | "gradient" | "text";
   className?: string;
   color?: color;
+  isSecondary?: boolean;
 }
 
 const MyButton = ({
@@ -18,6 +19,7 @@ const MyButton = ({
   variant,
   className,
   color,
+  isSecondary = false,
   ...props
 }: MyButtonProps) => {
   return (
@@ -27,7 +29,11 @@ const MyButton = ({
       variant={variant}
       className={classNames(
         className,
-        "flex items-center justify-center gap-x-2 px-4 py-1",
+        `flex items-center justify-center gap-x-2 px-4 py-1 transition-smooth ${
+          isSecondary
+            ? "bg-primary hover:bg-accent hover:text-primary ring-1 ring-accent text-accent"
+            : "bg-accent hover:bg-accent-dark"
+        }`
       )}
     >
       {children}

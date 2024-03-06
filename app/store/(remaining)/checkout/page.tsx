@@ -1,5 +1,5 @@
 "use client";
-import MyButton from "@/components/Button/Button";
+import MyButton from "@/components/MyButton";
 import Image from "next/image";
 
 export default function Cart() {
@@ -13,7 +13,7 @@ export default function Cart() {
           <p>Deliver to: Raj Thapa</p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <div className="flex flex-row gap-3">
-              <p className="h-fit w-fit bg-blue-50 px-1.5 py-0.5 text-xs text-blue-700">
+              <p className="h-fit w-fit bg-accent/20 px-1.5 py-0.5 text-xs text-accent-dark">
                 Home
               </p>
               <div className="flex flex-row">
@@ -101,7 +101,7 @@ export default function Cart() {
         </div>
         <div className="flex flex-row justify-between">
           <p className="text-sm font-semibold">Total</p>
-          <p className="font-semibold text-orange-700">Rs. 13,101</p>
+          <p className="font-semibold text-red-500">Rs. 13,101</p>
         </div>
         <MyButton className="w-full !py-4">Place Order</MyButton>
       </div>
