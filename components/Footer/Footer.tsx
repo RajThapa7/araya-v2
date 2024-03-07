@@ -4,7 +4,7 @@ import { footerMenuData, socialLinkData } from "./socialLinkData";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-dark">
+    <footer className="bg-gray-200">
       <div className="mx-auto w-full px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>

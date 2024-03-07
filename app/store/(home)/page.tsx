@@ -1,6 +1,4 @@
 "use client";
-import FlashCard from "@/components/FlashCard/FlashCard";
-import { MyTab } from "@/components/MyTab/MyTab";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import { IProductCard } from "@/types";
 
@@ -51,7 +49,7 @@ export const data: IProductCard[] = [
 
 const Desc = () => <p>hello</p>;
 
-const tabData = [
+export const tabData = [
   {
     label: "Top Rated",
     value: "top-rated",
@@ -77,17 +75,6 @@ const tabData = [
 export default function Page() {
   return (
     <div className="flex flex-col gap-10 pt-10">
-      {/* card  */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-4">
-        <FlashCard />
-        <FlashCard />
-        <FlashCard />
-        <FlashCard />
-      </div>
-
-      <MyTab data={tabData} />
-
-      <ProductSlider title="Related Products" data={data} />
       <ProductSlider
         title="Trending Products"
         cardType="small"

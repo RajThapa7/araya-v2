@@ -14,7 +14,7 @@ export default function Layout({ children }: PropsWithChildren) {
           process.env.NODE_ENV === "development" && "debug-screens"
         }`}
       >
-        <div className="bg-gray-50">
+        <div className="bg-primary-dark">
           <SearchBar />
           <MyNavbar />
           <div>{children}</div>
