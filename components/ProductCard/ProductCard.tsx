@@ -1,4 +1,5 @@
 "use client";
+import { montserrat } from "@/app/fonts";
 import ProductModal from "@/features/ProductModal/ProductModal";
 import arayaLogo from "@/public/footer-logo.svg";
 import { IProductCard } from "@/types";
@@ -7,7 +8,6 @@ import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 import { AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
-import { MyTooltip } from "../Tooltip/Tooltip";
 
 export default function ProductCard({
   img,
@@ -47,28 +47,24 @@ export default function ProductCard({
       <ProductModal {...{ open, setOpen }} />
       <div
         onClick={handleParentClick}
-        className="cursor-pointer transition-smooth group relative block h-fit w-full max-w-sm overflow-hidden ring-primary-dark bg-white ring-[1px] hover:ring-accent pt-2"
+        className={`cursor-pointer transition-smooth group relative block w-full max-w-sm overflow-hidden ring-primary-dark bg-white ring-[1px] hover:ring-accent pt-2 ${montserrat.className}`}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
         {isHover && (
           <>
-            <MyTooltip content="Add to wishlist">
-              <button
-                className="bg-gray-50 absolute end-4 top-3 z-10 group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75"
-                onClick={handleWishlistClick}
-              >
-                <AiOutlineHeart className="text-lg text-gray-500 group-hover/heart:text-accent" />
-              </button>
-            </MyTooltip>
-            <MyTooltip content="Quick View" placement="bottom">
-              <button
-                className="absolute end-4 top-12 z-10 group/eye w-fit h-fit rounded-full bg-gray-50 p-1.5 text-gray-900 transition hover:text-gray-900/75"
-                onClick={handleQuickViewClick}
-              >
-                <AiOutlineEye className="text-lg text-gray-500 group-hover/eye:text-accent" />
-              </button>
-            </MyTooltip>
+            <button
+              className="bg-gray-50 absolute end-4 top-3 z-10 group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75"
+              onClick={handleWishlistClick}
+            >
+              <AiOutlineHeart className="text-lg text-gray-500 group-hover/heart:text-accent" />
+            </button>
+            <button
+              className="absolute end-4 top-12 z-10 group/eye w-fit h-fit rounded-full bg-gray-50 p-1.5 text-gray-900 transition hover:text-gray-900/75"
+              onClick={handleQuickViewClick}
+            >
+              <AiOutlineEye className="text-lg text-gray-500 group-hover/eye:text-accent" />
+            </button>
           </>
         )}
 
@@ -114,15 +110,13 @@ export default function ProductCard({
             )}
           </div>
           <div className="transition-smooth h-fit w-fit rounded-full bg-gray-200 p-2 group-hover:bg-accent">
-            <MyTooltip content="Add to cart">
-              <ShoppingCartIcon
-                width={20}
-                color="white"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              />
-            </MyTooltip>
+            <ShoppingCartIcon
+              width={20}
+              color="white"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            />
           </div>
         </div>
       </div>

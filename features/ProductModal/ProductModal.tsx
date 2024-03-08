@@ -1,7 +1,7 @@
 import ImageSlider from "@/components/ImageSlider/ImageSlider";
 import { Modal } from "@/components/Modal/Modal";
 import ProductShortDescription from "@/components/ProductShortDescription";
-import { Dispatch } from "react";
+import { Dispatch, useEffect } from "react";
 
 export default function ProductModal({
   open,
@@ -10,6 +10,23 @@ export default function ProductModal({
   open: boolean;
   setOpen: Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const html =
+    typeof document !== "undefined" && document.querySelector("html");
+
+  useEffect(() => {
+    if (!html) {
+      return;
+    }
+    if (open) {
+      setTimeout(() => {
+        html.style.overflowY = "hidden";
+      }, 500);
+    }
+    return () => {
+      html.style.overflowY = "scroll";
+    };
+  }, [html, open]);
+
   return (
     <Modal {...{ open, setOpen }}>
       <div className="relative flex flex-col gap-16">

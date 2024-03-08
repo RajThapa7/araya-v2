@@ -51,7 +51,10 @@ export function MyTab({
         ))}
       </TabsHeader>
       <TabsBody
-        className={classNames(className, "mt-[1px] p-0 md:p-8 rounded-lg")}
+        className={classNames(
+          className,
+          `p-0 ${isProductDescription && "md:p-8 mt-[1px]"} rounded-lg`
+        )}
       >
         {data.map(({ value, desc }) => (
           <TabPanel

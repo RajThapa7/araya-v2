@@ -74,7 +74,7 @@ export const tabData = [
 ];
 export default function Page() {
   return (
-    <div className="flex flex-col gap-10 pt-10">
+    <div className="flex flex-col gap-10 pt-24 pb-14">
       <ProductSlider
         title="Trending Products"
         cardType="small"

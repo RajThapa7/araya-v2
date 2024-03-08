@@ -9,6 +9,7 @@ import {
 import { Drawer, IconButton } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import logo from "public/footer-logo.svg";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { IoSearch } from "react-icons/io5";
@@ -40,6 +41,8 @@ const DemoTab = () => {
     setIsComponentVisible(true);
   }, [searchTerm, setIsComponentVisible]);
 
+  const router = useRouter();
+
   return (
     <div className="relative hidden flex-1 flex-col px-4 lg:flex">
       <input
@@ -64,6 +67,11 @@ const DemoTab = () => {
               {Object.entries(data).map(([key, value]) => (
                 <tr
                   key={key}
+                  onClick={() => {
+                    setSearchTerm(key);
+                    router.push(`/store/search?query=${key}`);
+                    setIsComponentVisible(false);
+                  }}
                   className="cursor-pointer border-b-2 border-gray-300 text-sm text-gray-900 last:border-none hover:bg-gray-200"
                 >
                   <td className="w-full break-words px-5 pb-2 pt-3 font-semibold">
@@ -146,6 +154,7 @@ export default function SearchBar() {
   const [open, setOpen] = useState(false);
   const closeDrawer = () => setOpen(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     window.addEventListener(
@@ -172,7 +181,12 @@ export default function SearchBar() {
               <Bars3Icon className="h-6 w-6" strokeWidth={2} />
             )}
           </IconButton>
-          <Image src={logo} alt="logo" width={100} />
+          <Image
+            src={logo}
+            alt="logo"
+            width={100}
+            onClick={() => router.push("/store")}
+          />
         </div>
 
         <DemoTab />
