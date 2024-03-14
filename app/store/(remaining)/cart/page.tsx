@@ -4,19 +4,29 @@ import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import MyInput from "@/components/MyInput/MyInput";
 import QuantityInput from "@/components/QuantityInput";
 import Image from "next/image";
+import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
+import { data } from "../../(home)/page";
 
 export default function Cart() {
-  const reducedPrice = 100;
-  const price = 200;
   const discountPercentage = 10;
+
+  const [selected, setSelected] = useState<number[]>([]);
   return (
     <div className="flex flex-col gap-4 lg:flex-row">
       <div className="flex flex-1 flex-col">
         <div className="mb-4 flex flex-row justify-between bg-white py-1 pr-2 shadow-sm">
           <div className="inline-flex items-center">
-            <MyCheckbox />
+            <MyCheckbox
+              color="green"
+              onChange={(e) => {
+                if (e.target.checked) {
+                  return setSelected(data.map((_, index) => index));
+                }
+                setSelected([]);
+              }}
+            />
             <p className="text-xs text-gray-800">SELECT ALL ITEMS</p>
           </div>
           <button
@@ -28,27 +38,30 @@ export default function Cart() {
           </button>
         </div>
 
-        {Array.from({ length: 2 }).map(() => (
+        {data.map(({ img, price, title, reducedPrice, tag }, index) => (
           <div
-            className="bg flex h-fit flex-1 flex-col items-start gap-6 border-b-2 bg-white pb-2 pr-6 pt-5 shadow-sm last:border-b-0 md:flex-row"
-            key={"1"}
+            className={`bg flex h-fit flex-1 flex-col items-start justify-between gap-6 border-b-2 bg-white pb-2 pr-6 pt-5 shadow-sm last:border-b-0 md:flex-row`}
+            key={index}
           >
             <div className="flex min-w-[50%] flex-row gap-2">
-              <MyCheckbox />
+              <MyCheckbox
+                checked={selected.includes(index)}
+                color="green"
+                onChange={(e) => {
+                  setSelected(() => {
+                    // add selected value to the array
+                    if (e.target.checked) {
+                      return [...selected, index];
+                    }
+                    // if unselected remove the value from the array
+                    return selected.filter((item) => item !== index);
+                  });
+                }}
+              />
               <div className="relative -mt-4 aspect-square min-w-[8rem]">
-                <Image
-                  alt="item"
-                  fill
-                  className="object-contain"
-                  src={
-                    "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg"
-                  }
-                />
+                <Image alt="item" fill className="object-contain" src={img} />
               </div>
-              <p className="text-sm">
-                Zeblaze GTR 3 Pro SmartWatch | Ultra HD Amoled Display |
-                Bluetooth Calling | IP68 Water Resistance
-              </p>
+              <p className="text-sm">{title}</p>
             </div>
 
             <div className="inline-flex w-full justify-between gap-8 pl-10 md:w-fit md:pl-0">

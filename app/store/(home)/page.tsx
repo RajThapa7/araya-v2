@@ -7,7 +7,7 @@ export const data: IProductCard[] = [
     img: "https://transvelo.github.io/electro12-html/2.0/assets/img/150X140/img1.jpg",
     price: 999,
     reducedPrice: 800,
-    title: "Ipad Pro latest 10th gen 14' 2023",
+    title: "coptic stitch floral diary small size",
     tag: "Latest",
   },
   {

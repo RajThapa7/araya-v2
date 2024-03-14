@@ -4,6 +4,7 @@ interface IProductCard {
   img: string;
   title: string;
   tag?: string;
+  className?: string;
 }
 
 interface ITabProps {

@@ -222,6 +222,7 @@ export default function SearchBar() {
           <MyButton
             className="!hidden text-gray-500 lg:!flex !bg-primary group"
             variant="text"
+            onClick={() => router.push("/store/wishlist")}
           >
             <HeartIcon
               width={20}

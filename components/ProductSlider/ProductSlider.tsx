@@ -115,9 +115,15 @@ export default function ProductSlider({
             className="!flex !h-fit items-center justify-center !opacity-100"
           >
             {cardType === "default" ? (
-              <ProductCard {...{ img, price, title, reducedPrice, tag }} />
+              <ProductCard
+                className="sm:h-[420px]"
+                {...{ img, price, title, reducedPrice, tag }}
+              />
             ) : (
-              <SmallProductCard {...{ img, price, title, reducedPrice, tag }} />
+              <SmallProductCard
+                className="sm:h-[200px]"
+                {...{ img, price, title, reducedPrice, tag }}
+              />
             )}
           </SwiperSlide>
         ))}

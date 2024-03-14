@@ -3,11 +3,14 @@ import { montserrat } from "@/app/fonts";
 import ProductModal from "@/features/ProductModal/ProductModal";
 import arayaLogo from "@/public/footer-logo.svg";
 import { IProductCard } from "@/types";
+import classNames from "@/utils/classNames";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 import { AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
+import { IoIosStar } from "react-icons/io";
+import { toast } from "react-toastify";
 
 export default function ProductCard({
   img,
@@ -15,6 +18,7 @@ export default function ProductCard({
   title,
   reducedPrice,
   tag,
+  className,
 }: IProductCard) {
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
@@ -35,6 +39,7 @@ export default function ProductCard({
   const handleWishlistClick = (e: SyntheticEvent) => {
     e.stopPropagation();
     // Handle "Add to wishlist" button click here
+    toast.success("Item added to wishlist");
   };
 
   const handleQuickViewClick = (e: SyntheticEvent) => {
@@ -47,7 +52,10 @@ export default function ProductCard({
       <ProductModal {...{ open, setOpen }} />
       <div
         onClick={handleParentClick}
-        className={`cursor-pointer transition-smooth group relative block w-full max-w-sm overflow-hidden ring-primary-dark bg-white ring-[1px] hover:ring-accent pt-2 ${montserrat.className}`}
+        className={classNames(
+          className,
+          `cursor-pointer transition-smooth group relative block w-full max-w-sm overflow-hidden ring-primary-dark bg-white ring-[1px] hover:ring-accent pt-2 ${montserrat.className}`
+        )}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -85,9 +93,15 @@ export default function ProductCard({
               {tag}
             </span>
 
-            <h3 className="transition-smooth mt-4 text-left text-lg font-semibold text-header group-hover:text-accent-dark">
+            <h3 className="transition-smooth mt-4 text-left text-lg font-semibold text-header group-hover:text-accent-dark leading-tight">
               {title}
             </h3>
+
+            <div className=" inline-flex items-center gap-2 mt-1">
+              <IoIosStar size={14} className="text-yellow-700" />
+              <p className="text-sm text-gray-600">4.4/5 (23)</p>
+              <p className="text-sm text-gray-600">129 sold</p>
+            </div>
 
             {reducedPrice ? (
               <div className="mt-1.5 inline-flex gap-2">
