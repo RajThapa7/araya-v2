@@ -8,8 +8,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { Drawer, IconButton } from "@material-tailwind/react";
 import { motion } from "framer-motion";
+import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import logo from "public/footer-logo.svg";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { IoSearch } from "react-icons/io5";

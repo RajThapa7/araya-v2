@@ -3,7 +3,7 @@ import { montserrat } from "@/app/fonts";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import { IProductCard } from "@/types";
 import { Option, Select } from "@material-tailwind/react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "next-nprogress-bar";
 import { useState } from "react";
 const data: IProductCard[] = [
   {
