@@ -61,15 +61,15 @@ export default function ProductShortDescription({
         <div className="text-gray-600">
           <div className="flex flex-row gap-2">
             <p>Laptop screen size:</p>
-            <p>15.6"</p>
+            <p>15.6&quot;</p>
           </div>
           <div className="flex flex-row gap-2">
             <p>Laptop screen size:</p>
-            <p>15.6"</p>
+            <p>15.6&quot;</p>
           </div>
           <div className="flex flex-row gap-2">
             <p>Laptop screen size:</p>
-            <p>15.6"</p>
+            <p>15.6&quot;</p>
           </div>
         </div>
       </div>
