@@ -12,6 +12,15 @@
     --text-color-header: 55 65 81;
     --text-color-body: 75 85 99;
   }
+
+  *:focus {
+    outline: none;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
   /* dark mode according to the system preference */
   /* @media (prefers-color-scheme: dark) {
     :root {

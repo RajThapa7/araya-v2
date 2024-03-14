@@ -2,9 +2,9 @@
 import { merriweather } from "@/app/fonts";
 import { HamburgMenu } from "@/components";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaStore } from "react-icons/fa";
 import { MdHome } from "react-icons/md";
