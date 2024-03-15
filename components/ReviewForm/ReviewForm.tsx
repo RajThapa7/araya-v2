@@ -24,13 +24,13 @@ export default function ReviewForm() {
           <label htmlFor="review" className=" font-semibold text-gray-900">
             Name
           </label>
-          <MyInput defaultProps={{ label: "Name" }} />
+          <MyInput />
         </div>
         <div className="flex flex-col gap-3">
           <label htmlFor="review" className=" font-semibold text-gray-900">
             Email
           </label>
-          <MyInput defaultProps={{ label: "Email" }} />
+          <MyInput />
         </div>
         <MyButton className="!py-4 w-fit" type="submit">
           Add Review

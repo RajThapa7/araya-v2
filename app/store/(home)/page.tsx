@@ -4,14 +4,16 @@ import { IProductCard } from "@/types";
 
 export const data: IProductCard[] = [
   {
-    img: "https://transvelo.github.io/electro12-html/2.0/assets/img/150X140/img1.jpg",
+    // img: "https://transvelo.github.io/electro12-html/2.0/assets/img/150X140/img1.jpg",
+    img: require("@/public/product1.png"),
     price: 999,
     reducedPrice: 800,
     title: "coptic stitch floral diary small size",
     tag: "Latest",
   },
   {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
+    // img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
+    img: require("@/public/product2.png"),
     price: 999,
     // reducedPrice: 800,
     title: "Ipad Pro 2023",

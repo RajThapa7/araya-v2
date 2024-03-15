@@ -76,7 +76,7 @@ export default function ProductCard({
           </>
         )}
 
-        <div className="relative mx-auto aspect-video h-56 w-full">
+        <div className="relative mx-auto h-56 w-full">
           <Image
             src={imageSrc}
             onError={handleError}

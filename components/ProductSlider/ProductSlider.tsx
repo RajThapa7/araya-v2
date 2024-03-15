@@ -56,7 +56,7 @@ export default function ProductSlider({
   cardType = "default",
   spaceBetween = 10,
 }: IProductSliderProps) {
-  const swiperRef = useRef<Swiper>();
+  const swiperRef = useRef<any>();
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 

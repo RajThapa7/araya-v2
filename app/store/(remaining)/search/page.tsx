@@ -7,14 +7,14 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 const data: IProductCard[] = [
   {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
+    img: require("@/public/product1.png"),
     price: 999,
     reducedPrice: 800,
     title: "Ipad Pro 2023",
     tag: "Latest",
   },
   {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
+    img: require("@/public/product2.png"),
     price: 999,
     // reducedPrice: 800,
     title: "Ipad Pro 2023",
