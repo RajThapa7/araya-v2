@@ -3,7 +3,7 @@ import { ScrollUp } from "@/components";
 import Footer from "@/components/Footer/Footer";
 import { MyNavbar } from "@/components/Navbar";
 import ProgressBarProvider from "@/components/Provider/ProgressBarProvider";
-import SearchBar from "@/components/SearchBar/SearchBar";
+import SearchBar from "@/features/SearchBar/SearchBar";
 import { PropsWithChildren } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

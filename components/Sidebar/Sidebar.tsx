@@ -21,7 +21,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Image from "next/image";
-import logo from "public/logo.svg";
+import logo from "public/footer-logo.svg";
 import React from "react";
 import { RiCloseFill } from "react-icons/ri";
 
@@ -35,7 +35,7 @@ export function Sidebar({ closeDrawer }: { closeDrawer: () => void }) {
   return (
     <Card className="z-100 relative h-[calc(100vh-2rem)] p-4 pr-10 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 flex items-center justify-between gap-4 py-4 pl-4">
-        <Image src={logo} alt="logo" width={150} />
+        <Image src={logo} alt="logo" width={100} />
 
         <button onClick={() => closeDrawer()}>
           <RiCloseFill size={24} />
