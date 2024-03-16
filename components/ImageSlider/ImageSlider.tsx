@@ -43,6 +43,7 @@ export default function ImageSlider({
         spaceBetween={10}
         thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
         modules={[FreeMode, Navigation, Thumbs]}
+        centeredSlides={true}
         className="mySwiper2"
       >
         {images.map(({ alt, id, img }) => (
