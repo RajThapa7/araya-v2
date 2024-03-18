@@ -1,9 +1,11 @@
 "use client";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { useRouter } from "next-nprogress-bar";
 
 export function BadgeIcon() {
+  const router = useRouter();
   return (
-    <div className="relative group">
+    <div className="relative group" onClick={() => router.push("/store/cart")}>
       <ShoppingCartIcon
         width={25}
         height={30}

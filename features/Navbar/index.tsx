@@ -54,7 +54,7 @@ const navItems = [
     id: 1,
     title: "Shop",
     icon: <FaStore className="text-xl lg:text-base" />,
-    link: "#",
+    link: "/store",
   },
 ];
 
