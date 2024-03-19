@@ -5,19 +5,34 @@ import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import MyInput from "@/components/MyInput/MyInput";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import QuantityInput from "@/components/QuantityInput";
+import { IProductCard } from "@/types";
+import { mergeTwoArray } from "@/utils/utilsFunction";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 import { data } from "../../(home)/page";
 
 export default function Cart() {
-  const discountPercentage = 10;
+  const [selected, setSelected] = useState<{ id: number; quantity: number }[]>(
+    []
+  );
 
-  const [selected, setSelected] = useState<number[]>([]);
+  const selectedItemCount = selected.reduce(
+    (prev, curr) => prev + curr.quantity,
+    0
+  );
 
-  const router = useRouter();
+  const totalPrice = mergeTwoArray(data, selected, "id")
+    .filter((outer) => {
+      return selected.some(({ id }) => id === outer.id);
+    })
+    .reduce(
+      (prev, curr) => prev + (curr.reducedPrice || curr.price) * curr.quantity,
+      0
+    );
+
   return (
     <div className="flex flex-col gap-20">
       <Empty
@@ -37,7 +52,9 @@ export default function Cart() {
                 color="green"
                 onChange={(e) => {
                   if (e.target.checked) {
-                    return setSelected(data.map((_, index) => index));
+                    return setSelected(
+                      data.map(({ id }) => ({ id, quantity: 1 }))
+                    );
                   }
                   setSelected([]);
                 }}
@@ -63,80 +80,13 @@ export default function Cart() {
           </div>
 
           {/* cart items */}
-          {data.map(({ img, price, title, reducedPrice, tag }, index) => (
-            <div
-              className={`flex h-fit flex-1 flex-col items-start justify-between gap-6 border-b-2 bg-white pb-2 pr-6 pt-5 shadow-sm last:border-b-0 md:flex-row`}
-              key={index}
-            >
-              <div className="flex flex-row gap-2 w-full md:flex-1">
-                <MyCheckbox
-                  checked={selected.includes(index)}
-                  color="green"
-                  onChange={(e) => {
-                    setSelected(() => {
-                      // add selected value to the array
-                      if (e.target.checked) {
-                        return [...selected, index];
-                      }
-                      // if unselected remove the value from the array
-                      return selected.filter((item) => item !== index);
-                    });
-                  }}
-                />
-                <div className="relative -mt-4 aspect-square min-w-[8rem]">
-                  <Image alt="item" fill className="object-contain" src={img} />
-                </div>
-                <p
-                  className="text-sm text-body transition-smooth w-fit h-fit hover:text-accent-dark cursor-pointer"
-                  onClick={() => router.push("/store/product")}
-                >
-                  {title}
-                </p>
-              </div>
-
-              {/* price and quantity div */}
-              <div className="inline-flex w-full md:flex-1 justify-between gap-8 pl-10 md:pl-0">
-                <div className="flex flex-col gap-1">
-                  {reducedPrice ? (
-                    <div className=" flex flex-col gap-2">
-                      <p className="text-left text-lg text-red-500">
-                        Rs.{reducedPrice}
-                      </p>
-                      <div className="flex flex-row items-center justify-center gap-2">
-                        <p className="text-sm text-gray-500 line-through">
-                          Rs.{price}
-                        </p>
-                        <p className="text-sm text-gray-900">
-                          -{discountPercentage}%
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <p className="mt-1.5 text-left text-lg text-gray-700">
-                      Rs.{price}
-                    </p>
-                  )}
-                  <div className="inline-flex">
-                    <button
-                      className="rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75"
-                      // onClick={handleWishlistClick}
-                    >
-                      <AiOutlineHeart className="text-lg text-gray-500" />
-                    </button>
-                    <button
-                      className="rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75"
-                      // onClick={handleWishlistClick}
-                    >
-                      <FiTrash2 className="text-lg text-gray-500" />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="">
-                  <QuantityInput />
-                </div>
-              </div>
-            </div>
+          {data.map((item) => (
+            <CartItem
+              item={item}
+              key={item.id}
+              selected={selected}
+              setSelected={setSelected}
+            />
           ))}
         </div>
 
@@ -144,8 +94,10 @@ export default function Cart() {
         <div className="flex h-fit w-full max-w-lg rounded-md flex-col gap-3 bg-white p-4 shadow-sm lg:mt-32 lg:w-fit">
           <p className="text-md font-semibold text-gray-800">Order Summary</p>
           <div className="flex flex-row justify-between">
-            <p className="text-sm text-gray-800">Subtotal (0 items)</p>
-            <p className="">Rs. 13,101</p>
+            <p className="text-sm text-gray-800">
+              Subtotal ({selectedItemCount} items)
+            </p>
+            <p className="">Rs. {totalPrice.toLocaleString("en-IN")}</p>
           </div>
           <div className="inline-flex gap-2">
             <MyInput placeholder="Enter voucher" className="" />
@@ -153,7 +105,9 @@ export default function Cart() {
           </div>
           <div className="flex flex-row justify-between">
             <p className="text-sm font-semibold">Total</p>
-            <p className="font-semibold text-orange-700">Rs. 13,101</p>
+            <p className="font-semibold text-orange-700">
+              Rs. {totalPrice.toLocaleString("en-IN")}
+            </p>
           </div>
           <MyButton className="w-full !py-4">Proceed to Checkout</MyButton>
         </div>
@@ -162,3 +116,107 @@ export default function Cart() {
     </div>
   );
 }
+
+const CartItem = ({
+  item,
+  selected,
+  setSelected,
+}: {
+  item: IProductCard;
+  selected: {
+    id: number;
+    quantity: number;
+  }[];
+  setSelected: Dispatch<
+    SetStateAction<
+      {
+        id: number;
+        quantity: number;
+      }[]
+    >
+  >;
+}) => {
+  const [quantity, setQuantity] = useState(1);
+  const { id, img, price, reducedPrice, title, className, tag } = item;
+  const router = useRouter();
+  const discountPercentage = 10;
+
+  useEffect(() => {
+    setSelected((prev) => {
+      let currIndex = prev.findIndex(({ id: currId }) => currId === id);
+      prev.splice(currIndex, 1);
+      return [...prev, { id, quantity }];
+    });
+  }, [id, quantity, setSelected]);
+
+  return (
+    <div
+      className={`flex h-fit flex-1 flex-col items-start justify-between gap-6 border-b-2 bg-white pb-2 pr-6 pt-5 shadow-sm last:border-b-0 md:flex-row`}
+      key={id}
+    >
+      <div className="flex flex-row gap-2 w-full md:flex-1">
+        <MyCheckbox
+          // checked={selected.includes(id)}
+          checked={selected.some(({ id: selectedId }) => selectedId === id)}
+          color="green"
+          onChange={(e) => {
+            setSelected(() => {
+              // add selected value to the array
+              if (e.target.checked) {
+                return [...selected, { id, quantity }];
+              }
+              // if unselected remove the value from the array
+              return selected.filter((item) => item.id !== id);
+            });
+          }}
+        />
+        <div className="relative -mt-4 aspect-square min-w-[8rem]">
+          <Image alt="item" fill className="object-contain" src={img} />
+        </div>
+        <p
+          className="text-sm text-body transition-smooth w-fit h-fit hover:text-accent-dark cursor-pointer"
+          onClick={() => router.push("/store/product")}
+        >
+          {title}
+        </p>
+      </div>
+
+      {/* price and quantity div */}
+      <div className="inline-flex w-full md:flex-1 justify-between gap-8 pl-10 md:pl-0">
+        <div className="flex flex-col gap-1">
+          {reducedPrice ? (
+            <div className=" flex flex-col gap-2">
+              <p className="text-left text-lg text-red-500">
+                Rs.{reducedPrice}
+              </p>
+              <div className="flex flex-row items-center justify-center gap-2">
+                <p className="text-sm text-gray-500 line-through">Rs.{price}</p>
+                <p className="text-sm text-gray-900">-{discountPercentage}%</p>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-1.5 text-left text-lg text-gray-700">Rs.{price}</p>
+          )}
+          <div className="inline-flex">
+            <button
+              className="rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75"
+              // onClick={handleWishlistClick}
+            >
+              <AiOutlineHeart className="text-lg text-gray-500" />
+            </button>
+            <button
+              className="rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75"
+              // onClick={handleWishlistClick}
+            >
+              <FiTrash2 className="text-lg text-gray-500" />
+            </button>
+          </div>
+        </div>
+
+        <div className="">
+          <QuantityInput {...{ quantity, setQuantity }} />
+        </div>
+      </div>
+    </div>
+  );
+};
