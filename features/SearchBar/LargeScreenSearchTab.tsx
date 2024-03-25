@@ -73,7 +73,7 @@ const LargeScreensSearchTab = () => {
           className="absolute left-3 top-[44px] z-[999] w-[calc(100%-24px)] rounded-md bg-white px-4 py-4 shadow-xl"
           ref={ref}
         >
-          {recentSearches !== null ? (
+          {recentSearches !== "" && recentSearches !== null ? (
             <>
               <div className="flex flex-row justify-between px-5 items-center mb-1">
                 <p className="text-sm text-gray-600">search history</p>

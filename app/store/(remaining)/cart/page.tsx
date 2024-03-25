@@ -9,7 +9,7 @@ import { IProductCard } from "@/types";
 import { mergeTwoArray } from "@/utils/utilsFunction";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 import { data } from "../../(home)/page";
@@ -137,17 +137,19 @@ const CartItem = ({
   >;
 }) => {
   const [quantity, setQuantity] = useState(1);
-  const { id, img, price, reducedPrice, title, className, tag } = item;
+  const { id, img, price, reducedPrice, title } = item;
   const router = useRouter();
   const discountPercentage = 10;
 
-  useEffect(() => {
+  console.log(selected, "selected");
+
+  const onQuantityChange = (count: number) => {
     setSelected((prev) => {
       let currIndex = prev.findIndex(({ id: currId }) => currId === id);
       prev.splice(currIndex, 1);
-      return [...prev, { id, quantity }];
+      return [...prev, { id, quantity: count }];
     });
-  }, [id, quantity, setSelected]);
+  };
 
   return (
     <div
@@ -156,7 +158,6 @@ const CartItem = ({
     >
       <div className="flex flex-row gap-2 w-full md:flex-1">
         <MyCheckbox
-          // checked={selected.includes(id)}
           checked={selected.some(({ id: selectedId }) => selectedId === id)}
           color="green"
           onChange={(e) => {
@@ -214,7 +215,10 @@ const CartItem = ({
         </div>
 
         <div className="">
-          <QuantityInput {...{ quantity, setQuantity }} />
+          <QuantityInput
+            {...{ quantity, setQuantity }}
+            onChange={onQuantityChange}
+          />
         </div>
       </div>
     </div>
