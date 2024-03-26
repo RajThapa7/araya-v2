@@ -109,7 +109,7 @@ export default function ProductSlider({
         modules={[Pagination, Navigation, Grid]}
         className="!h-full !w-full !px-[2px] !pb-10 !pt-6"
       >
-        {data.map(({ img, price, title, reducedPrice, tag }) => (
+        {data.map(({ id, img, price, title, reducedPrice, tag }) => (
           <SwiperSlide
             key={title}
             className="!flex !h-fit items-center justify-center !opacity-100"
@@ -117,12 +117,12 @@ export default function ProductSlider({
             {cardType === "default" ? (
               <ProductCard
                 className="sm:h-[420px]"
-                {...{ img, price, title, reducedPrice, tag }}
+                {...{ img, id, price, title, reducedPrice, tag }}
               />
             ) : (
               <SmallProductCard
                 className="sm:h-[200px]"
-                {...{ img, price, title, reducedPrice, tag }}
+                {...{ img, id, price, title, reducedPrice, tag }}
               />
             )}
           </SwiperSlide>

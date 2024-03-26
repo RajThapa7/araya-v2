@@ -1,51 +1,6 @@
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
-import { IProductCard } from "@/types";
+import { data } from "@/data/productData";
 import Image from "next/image";
-
-const data: IProductCard[] = [
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    // reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    // reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-];
 
 export default function StoreFeaturedSection() {
   return (

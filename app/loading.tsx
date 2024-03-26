@@ -5,6 +5,7 @@ import Image from "next/image";
 const Loading = () => {
   return (
     <MotionDiv
+      layout
       className="flex justify-center items-center h-[calc(100vh-5rem)]"
       animate={{ rotate: [0, -360, -360, 0], scale: [1, 1.5, 1.5, 1, 1] }}
       transition={{ repeat: Infinity, duration: 2, ease: "linear" }}

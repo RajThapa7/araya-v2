@@ -41,7 +41,9 @@ export default function ImageSlider({
     <div className={classNames(className, "h-fit")}>
       <Swiper
         spaceBetween={10}
-        thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+        thumbs={{
+          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+        }}
         modules={[FreeMode, Navigation, Thumbs]}
         centeredSlides={true}
         className="mySwiper2"

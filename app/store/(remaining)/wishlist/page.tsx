@@ -4,55 +4,12 @@ import Empty from "@/components/Empty/Empty";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import SmallProductCard from "@/components/SmallProductCard/SmallProductCard";
-import { IProductCard } from "@/types";
+import { data } from "@/data/productData";
 import { Option, Select } from "@material-tailwind/react";
 import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
-const data: IProductCard[] = [
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    // reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    // tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    // reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-];
+
 const Category = () => {
   const [sortValue, setSortValue] = useState("price");
   const [selected, setSelected] = useState<number[]>([]);
@@ -124,7 +81,7 @@ const Category = () => {
 
         {/* product lists */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {data.map(({ img, price, title, reducedPrice, tag }, index) => (
+          {data.map(({ img, price, title, reducedPrice, tag, id }, index) => (
             <div key={index} className="flex flex-row">
               <MyCheckbox
                 color="green"
@@ -141,7 +98,7 @@ const Category = () => {
                 }}
               />
               <SmallProductCard
-                {...{ img, price, reducedPrice, tag, title }}
+                {...{ img, price, reducedPrice, tag, title, id }}
                 className={`${selected.includes(index) && "!outline-accent"}`}
               />
             </div>

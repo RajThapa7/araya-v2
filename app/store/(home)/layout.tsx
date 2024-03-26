@@ -2,10 +2,37 @@
 import { MyCarousel } from "@/components/Carousel/Carousel";
 import FlashCard from "@/components/FlashCard/FlashCard";
 import { MyTab } from "@/components/MyTab/MyTab";
+import ProductSlider from "@/components/ProductSlider/ProductSlider";
+import { data } from "@/data/productData";
 import FeaturedSection from "@/features/StoreFeaturedSection";
 import { PropsWithChildren } from "react";
 import "../../globals.css";
-import { tabData } from "./page";
+
+const Desc = () => <p>hello</p>;
+
+const tabData = [
+  {
+    label: "Top Rated",
+    value: "top-rated",
+    desc: (
+      <ProductSlider
+        isCategoryTitle={false}
+        title="Related Products"
+        data={data}
+      />
+    ),
+  },
+  {
+    label: "Top Discount",
+    value: "top-discount",
+    desc: <Desc />,
+  },
+  {
+    label: "Top Selling",
+    value: "top-selling",
+    desc: <Desc />,
+  },
+];
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

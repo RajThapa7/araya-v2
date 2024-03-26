@@ -1,9 +1,9 @@
-import { data } from "@/app/store/(home)/page";
 import ImageSlider from "@/components/ImageSlider/ImageSlider";
 import { MyTab } from "@/components/MyTab/MyTab";
 import ProductDetail from "@/components/ProductDetail/ProductDetail";
 import ProductShortDescription from "@/components/ProductShortDescription";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
+import { data } from "@/data/productData";
 import ReviewSection from "@/features/ReviewSection/ReviewSection";
 
 const tabData = [

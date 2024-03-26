@@ -85,3 +85,7 @@ html {
   opacity: 1;
   border-top: 2px solid rgb(67, 160, 71) !important;
 }
+
+.mySwiper .swiper-wrapper {
+  @apply justify-center;
+}

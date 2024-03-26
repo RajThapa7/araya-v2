@@ -5,6 +5,7 @@ import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import MyInput from "@/components/MyInput/MyInput";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import QuantityInput from "@/components/QuantityInput";
+import { data } from "@/data/productData";
 import { IProductCard } from "@/types";
 import { mergeTwoArray } from "@/utils/utilsFunction";
 import { useRouter } from "next-nprogress-bar";
@@ -12,7 +13,6 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
-import { data } from "../../(home)/page";
 
 export default function Cart() {
   const [selected, setSelected] = useState<{ id: number; quantity: number }[]>(

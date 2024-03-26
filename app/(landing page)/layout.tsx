@@ -1,10 +1,7 @@
 import { ScrollUp } from "@/components";
 import { Navbar } from "@/features";
 import { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import "../globals.css";
-
-const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Araya Arts",
@@ -17,16 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`${montserrat.className} ${
-          process.env.NODE_ENV === "development" && "debug-screens"
-        }`}
-      >
-        <Navbar />
-        {children}
-        <ScrollUp />
-      </body>
-    </html>
+    <>
+      <Navbar />
+      {children}
+      <ScrollUp />
+    </>
   );
 }

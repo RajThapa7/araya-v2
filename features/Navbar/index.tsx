@@ -19,7 +19,7 @@ const navLinks = [
   {
     id: 1,
     title: "Shop",
-    link: "/",
+    link: "/store",
   },
   {
     id: 2,

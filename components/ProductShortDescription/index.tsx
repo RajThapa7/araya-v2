@@ -1,6 +1,7 @@
 "use client";
 import classNames from "@/utils/classNames";
 import Link from "next/link";
+import { useState } from "react";
 import { FiHeart } from "react-icons/fi";
 import MyButton from "../MyButton";
 import QuantityInput from "../QuantityInput";
@@ -16,6 +17,7 @@ export default function ProductShortDescription({
   const price = 999;
 
   const discountPercentage = Math.round(((price - reducedPrice) * 100) / price);
+  const [quantity, setQuantity] = useState(1);
   return (
     <div className={classNames(className, "")}>
       <div className="flex flex-col gap-3">
@@ -86,7 +88,7 @@ export default function ProductShortDescription({
         ) : (
           <p className="mt-1.5 text-3xl text-header">Rs. {price}</p>
         )}
-        <QuantityInput />
+        <QuantityInput {...{ quantity, setQuantity }} />
         <div className="flex flex-row gap-4">
           <MyButton className="!py-4">Buy Now</MyButton>
           <MyButton isSecondary className="!py-4">
