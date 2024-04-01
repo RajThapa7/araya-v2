@@ -7,7 +7,6 @@ import SearchBar from "@/features/SearchBar/SearchBar";
 import { PropsWithChildren } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../globals.css";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

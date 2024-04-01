@@ -52,10 +52,16 @@ const config: Config = withMT({
             transform: "rotate(0.0deg) scale(1) translateY(0%)",
           },
         },
+        "grow-rotate": {
+          "0%": { transform: "rotate(0deg) scale(1)" },
+          "50%": { transform: "rotate(-360deg) scale(1.5)" },
+          "100%": { transform: "rotate(0deg) scale(1)" },
+        },
       },
       animation: {
         "grow-wiggle": "grow-wiggle 0.7s ease-in",
         "shrink-wiggle": "shrink-wiggle 0.7s ease-in",
+        "grow-rotate": "grow-rotate 1.7s infinite linear",
       },
     },
   },

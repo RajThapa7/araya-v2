@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { montserrat } from "./fonts";
+import "./globals.css";
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
