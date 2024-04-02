@@ -70,7 +70,11 @@ export default function SearchBar() {
             )}
           </button>
 
-          <MyButton className="text-gray-500 !bg-primary group" variant="text">
+          <MyButton
+            className="text-gray-500 !bg-primary group"
+            variant="text"
+            onClick={() => router.push("/store/login")}
+          >
             <UserIcon
               width={20}
               className="group-hover:text-accent transition-smooth"

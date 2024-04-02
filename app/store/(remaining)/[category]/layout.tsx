@@ -1,8 +1,8 @@
-import { SearchPage } from "@/features";
 import { Metadata, ResolvingMetadata } from "next";
+import { PropsWithChildren } from "react";
 
 type Props = {
-  params: { id: string };
+  params: { category: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
@@ -11,17 +11,14 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   return {
-    title: `${searchParams?.query} | Araya Arts Store`,
+    title: `${params.category} | Araya Arts Store`,
     description:
       "Araya Arts | Handmade Custom Notebooks and other art materials",
   };
 }
-const Search = () => {
-  return (
-    <>
-      <SearchPage />
-    </>
-  );
+
+const Layout = ({ children }: PropsWithChildren) => {
+  return <>{children}</>;
 };
 
-export default Search;
+export default Layout;

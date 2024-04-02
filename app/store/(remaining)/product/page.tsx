@@ -5,6 +5,23 @@ import ProductShortDescription from "@/components/ProductShortDescription";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import { data } from "@/data/productData";
 import ReviewSection from "@/features/ReviewSection/ReviewSection";
+import { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  return {
+    title: `${searchParams?.query} | Araya Arts Store`,
+    description:
+      "Araya Arts | Handmade Custom Notebooks and other art materials",
+  };
+}
 
 const tabData = [
   {

@@ -1,12 +1,17 @@
-"use client";
 import { MyCarousel } from "@/components/Carousel/Carousel";
 import FlashCard from "@/components/FlashCard/FlashCard";
 import { MyTab } from "@/components/MyTab/MyTab";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import { data } from "@/data/productData";
 import FeaturedSection from "@/features/StoreFeaturedSection";
+import { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import "../../globals.css";
+
+export const metadata: Metadata = {
+  title: "Araya Arts Store",
+  description: "Araya Arts | Handmade Custom Notebooks and other art materials",
+};
 
 const Desc = () => <p>hello</p>;
 

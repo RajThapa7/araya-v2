@@ -1,7 +1,13 @@
 import MyButton from "@/components/MyButton";
 import notFound from "@/public/404.svg";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "404 | Araya Arts Store",
+  description: "Araya Arts | Handmade Custom Notebooks and other art materials",
+};
 
 export default function NotFound() {
   return (

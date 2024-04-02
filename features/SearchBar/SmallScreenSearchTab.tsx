@@ -58,7 +58,7 @@ export const SmallScreenSearchTab = ({
             setIsSearchHistoryOpen(true);
           }}
           value={searchTerm}
-          placeholder="search karnali"
+          placeholder="Search in Araya Arts"
           className="w-full rounded-lg border-none px-8 py-2 text-gray-800 outline-none ring-1 ring-gray-300 focus:ring-accent"
           onKeyDown={(e) => {
             if (searchTerm === "") {

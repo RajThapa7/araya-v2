@@ -5,5 +5,6 @@ export { default as FeaturedSection } from "./FeaturedSection";
 export { default as Footer } from "./Footer";
 export { default as HeroSection } from "./HeroSection";
 export { default as Navbar } from "./Navbar";
+export { default as SearchPage } from "./SearchPage";
 export { default as SecondFeaturedSection } from "./SecondFeaturedSection";
 export { default as Testimonials } from "./Testimonials";
