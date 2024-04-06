@@ -1,28 +1,39 @@
 "use client";
 import MyButton from "@/components/MyButton";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { PropsWithChildren, useState } from "react";
 
 const data = [
   {
     id: 0,
     name: "Products",
+    route: "product",
   },
   {
     id: 1,
-    name: "Products",
+    name: "Categories",
+    route: "category",
   },
   {
     id: 2,
-    name: "Products",
+    name: "Users",
+    route: "user",
   },
 ];
 
 const Layout = ({ children }: PropsWithChildren) => {
-  const [activeIndex, setActiveIndex] = useState<number>();
+  const currentRoute = usePathname();
+  const routeArray = currentRoute.split("/").slice(1);
+
+  //set the active index based on the current route that matches the route property in the above data
+  const [activeIndex, setActiveIndex] = useState<number>(
+    data.findIndex(({ route }) => route === routeArray[1])
+  );
   return (
-    <div className="flex flex-row">
-      <div className="bg-gray-100 h-screen w-64 py-8 flex flex-col fixed">
+    <div className="">
+      {/* sidebar */}
+      <div className="bg-gray-100 h-screen w-64 py-8 flex flex-col absolute top-0 left-0">
         <Image
           alt="logo"
           width={100}
@@ -45,7 +56,11 @@ const Layout = ({ children }: PropsWithChildren) => {
         </div>
         <MyButton className="!py-4 mx-4">Logout</MyButton>
       </div>
-      <div className="flex-1 ml-64">{children}</div>
+
+      {/* children */}
+      <div className="h-screen overflow-y-scroll flex-1 ml-64 p-10">
+        {children}
+      </div>
     </div>
   );
 };

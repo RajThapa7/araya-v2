@@ -18,4 +18,37 @@ interface ITabProps {
   isProductDescription?: boolean;
 }
 
-export type { IProductCard, ITabProps };
+interface IProductData {
+  _id: string;
+  title: string;
+  featured_img: string;
+  img: string[];
+  price: number;
+  description: string;
+  productHighlight: string;
+  category: ICategory;
+  createdAt: Date;
+  updatedAt: Date;
+}
+interface IProductListData {
+  count: number;
+  totalCount: number;
+  totalPages: number;
+  data: IProductData[];
+}
+
+interface ICategory {
+  _id: string;
+  categoryName: string;
+  createdAt: Date;
+  updatedAt: Date;
+  slug: string;
+}
+
+export type {
+  ICategory,
+  IProductCard,
+  IProductData,
+  IProductListData,
+  ITabProps,
+};

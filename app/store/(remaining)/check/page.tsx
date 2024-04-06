@@ -1,16 +1,37 @@
-import logo from "@/app/icon.svg";
-import { MotionDiv } from "@/components";
-import Image from "next/image";
-
 const Loading = () => {
   return (
-    <MotionDiv
-      className="flex justify-center items-center h-[calc(100vh-15rem)]"
-      animate={{ rotate: [0, -360, -360, 0], scale: [1, 1.5, 1.5, 1, 1] }}
-      transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-    >
-      <Image src={logo} width={150} height={100} alt="logo" />
-    </MotionDiv>
+    <div className="overflow-x-scroll py-8">
+      <table className="w-full bg-white">
+        <thead className="whitespace-nowrap">
+          <tr>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+              Title
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+              Category
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+              Price
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+              Action
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+              Action
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+              Action
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+              Action
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+              Action
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
   );
 };
 

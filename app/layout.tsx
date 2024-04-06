@@ -1,3 +1,6 @@
+"use client";
+import QueryProvider from "@/Providers/QueryProvider";
+import ProgressBarProvider from "@/components/Provider/ProgressBarProvider";
 import { PropsWithChildren } from "react";
 import { montserrat } from "./fonts";
 import "./globals.css";
@@ -10,7 +13,9 @@ const Layout = ({ children }: PropsWithChildren) => {
           process.env.NODE_ENV === "development" && "debug-screens"
         }`}
       >
-        {children}
+        <ProgressBarProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </ProgressBarProvider>
       </body>
     </html>
   );
