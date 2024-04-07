@@ -1,13 +1,21 @@
 "use client";
 import useFetchCategories from "@/api/hooks/useFetchCategories";
+import { montserrat } from "@/app/fonts";
+import MultipleImageUploader from "@/components/MultipleImageUploader/MulitpleImageUploader";
 import MyButton from "@/components/MyButton";
 import MyInput from "@/components/MyInput/MyInput";
+import { Option, Select } from "@material-tailwind/react";
 import { useRouter } from "next-nprogress-bar";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Page = () => {
   const router = useRouter();
   const { data: categoryData } = useFetchCategories();
+  const categoryDropdown = categoryData?.map(({ _id, categoryName }) => ({
+    label: categoryName,
+    value: _id,
+  }));
+
   const formData = [
     {
       id: 0,
@@ -25,6 +33,8 @@ const Page = () => {
       id: 6,
       label: "Category",
       name: "category",
+      type: "dropdown",
+      dropdownData: categoryDropdown || [],
       placeholder: "Select Category of the product",
     },
     {
@@ -68,15 +78,42 @@ const Page = () => {
       <form action="">
         <div className="flex gap-6 flex-col">
           {formData.map((item) => (
-            <div key={item.id} className="flex flex-col gap-2">
-              <label htmlFor={item.name}>{item.label}</label>
-              <MyInput
-                type={item?.type || "text"}
-                name={item.name}
-                placeholder={item.placeholder}
-              />
-            </div>
+            <>
+              {item.type === undefined && (
+                <div key={item.id} className="flex flex-col gap-2">
+                  <label htmlFor={item.name}>{item.label}</label>
+                  <MyInput
+                    type={"text"}
+                    name={item.name}
+                    placeholder={item.placeholder}
+                  />
+                </div>
+              )}
+              {item.type === "dropdown" && (
+                <div key={item.id} className="flex flex-col gap-2">
+                  <label htmlFor={item.name}>{item.label}</label>
+                  <Select
+                    color="blue"
+                    variant="outlined"
+                    name={item.name}
+                    label={item.placeholder}
+                    className={` bg-gray-100 ${montserrat.className}`}
+                  >
+                    {item?.dropdownData?.map(({ label, value }) => (
+                      <Option value="value" key={value}>
+                        {label}
+                      </Option>
+                    ))}
+                  </Select>
+                </div>
+              )}
+            </>
           ))}
+
+          <div className="flex flex-col gap-2">
+            <label>Images</label>
+            <MultipleImageUploader />
+          </div>
         </div>
         <MyButton className="!p-4 mt-8">Add Product</MyButton>
       </form>
