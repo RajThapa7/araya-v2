@@ -30,20 +30,23 @@ const MyInput = forwardRef(
     };
 
     return (
-      <input
-        ref={ref}
-        type="text"
-        value={inputValue}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        className={classNames(
-          "z-1 w-full rounded-md border-none bg-gray-100 px-4 py-3 outline-none focus:ring-2",
-          className,
-          error ? "ring-red-500 ring-2" : "focus:ring-blue-500",
-          props.disabled ? "cursor-not-allowed font-medium text-gray-500" : ""
-        )}
-        {...customProps}
-      />
+      <>
+        <input
+          ref={ref}
+          type="text"
+          value={inputValue}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          className={classNames(
+            "z-1 w-full rounded-md border-none bg-gray-100 px-4 py-3 outline-none focus:ring-1",
+            className,
+            error ? "ring-red-500 ring-1" : "focus:ring-blue-500",
+            props.disabled ? "cursor-not-allowed font-medium text-gray-500" : ""
+          )}
+          {...customProps}
+        />
+        <p className="text-sm text-red-400">{error?.message}</p>
+      </>
     );
   }
 );

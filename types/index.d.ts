@@ -44,9 +44,25 @@ interface ICategory {
   updatedAt: Date;
   slug: string;
 }
+interface IFormData {
+  id: number;
+  label: string;
+  name: string;
+  placeholder: string;
+  tag?: string;
+  type?: "dropdown" | "number" | "image";
+  dropdownData?: {
+    label: string;
+    value: string;
+  }[];
+}
+
+type FormInputType = { [key: string]: string | number | null | undefined };
 
 export type {
+  FormInputType,
   ICategory,
+  IFormData,
   IProductCard,
   IProductData,
   IProductListData,
