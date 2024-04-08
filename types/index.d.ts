@@ -24,6 +24,8 @@ interface IProductData {
   featured_img: string;
   img: string[];
   price: number;
+  reducedPrice?: number;
+  tag?: string;
   description: string;
   productHighlight: string;
   category: ICategory;

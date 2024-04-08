@@ -20,6 +20,7 @@ interface IFormBuilderProps {
   control?: Control<FormInputType>;
   handleSubmit: UseFormHandleSubmit<FormInputType, undefined>;
   onSubmit: SubmitHandler<FormInputType>;
+  buttonLabel?: string;
 }
 
 const FormBuilder = ({
@@ -29,6 +30,7 @@ const FormBuilder = ({
   onSubmit,
   control,
   errors,
+  buttonLabel,
 }: IFormBuilderProps) => {
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -74,7 +76,7 @@ const FormBuilder = ({
                       onBlur={onBlur}
                     >
                       {item?.dropdownData?.map(({ label, value }) => (
-                        <Option value="value" key={value}>
+                        <Option value={value} key={value}>
                           {label}
                         </Option>
                       ))}
@@ -102,7 +104,7 @@ const FormBuilder = ({
         ))}
       </div>
       <MyButton className="!p-4 mt-8" type="submit">
-        Add Product
+        {buttonLabel || "Add Product"}
       </MyButton>
     </form>
   );

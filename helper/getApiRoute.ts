@@ -26,7 +26,7 @@ const routes = {
   getAllUsers: () => "/admin/users",
   addProduct: () => "/admin/product/add",
   deleteProduct: (productId?: string) => `/admin/product/delete/${productId}`,
-  editProduct: () => "/admin/product/edit",
+  editProduct: (productId?: string) => `/admin/product/edit/${productId}`,
 
   addCategory: () => "/admin/category/add",
   editCategory: () => "/admin/category/edit",

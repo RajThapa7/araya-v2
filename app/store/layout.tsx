@@ -4,8 +4,6 @@ import Footer from "@/components/Footer/Footer";
 import { MyNavbar } from "@/components/Navbar";
 import SearchBar from "@/features/SearchBar/SearchBar";
 import { PropsWithChildren } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -17,7 +15,6 @@ export default function Layout({ children }: PropsWithChildren) {
         <Footer />
       </div>
       <ScrollUp />
-      <ToastContainer theme="colored" hideProgressBar autoClose={2000} />
     </>
   );
 }

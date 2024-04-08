@@ -2,6 +2,8 @@
 import QueryProvider from "@/Providers/QueryProvider";
 import ProgressBarProvider from "@/components/Provider/ProgressBarProvider";
 import { PropsWithChildren } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { montserrat } from "./fonts";
 import "./globals.css";
 
@@ -16,6 +18,7 @@ const Layout = ({ children }: PropsWithChildren) => {
         <ProgressBarProvider>
           <QueryProvider>{children}</QueryProvider>
         </ProgressBarProvider>
+        <ToastContainer theme="colored" hideProgressBar autoClose={2000} />
       </body>
     </html>
   );

@@ -43,9 +43,21 @@ const Page = ({ params }: { params: { productId: string } }) => {
               <p className="text-body font-semibold">Category</p>
               <p>{data?.category?.categoryName}</p>
             </div>
+            <div className={`flex-col gap-2 ${data?.tag ? "flex" : "hidden"}`}>
+              <p className="text-body font-semibold">Tag</p>
+              <p>{data?.tag}</p>
+            </div>
             <div className="flex flex-col gap-2">
               <p className="text-body font-semibold">Price</p>
               <p>Rs. {data?.price}</p>
+            </div>
+            <div
+              className={`flex-col gap-2 ${
+                data?.reducedPrice ? "flex" : "hidden"
+              }`}
+            >
+              <p className="text-body font-semibold">Reduced Price</p>
+              <p>Rs. {data?.reducedPrice}</p>
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-body font-semibold">Description</p>
