@@ -100,6 +100,13 @@ const FormBuilder = ({
                 />
               </div>
             )}
+
+            {item.type === "checkbox" && (
+              <div className="flex flex-row items-center gap-2">
+                <label>{item.label}</label>
+                <input type="checkbox" {...register(item.name)} />
+              </div>
+            )}
           </>
         ))}
       </div>

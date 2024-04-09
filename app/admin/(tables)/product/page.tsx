@@ -5,8 +5,10 @@ import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import { Pagination } from "@/components/Pagination/Pagination";
+import TableSkeletal from "@/components/Skeletal/TableSkeletal";
 import { AxiosError } from "axios";
 import { useRouter } from "next-nprogress-bar";
+import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { FaEdit, FaEye } from "react-icons/fa";
@@ -15,7 +17,7 @@ import { toast } from "react-toastify";
 
 const Page = () => {
   const router = useRouter();
-  const { data } = useFetchProductList();
+  const { data, isLoading } = useFetchProductList();
   const mutation = useDeleteProduct();
   const pathname = usePathname();
 
@@ -54,8 +56,8 @@ const Page = () => {
     router.push(pathname + "?" + createQueryString("limit", resultPerPage));
   };
 
-  const page = searchParams.get("page") as string;
-  const limit = searchParams.get("limit") as string;
+  const page = searchParams.get("page") || ("1" as string);
+  const limit = searchParams.get("limit") || ("10" as string);
 
   // to display the range of data displayed on top of table
   const initialLimit = (parseInt(page) - 1) * parseInt(limit) + 1;
@@ -107,52 +109,107 @@ const Page = () => {
                 Tag
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+                Product Count
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+                Stock Available
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+                Visibility
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-black">
                 Action
               </th>
             </tr>
           </thead>
-          <tbody className="whitespace-nowrap">
-            {data?.data?.map((item) => (
-              <tr className="odd:bg-accent odd:bg-opacity-10" key={item._id}>
-                <td className="w-8">
-                  <MyCheckbox color="green" onChange={(e) => {}} />
-                </td>
 
-                <td className="px-6 py-3 text-sm">{item.title}</td>
-                <td className="px-6 py-3 text-sm">
-                  {item.category.categoryName}
-                </td>
-                <td className="px-6 py-3 text-sm">{item.price}</td>
-                <td className="px-6 py-3 text-sm">
-                  {item?.reducedPrice || "_"}
-                </td>
-                <td className="px-6 py-3 text-sm">{item?.tag || "_"}</td>
+          {!isLoading && data?.data.length !== 0 && (
+            <tbody className="whitespace-nowrap">
+              {data?.data?.map((item) => (
+                <tr className="odd:bg-accent odd:bg-opacity-10" key={item._id}>
+                  <td className="w-8">
+                    <MyCheckbox color="green" onChange={(e) => {}} />
+                  </td>
 
-                <td className="px-6 py-3">
-                  <div className="flex flex-row gap-4 items-center">
-                    <FaEye
-                      size={18}
-                      className="text-blue-600 hover:text-blue-800"
-                      onClick={() => router.push(`/admin/product/${item._id}`)}
-                    />
-                    <FaEdit
-                      className="text-accent hover:text-accent-dark"
-                      size={18}
-                      onClick={() =>
-                        router.push(`/admin/product/edit/${item._id}`)
-                      }
-                    />
-                    <RiDeleteBin6Line
-                      className="text-red-600 hover:text-red-800"
-                      size={18}
-                      onClick={() => handleDelete(item._id)}
-                    />
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                  <td className="px-6 py-3 text-sm">{item.title}</td>
+                  <td className="px-6 py-3 text-sm">
+                    {item.category.categoryName}
+                  </td>
+                  <td className="px-6 py-3 text-sm">{item.price}</td>
+                  <td className="px-6 py-3 text-sm">
+                    {item?.reducedPrice || "_"}
+                  </td>
+                  <td className="px-6 py-3 text-sm">{item?.tag || "_"}</td>
+                  <td className="px-6 py-3 text-sm">
+                    {item?.productCount || "_"}
+                  </td>
+                  <td className="px-6 py-3 text-sm">
+                    {item.isStockAvailable ? (
+                      <span className="w-fit text-primary whitespace-nowrap bg-blue-400 px-3 py-1.5 text-xs font-medium">
+                        YES
+                      </span>
+                    ) : (
+                      <span className="w-fit whitespace-nowrap text-primary bg-red-400 px-3 py-1.5 text-xs font-medium">
+                        NO
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-6 py-3 text-sm">
+                    {item.isProductVisible ? (
+                      <span className="w-fit text-primary whitespace-nowrap bg-blue-400 px-3 py-1.5 text-xs font-medium">
+                        YES
+                      </span>
+                    ) : (
+                      <span className="w-fit whitespace-nowrap text-primary bg-red-400 px-3 py-1.5 text-xs font-medium">
+                        NO
+                      </span>
+                    )}
+                  </td>
+
+                  <td className="px-6 py-3">
+                    <div className="flex flex-row gap-4 items-center">
+                      <FaEye
+                        size={18}
+                        className="text-blue-600 hover:text-blue-800"
+                        onClick={() =>
+                          router.push(`/admin/product/${item._id}`)
+                        }
+                      />
+                      <FaEdit
+                        className="text-accent hover:text-accent-dark"
+                        size={18}
+                        onClick={() =>
+                          router.push(`/admin/product/edit/${item._id}`)
+                        }
+                      />
+                      <RiDeleteBin6Line
+                        className="text-red-600 hover:text-red-800"
+                        size={18}
+                        onClick={() => handleDelete(item._id)}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
         </table>
+
+        {/* show empty component */}
+        {data?.data.length === 0 && (
+          <div className="flex flex-col items-center justify-center gap-4 py-6">
+            <Image
+              src={require("@/public/no_data.svg")}
+              alt="no data"
+              width={100}
+              height={100}
+            />
+            <p className="font-semibold">No data to show</p>
+          </div>
+        )}
+
+        {/* skeletal loading */}
+        {isLoading && <TableSkeletal />}
       </div>
 
       {/* pagination */}

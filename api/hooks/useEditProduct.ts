@@ -12,6 +12,8 @@ export interface IPostData {
   description: string;
   productHighlight: string;
   image: any[];
+  productCount?: string;
+  isProductVisible: string;
 }
 
 const editProduct = async (
@@ -30,6 +32,8 @@ const editProduct = async (
   formData.append("reducedPrice", data?.reducedPrice || "");
   formData.append("description", data.description);
   formData.append("productHighlight", data.productHighlight);
+  formData.append("productCount", data.productCount || "");
+  formData.append("isProductVisible", data.isProductVisible);
 
   data.image.forEach((item) => formData.append("image", item));
 

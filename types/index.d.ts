@@ -31,6 +31,9 @@ interface IProductData {
   category: ICategory;
   createdAt: Date;
   updatedAt: Date;
+  isProductVisible: boolean;
+  isStockAvailable: boolean;
+  productCount: number;
 }
 interface IProductListData {
   count: number;
@@ -52,7 +55,7 @@ interface IFormData {
   name: string;
   placeholder: string;
   tag?: string;
-  type?: "dropdown" | "number" | "image";
+  type?: "dropdown" | "number" | "image" | "checkbox";
   dropdownData?: {
     label: string;
     value: string;

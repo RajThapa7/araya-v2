@@ -21,6 +21,8 @@ const defaultValues: any = {
   description: "",
   productHighlight: "",
   image: null,
+  productCount: null,
+  isProductVisible: true,
 };
 
 const Page = () => {
@@ -81,6 +83,20 @@ const Page = () => {
     },
     {
       id: 7,
+      label: "Product Visible",
+      name: "isProductVisible",
+      placeholder: "",
+      type: "checkbox",
+    },
+    {
+      id: 8,
+      label: "Product Count",
+      name: "productCount",
+      placeholder: "Enter the available product count",
+      type: "number",
+    },
+    {
+      id: 9,
       label: "Images",
       name: "image",
       placeholder: "select image",

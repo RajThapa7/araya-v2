@@ -89,3 +89,41 @@ html {
 .mySwiper .swiper-wrapper {
   @apply justify-center;
 }
+
+/* skeletal css */
+
+.animate-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    #e7edf1 0px,
+    #f7f6fa 200px,
+    #e7edf1 400px
+  );
+  background-size: 1200px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.dark-animate-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    #524f4f 0px,
+    #807c7c 200px,
+    #524f4f 400px
+  );
+  background-size: 1200px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px;
+  }
+
+  50% {
+    background-position: 400px;
+  }
+
+  100% {
+    background-position: 700px;
+  }
+}

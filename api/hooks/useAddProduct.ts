@@ -9,6 +9,8 @@ export interface IPostData {
   category: string;
   price: string;
   reducedPrice?: string;
+  productCount?: string;
+  isProductVisible: string;
   description: string;
   productHighlight: string;
   image: any[];
@@ -26,6 +28,8 @@ const addProduct = async (data: IPostData, api: AxiosInstance) => {
   formData.append("reducedPrice", data?.reducedPrice || "");
   formData.append("description", data.description);
   formData.append("productHighlight", data.productHighlight);
+  formData.append("productCount", data.productCount || "");
+  formData.append("isProductVisible", data.isProductVisible);
 
   data.image.forEach((item) => formData.append("image", item));
 

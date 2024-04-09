@@ -2,6 +2,7 @@
 import useEditProduct from "@/api/hooks/useEditProduct";
 import useFetchCategories from "@/api/hooks/useFetchCategories";
 import useFetchProductById from "@/api/hooks/useFetchProductById";
+import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import FormBuilder from "@/features/FormBuilder/FormBuilder";
 import addProductSchema from "@/features/admin/add/schema";
 import { IFormData } from "@/types";
@@ -25,6 +26,8 @@ const Page = ({ params }: { params: { productId: string } }) => {
     description: "",
     productHighlight: "",
     image: null,
+    productCount: null,
+    isProductVisible: null,
   };
 
   const router = useRouter();
@@ -84,6 +87,20 @@ const Page = ({ params }: { params: { productId: string } }) => {
     },
     {
       id: 7,
+      label: "Product Visible",
+      name: "isProductVisible",
+      placeholder: "",
+      type: "checkbox",
+    },
+    {
+      id: 8,
+      label: "Product Count",
+      name: "productCount",
+      placeholder: "Enter the available product count",
+      type: "number",
+    },
+    {
+      id: 9,
       label: "Images",
       name: "image",
       placeholder: "select image",
@@ -107,7 +124,6 @@ const Page = ({ params }: { params: { productId: string } }) => {
   });
 
   const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(data);
     mutation.mutate(data, {
       onSuccess: (data) => {
         reset();
@@ -139,6 +155,7 @@ const Page = ({ params }: { params: { productId: string } }) => {
         {...{ errors, formData, handleSubmit, onSubmit, register, control }}
         buttonLabel="Edit Product"
       />
+      <LoadingOverlay isVisible={mutation.isPending} />
     </div>
   );
 };

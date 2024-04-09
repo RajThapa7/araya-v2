@@ -8,13 +8,11 @@ import useCreateApi from "../useCreateApi";
 
 const getAllProducts = async (
   api: AxiosInstance,
-  limit: string | null,
-  page: string | null
+  limit: string,
+  page: string
 ): Promise<IProductListData> => {
   const route = getApiRoute("getAllProducts")();
-  const result = await api.get(
-    route + `?limit=${limit || 10}&page=${page || 1}`
-  );
+  const result = await api.get(route + `?limit=${limit}&page=${page}`);
   return result.data;
 };
 
@@ -22,8 +20,8 @@ const useFetchProductList = () => {
   const api = useCreateApi();
   const searchParams = useSearchParams();
 
-  const limit = searchParams.get("limit");
-  const page = searchParams.get("page");
+  const limit = searchParams.get("limit") || "10";
+  const page = searchParams.get("page") || "1";
 
   const result = useQuery({
     queryKey: ["products", limit, page],
