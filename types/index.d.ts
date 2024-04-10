@@ -48,7 +48,9 @@ interface ICategory {
   createdAt: Date;
   updatedAt: Date;
   slug: string;
+  productCount: number;
 }
+
 interface IFormData {
   id: number;
   label: string;
@@ -62,11 +64,20 @@ interface IFormData {
   }[];
 }
 
+interface ICategoryListData {
+  totalCount: number;
+  totalPages: number;
+  count: number;
+  page: number;
+  data: IProductData[];
+}
+
 type FormInputType = { [key: string]: string | number | null | undefined };
 
 export type {
   FormInputType,
   ICategory,
+  ICategoryListData,
   IFormData,
   IProductCard,
   IProductData,

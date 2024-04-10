@@ -1,6 +1,7 @@
 import { montserrat } from "@/app/fonts";
 import MultipleImageUploader from "@/components/MultipleImageUploader/MulitpleImageUploader";
 import MyButton from "@/components/MyButton";
+import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import MyInput from "@/components/MyInput/MyInput";
 import { FormInputType, IFormData } from "@/types";
 import { Option, Select } from "@material-tailwind/react";
@@ -104,7 +105,13 @@ const FormBuilder = ({
             {item.type === "checkbox" && (
               <div className="flex flex-row items-center gap-2">
                 <label>{item.label}</label>
-                <input type="checkbox" {...register(item.name)} />
+                <Controller
+                  control={control}
+                  name={item.name}
+                  render={({ field: { onChange, value } }) => (
+                    <MyCheckbox onChange={onChange} checked={!!value} />
+                  )}
+                />
               </div>
             )}
           </>

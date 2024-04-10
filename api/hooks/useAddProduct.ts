@@ -44,7 +44,14 @@ const useAddProduct = () => {
   const mutation = useMutation({
     mutationFn: (data: IPostData) => addProduct(data, api),
     onSuccess: () => {
-      client.invalidateQueries({ queryKey: ["products"] });
+      // invalidate multiple queries
+      client.invalidateQueries({
+        predicate: (query) => {
+          return ["products", "categories"].includes(
+            query.queryKey[0] as string
+          );
+        },
+      });
     },
   });
   return mutation;

@@ -1,5 +1,6 @@
 "use client";
 import MyButton from "@/components/MyButton";
+import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren, useState } from "react";
@@ -9,16 +10,19 @@ const data = [
     id: 0,
     name: "Products",
     route: "product",
+    link: "/admin/product",
   },
   {
     id: 1,
     name: "Categories",
     route: "category",
+    link: "/admin/category",
   },
   {
     id: 2,
     name: "Users",
     route: "user",
+    link: "/admin/user",
   },
 ];
 
@@ -30,6 +34,7 @@ const Layout = ({ children }: PropsWithChildren) => {
   const [activeIndex, setActiveIndex] = useState<number>(
     data.findIndex(({ route }) => route === routeArray[1])
   );
+  const router = useRouter();
   return (
     <div className="">
       {/* sidebar */}
@@ -42,10 +47,13 @@ const Layout = ({ children }: PropsWithChildren) => {
           src={require("@/public/footer-logo.svg")}
         />
         <div className="flex flex-col mt-4 flex-1">
-          {data.map(({ id, name }) => (
+          {data.map(({ id, name, link }) => (
             <p
               key={id}
-              onClick={() => setActiveIndex(id)}
+              onClick={() => {
+                setActiveIndex(id);
+                router.push(link);
+              }}
               className={`py-4 cursor-pointer transition-smooth hover:bg-accent hover:bg-opacity-20 hover:text-accent-dark pl-6 ${
                 activeIndex === id && "bg-accent bg-opacity-20 text-accent-dark"
               }`}
