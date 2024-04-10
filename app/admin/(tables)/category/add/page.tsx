@@ -2,7 +2,7 @@
 import useAddCategory from "@/api/hooks/useAddCategory";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import FormBuilder from "@/features/FormBuilder/FormBuilder";
-import addCategorySchema from "@/features/category/add/schema";
+import addCategorySchema from "@/features/admin/category/add/schema";
 import { IFormData } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";

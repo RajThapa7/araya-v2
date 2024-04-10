@@ -2,14 +2,20 @@
 import useEditProduct from "@/api/hooks/useEditProduct";
 import useFetchCategories from "@/api/hooks/useFetchCategories";
 import useFetchProductById from "@/api/hooks/useFetchProductById";
+import { montserrat } from "@/app/fonts";
+import CloudImageManager from "@/components/CloudImageManager/CloudImageManager";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
-import FormBuilder from "@/features/FormBuilder/FormBuilder";
-import addProductSchema from "@/features/admin/add/schema";
+import MultipleImageUploader from "@/components/MultipleImageUploader/MulitpleImageUploader";
+import MyButton from "@/components/MyButton";
+import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
+import MyInput from "@/components/MyInput/MyInput";
+import editProductSchema from "@/features/admin/product/edit/schema";
 import { IFormData } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Option, Select } from "@material-tailwind/react";
 import { AxiosError } from "axios";
 import { useRouter } from "next-nprogress-bar";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { toast } from "react-toastify";
 
@@ -25,7 +31,9 @@ const Page = ({ params }: { params: { productId: string } }) => {
     reducedPrice: null,
     description: "",
     productHighlight: "",
-    image: null,
+    cloudImage: [],
+    removedCloudImage: [],
+    image: [],
     productCount: null,
     isProductVisible: null,
   };
@@ -120,10 +128,12 @@ const Page = ({ params }: { params: { productId: string } }) => {
   } = useForm<any>({
     defaultValues: defaultValues,
     values: data, //updates the form data from the fetched data
-    resolver: yupResolver(addProductSchema),
+    resolver: yupResolver(editProductSchema),
   });
 
   const onSubmit: SubmitHandler<any> = (data) => {
+    console.log(data, "edit data");
+    return;
     mutation.mutate(data, {
       onSuccess: (data) => {
         reset();
@@ -151,18 +161,110 @@ const Page = ({ params }: { params: { productId: string } }) => {
           Edit Product
         </h2>
       </div>
-      <FormBuilder
-        {...{
-          errors,
-          formData,
-          handleSubmit,
-          onSubmit,
-          register,
-          control,
-          setValue,
-        }}
-        buttonLabel="Edit Product"
-      />
+      <form action="" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex gap-6 flex-col">
+          {formData.map((item) => (
+            <>
+              {item.type === undefined && (
+                <div key={item.id} className="flex flex-col gap-2">
+                  <label htmlFor={item.name}>{item.label}</label>
+                  <MyInput
+                    type={"text"}
+                    placeholder={item.placeholder}
+                    {...register(item.name)}
+                    error={errors[item.name]}
+                  />
+                </div>
+              )}
+              {item.type === "number" && (
+                <div key={item.id} className="flex flex-col gap-2">
+                  <label htmlFor={item.name}>{item.label}</label>
+                  <MyInput
+                    type={"number"}
+                    placeholder={item.placeholder}
+                    {...register(item.name)}
+                    error={errors[item.name]}
+                  />
+                </div>
+              )}
+              {item.type === "dropdown" && (
+                <div key={item.id} className="flex flex-col gap-2">
+                  <label htmlFor={item.name}>{item.label}</label>
+                  <Controller
+                    control={control}
+                    name={item.name}
+                    render={({ field: { value, onChange, onBlur } }) => (
+                      <Select
+                        color="blue"
+                        variant="outlined"
+                        label={item.placeholder}
+                        className={` bg-gray-100 ${montserrat.className}`}
+                        error={!!errors[item.name]}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                      >
+                        {item?.dropdownData?.map(({ label, value }) => (
+                          <Option value={value} key={value}>
+                            {label}
+                          </Option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </div>
+              )}
+
+              {item.type === "image" && (
+                <div className="flex flex-col gap-2">
+                  <label>{item.label}</label>
+                  <Controller
+                    control={control}
+                    name={item.name}
+                    render={({ field: { onChange } }) => (
+                      <MultipleImageUploader
+                        onChange={onChange}
+                        error={errors[item.name]}
+                      />
+                    )}
+                  />
+                </div>
+              )}
+
+              {item.type === "checkbox" && (
+                <div className="flex flex-row items-center gap-2">
+                  <label>{item.label}</label>
+                  <Controller
+                    control={control}
+                    name={item.name}
+                    render={({ field: { onChange, value } }) => (
+                      <MyCheckbox onChange={onChange} checked={!!value} />
+                    )}
+                  />
+                </div>
+              )}
+            </>
+          ))}
+        </div>
+
+        {!isLoading && (
+          <Controller
+            control={control}
+            name="cloudImage"
+            render={({ field: { onChange } }) => (
+              <CloudImageManager
+                error={errors["cloudImage"]}
+                onChange={onChange}
+                setValue={setValue}
+                images={data?.img || []}
+              />
+            )}
+          />
+        )}
+
+        <MyButton className="!p-4 mt-8" type="submit">
+          Edit Product
+        </MyButton>
+      </form>
       <LoadingOverlay isVisible={mutation.isPending} />
     </div>
   );

@@ -11,6 +11,7 @@ type CheckboxProps = {
 export default function MyCheckbox(props: CheckboxProps) {
   return (
     <Checkbox
+      color="green"
       crossOrigin={undefined}
       className="h-4 w-4 rounded-sm"
       {...props}

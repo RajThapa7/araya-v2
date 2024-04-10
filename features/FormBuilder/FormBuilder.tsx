@@ -22,6 +22,7 @@ interface IFormBuilderProps {
   handleSubmit: UseFormHandleSubmit<FormInputType, undefined>;
   onSubmit: SubmitHandler<FormInputType>;
   buttonLabel?: string;
+  isEditPage?: boolean;
 }
 
 const FormBuilder = ({
@@ -32,6 +33,7 @@ const FormBuilder = ({
   control,
   errors,
   buttonLabel,
+  isEditPage = false,
 }: IFormBuilderProps) => {
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -86,6 +88,7 @@ const FormBuilder = ({
                 />
               </div>
             )}
+
             {item.type === "image" && (
               <div className="flex flex-col gap-2">
                 <label>{item.label}</label>
@@ -117,6 +120,12 @@ const FormBuilder = ({
           </>
         ))}
       </div>
+      {isEditPage && (
+        <div>
+          <label>Edit Image</label>
+          <MyCheckbox onChange={() => {}} checked={false} />
+        </div>
+      )}
       <MyButton className="!p-4 mt-8" type="submit">
         {buttonLabel || "Add Product"}
       </MyButton>
