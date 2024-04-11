@@ -1,8 +1,10 @@
 "use client";
+import { useAuth } from "@/Providers/AuthProvider";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 
 const useCreateApi = () => {
+  const { token } = useAuth();
   const currentRoute = usePathname();
   const isAdminRoute = currentRoute.split("/").slice(1).includes("admin");
 
@@ -12,9 +14,7 @@ const useCreateApi = () => {
 
   api.interceptors.request.use(function (config) {
     if (config.headers) {
-      config.headers[
-        "Authorization"
-      ] = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MGUxMTZmNTdkMTcxOTFhY2I3MjE5NyIsImV4cGlyZSI6MTcxMzA3ODc5MTE3OSwiaXNBZG1pbiI6dHJ1ZX0.4MIHftkbO3CHFzYmUGZJmQqcRaxrHSNDuMTb9zQ9zWQ`;
+      config.headers["Authorization"] = `Bearer ${token}`;
 
       return config;
     }

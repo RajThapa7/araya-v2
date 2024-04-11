@@ -8,7 +8,7 @@ import TableSkeletal from "@/components/Skeletal/TableSkeletal";
 import { AxiosError } from "axios";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
-import { FaEdit, FaEye } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 
@@ -96,13 +96,13 @@ const Page = () => {
                             router.push(`/admin/category/${item.slug}`)
                           }
                         />
-                        <FaEdit
+                        {/* <FaEdit
                           className="text-accent hover:text-accent-dark"
                           size={18}
                           onClick={() =>
                             router.push(`/admin/category/edit/${item._id}`)
                           }
-                        />
+                        /> */}
                         <RiDeleteBin6Line
                           className="text-red-600 hover:text-red-800"
                           size={18}

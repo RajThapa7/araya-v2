@@ -34,8 +34,8 @@ export function Pagination({
         pageLinkClassName="!py-2 !px-4 hover:bg-gray-200"
         activeLinkClassName="bg-accent text-primary"
         activeClassName="bg-accent"
-        initialPage={parseInt(page) - 1 || 0}
-        forcePage={parseInt(page) - 1}
+        // initialPage={parseInt(page) - 1 || 0}
+        forcePage={parseInt(page || "1") - 1}
       />
       {/* result per page selector */}
       <div className="flex flex-row items-center gap-2">

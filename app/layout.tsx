@@ -1,4 +1,5 @@
 "use client";
+import AuthProvider from "@/Providers/AuthProvider";
 import QueryProvider from "@/Providers/QueryProvider";
 import ProgressBarProvider from "@/components/Provider/ProgressBarProvider";
 import { PropsWithChildren } from "react";
@@ -16,7 +17,9 @@ const Layout = ({ children }: PropsWithChildren) => {
         }`}
       >
         <ProgressBarProvider>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </QueryProvider>
         </ProgressBarProvider>
         <ToastContainer theme="colored" hideProgressBar autoClose={2000} />
       </body>

@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/Providers/AuthProvider";
 import MyButton from "@/components/MyButton";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
@@ -27,6 +28,7 @@ const data = [
 ];
 
 const Layout = ({ children }: PropsWithChildren) => {
+  const { logout } = useAuth();
   const currentRoute = usePathname();
   const routeArray = currentRoute.split("/").slice(1);
 
@@ -62,7 +64,14 @@ const Layout = ({ children }: PropsWithChildren) => {
             </p>
           ))}
         </div>
-        <MyButton className="!py-4 mx-4">Logout</MyButton>
+        <MyButton
+          className="!py-4 mx-4"
+          onClick={() => {
+            logout("/admin/login", "Logged out successfully");
+          }}
+        >
+          Logout
+        </MyButton>
       </div>
 
       {/* children */}
