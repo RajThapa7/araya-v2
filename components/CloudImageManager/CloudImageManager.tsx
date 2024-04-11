@@ -16,15 +16,13 @@ const CloudImageManager = ({
   setValue: UseFormSetValue<any>;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [image, setImage] = useState<string>();
+  const [image, setImage] = useState<string>(); //for modal
 
   const [cloudImageArray, setCloudImageArray] = useState<string[]>(images);
 
   useEffect(() => {
-    console.log("cloud image picker is called bro");
-    console.log(images, "images array ");
-    onChange(cloudImageArray);
-  }, []);
+    setValue("cloudImage", images);
+  }, [images, setValue]);
 
   const [removedArr, setRemovedArr] = useState<string[]>([]);
 
@@ -44,7 +42,11 @@ const CloudImageManager = ({
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div
+      className={`${
+        cloudImageArray.length === 0 ? "hidden" : "flex"
+      } flex-col gap-2`}
+    >
       <p className="">Uploaded Images</p>
       <div className="flex flex-row gap-14">
         {cloudImageArray?.map((item, index) => (

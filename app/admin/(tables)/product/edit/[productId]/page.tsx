@@ -132,8 +132,6 @@ const Page = ({ params }: { params: { productId: string } }) => {
   });
 
   const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(data, "edit data");
-    return;
     mutation.mutate(data, {
       onSuccess: (data) => {
         reset();

@@ -10,8 +10,11 @@ const editProductSchema = yup.object().shape({
   productHighlight: yup.string().required("Please enter the product highlight"),
   cloudImage: yup.array(),
   image: yup.array().test("is-required", "Please upload an image", function () {
-    const { cloudImage } = this.parent;
+    const { cloudImage, image } = this.parent;
     if (cloudImage.length === 0) {
+      if (image.length !== 0) {
+        return true;
+      }
       return false;
     }
     return true;
