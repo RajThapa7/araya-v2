@@ -1,10 +1,16 @@
 "use client";
+import { useAuth } from "@/Providers/AuthProvider";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import { data } from "@/data/productData";
 import useScrollToTop from "@/hooks/useScrollToTop";
 
 export default function Page() {
   useScrollToTop();
+  const { token, user } = useAuth();
+
+  const isLoggedIn = !!token;
+  console.log(token, user, "token");
+  console.log(isLoggedIn, "is logged inn");
   return (
     <div className="flex flex-col gap-10 pt-24 pb-14">
       <ProductSlider

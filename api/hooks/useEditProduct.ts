@@ -15,7 +15,7 @@ export interface IPostData {
   productCount?: string;
   isProductVisible: string;
   cloudImage: string[];
-  removedCloudImage: string[];
+  removedCloudImage?: string[];
 }
 
 const editProduct = async (
@@ -37,7 +37,10 @@ const editProduct = async (
   formData.append("productCount", data.productCount || "");
   formData.append("isProductVisible", data.isProductVisible);
   formData.append("cloudImage", JSON.stringify(data.cloudImage));
-  formData.append("removedCloudImage", JSON.stringify(data.removedCloudImage));
+  formData.append(
+    "removedCloudImage",
+    JSON.stringify(data.removedCloudImage || [])
+  );
 
   data.image.forEach((item) => formData.append("image", item));
 

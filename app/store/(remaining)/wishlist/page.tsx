@@ -1,11 +1,15 @@
 "use client";
+import { useAuth } from "@/Providers/AuthProvider";
 import { montserrat } from "@/app/fonts";
 import Empty from "@/components/Empty/Empty";
+import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import SmallProductCard from "@/components/SmallProductCard/SmallProductCard";
 import { data } from "@/data/productData";
 import { Option, Select } from "@material-tailwind/react";
+import { useRouter } from "next-nprogress-bar";
+import Image from "next/image";
 import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -13,6 +17,31 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 const Category = () => {
   const [sortValue, setSortValue] = useState("price");
   const [selected, setSelected] = useState<number[]>([]);
+
+  const { token } = useAuth();
+  const isLoggedIn = !!token;
+
+  const router = useRouter();
+
+  if (!isLoggedIn) {
+    return (
+      <div className="flex flex-col gap-8 items-center">
+        <p className="font-semibold text-header text-2xl">
+          Login to access your wishlist
+        </p>
+        <Image
+          src={require("@/public/login.svg")}
+          alt="login"
+          width={400}
+          height={200}
+        />
+        <MyButton className="!py-3" onClick={() => router.push("/store/login")}>
+          {" "}
+          Login
+        </MyButton>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-20">

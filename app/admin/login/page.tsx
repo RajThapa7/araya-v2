@@ -38,7 +38,7 @@ const AdminLogin = () => {
   const onSubmit = (data: any) => {
     mutation.mutate(data, {
       onSuccess: (res) => {
-        login(res.token, "/admin/product");
+        login(res.user, res.token, "/admin/product", true);
       },
       onError: (error) => {
         if (error instanceof AxiosError) {

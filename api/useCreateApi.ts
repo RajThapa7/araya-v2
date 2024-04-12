@@ -4,9 +4,11 @@ import axios from "axios";
 import { usePathname } from "next/navigation";
 
 const useCreateApi = () => {
-  const { token } = useAuth();
+  const { token, adminToken, logout } = useAuth();
   const currentRoute = usePathname();
   const isAdminRoute = currentRoute.split("/").slice(1).includes("admin");
+
+  const accessToken = isAdminRoute ? adminToken : token;
 
   const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -14,7 +16,7 @@ const useCreateApi = () => {
 
   api.interceptors.request.use(function (config) {
     if (config.headers) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
 
       return config;
     }
@@ -24,8 +26,8 @@ const useCreateApi = () => {
   api.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error?.response?.status === 401) {
-        // logout();
+      if ([401, 403].includes(parseInt(error?.response?.status))) {
+        logout("/admin/login", "You have been logged out");
       }
       return Promise.reject(error);
     }

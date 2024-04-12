@@ -1,34 +1,75 @@
-import useLocalStorage from "@/hooks/useLocalStorage";
 import { useRouter } from "next-nprogress-bar";
 import { PropsWithChildren, createContext, useContext } from "react";
+import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 
+interface IUser {
+  _id: string;
+  username: string;
+  provider: string;
+  provider_id: string | null;
+  isAdmin: boolean;
+}
+
 type Value = {
-  login: (token: string | null, route: string) => void;
-  logout: (route: string, message: string) => void;
-  token: string | null;
+  login: (
+    user: IUser,
+    token: string,
+    route: string,
+    isAdminLogin?: boolean
+  ) => void;
+  logout: (route: string, message: string, isAdminLogout?: boolean) => void;
+  token: string;
+  adminToken: string;
+  user: IUser;
 };
 
 const AuthContext = createContext<Value | undefined>(undefined);
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [accessToken, setAccessToken, removeAccessToken] = useLocalStorage<
-    string | null
-  >("accessToken", null);
+  const [authCookie, setAuthCookie, removeAuthCookie] = useCookies([
+    "accessToken",
+    "user",
+    "adminAccessToken",
+    "admin",
+  ]);
 
   const router = useRouter();
 
   const value: Value = {
-    login: (token: string | null, route: string) => {
-      setAccessToken(token);
+    login: (
+      user: IUser,
+      token: string,
+      route: string,
+      isAdminLogin: boolean = false
+    ) => {
+      if (!isAdminLogin) {
+        setAuthCookie("accessToken", token);
+        setAuthCookie("user", user);
+      } else {
+        setAuthCookie("adminAccessToken", token);
+        setAuthCookie("admin", user);
+      }
       router.push(route);
     },
-    logout: (route: string, message: string) => {
+    logout: (
+      route: string,
+      message: string,
+      isAdminLogout: boolean = false
+    ) => {
       toast.success(message);
-      removeAccessToken();
+      if (!isAdminLogout) {
+        removeAuthCookie("accessToken");
+        removeAuthCookie("user");
+      } else {
+        removeAuthCookie("adminAccessToken");
+        removeAuthCookie("admin");
+      }
       router.push(route);
     },
-    token: accessToken,
+    token: authCookie.accessToken,
+    adminToken: authCookie.adminAccessToken,
+    user: authCookie.user,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

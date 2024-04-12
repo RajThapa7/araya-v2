@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/Providers/AuthProvider";
 import Empty from "@/components/Empty/Empty";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
@@ -32,6 +33,31 @@ export default function Cart() {
       (prev, curr) => prev + (curr.reducedPrice || curr.price) * curr.quantity,
       0
     );
+
+  const { token } = useAuth();
+  const isLoggedIn = !!token;
+
+  const router = useRouter();
+
+  if (!isLoggedIn) {
+    return (
+      <div className="flex flex-col gap-8 items-center">
+        <p className="font-semibold text-header text-2xl">
+          Login to access your cart
+        </p>
+        <Image
+          src={require("@/public/login.svg")}
+          alt="login"
+          width={400}
+          height={200}
+        />
+        <MyButton className="!py-3" onClick={() => router.push("/store/login")}>
+          {" "}
+          Login
+        </MyButton>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-20">

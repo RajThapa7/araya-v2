@@ -67,7 +67,7 @@ const Layout = ({ children }: PropsWithChildren) => {
         <MyButton
           className="!py-4 mx-4"
           onClick={() => {
-            logout("/admin/login", "Logged out successfully");
+            logout("/admin/login", "Logged out successfully", true);
           }}
         >
           Logout
