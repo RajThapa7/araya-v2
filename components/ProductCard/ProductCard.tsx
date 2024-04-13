@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/Providers/AuthProvider";
 import { montserrat } from "@/app/fonts";
 import ProductModal from "@/features/ProductModal/ProductModal";
 import arayaLogo from "@/public/footer-logo.svg";
@@ -20,6 +21,9 @@ export default function ProductCard({
   tag,
   className,
 }: IProductCard) {
+  const { token } = useAuth();
+  const isLoggedIn = !!token;
+
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
   const [isHover, setIsHover] = useState(false);
@@ -38,6 +42,13 @@ export default function ProductCard({
 
   const handleWishlistClick = (e: SyntheticEvent) => {
     e.stopPropagation();
+    if (!isLoggedIn) {
+      return toast.warn("log in to add item to wishlist", {
+        onClick: () => {
+          router.push("/store/login");
+        },
+      });
+    }
     // Handle "Add to wishlist" button click here
     toast.success("Item added to wishlist", {
       onClick: () => {
@@ -54,6 +65,13 @@ export default function ProductCard({
 
   const handleCartPress = (e: SyntheticEvent) => {
     e.stopPropagation();
+    if (!isLoggedIn) {
+      return toast.warn("log in to add item to cart", {
+        onClick: () => {
+          router.push("/store/login");
+        },
+      });
+    }
     toast.success("Item added to cart successfully", {
       onClick: () => {
         router.push("/store/cart");
