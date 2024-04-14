@@ -2,7 +2,7 @@ import getApiRoute from "@/helper/getApiRoute";
 import { ICategory } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
-import useCreateApi from "../useCreateApi";
+import useCreateApi from "../../useCreateApi";
 
 const getAllCategories = async (api: AxiosInstance): Promise<ICategory[]> => {
   const route = getApiRoute("getAllCategories")();

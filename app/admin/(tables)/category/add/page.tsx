@@ -1,5 +1,5 @@
 "use client";
-import useAddCategory from "@/api/hooks/useAddCategory";
+import useAddCategory from "@/api/hooks/admin/useAddCategory";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import FormBuilder from "@/features/FormBuilder/FormBuilder";
 import addCategorySchema from "@/features/admin/category/add/schema";

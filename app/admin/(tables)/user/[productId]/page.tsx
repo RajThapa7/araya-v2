@@ -1,5 +1,5 @@
 "use client";
-import useFetchProductById from "@/api/hooks/useFetchProductById";
+import useFetchProductById from "@/api/hooks/products/useFetchProductById";
 import Loading from "@/app/loading";
 import { Modal } from "@/components/Modal/Modal";
 import { useRouter } from "next-nprogress-bar";

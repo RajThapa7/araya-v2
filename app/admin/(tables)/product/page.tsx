@@ -1,6 +1,6 @@
 "use client";
-import useDeleteProduct from "@/api/hooks/useDeleteProduct";
-import useFetchProductList from "@/api/hooks/useFetchProducts";
+import useDeleteProduct from "@/api/hooks/admin/useDeleteProduct";
+import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
@@ -21,7 +21,7 @@ const Page = () => {
   const mutation = useDeleteProduct();
   const pathname = usePathname();
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: any) => {
     mutation.mutate(id, {
       onSuccess: (data) => {
         toast.success(data.message);

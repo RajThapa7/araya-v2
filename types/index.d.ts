@@ -1,5 +1,5 @@
 interface IProductCard {
-  id: number;
+  id: string;
   price: number;
   reducedPrice?: number;
   img: string;

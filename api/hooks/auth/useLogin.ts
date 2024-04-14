@@ -1,25 +1,25 @@
 import getApiRoute from "@/helper/getApiRoute";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
-import useCreateApi from "../useCreateApi";
+import useCreateApi from "../../useCreateApi";
 
-interface IAdminLoginData {
+interface ILoginData {
   username: string;
   password: string;
 }
 
-const adminLogin = async (data: IAdminLoginData, api: AxiosInstance) => {
-  const route = getApiRoute("adminLogin")();
+const adminLogin = async (data: ILoginData, api: AxiosInstance) => {
+  const route = getApiRoute("login")();
   const result = await api.post(route, data);
   return result.data;
 };
 
-const useAdminLogin = () => {
+const useLogin = () => {
   const api = useCreateApi();
   const mutation = useMutation({
-    mutationFn: (data: IAdminLoginData) => adminLogin(data, api),
+    mutationFn: (data: ILoginData) => adminLogin(data, api),
   });
   return mutation;
 };
 
-export default useAdminLogin;
+export default useLogin;

@@ -1,6 +1,6 @@
 "use client";
-import useDeleteProduct from "@/api/hooks/useDeleteProduct";
-import useFetchUsers from "@/api/hooks/useFetchUsers";
+import useDeleteProduct from "@/api/hooks/admin/useDeleteProduct";
+import useFetchUsers from "@/api/hooks/admin/useFetchUsers";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import { Modal } from "@/components/Modal/Modal";
 import MyButton from "@/components/MyButton";
@@ -25,7 +25,7 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState<string>();
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: any) => {
     mutation.mutate(id, {
       onSuccess: (data) => {
         toast.success(data.message);

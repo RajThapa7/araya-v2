@@ -1,7 +1,7 @@
 "use client";
-import useEditProduct from "@/api/hooks/useEditProduct";
-import useFetchCategories from "@/api/hooks/useFetchCategories";
-import useFetchProductById from "@/api/hooks/useFetchProductById";
+import useEditProduct from "@/api/hooks/admin/useEditProduct";
+import useFetchCategories from "@/api/hooks/categories/useFetchCategories";
+import useFetchProductById from "@/api/hooks/products/useFetchProductById";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import FormBuilder from "@/features/FormBuilder/FormBuilder";
 import addProductSchema from "@/features/admin/product/add/schema";

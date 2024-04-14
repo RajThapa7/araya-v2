@@ -1,4 +1,5 @@
 "use client";
+import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import { IProductCard } from "@/types";
 import { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -11,6 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { SwiperOptions } from "swiper/types";
 import CategoryTitle from "../CategoryTitle/CategoryTitle";
 import ProductCard from "../ProductCard/ProductCard";
+import CardSkeletal from "../Skeletal/CardSkeletal";
 import SmallProductCard from "../SmallProductCard/SmallProductCard";
 
 type BreakPoint = { [width: number]: SwiperOptions };
@@ -59,6 +61,8 @@ export default function ProductSlider({
   const swiperRef = useRef<any>();
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  const { data: productData, isLoading } = useFetchProductList();
 
   return (
     <div className="">
@@ -109,24 +113,42 @@ export default function ProductSlider({
         modules={[Pagination, Navigation, Grid]}
         className="!h-full !w-full !px-[2px] !pb-10 !pt-6"
       >
-        {data.map(({ id, img, price, title, reducedPrice, tag }) => (
-          <SwiperSlide
-            key={title}
-            className="!flex !h-fit items-center justify-center !opacity-100"
-          >
-            {cardType === "default" ? (
-              <ProductCard
-                className="sm:h-[420px]"
-                {...{ img, id, price, title, reducedPrice, tag }}
-              />
-            ) : (
-              <SmallProductCard
-                className="sm:h-[200px]"
-                {...{ img, id, price, title, reducedPrice, tag }}
-              />
-            )}
-          </SwiperSlide>
-        ))}
+        {isLoading && <CardSkeletal />}
+
+        {!isLoading &&
+          productData?.data?.map(
+            ({
+              _id,
+              reducedPrice,
+              title: productTitle,
+              price,
+              featured_img,
+              tag,
+            }) => (
+              <SwiperSlide
+                key={title}
+                className="!flex !h-fit items-center justify-center !opacity-100"
+              >
+                {cardType === "default" ? (
+                  <ProductCard
+                    className="sm:h-[420px]"
+                    id={_id}
+                    img={featured_img}
+                    {...{ price, reducedPrice, tag }}
+                    title={productTitle}
+                  />
+                ) : (
+                  <SmallProductCard
+                    className="sm:h-[200px]"
+                    id={_id}
+                    title={productTitle}
+                    img={featured_img}
+                    {...{ price, reducedPrice, tag }}
+                  />
+                )}
+              </SwiperSlide>
+            )
+          )}
       </Swiper>
     </div>
   );

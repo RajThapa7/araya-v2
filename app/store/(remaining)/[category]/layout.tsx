@@ -1,15 +1,11 @@
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { PropsWithChildren } from "react";
 
 type Props = {
   params: { category: string };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${params.category} | Araya Arts Store`,
     description:

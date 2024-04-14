@@ -1,7 +1,7 @@
 import getApiRoute from "@/helper/getApiRoute";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
-import useCreateApi from "../useCreateApi";
+import useCreateApi from "../../useCreateApi";
 
 const checkForAuthSuccess = async (api: AxiosInstance) => {
   const route = getApiRoute("authSuccess")();

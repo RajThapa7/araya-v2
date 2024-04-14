@@ -1,7 +1,7 @@
 import getApiRoute from "@/helper/getApiRoute";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
-import useCreateApi from "../useCreateApi";
+import useCreateApi from "../../useCreateApi";
 
 export interface IPostData {
   title: string;

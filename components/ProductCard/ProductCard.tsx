@@ -1,5 +1,9 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import {
+  default as useAddProductToWishlist,
+  default as useFetchRemoveProductFromWishlist,
+} from "@/api/hooks/wishlist/useAddProductToWishlist";
 import { montserrat } from "@/app/fonts";
 import ProductModal from "@/features/ProductModal/ProductModal";
 import arayaLogo from "@/public/footer-logo.svg";
@@ -12,6 +16,7 @@ import { SyntheticEvent, useState } from "react";
 import { AiFillHeart, AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 import { IoIosStar } from "react-icons/io";
 import { toast } from "react-toastify";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 
 export default function ProductCard({
   img,
@@ -20,9 +25,11 @@ export default function ProductCard({
   reducedPrice,
   tag,
   className,
+  id,
 }: IProductCard) {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const isLoggedIn = !!token;
+  const [isFav, setIsFav] = useState(false);
 
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
@@ -30,17 +37,20 @@ export default function ProductCard({
   const [open, setOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState<string | StaticImageData>(img);
 
+  const wishlistMutation = useAddProductToWishlist();
+  const removeWishlistMutation = useFetchRemoveProductFromWishlist();
+
   const handleError = () => {
     setImageSrc(arayaLogo);
   };
   const router = useRouter();
 
-  const handleParentClick = (e: SyntheticEvent) => {
-    router.push("/store/product");
+  const handleParentClick = (e: SyntheticEvent, id: string) => {
+    router.push(`/store/product/${id}`);
     e.stopPropagation();
   };
 
-  const handleWishlistClick = (e: SyntheticEvent) => {
+  const handleWishlistClick = (e: SyntheticEvent, id: string) => {
     e.stopPropagation();
     if (!isLoggedIn) {
       return toast.warn("log in to add item to wishlist", {
@@ -49,13 +59,36 @@ export default function ProductCard({
         },
       });
     }
-    // Handle "Add to wishlist" button click here
-    toast.success("Item added to wishlist", {
-      onClick: () => {
-        router.push("/store/wishlist");
-      },
-    });
-    setIsFav(true);
+
+    isFav
+      ? removeWishlistMutation.mutate(
+          { userId: user._id, productId: id },
+          {
+            onSuccess: (data) => {
+              toast.success(data.message, {
+                onClick: () => {
+                  router.push("/store/wishlist");
+                },
+              });
+              setIsFav(true);
+            },
+            onError: (error) => ErrorHandler(error),
+          }
+        )
+      : wishlistMutation.mutate(
+          { userId: user._id, productId: id },
+          {
+            onSuccess: (data) => {
+              toast.success(data.message, {
+                onClick: () => {
+                  router.push("/store/wishlist");
+                },
+              });
+              setIsFav(true);
+            },
+            onError: (error) => ErrorHandler(error),
+          }
+        );
   };
 
   const handleQuickViewClick = (e: SyntheticEvent) => {
@@ -79,13 +112,11 @@ export default function ProductCard({
     });
   };
 
-  const [isFav, setIsFav] = useState(false);
-
   return (
     <>
-      <ProductModal {...{ open, setOpen }} />
+      <ProductModal productId={id} {...{ open, setOpen }} />
       <div
-        onClick={handleParentClick}
+        onClick={(e) => handleParentClick(e, id)}
         className={classNames(
           className,
           `cursor-pointer transition-smooth group relative block w-full max-w-sm overflow-hidden ring-primary-dark bg-white ring-[1px] hover:ring-accent pt-2 ${montserrat.className}`
@@ -117,7 +148,7 @@ export default function ProductCard({
           } absolute end-4 top-3 z-[99] group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
             isFav ? "hidden" : "flex"
           }`}
-          onClick={handleWishlistClick}
+          onClick={(e) => handleWishlistClick(e, id)}
         >
           <AiOutlineHeart
             className={`text-lg text-gray-500 group-hover/heart:text-accent ${

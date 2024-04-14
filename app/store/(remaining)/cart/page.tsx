@@ -16,7 +16,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 
 export default function Cart() {
-  const [selected, setSelected] = useState<{ id: number; quantity: number }[]>(
+  const [selected, setSelected] = useState<{ id: string; quantity: number }[]>(
     []
   );
 
@@ -150,13 +150,13 @@ const CartItem = ({
 }: {
   item: IProductCard;
   selected: {
-    id: number;
+    id: string;
     quantity: number;
   }[];
   setSelected: Dispatch<
     SetStateAction<
       {
-        id: number;
+        id: string;
         quantity: number;
       }[]
     >

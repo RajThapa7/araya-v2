@@ -1,6 +1,6 @@
 "use client";
-import useDeleteProduct from "@/api/hooks/useDeleteProduct";
-import useFetchProductUnderCategories from "@/api/hooks/useFetchProductUnderCategories";
+import useDeleteProduct from "@/api/hooks/admin/useDeleteProduct";
+import useFetchProductUnderCategories from "@/api/hooks/products/useFetchProductUnderCategories";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
@@ -27,7 +27,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
   const mutation = useDeleteProduct();
   const pathname = usePathname();
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: any) => {
     mutation.mutate(id, {
       onSuccess: (data) => {
         toast.success(data.message);
@@ -106,7 +106,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
       <p className="text-body mt-10 font-semibold">
         Product Under Category{" "}
         <span className="text-accent-dark">
-          "{currentCategory?.categoryName}"
+          &quot;{currentCategory?.categoryName}&quot;
         </span>
       </p>
 

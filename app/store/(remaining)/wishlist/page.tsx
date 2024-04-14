@@ -1,10 +1,12 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import { montserrat } from "@/app/fonts";
 import Empty from "@/components/Empty/Empty";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
+import CardSkeletal from "@/components/Skeletal/CardSkeletal";
 import SmallProductCard from "@/components/SmallProductCard/SmallProductCard";
 import { data } from "@/data/productData";
 import { Option, Select } from "@material-tailwind/react";
@@ -18,10 +20,12 @@ const Category = () => {
   const [sortValue, setSortValue] = useState("price");
   const [selected, setSelected] = useState<number[]>([]);
 
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const isLoggedIn = !!token;
 
   const router = useRouter();
+
+  const { isLoading, data: wishlistData } = useFetchWishlist(user._id);
 
   if (!isLoggedIn) {
     return (
@@ -47,11 +51,11 @@ const Category = () => {
     <div className="flex flex-col gap-20">
       <Empty
         title="There is no item in your wishlist"
-        className={data.length === 0 ? "flex" : "hidden"}
+        className={wishlistData?.products.length === 0 ? "flex" : "hidden"}
       />
 
       {/* wishlist div */}
-      <div className={data.length === 0 ? "hidden" : ""}>
+      <div className={wishlistData?.products.length === 0 ? "hidden" : ""}>
         <div className="mb-8 flex flex-row justify-between items-center">
           <p className="text-2xl text-body font-semibold capitalize">
             My Wishlist
@@ -108,31 +112,44 @@ const Category = () => {
           </div>
         </div>
 
+        {isLoading && <CardSkeletal count={8} />}
+
         {/* product lists */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {data.map(({ img, price, title, reducedPrice, tag, id }, index) => (
-            <div key={index} className="flex flex-row">
-              <MyCheckbox
-                color="green"
-                checked={selected.includes(index)}
-                onChange={(e) => {
-                  setSelected(() => {
-                    // add selected value to the array
-                    if (e.target.checked) {
-                      return [...selected, index];
-                    }
-                    // if unselected remove the value from the array
-                    return selected.filter((item) => item !== index);
-                  });
-                }}
-              />
-              <SmallProductCard
-                {...{ img, price, reducedPrice, tag, title, id }}
-                className={`${selected.includes(index) && "!outline-accent"}`}
-              />
-            </div>
-          ))}
-        </div>
+        {!isLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {wishlistData?.products.map(
+              (
+                { featured_img, price, title, reducedPrice, tag, _id },
+                index
+              ) => (
+                <div key={index} className="flex flex-row">
+                  <MyCheckbox
+                    color="green"
+                    checked={selected.includes(index)}
+                    onChange={(e) => {
+                      setSelected(() => {
+                        // add selected value to the array
+                        if (e.target.checked) {
+                          return [...selected, index];
+                        }
+                        // if unselected remove the value from the array
+                        return selected.filter((item) => item !== index);
+                      });
+                    }}
+                  />
+                  <SmallProductCard
+                    id={_id}
+                    img={featured_img}
+                    {...{ price, reducedPrice, tag, title }}
+                    className={`${
+                      selected.includes(index) && "!outline-accent"
+                    }`}
+                  />
+                </div>
+              )
+            )}
+          </div>
+        )}
       </div>
 
       <ProductSlider data={data} title="Picks for you" />

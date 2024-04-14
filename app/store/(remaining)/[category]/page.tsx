@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 const data: IProductCard[] = [
   {
-    id: 0,
+    id: "0",
     img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
     price: 999,
     reducedPrice: 800,
@@ -15,7 +15,7 @@ const data: IProductCard[] = [
     tag: "Latest",
   },
   {
-    id: 1,
+    id: "1",
     img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
     price: 999,
     // reducedPrice: 800,
@@ -23,7 +23,7 @@ const data: IProductCard[] = [
     // tag: "Latest",
   },
   {
-    id: 2,
+    id: "2",
     img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
     price: 999,
     // reducedPrice: 800,
@@ -31,7 +31,7 @@ const data: IProductCard[] = [
     tag: "Latest",
   },
   {
-    id: 4,
+    id: "3",
     img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
     price: 999,
     reducedPrice: 800,
@@ -39,7 +39,7 @@ const data: IProductCard[] = [
     tag: "Latest",
   },
   {
-    id: 5,
+    id: "4",
     img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
     price: 999,
     reducedPrice: 800,
@@ -47,7 +47,7 @@ const data: IProductCard[] = [
     tag: "Latest",
   },
   {
-    id: 6,
+    id: "5",
     img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
     price: 999,
     reducedPrice: 800,

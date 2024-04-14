@@ -1,6 +1,6 @@
 "use client";
-import useDeleteProduct from "@/api/hooks/useDeleteProduct";
-import useFetchCategories from "@/api/hooks/useFetchCategories";
+import useDeleteProduct from "@/api/hooks/admin/useDeleteProduct";
+import useFetchCategories from "@/api/hooks/categories/useFetchCategories";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
@@ -17,7 +17,7 @@ const Page = () => {
   const { data, isLoading } = useFetchCategories();
   const mutation = useDeleteProduct();
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: any) => {
     mutation.mutate(id, {
       onSuccess: (data) => {
         toast.success(data.message);

@@ -1,6 +1,6 @@
 "use client";
-import useAddProduct from "@/api/hooks/useAddProduct";
-import useFetchCategories from "@/api/hooks/useFetchCategories";
+import useAddProduct from "@/api/hooks/admin/useAddProduct";
+import useFetchCategories from "@/api/hooks/categories/useFetchCategories";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import FormBuilder from "@/features/FormBuilder/FormBuilder";
 import addProductSchema from "@/features/admin/product/add/schema";

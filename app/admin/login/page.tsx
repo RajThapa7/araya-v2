@@ -1,6 +1,6 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
-import useAdminLogin from "@/api/hooks/useAdminLogin";
+import useAdminLogin from "@/api/hooks/admin/useAdminLogin";
 import MyButton from "@/components/MyButton";
 import MyInput from "@/components/MyInput/MyInput";
 import adminLoginSchema from "@/features/admin/login/schema";

@@ -31,9 +31,11 @@ const images = [
 export default function ImageSlider({
   className,
   isMagnified = true,
+  data,
 }: {
   className?: string;
   isMagnified?: boolean;
+  data: string[];
 }) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
@@ -48,8 +50,8 @@ export default function ImageSlider({
         centeredSlides={true}
         className="mySwiper2"
       >
-        {images.map(({ alt, id, img }) => (
-          <SwiperSlide key={id}>
+        {data.map((img, index) => (
+          <SwiperSlide key={index}>
             {!isMagnified ? (
               <div className="relative w-full pt-[100%]">
                 <Image
@@ -78,7 +80,7 @@ export default function ImageSlider({
                     {...{
                       enlargedImagePortalId: "portal",
                       smallImage: {
-                        alt: alt,
+                        alt: "product image",
                         isFluidWidth: true,
                         src: img,
                         sizes:
@@ -111,8 +113,8 @@ export default function ImageSlider({
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper !w-full"
       >
-        {images.map(({ alt, id, img }) => (
-          <SwiperSlide key={id}>
+        {data.map((img, index) => (
+          <SwiperSlide key={index}>
             <div className="relative w-[70px] pt-[100%]">
               <Image
                 src={img}

@@ -1,7 +1,7 @@
 import getApiRoute from "@/helper/getApiRoute";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
-import useCreateApi from "../useCreateApi";
+import useCreateApi from "../../useCreateApi";
 
 const deleteProduct = async (data: any, api: AxiosInstance) => {
   const route = getApiRoute("deleteProduct")(data);

@@ -1,7 +1,7 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
-import useCheckForAuthSuccess from "@/api/hooks/useCheckForAuthSuccess";
-import useLogin from "@/api/hooks/useLogin";
+import useCheckForAuthSuccess from "@/api/hooks/auth/useCheckForAuthSuccess";
+import useLogin from "@/api/hooks/auth/useLogin";
 import MyButton from "@/components/MyButton";
 import MyInput from "@/components/MyInput/MyInput";
 import loginSchema from "@/features/store/login/schema/schema";

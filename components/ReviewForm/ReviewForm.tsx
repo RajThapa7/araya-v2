@@ -1,12 +1,12 @@
+import MultipleImageUploader from "../MultipleImageUploader/MulitpleImageUploader";
 import MyButton from "../MyButton";
-import MyInput from "../MyInput/MyInput";
 import MyTextArea from "../MyTextArea/MyTextArea";
 import { MyRating } from "../Rating";
 
 export default function ReviewForm() {
   return (
     <div className="flex flex-col gap-8 flex-1 max-w-lg">
-      <p className="text-gray-900 text-lg">Add a Review</p>
+      <p className="text-gray-900 font-semibold text-lg">Add a Review</p>
       <form action="" className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <label htmlFor="review" className="font-semibold text-gray-900">
@@ -16,21 +16,15 @@ export default function ReviewForm() {
         </div>
         <div className="flex flex-col gap-3">
           <label htmlFor="review" className=" font-semibold text-gray-900">
-            Your Rating
+            Your Review
           </label>
           <MyTextArea label="Review" className="" />
         </div>
         <div className="flex flex-col gap-3">
           <label htmlFor="review" className=" font-semibold text-gray-900">
-            Name
+            Product Image
           </label>
-          <MyInput />
-        </div>
-        <div className="flex flex-col gap-3">
-          <label htmlFor="review" className=" font-semibold text-gray-900">
-            Email
-          </label>
-          <MyInput />
+          <MultipleImageUploader />
         </div>
         <MyButton className="!py-4 w-fit" type="submit">
           Add Review

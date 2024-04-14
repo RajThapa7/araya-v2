@@ -1,3 +1,6 @@
+import { useAuth } from "@/Providers/AuthProvider";
+import useFetchRemoveProductFromWishlist from "@/api/hooks/wishlist/useAddProductToWishlist";
+import useAddProductToWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import ProductModal from "@/features/ProductModal/ProductModal";
 import arayaLogo from "@/public/footer-logo.svg";
 import type { IProductCard } from "@/types";
@@ -9,6 +12,7 @@ import { SyntheticEvent, useState } from "react";
 import { AiFillHeart, AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 import { IoIosStar } from "react-icons/io";
 import { toast } from "react-toastify";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 import { MyTooltip } from "../Tooltip/Tooltip";
 
 export default function SmallProductCard({
@@ -18,7 +22,11 @@ export default function SmallProductCard({
   reducedPrice,
   tag,
   className,
+  id,
 }: IProductCard) {
+  const { token, user } = useAuth();
+  const isLoggedIn = !!token;
+
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
   const [isHover, setIsHover] = useState(false);
@@ -26,6 +34,8 @@ export default function SmallProductCard({
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
+  const wishlistMutation = useAddProductToWishlist();
+  const removeWishlistMutation = useFetchRemoveProductFromWishlist();
 
   const handleError = () => {
     setImageSrc(arayaLogo);
@@ -36,15 +46,46 @@ export default function SmallProductCard({
     e.stopPropagation();
   };
 
-  const handleWishlistClick = (e: SyntheticEvent) => {
+  const handleWishlistClick = (e: SyntheticEvent, id: string) => {
     e.stopPropagation();
-    // Handle "Add to wishlist" button click here
-    toast.success("Item added to wishlist", {
-      onClick: () => {
-        router.push("/store/wishlist");
-      },
-    });
-    setIsFav(true);
+    if (!isLoggedIn) {
+      return toast.warn("log in to add item to wishlist", {
+        onClick: () => {
+          router.push("/store/login");
+        },
+      });
+    }
+
+    removeWishlistMutation.mutate(
+      { userId: user._id, productId: id },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message, {
+            onClick: () => {
+              router.push("/store/wishlist");
+            },
+          });
+          setIsFav(true);
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
+
+    // !isFav &&
+    //   wishlistMutation.mutate(
+    //     { userId: user._id, productId: id },
+    //     {
+    //       onSuccess: (data) => {
+    //         toast.success(data.message, {
+    //           onClick: () => {
+    //             router.push("/store/wishlist");
+    //           },
+    //         });
+    //         setIsFav(true);
+    //       },
+    //       onError: (error) => ErrorHandler(error),
+    //     }
+    //   );
   };
 
   const handleQuickViewClick = (e: SyntheticEvent) => {
@@ -65,7 +106,7 @@ export default function SmallProductCard({
 
   return (
     <>
-      <ProductModal {...{ open, setOpen }} />
+      <ProductModal productId={id} {...{ open, setOpen }} />
       <div
         onClick={handleParentClick}
         className={classNames(
@@ -99,7 +140,7 @@ export default function SmallProductCard({
           } absolute end-4 top-4 z-[99] group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
             isFav ? "hidden" : "flex"
           }`}
-          onClick={handleWishlistClick}
+          onClick={(e) => handleWishlistClick(e, id)}
         >
           <AiOutlineHeart
             className={`text-lg text-gray-500 group-hover/heart:text-accent ${
