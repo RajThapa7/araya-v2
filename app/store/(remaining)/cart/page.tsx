@@ -71,7 +71,13 @@ export default function Cart() {
     removeCartMutation.mutate(
       { userId: user._id, productId },
       {
-        onSuccess: (data) => toast.success(data.message),
+        onSuccess: (data) => {
+          toast.success(data.message);
+          // after removing the item from cart also remove it from the selected items
+          setSelected(() => {
+            return selected.filter((item) => item.id !== productId);
+          });
+        },
         onError: (error) => ErrorHandler(error),
       }
     );

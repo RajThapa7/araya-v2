@@ -52,7 +52,7 @@ function NavListMenu({ title, navListMenuData }: INavListMenuProps) {
   ));
 
   return (
-    <React.Fragment>
+    <div className="mt-16">
       <Menu
         open={isMenuOpen}
         handler={setIsMenuOpen}
@@ -105,7 +105,7 @@ function NavListMenu({ title, navListMenuData }: INavListMenuProps) {
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 
