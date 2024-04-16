@@ -1,5 +1,7 @@
+"use client";
 import { useAuth } from "@/Providers/AuthProvider";
 import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
+import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import useFetchRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import ProductModal from "@/features/ProductModal/ProductModal";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -9,6 +11,7 @@ import classNames from "@/utils/classNames";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next-nprogress-bar";
 import Image, { StaticImageData } from "next/image";
+import { usePathname } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 import { AiFillHeart, AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 import { IoIosStar } from "react-icons/io";
@@ -24,8 +27,9 @@ export default function SmallProductCard({
   tag,
   className,
   id,
-  fav,
+  fav = false,
 }: IProductCard) {
+  const pathname = usePathname();
   const { token, user } = useAuth();
   const isLoggedIn = !!token;
   const dispatch = useAppDispatch();
@@ -33,7 +37,8 @@ export default function SmallProductCard({
   // const [isFav, setIsFav] = useState(wishlist.some((item) => item._id === id));
   const [isFav, setIsFav] = useState(fav);
 
-  console.log(isFav, title, "favourite card or not");
+  const { data: wishlistItems } = useFetchWishlist(user._id);
+  const isInWishlist = wishlistItems?.products.some((item) => item._id === id);
 
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
@@ -129,7 +134,7 @@ export default function SmallProductCard({
         {/* fav buttons */}
         <button
           className={` bg-red-50 absolute end-4 top-4 group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 z-50 active:bg-green-300 ${
-            isHover || isFav ? "opacity-100" : "opacity-0"
+            isHover || isInWishlist ? "opacity-100" : "opacity-0"
           }`}
           onClick={(e) => {
             handleWishlistRemove(e, id);
@@ -137,7 +142,7 @@ export default function SmallProductCard({
         >
           <AiFillHeart
             className={`text-lg ${
-              isFav
+              isInWishlist
                 ? "animate-grow-wiggle text-red-300"
                 : "text-white animate-shrink-wiggle"
             }`}
@@ -147,13 +152,13 @@ export default function SmallProductCard({
           className={`bg-gray-50 ${
             isHover ? "opacity-100" : "opacity-0"
           } absolute end-4 top-4 z-[99] group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
-            isFav ? "hidden" : "flex"
+            isInWishlist ? "hidden" : "flex"
           }`}
           onClick={(e) => handleWishlistClick(e, id)}
         >
           <AiOutlineHeart
             className={`text-lg text-gray-500 group-hover/heart:text-accent ${
-              !isFav && "animate-shrink-wiggle"
+              !isInWishlist && "animate-shrink-wiggle"
             }`}
           />
         </button>

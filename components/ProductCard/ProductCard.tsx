@@ -1,6 +1,7 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
 import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
+import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import useRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import { montserrat } from "@/app/fonts";
 import ProductModal from "@/features/ProductModal/ProductModal";
@@ -40,6 +41,9 @@ export default function ProductCard({
 
   const wishlistMutation = useAddProductToWishlist();
   const removeWishlistMutation = useRemoveProductFromWishlist();
+
+  const { data: wishlistItems } = useFetchWishlist(user._id);
+  const isInWishlist = wishlistItems?.products.some((item) => item._id === id);
 
   const handleError = () => {
     setImageSrc(arayaLogo);
@@ -135,7 +139,7 @@ export default function ProductCard({
         {/* fav buttons */}
         <button
           className={` bg-red-50 absolute end-4 top-3 group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 z-50 active:bg-green-300 ${
-            isHover || isFav ? "opacity-100" : "opacity-0"
+            isHover || isInWishlist ? "opacity-100" : "opacity-0"
           }`}
           onClick={(e) => {
             handleWishlistRemove(e, id);
@@ -143,7 +147,7 @@ export default function ProductCard({
         >
           <AiFillHeart
             className={`text-lg ${
-              isFav
+              isInWishlist
                 ? "animate-grow-wiggle text-red-300"
                 : "text-white animate-shrink-wiggle"
             }`}
@@ -153,13 +157,13 @@ export default function ProductCard({
           className={`bg-gray-50 ${
             isHover ? "opacity-100" : "opacity-0"
           } absolute end-4 top-3 z-[99] group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
-            isFav ? "hidden" : "flex"
+            isInWishlist ? "hidden" : "flex"
           }`}
           onClick={(e) => handleWishlistClick(e, id)}
         >
           <AiOutlineHeart
             className={`text-lg text-gray-500 group-hover/heart:text-accent ${
-              !isFav && "animate-shrink-wiggle"
+              !isInWishlist && "animate-shrink-wiggle"
             }`}
           />
         </button>

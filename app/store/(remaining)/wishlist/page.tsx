@@ -19,7 +19,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 
 const Category = () => {
   const [sortValue, setSortValue] = useState("price");
-  const [selected, setSelected] = useState<number[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
 
   const { token, user } = useAuth();
   const isLoggedIn = !!token;
@@ -83,7 +83,9 @@ const Category = () => {
               color="green"
               onChange={(e) => {
                 if (e.target.checked) {
-                  return setSelected(data.map((_, index) => index));
+                  return setSelected(
+                    wishlistData?.products.map((item) => item._id) || []
+                  );
                 }
                 setSelected([]);
               }}
@@ -125,18 +127,18 @@ const Category = () => {
                 { featured_img, price, title, reducedPrice, tag, _id },
                 index
               ) => (
-                <div key={index} className="flex flex-row">
+                <div key={_id} className="flex flex-row">
                   <MyCheckbox
                     color="green"
-                    checked={selected.includes(index)}
+                    checked={selected.includes(_id)}
                     onChange={(e) => {
                       setSelected(() => {
                         // add selected value to the array
                         if (e.target.checked) {
-                          return [...selected, index];
+                          return [...selected, _id];
                         }
                         // if unselected remove the value from the array
-                        return selected.filter((item) => item !== index);
+                        return selected.filter((item) => item !== _id);
                       });
                     }}
                   />
@@ -145,9 +147,7 @@ const Category = () => {
                     id={_id}
                     img={featured_img}
                     {...{ price, reducedPrice, tag, title }}
-                    className={`${
-                      selected.includes(index) && "!outline-accent"
-                    }`}
+                    className={`${selected.includes(_id) && "!outline-accent"}`}
                   />
                 </div>
               )
