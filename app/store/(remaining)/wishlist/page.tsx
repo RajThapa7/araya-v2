@@ -9,6 +9,7 @@ import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import CardSkeletal from "@/components/Skeletal/CardSkeletal";
 import SmallProductCard from "@/components/SmallProductCard/SmallProductCard";
 import { data } from "@/data/productData";
+import { useAppSelector } from "@/lib/hooks";
 import { Option, Select } from "@material-tailwind/react";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
@@ -25,7 +26,9 @@ const Category = () => {
 
   const router = useRouter();
 
-  const { isLoading, data: wishlistData } = useFetchWishlist(user._id);
+  const { isLoading, data: wishlistData } = useFetchWishlist(user?._id);
+
+  const { wishlist } = useAppSelector((state) => state.wishlist);
 
   if (!isLoggedIn) {
     return (
@@ -138,6 +141,7 @@ const Category = () => {
                     }}
                   />
                   <SmallProductCard
+                    fav={true}
                     id={_id}
                     img={featured_img}
                     {...{ price, reducedPrice, tag, title }}

@@ -31,6 +31,12 @@ const routes = {
   addCategory: () => "/admin/category/add",
   editCategory: () => "/admin/category/edit",
   deleteCategory: (categoryId?: string) => `/admin/category/${categoryId}`,
+
+  getAllCarouselItem: () => "/carousel",
+  getCarouselById: (id?: string) => `/carousel/${id}`,
+  addCarouselItem: () => "/admin/carousel/add",
+  removeCarouselItem: (id?: string) => `/admin/carousel/delete/${id}`,
+  editCarouselItem: (id?: string) => `/admin/carousel/edit/${id}`,
 };
 
 const getApiRoute = (

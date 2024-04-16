@@ -1,6 +1,7 @@
 "use client";
 import AuthProvider from "@/Providers/AuthProvider";
 import QueryProvider from "@/Providers/QueryProvider";
+import StoreProvider from "@/Providers/StoreProvider";
 import ProgressBarProvider from "@/components/Provider/ProgressBarProvider";
 import { PropsWithChildren } from "react";
 import { ToastContainer } from "react-toastify";
@@ -18,7 +19,9 @@ const Layout = ({ children }: PropsWithChildren) => {
       >
         <ProgressBarProvider>
           <QueryProvider>
-            <AuthProvider>{children}</AuthProvider>
+            <StoreProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </StoreProvider>
           </QueryProvider>
         </ProgressBarProvider>
         <ToastContainer theme="colored" hideProgressBar autoClose={2000} />

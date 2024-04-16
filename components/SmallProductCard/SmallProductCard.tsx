@@ -1,7 +1,8 @@
 import { useAuth } from "@/Providers/AuthProvider";
-import useFetchRemoveProductFromWishlist from "@/api/hooks/wishlist/useAddProductToWishlist";
-import useAddProductToWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
+import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
+import useFetchRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import ProductModal from "@/features/ProductModal/ProductModal";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import arayaLogo from "@/public/footer-logo.svg";
 import type { IProductCard } from "@/types";
 import classNames from "@/utils/classNames";
@@ -23,9 +24,16 @@ export default function SmallProductCard({
   tag,
   className,
   id,
+  fav,
 }: IProductCard) {
   const { token, user } = useAuth();
   const isLoggedIn = !!token;
+  const dispatch = useAppDispatch();
+  const { wishlist } = useAppSelector((store) => store.wishlist);
+  // const [isFav, setIsFav] = useState(wishlist.some((item) => item._id === id));
+  const [isFav, setIsFav] = useState(fav);
+
+  console.log(isFav, title, "favourite card or not");
 
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
@@ -46,6 +54,25 @@ export default function SmallProductCard({
     e.stopPropagation();
   };
 
+  const handleWishlistRemove = (e: SyntheticEvent, id: string) => {
+    e.stopPropagation();
+    removeWishlistMutation.mutate(
+      { userId: user._id, productId: id },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message, {
+            onClick: () => {
+              router.push("/store/wishlist");
+            },
+          });
+          setIsFav(false);
+          // dispatch(removeWishlistItem({ wishlist: data.list.products }));
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
+  };
+
   const handleWishlistClick = (e: SyntheticEvent, id: string) => {
     e.stopPropagation();
     if (!isLoggedIn) {
@@ -56,7 +83,7 @@ export default function SmallProductCard({
       });
     }
 
-    removeWishlistMutation.mutate(
+    wishlistMutation.mutate(
       { userId: user._id, productId: id },
       {
         onSuccess: (data) => {
@@ -65,27 +92,12 @@ export default function SmallProductCard({
               router.push("/store/wishlist");
             },
           });
+          // dispatch(addWishlistItem({ wishlist: data.list.products }));
           setIsFav(true);
         },
         onError: (error) => ErrorHandler(error),
       }
     );
-
-    // !isFav &&
-    //   wishlistMutation.mutate(
-    //     { userId: user._id, productId: id },
-    //     {
-    //       onSuccess: (data) => {
-    //         toast.success(data.message, {
-    //           onClick: () => {
-    //             router.push("/store/wishlist");
-    //           },
-    //         });
-    //         setIsFav(true);
-    //       },
-    //       onError: (error) => ErrorHandler(error),
-    //     }
-    //   );
   };
 
   const handleQuickViewClick = (e: SyntheticEvent) => {
@@ -101,8 +113,6 @@ export default function SmallProductCard({
       },
     });
   };
-
-  const [isFav, setIsFav] = useState(false);
 
   return (
     <>
@@ -122,8 +132,7 @@ export default function SmallProductCard({
             isHover || isFav ? "opacity-100" : "opacity-0"
           }`}
           onClick={(e) => {
-            e.stopPropagation();
-            setIsFav((prev) => !prev);
+            handleWishlistRemove(e, id);
           }}
         >
           <AiFillHeart

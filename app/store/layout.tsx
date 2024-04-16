@@ -6,6 +6,15 @@ import SearchBar from "@/features/SearchBar/SearchBar";
 import { PropsWithChildren } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {
+  // const { user } = useAuth();
+  // const { data } = useFetchWishlist(user._id);
+  // const dispatch = useAppDispatch();
+  // const pathname = usePathname();
+  // useEffect(() => {
+  //   dispatch(setInitialData({ wishlist: data?.products || [] }));
+  //   console.log("dispatch called in " + pathname);
+  // }, []);
+
   return (
     <>
       <div className="bg-primary-dark flex flex-col min-h-screen">

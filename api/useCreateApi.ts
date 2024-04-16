@@ -27,7 +27,7 @@ const useCreateApi = () => {
     (response) => response,
     (error) => {
       if ([401, 403].includes(parseInt(error?.response?.status))) {
-        logout("/admin/login", "You have been logged out");
+        logout("/store/login", "You have been logged out");
       }
       return Promise.reject(error);
     }

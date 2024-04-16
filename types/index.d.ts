@@ -6,6 +6,7 @@ interface IProductCard {
   title: string;
   tag?: string;
   className?: string;
+  fav?: boolean;
 }
 
 interface ITabProps {

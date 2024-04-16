@@ -1,11 +1,10 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
-import {
-  default as useAddProductToWishlist,
-  default as useFetchRemoveProductFromWishlist,
-} from "@/api/hooks/wishlist/useAddProductToWishlist";
+import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
+import useRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import { montserrat } from "@/app/fonts";
 import ProductModal from "@/features/ProductModal/ProductModal";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import arayaLogo from "@/public/footer-logo.svg";
 import { IProductCard } from "@/types";
 import classNames from "@/utils/classNames";
@@ -27,9 +26,11 @@ export default function ProductCard({
   className,
   id,
 }: IProductCard) {
+  const dispatch = useAppDispatch();
+  const { wishlist } = useAppSelector((store) => store.wishlist);
   const { token, user } = useAuth();
   const isLoggedIn = !!token;
-  const [isFav, setIsFav] = useState(false);
+  const [isFav, setIsFav] = useState(wishlist.some((item) => item._id === id));
 
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
@@ -38,7 +39,7 @@ export default function ProductCard({
   const [imageSrc, setImageSrc] = useState<string | StaticImageData>(img);
 
   const wishlistMutation = useAddProductToWishlist();
-  const removeWishlistMutation = useFetchRemoveProductFromWishlist();
+  const removeWishlistMutation = useRemoveProductFromWishlist();
 
   const handleError = () => {
     setImageSrc(arayaLogo);
@@ -50,6 +51,27 @@ export default function ProductCard({
     e.stopPropagation();
   };
 
+  const handleWishlistRemove = (e: SyntheticEvent, id: string) => {
+    e.stopPropagation();
+    removeWishlistMutation.mutate(
+      { userId: user._id, productId: id },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message, {
+            onClick: () => {
+              router.push("/store/wishlist");
+            },
+          });
+          setIsFav(false);
+          // dispatch(removeWishlistItem({ wishlist: data.list.products }));
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
+  };
+
+  // console.log(wishlist, "wishlist item");
+
   const handleWishlistClick = (e: SyntheticEvent, id: string) => {
     e.stopPropagation();
     if (!isLoggedIn) {
@@ -60,35 +82,21 @@ export default function ProductCard({
       });
     }
 
-    isFav
-      ? removeWishlistMutation.mutate(
-          { userId: user._id, productId: id },
-          {
-            onSuccess: (data) => {
-              toast.success(data.message, {
-                onClick: () => {
-                  router.push("/store/wishlist");
-                },
-              });
-              setIsFav(true);
+    wishlistMutation.mutate(
+      { userId: user._id, productId: id },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message, {
+            onClick: () => {
+              router.push("/store/wishlist");
             },
-            onError: (error) => ErrorHandler(error),
-          }
-        )
-      : wishlistMutation.mutate(
-          { userId: user._id, productId: id },
-          {
-            onSuccess: (data) => {
-              toast.success(data.message, {
-                onClick: () => {
-                  router.push("/store/wishlist");
-                },
-              });
-              setIsFav(true);
-            },
-            onError: (error) => ErrorHandler(error),
-          }
-        );
+          });
+          // dispatch(addWishlistItem({ wishlist: data.list.products }));
+          setIsFav(true);
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
   };
 
   const handleQuickViewClick = (e: SyntheticEvent) => {
@@ -130,8 +138,7 @@ export default function ProductCard({
             isHover || isFav ? "opacity-100" : "opacity-0"
           }`}
           onClick={(e) => {
-            e.stopPropagation();
-            setIsFav((prev) => !prev);
+            handleWishlistRemove(e, id);
           }}
         >
           <AiFillHeart

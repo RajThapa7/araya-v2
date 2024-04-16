@@ -8,20 +8,17 @@ interface IPostData {
   productId: string;
 }
 
-const removeProductFromWishlist = async (
-  data: IPostData,
-  api: AxiosInstance
-) => {
-  const route = getApiRoute("removeProductFromWishlist")();
+const addProductToWishlist = async (data: IPostData, api: AxiosInstance) => {
+  const route = getApiRoute("addProductToWishlist")();
   const result = await api.post(route, data);
   return result.data;
 };
 
-const useFetchRemoveProductFromWishlist = () => {
+const useAddProductToWishlist = () => {
   const client = useQueryClient();
   const api = useCreateApi();
   const result = useMutation({
-    mutationFn: (data: IPostData) => removeProductFromWishlist(data, api),
+    mutationFn: (data: IPostData) => addProductToWishlist(data, api),
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ["wishlist"] });
     },
@@ -29,4 +26,4 @@ const useFetchRemoveProductFromWishlist = () => {
   return result;
 };
 
-export default useFetchRemoveProductFromWishlist;
+export default useAddProductToWishlist;

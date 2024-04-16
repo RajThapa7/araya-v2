@@ -22,6 +22,7 @@ const useFetchWishlist = (userId: string) => {
   const result = useQuery({
     queryKey: ["wishlist"],
     queryFn: () => getWishlist(api, userId),
+    enabled: !!userId,
   });
   return result;
 };

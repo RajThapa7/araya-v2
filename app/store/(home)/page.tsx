@@ -9,8 +9,7 @@ export default function Page() {
   const { token, user } = useAuth();
 
   const isLoggedIn = !!token;
-  console.log(token, user, "token");
-  console.log(isLoggedIn, "is logged inn");
+
   return (
     <div className="flex flex-col gap-10 pt-24 pb-14">
       <ProductSlider

@@ -25,6 +25,12 @@ const data = [
     route: "user",
     link: "/admin/user",
   },
+  {
+    id: 3,
+    name: "Carousel",
+    route: "carousel",
+    link: "/admin/carousel",
+  },
 ];
 
 const Layout = ({ children }: PropsWithChildren) => {
