@@ -10,12 +10,9 @@ interface IResult {
   page: number;
   data: {
     _id: string;
-    title: string;
-    subtitle: string;
     img: string;
-    price: number;
     link: string;
-    buttonText: string;
+    title: string;
     isVisible: boolean;
     createdAt: string;
     updatedAt: string;

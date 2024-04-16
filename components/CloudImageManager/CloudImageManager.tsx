@@ -22,7 +22,7 @@ const CloudImageManager = ({
 
   useEffect(() => {
     setValue("cloudImage", images);
-  }, [images, setValue]);
+  }, []);
 
   const [removedArr, setRemovedArr] = useState<string[]>([]);
 

@@ -13,9 +13,6 @@ import { toast } from "react-toastify";
 
 const defaultValues: any = {
   title: "",
-  subtitle: "",
-  price: null,
-  buttonText: "",
   link: "",
   image: null,
   isVisible: true,
@@ -30,25 +27,6 @@ const Page = () => {
       label: "Title",
       name: "title",
       placeholder: "Enter title of the carousel",
-    },
-    {
-      id: 1,
-      label: "Subtitle",
-      name: "subtitle",
-      placeholder: "Enter subtitle of the carousel",
-    },
-    {
-      id: 2,
-      label: "Price",
-      name: "price",
-      placeholder: "Enter price to display in the carousel",
-      type: "number",
-    },
-    {
-      id: 4,
-      label: "Button Text",
-      name: "buttonText",
-      placeholder: "Enter the button text for the carousel ",
     },
     {
       id: 5,
@@ -103,7 +81,7 @@ const Page = () => {
       <div className="inline-flex items-center gap-2 mt-2 mb-4">
         <IoMdArrowRoundBack
           className="text-xl text-accent hover:text-accent-dark"
-          onClick={() => router.push("/admin/product")}
+          onClick={() => router.push("/admin/carousel")}
         />
 
         <h2 className=" font-semibold text-accent-dark text-xl">

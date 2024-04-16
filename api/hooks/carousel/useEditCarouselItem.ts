@@ -4,13 +4,10 @@ import { AxiosInstance } from "axios";
 import useCreateApi from "../../useCreateApi";
 
 export interface IPostData {
-  buttonText?: string;
   image: any[];
   isVisible: string;
   link: string;
-  price: string;
   title: string;
-  subtitle?: string;
   cloudImage: string[];
   removedCloudImage?: string[];
 }
@@ -24,13 +21,9 @@ const editCarouselItem = async (
 
   const formData = new FormData();
 
-  formData.append("buttonText", data.buttonText || "");
   formData.append("isVisible", data.isVisible);
-  formData.append("price", data.price);
   formData.append("link", data.link);
   formData.append("title", data.title);
-  formData.append("subtitle", data.subtitle || "");
-  formData.append("price", data.price);
   formData.append("cloudImage", JSON.stringify(data.cloudImage));
   formData.append(
     "removedCloudImage",

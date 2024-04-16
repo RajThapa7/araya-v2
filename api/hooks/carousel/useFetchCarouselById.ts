@@ -5,12 +5,9 @@ import useCreateApi from "../../useCreateApi";
 
 interface IResult {
   _id: string;
-  title: string;
-  subtitle: string;
   img: string;
-  price: number;
   link: string;
-  buttonText: string;
+  title: string;
   isVisible: boolean;
   createdAt: string;
   updatedAt: string;
@@ -28,7 +25,7 @@ const getCarouselById = async (
 const useFetchCarouselById = (id: string) => {
   const api = useCreateApi();
   const result = useQuery({
-    queryKey: ["products", id],
+    queryKey: ["carousel", id],
     queryFn: () => getCarouselById(api, id),
   });
   return result;

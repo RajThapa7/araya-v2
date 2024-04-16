@@ -40,20 +40,8 @@ const Page = ({ params }: { params: { id: string } }) => {
               <p>{data?.title}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Subtitle</p>
-              <p>{data?.subtitle || "_"}</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Price</p>
-              <p>Rs. {data?.price}</p>
-            </div>
-            <div className="flex flex-col gap-2">
               <p className="text-body font-semibold">Link</p>
               <p>{data?.link}</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Button Text</p>
-              <p>{data?.buttonText || "_"}</p>
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-body font-semibold">Visibility</p>

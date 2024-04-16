@@ -4,13 +4,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
 
 interface IPostData {
-  buttonText?: string;
   image: any[];
   isVisible: string;
   link: string;
-  price: string;
   title: string;
-  subtitle?: string;
 }
 
 const addCarouselItem = async (api: AxiosInstance, data: IPostData) => {
@@ -18,12 +15,9 @@ const addCarouselItem = async (api: AxiosInstance, data: IPostData) => {
 
   const formData = new FormData();
 
-  formData.append("buttonText", data.buttonText || "");
   formData.append("isVisible", data.isVisible);
-  formData.append("price", data.price);
   formData.append("link", data.link);
   formData.append("title", data.title);
-  formData.append("subtitle", data.subtitle || "");
 
   data.image.forEach((item) => formData.append("image", item));
 

@@ -1,12 +1,12 @@
 "use client";
 import useFetchCarouselItem from "@/api/hooks/carousel/useFetchCarouselItem";
 import useDeleteCarouselItem from "@/api/hooks/carousel/useRemoveCarouselItem";
+import ErrorHandler from "@/components/ErrorHandler/ErrorHandler";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import { Pagination } from "@/components/Pagination/Pagination";
 import TableSkeletal from "@/components/Skeletal/TableSkeletal";
-import { AxiosError } from "axios";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -27,9 +27,7 @@ const Page = () => {
         toast.success(data.message);
       },
       onError: (error) => {
-        if (error instanceof AxiosError) {
-          toast.error(error?.response?.data?.message);
-        }
+        ErrorHandler(error);
       },
     });
   };
@@ -94,16 +92,10 @@ const Page = () => {
                 <MyCheckbox color="green" onChange={(e) => {}} />
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+                Id
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-black">
                 Title
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-black">
-                Subtitle
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-black">
-                Price
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-black">
-                Button Text
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-black">
                 Link
@@ -125,12 +117,8 @@ const Page = () => {
                     <MyCheckbox color="green" onChange={(e) => {}} />
                   </td>
 
+                  <td className="px-6 py-3 text-sm">{item._id}</td>
                   <td className="px-6 py-3 text-sm">{item.title}</td>
-                  <td className="px-6 py-3 text-sm">{item?.subtitle || "_"}</td>
-                  <td className="px-6 py-3 text-sm">{item.price}</td>
-                  <td className="px-6 py-3 text-sm">
-                    {item?.buttonText || "_"}
-                  </td>
                   <td className="px-6 py-3 text-sm">{item.link}</td>
                   <td className="px-6 py-3 text-sm">
                     {item.isVisible ? (
