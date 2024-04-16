@@ -1,5 +1,7 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import useAddProductToCart from "@/api/hooks/cart/useAddProductToCart";
+import useRemoveProductFromCart from "@/api/hooks/cart/useRemoveProductFromCart";
 import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
 import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import useRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
@@ -42,7 +44,10 @@ export default function ProductCard({
   const wishlistMutation = useAddProductToWishlist();
   const removeWishlistMutation = useRemoveProductFromWishlist();
 
-  const { data: wishlistItems } = useFetchWishlist(user._id);
+  const cartMutation = useAddProductToCart();
+  const removeCartMutation = useRemoveProductFromCart();
+
+  const { data: wishlistItems } = useFetchWishlist(user?._id);
   const isInWishlist = wishlistItems?.products.some((item) => item._id === id);
 
   const handleError = () => {
@@ -73,8 +78,6 @@ export default function ProductCard({
       }
     );
   };
-
-  // console.log(wishlist, "wishlist item");
 
   const handleWishlistClick = (e: SyntheticEvent, id: string) => {
     e.stopPropagation();
@@ -117,11 +120,20 @@ export default function ProductCard({
         },
       });
     }
-    toast.success("Item added to cart successfully", {
-      onClick: () => {
-        router.push("/store/cart");
-      },
-    });
+
+    cartMutation.mutate(
+      { userId: user._id, productId: id },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message, {
+            onClick: () => {
+              router.push("/store/cart");
+            },
+          });
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
   };
 
   return (

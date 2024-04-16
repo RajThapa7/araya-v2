@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import useAddProductToCart from "@/api/hooks/cart/useAddProductToCart";
 import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
 import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import useFetchRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
@@ -37,7 +38,7 @@ export default function SmallProductCard({
   // const [isFav, setIsFav] = useState(wishlist.some((item) => item._id === id));
   const [isFav, setIsFav] = useState(fav);
 
-  const { data: wishlistItems } = useFetchWishlist(user._id);
+  const { data: wishlistItems } = useFetchWishlist(user?._id);
   const isInWishlist = wishlistItems?.products.some((item) => item._id === id);
 
   const discountPercentage =
@@ -58,6 +59,8 @@ export default function SmallProductCard({
     router.push("/store/product");
     e.stopPropagation();
   };
+
+  const cartMutation = useAddProductToCart();
 
   const handleWishlistRemove = (e: SyntheticEvent, id: string) => {
     e.stopPropagation();
@@ -112,11 +115,27 @@ export default function SmallProductCard({
 
   const handleCartPress = (e: SyntheticEvent) => {
     e.stopPropagation();
-    toast.success("Item added to cart successfully", {
-      onClick: () => {
-        router.push("/store/cart");
-      },
-    });
+    if (!isLoggedIn) {
+      return toast.warn("log in to add item to cart", {
+        onClick: () => {
+          router.push("/store/login");
+        },
+      });
+    }
+
+    cartMutation.mutate(
+      { userId: user._id, productId: id },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message, {
+            onClick: () => {
+              router.push("/store/cart");
+            },
+          });
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
   };
 
   return (

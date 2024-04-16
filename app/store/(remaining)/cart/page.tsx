@@ -1,19 +1,24 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import useFetchCart from "@/api/hooks/cart/useFetchCart";
+import useRemoveProductFromCart from "@/api/hooks/cart/useRemoveProductFromCart";
 import Empty from "@/components/Empty/Empty";
+import ErrorHandler from "@/components/ErrorHandler/ErrorHandler";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import MyInput from "@/components/MyInput/MyInput";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import QuantityInput from "@/components/QuantityInput";
+import CartSkeletal from "@/components/Skeletal/CartSkeletal";
 import { data } from "@/data/productData";
-import { IProductCard } from "@/types";
+import { IProductData } from "@/types";
 import { mergeTwoArray } from "@/utils/utilsFunction";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export default function Cart() {
   const [selected, setSelected] = useState<{ id: string; quantity: number }[]>(
@@ -25,7 +30,13 @@ export default function Cart() {
     0
   );
 
-  const totalPrice = mergeTwoArray(data, selected, "id")
+  const { token, user } = useAuth();
+  const isLoggedIn = !!token;
+  const { isLoading, data: cartData } = useFetchCart(user?._id);
+
+  const removeCartMutation = useRemoveProductFromCart();
+
+  const totalPrice = mergeTwoArray(cartData?.products || [], selected, "id")
     .filter((outer) => {
       return selected.some(({ id }) => id === outer.id);
     })
@@ -33,9 +44,6 @@ export default function Cart() {
       (prev, curr) => prev + (curr.reducedPrice || curr.price) * curr.quantity,
       0
     );
-
-  const { token } = useAuth();
-  const isLoggedIn = !!token;
 
   const router = useRouter();
 
@@ -59,14 +67,28 @@ export default function Cart() {
     );
   }
 
+  const handleCartRemove = (productId: string) => {
+    removeCartMutation.mutate(
+      { userId: user._id, productId },
+      {
+        onSuccess: (data) => toast.success(data.message),
+        onError: (error) => ErrorHandler(error),
+      }
+    );
+  };
+
   return (
     <div className="flex flex-col gap-20">
       <Empty
         title="Your cart is empty"
-        className={data.length === 0 ? "flex" : "hidden"}
+        className={cartData?.products.length === 0 ? "flex" : "hidden"}
       />
 
-      <div className="flex flex-col gap-4 lg:flex-row">
+      <div
+        className={`${
+          cartData?.products.length !== 0 ? "flex" : "hidden"
+        } flex-col gap-4 lg:flex-row`}
+      >
         <div className="flex flex-1 flex-col">
           <p className="text-2xl text-body font-semibold capitalize mb-8">
             My Cart
@@ -79,7 +101,10 @@ export default function Cart() {
                 onChange={(e) => {
                   if (e.target.checked) {
                     return setSelected(
-                      data.map(({ id }) => ({ id, quantity: 1 }))
+                      cartData?.products.map(({ _id }) => ({
+                        id: _id,
+                        quantity: 1,
+                      })) || []
                     );
                   }
                   setSelected([]);
@@ -97,7 +122,7 @@ export default function Cart() {
             <div className="flex flex-row gap-2 ml-1 md:ml-0">
               <button
                 className="inline-flex items-center gap-1 rounded-full p-1.5 text-body transition hover:text-accent"
-                // onClick={handleWishlistClick}
+                // onClick={handleWishlistRemove}
               >
                 <FiTrash2 className="text-lg text-gray-500" />
                 <p className="text-xs">REMOVE</p>
@@ -105,15 +130,20 @@ export default function Cart() {
             </div>
           </div>
 
+          {/* skeletal loader */}
+          {isLoading && <CartSkeletal />}
+
           {/* cart items */}
-          {data.map((item) => (
-            <CartItem
-              item={item}
-              key={item.id}
-              selected={selected}
-              setSelected={setSelected}
-            />
-          ))}
+          {!isLoading &&
+            cartData?.products.map((item) => (
+              <CartItem
+                item={item}
+                key={item._id}
+                selected={selected}
+                setSelected={setSelected}
+                handleCartRemove={handleCartRemove}
+              />
+            ))}
         </div>
 
         {/* checkout menu */}
@@ -147,8 +177,9 @@ const CartItem = ({
   item,
   selected,
   setSelected,
+  handleCartRemove,
 }: {
-  item: IProductCard;
+  item: IProductData;
   selected: {
     id: string;
     quantity: number;
@@ -161,44 +192,48 @@ const CartItem = ({
       }[]
     >
   >;
+  handleCartRemove: (productId: string) => void;
 }) => {
   const [quantity, setQuantity] = useState(1);
-  const { id, img, price, reducedPrice, title } = item;
+  const { _id, featured_img, price, reducedPrice, title } = item;
   const router = useRouter();
   const discountPercentage = 10;
 
-  console.log(selected, "selected");
-
   const onQuantityChange = (count: number) => {
     setSelected((prev) => {
-      let currIndex = prev.findIndex(({ id: currId }) => currId === id);
+      let currIndex = prev.findIndex(({ id: currId }) => currId === _id);
       prev.splice(currIndex, 1);
-      return [...prev, { id, quantity: count }];
+      return [...prev, { id: _id, quantity: count }];
     });
   };
 
   return (
     <div
-      className={`flex h-fit flex-1 flex-col items-start justify-between gap-6 border-b-2 bg-white pb-2 pr-6 pt-5 shadow-sm last:border-b-0 md:flex-row`}
-      key={id}
+      className={`flex h-fit flex-col items-start justify-between gap-6 border-b-2 bg-primary pb-2 pr-6 pt-5 shadow-sm last:border-b-0 md:flex-row`}
+      key={_id}
     >
       <div className="flex flex-row gap-2 w-full md:flex-1">
         <MyCheckbox
-          checked={selected.some(({ id: selectedId }) => selectedId === id)}
+          checked={selected.some(({ id: selectedId }) => selectedId === _id)}
           color="green"
           onChange={(e) => {
             setSelected(() => {
               // add selected value to the array
               if (e.target.checked) {
-                return [...selected, { id, quantity }];
+                return [...selected, { id: _id, quantity }];
               }
               // if unselected remove the value from the array
-              return selected.filter((item) => item.id !== id);
+              return selected.filter((item) => item.id !== _id);
             });
           }}
         />
         <div className="relative -mt-4 aspect-square min-w-[8rem]">
-          <Image alt="item" fill className="object-contain" src={img} />
+          <Image
+            alt="item"
+            fill
+            className="object-contain"
+            src={featured_img}
+          />
         </div>
         <p
           className="text-sm text-body transition-smooth w-fit h-fit hover:text-accent-dark cursor-pointer"
@@ -233,7 +268,7 @@ const CartItem = ({
             </button>
             <button
               className="rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75"
-              // onClick={handleWishlistClick}
+              onClick={() => handleCartRemove(_id)}
             >
               <FiTrash2 className="text-lg text-gray-500" />
             </button>
