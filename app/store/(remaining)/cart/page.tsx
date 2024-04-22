@@ -2,6 +2,7 @@
 import { useAuth } from "@/Providers/AuthProvider";
 import useFetchCart from "@/api/hooks/cart/useFetchCart";
 import useRemoveProductFromCart from "@/api/hooks/cart/useRemoveProductFromCart";
+import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import Empty from "@/components/Empty/Empty";
 import ErrorHandler from "@/components/ErrorHandler/ErrorHandler";
 import MyButton from "@/components/MyButton";
@@ -10,7 +11,6 @@ import MyInput from "@/components/MyInput/MyInput";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import QuantityInput from "@/components/QuantityInput";
 import CartSkeletal from "@/components/Skeletal/CartSkeletal";
-import { data } from "@/data/productData";
 import { IProductData } from "@/types";
 import { mergeTwoArray } from "@/utils/utilsFunction";
 import { useRouter } from "next-nprogress-bar";
@@ -35,6 +35,7 @@ export default function Cart() {
   const { isLoading, data: cartData } = useFetchCart(user?._id);
 
   const removeCartMutation = useRemoveProductFromCart();
+  const { data, isLoading: isProductLoading } = useFetchProductList();
 
   const totalPrice = mergeTwoArray(cartData?.products || [], selected, "id")
     .filter((outer) => {
@@ -174,7 +175,34 @@ export default function Cart() {
           <MyButton className="w-full !py-4">Proceed to Checkout</MyButton>
         </div>
       </div>
-      <ProductSlider data={data} title="Picks for you" />
+      <ProductSlider
+        data={data?.data || []}
+        isLoading={isProductLoading}
+        title="Picks for you"
+        breakpoints={{
+          540: {
+            slidesPerView: 2,
+            grid: {
+              fill: "row",
+              rows: 2,
+            },
+          },
+          840: {
+            slidesPerView: 3,
+            grid: {
+              fill: "row",
+              rows: 2,
+            },
+          },
+          1160: {
+            slidesPerView: 4,
+            grid: {
+              fill: "row",
+              rows: 2,
+            },
+          },
+        }}
+      />
     </div>
   );
 }

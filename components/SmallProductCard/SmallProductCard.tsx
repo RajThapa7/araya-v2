@@ -5,14 +5,12 @@ import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
 import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import useFetchRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import ProductModal from "@/features/ProductModal/ProductModal";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import arayaLogo from "@/public/footer-logo.svg";
 import type { IProductCard } from "@/types";
 import classNames from "@/utils/classNames";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next-nprogress-bar";
 import Image, { StaticImageData } from "next/image";
-import { usePathname } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 import { AiFillHeart, AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 import { IoIosStar } from "react-icons/io";
@@ -29,14 +27,12 @@ export default function SmallProductCard({
   className,
   id,
   fav = false,
+  ratingCount,
+  averageRating,
 }: IProductCard) {
-  const pathname = usePathname();
+  const [clicked, setClicked] = useState(false);
   const { token, user } = useAuth();
   const isLoggedIn = !!token;
-  const dispatch = useAppDispatch();
-  const { wishlist } = useAppSelector((store) => store.wishlist);
-  // const [isFav, setIsFav] = useState(wishlist.some((item) => item._id === id));
-  const [isFav, setIsFav] = useState(fav);
 
   const { data: wishlistItems } = useFetchWishlist(user?._id);
   const isInWishlist = wishlistItems?.products.some((item) => item._id === id);
@@ -73,8 +69,7 @@ export default function SmallProductCard({
               router.push("/store/wishlist");
             },
           });
-          setIsFav(false);
-          // dispatch(removeWishlistItem({ wishlist: data.list.products }));
+          setClicked(false);
         },
         onError: (error) => ErrorHandler(error),
       }
@@ -100,8 +95,7 @@ export default function SmallProductCard({
               router.push("/store/wishlist");
             },
           });
-          // dispatch(addWishlistItem({ wishlist: data.list.products }));
-          setIsFav(true);
+          setClicked(true);
         },
         onError: (error) => ErrorHandler(error),
       }
@@ -162,7 +156,9 @@ export default function SmallProductCard({
           <AiFillHeart
             className={`text-lg ${
               isInWishlist
-                ? "animate-grow-wiggle text-red-300"
+                ? clicked
+                  ? "animate-grow-wiggle text-red-300"
+                  : "text-red-300"
                 : "text-white animate-shrink-wiggle"
             }`}
           />
@@ -208,18 +204,24 @@ export default function SmallProductCard({
 
         <div className="relative flex w-1/2 flex-1 flex-row items-start justify-between bg-white p-6">
           <div className="flex flex-col">
-            <span className="w-fit whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
-              {tag}
-            </span>
+            {tag && (
+              <span className="w-fit whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
+                {tag}
+              </span>
+            )}
 
             <h3 className="leading-tight transition-smooth mt-4 text-lg font-semibold text-header group-hover:text-accent-dark text-left">
               {title}
             </h3>
-            <div className=" inline-flex items-center gap-2 mt-1">
-              <IoIosStar size={14} className="text-yellow-700" />
-              <p className="text-xs text-gray-600">4.4/5 (23)</p>
-              <p className="text-xs text-gray-600">129 sold</p>
-            </div>
+            {ratingCount !== 0 && (
+              <div className=" inline-flex items-center gap-2 mt-1">
+                <IoIosStar size={14} className="text-yellow-700" />
+                <p className="text-xs text-gray-600">
+                  {averageRating.toFixed(2)}/5 ({ratingCount})
+                </p>
+                <p className="text-xs text-gray-600">129 sold</p>
+              </div>
+            )}
 
             {reducedPrice ? (
               <>

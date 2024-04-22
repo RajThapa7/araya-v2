@@ -1,8 +1,10 @@
+"use client";
+import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
-import { data } from "@/data/productData";
 import Image from "next/image";
 
 export default function StoreFeaturedSection() {
+  const { data, isLoading } = useFetchProductList();
   return (
     <div className=" bg-gray-200 px-8 flex flex-col justify-center py-20">
       <div className="flex flex-col 2xl:flex-row">
@@ -46,7 +48,8 @@ export default function StoreFeaturedSection() {
                 },
               },
             }}
-            data={data}
+            data={data?.data || []}
+            isLoading={isLoading}
             cardType="small"
           />
         </div>

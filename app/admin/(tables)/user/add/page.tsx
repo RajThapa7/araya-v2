@@ -116,6 +116,7 @@ const Page = () => {
     defaultValues: defaultValues,
     resolver: yupResolver(addProductSchema),
   });
+
   const onSubmit: SubmitHandler<any> = (data) => {
     mutation.mutate(data, {
       onSuccess: (data) => {

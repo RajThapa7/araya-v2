@@ -1,5 +1,6 @@
 "use client";
 import useFetchProductById from "@/api/hooks/products/useFetchProductById";
+import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import ImageSlider from "@/components/ImageSlider/ImageSlider";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 import { MyTab } from "@/components/MyTab/MyTab";
@@ -7,24 +8,7 @@ import ProductDetail from "@/components/ProductDetail/ProductDetail";
 import ProductShortDescription from "@/components/ProductShortDescription";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import ProductDescriptionSkeletal from "@/components/Skeletal/ProductDescriptionSkeletal";
-import { data } from "@/data/productData";
 import ReviewSection from "@/features/ReviewSection/ReviewSection";
-
-// type Props = {
-//   params: { id: string };
-//   searchParams: { [key: string]: string | string[] | undefined };
-// };
-
-// export async function generateMetadata(
-//   { params, searchParams }: Props,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//   return {
-//     title: `${searchParams?.query} | Araya Arts Store`,
-//     description:
-//       "Araya Arts | Handmade Custom Notebooks and other art materials",
-//   };
-// }
 
 export default function ProductPage({
   params,
@@ -46,6 +30,8 @@ export default function ProductPage({
       desc: <ReviewSection />,
     },
   ];
+
+  const { data, isLoading: isProductLoading } = useFetchProductList();
   return (
     <div className="relative flex flex-col gap-14">
       <LoadingOverlay isVisible={isLoading} />
@@ -71,7 +57,8 @@ export default function ProductPage({
       <div className="bg-transparent">
         <ProductSlider
           title="Related Products"
-          data={data}
+          data={data?.data || []}
+          isLoading={isProductLoading}
           spaceBetween={10}
           breakpoints={{
             540: {

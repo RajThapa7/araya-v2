@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import { montserrat } from "@/app/fonts";
 import Empty from "@/components/Empty/Empty";
@@ -8,7 +9,6 @@ import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
 import CardSkeletal from "@/components/Skeletal/CardSkeletal";
 import SmallProductCard from "@/components/SmallProductCard/SmallProductCard";
-import { data } from "@/data/productData";
 import { useAppSelector } from "@/lib/hooks";
 import { Option, Select } from "@material-tailwind/react";
 import { useRouter } from "next-nprogress-bar";
@@ -29,6 +29,8 @@ const Category = () => {
   const { isLoading, data: wishlistData } = useFetchWishlist(user?._id);
 
   const { wishlist } = useAppSelector((state) => state.wishlist);
+
+  const { data, isLoading: isProductLoading } = useFetchProductList();
 
   if (!isLoggedIn) {
     return (
@@ -123,10 +125,16 @@ const Category = () => {
         {!isLoading && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {wishlistData?.products.map(
-              (
-                { featured_img, price, title, reducedPrice, tag, _id },
-                index
-              ) => (
+              ({
+                featured_img,
+                price,
+                title,
+                reducedPrice,
+                tag,
+                _id,
+                average_rating,
+                ratingCount,
+              }) => (
                 <div key={_id} className="flex flex-row">
                   <MyCheckbox
                     color="green"
@@ -143,6 +151,8 @@ const Category = () => {
                     }}
                   />
                   <SmallProductCard
+                    ratingCount={ratingCount}
+                    averageRating={average_rating}
                     fav={true}
                     id={_id}
                     img={featured_img}
@@ -156,7 +166,34 @@ const Category = () => {
         )}
       </div>
 
-      <ProductSlider data={data} title="Picks for you" />
+      <ProductSlider
+        data={data?.data || []}
+        title="Picks for you"
+        isLoading={isProductLoading}
+        breakpoints={{
+          540: {
+            slidesPerView: 2,
+            grid: {
+              fill: "row",
+              rows: 2,
+            },
+          },
+          840: {
+            slidesPerView: 3,
+            grid: {
+              fill: "row",
+              rows: 2,
+            },
+          },
+          1160: {
+            slidesPerView: 4,
+            grid: {
+              fill: "row",
+              rows: 2,
+            },
+          },
+        }}
+      />
     </div>
   );
 };

@@ -1,9 +1,7 @@
 import { MyCarousel } from "@/components/Carousel/Carousel";
 import FlashCard from "@/components/FlashCard/FlashCard";
-import { MyTab } from "@/components/MyTab/MyTab";
-import ProductSlider from "@/components/ProductSlider/ProductSlider";
-import { data } from "@/data/productData";
 import FeaturedSection from "@/features/StoreFeaturedSection";
+import StoreHomeTabBar from "@/features/store/(home)/TabBar";
 import { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import "../../globals.css";
@@ -12,32 +10,6 @@ export const metadata: Metadata = {
   title: "Araya Arts Store",
   description: "Araya Arts | Handmade Custom Notebooks and other art materials",
 };
-
-const Desc = () => <p>hello</p>;
-
-const tabData = [
-  {
-    label: "Top Rated",
-    value: "top-rated",
-    desc: (
-      <ProductSlider
-        isCategoryTitle={false}
-        title="Related Products"
-        data={data}
-      />
-    ),
-  },
-  {
-    label: "Top Discount",
-    value: "top-discount",
-    desc: <Desc />,
-  },
-  {
-    label: "Top Selling",
-    value: "top-selling",
-    desc: <Desc />,
-  },
-];
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -50,7 +22,7 @@ export default function Layout({ children }: PropsWithChildren) {
           <FlashCard />
           <FlashCard />
         </div>
-        <MyTab data={tabData} />
+        <StoreHomeTabBar />
       </div>
       <FeaturedSection />
       <div className="mx-auto max-w-7xl px-8 2xl:px-0">

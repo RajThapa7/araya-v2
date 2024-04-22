@@ -1,64 +1,25 @@
 "use client";
+import useFetchProductUnderCategories from "@/api/hooks/products/useFetchProductUnderCategories";
 import { montserrat } from "@/app/fonts";
+import { Pagination } from "@/components/Pagination/Pagination";
 import ProductCard from "@/components/ProductCard/ProductCard";
-import { IProductCard } from "@/types";
+import CardSkeletal from "@/components/Skeletal/CardSkeletal";
+import usePaginate from "@/hooks/usePaginate";
 import { Option, Select } from "@material-tailwind/react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-const data: IProductCard[] = [
-  {
-    id: "0",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    id: "1",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    // reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    // tag: "Latest",
-  },
-  {
-    id: "2",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    // reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    id: "3",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    id: "4",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-  {
-    id: "5",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg",
-    price: 999,
-    reducedPrice: 800,
-    title: "Ipad Pro 2023",
-    tag: "Latest",
-  },
-];
+
 const Category = ({ params }: { params: { category: string } }) => {
   const [sortValue, setSortValue] = useState("price");
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get("query");
+
+  const { category } = params;
+
+  const { data, isLoading } = useFetchProductUnderCategories(category);
+
+  const { handleCountChange, handlePageClick } = usePaginate();
+
   return (
     <div>
       <div className="mb-8 flex flex-row justify-between items-center">
@@ -81,13 +42,37 @@ const Category = ({ params }: { params: { category: string } }) => {
 
       {/* product lists */}
       <div className="flex flex-wrap gap-4">
-        {data.map(({ img, price, title, reducedPrice, tag, id }, index) => (
-          <ProductCard
-            {...{ img, price, reducedPrice, tag, title, id }}
-            key={index}
-          />
-        ))}
+        {!isLoading &&
+          data?.data.map(
+            (
+              {
+                img,
+                price,
+                title,
+                average_rating,
+                ratingCount,
+                reducedPrice,
+                tag,
+                _id,
+              },
+              index
+            ) => (
+              <ProductCard
+                {...{ price, reducedPrice, tag, title }}
+                img={img[0]}
+                id={_id}
+                averageRating={average_rating}
+                ratingCount={ratingCount}
+                key={index}
+              />
+            )
+          )}
+        {isLoading && <CardSkeletal />}
       </div>
+      <Pagination
+        totalPageCount={data?.totalPages || 0}
+        {...{ handleCountChange, handlePageClick }}
+      />
     </div>
   );
 };

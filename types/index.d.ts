@@ -7,6 +7,8 @@ interface IProductCard {
   tag?: string;
   className?: string;
   fav?: boolean;
+  averageRating: number;
+  ratingCount: number;
 }
 
 interface ITabProps {
@@ -35,6 +37,9 @@ interface IProductData {
   isProductVisible: boolean;
   isStockAvailable: boolean;
   productCount: number;
+  discountPercentage: number;
+  average_rating: number;
+  ratingCount: number;
 }
 interface IProductListData {
   count: number;
@@ -58,7 +63,7 @@ interface IFormData {
   name: string;
   placeholder: string;
   tag?: string;
-  type?: "dropdown" | "number" | "image" | "checkbox";
+  type?: "rating" | "dropdown" | "number" | "image" | "checkbox";
   dropdownData?: {
     label: string;
     value: string;

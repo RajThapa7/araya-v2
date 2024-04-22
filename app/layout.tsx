@@ -24,7 +24,12 @@ const Layout = ({ children }: PropsWithChildren) => {
             </StoreProvider>
           </QueryProvider>
         </ProgressBarProvider>
-        <ToastContainer theme="colored" hideProgressBar autoClose={2000} />
+        <ToastContainer
+          theme="colored"
+          hideProgressBar
+          autoClose={2000}
+          position="bottom-right"
+        />
       </body>
     </html>
   );

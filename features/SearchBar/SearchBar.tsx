@@ -46,7 +46,7 @@ export default function SearchBar() {
     useComponentVisible(false);
   return (
     <div className="">
-      <div className="flex fixed top-0 left-0 bg-primary flex-row justify-between gap-x-12 z-[999] w-screen px-2 py-4 md:px-6 lg:justify-around">
+      <div className="flex fixed top-0 left-0 bg-primary flex-row justify-between gap-x-12 z-[100] w-screen px-2 py-4 md:px-6 lg:justify-around shadow-sm">
         {/* mobile menu  */}
         <div className="flex flex-row gap-4">
           <IconButton

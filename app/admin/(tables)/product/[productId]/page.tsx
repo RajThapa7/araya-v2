@@ -59,6 +59,14 @@ const Page = ({ params }: { params: { productId: string } }) => {
               <p className="text-body font-semibold">Reduced Price</p>
               <p>Rs. {data?.reducedPrice}</p>
             </div>
+            <div
+              className={`flex-col gap-2 ${
+                data?.reducedPrice ? "flex" : "hidden"
+              }`}
+            >
+              <p className="text-body font-semibold">Discount Percentage</p>
+              <p>{data?.discountPercentage}%</p>
+            </div>
             <div className="flex flex-col gap-2">
               <p className="text-body font-semibold">Description</p>
               <p>{data?.description}</p>

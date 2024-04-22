@@ -18,7 +18,7 @@ export function Pagination({
   const page = searchParams.get("page") as string;
 
   return (
-    <div className="flex flex-row gap-10 mt-4 items-center justify-center">
+    <div className="flex flex-row gap-10 mt-12 items-center justify-center">
       <ReactPaginate
         breakLabel="..."
         nextLabel={<ArrowRightIcon strokeWidth={2} className="h-4 w-4 ml-4" />}

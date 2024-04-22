@@ -1,7 +1,8 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import useFetchProductList from "@/api/hooks/products/useFetchProducts";
+import GridView from "@/components/GridView/GridView";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
-import { data } from "@/data/productData";
 import useScrollToTop from "@/hooks/useScrollToTop";
 
 export default function Page() {
@@ -9,6 +10,7 @@ export default function Page() {
   const { token, user } = useAuth();
 
   const isLoggedIn = !!token;
+  const { data: productData, isLoading } = useFetchProductList();
 
   return (
     <div className="flex flex-col gap-10 pt-24 pb-14">
@@ -20,20 +22,26 @@ export default function Page() {
             slidesPerView: 2,
             grid: {
               fill: "row",
-              rows: 1,
+              rows: 2,
             },
           },
           1400: {
             slidesPerView: 3,
             grid: {
               fill: "row",
-              rows: 1,
+              rows: 2,
             },
           },
         }}
-        data={data}
+        data={productData?.data || []}
+        isLoading={isLoading}
       />
-      <ProductSlider title="Recommend for you" data={data} />
+      <ProductSlider
+        title="Recommend for you"
+        data={productData?.data || []}
+        isLoading={isLoading}
+      />
+      {!isLoading && productData && <GridView data={productData?.data} />}
     </div>
   );
 }

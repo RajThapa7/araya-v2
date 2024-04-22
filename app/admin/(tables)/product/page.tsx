@@ -106,6 +106,9 @@ const Page = () => {
                 Discounted Price
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-black">
+                Discount Percentage
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-black">
                 Tag
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-black">
@@ -138,6 +141,9 @@ const Page = () => {
                   <td className="px-6 py-3 text-sm">{item.price}</td>
                   <td className="px-6 py-3 text-sm">
                     {item?.reducedPrice || "_"}
+                  </td>
+                  <td className="px-6 py-3 text-sm">
+                    {item.discountPercentage}%
                   </td>
                   <td className="px-6 py-3 text-sm">{item?.tag || "_"}</td>
                   <td className="px-6 py-3 text-sm">

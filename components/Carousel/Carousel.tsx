@@ -8,7 +8,7 @@ export function MyCarousel() {
   return (
     <Carousel
       loop={true}
-      className="mt-[72px] lg:mt-0"
+      className=""
       autoplay
       navigation={({ setActiveIndex, activeIndex, length }) => (
         <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">

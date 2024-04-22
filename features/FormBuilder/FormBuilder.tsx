@@ -3,6 +3,7 @@ import MultipleImageUploader from "@/components/MultipleImageUploader/MulitpleIm
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import MyInput from "@/components/MyInput/MyInput";
+import { MyRating } from "@/components/Rating/index";
 import { FormInputType, IFormData } from "@/types";
 import { Option, Select } from "@material-tailwind/react";
 import {
@@ -98,6 +99,24 @@ const FormBuilder = ({
                   render={({ field: { onChange } }) => (
                     <MultipleImageUploader
                       onChange={onChange}
+                      error={errors[item.name]}
+                    />
+                  )}
+                />
+              </div>
+            )}
+
+            {item.type === "rating" && (
+              <div className="flex flex-col gap-2">
+                <label>{item.label}</label>
+
+                <Controller
+                  control={control}
+                  name={item.name}
+                  render={({ field: { onChange, value } }) => (
+                    <MyRating
+                      onChange={onChange}
+                      readonly={false}
                       error={errors[item.name]}
                     />
                   )}

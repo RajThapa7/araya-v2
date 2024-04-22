@@ -1,6 +1,5 @@
 "use client";
-import useFetchProductList from "@/api/hooks/products/useFetchProducts";
-import { IProductCard } from "@/types";
+import { IProductData } from "@/types";
 import { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "swiper/css";
@@ -44,10 +43,11 @@ const defaultBreakpoint: BreakPoint = {
 interface IProductSliderProps {
   breakpoints?: BreakPoint;
   title: string;
-  data: IProductCard[];
+  data: IProductData[];
   cardType?: "small" | "default";
   isCategoryTitle?: boolean;
   spaceBetween?: number;
+  isLoading: boolean;
 }
 
 export default function ProductSlider({
@@ -57,12 +57,11 @@ export default function ProductSlider({
   data,
   cardType = "default",
   spaceBetween = 10,
+  isLoading,
 }: IProductSliderProps) {
   const swiperRef = useRef<any>();
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-
-  const { data: productData, isLoading } = useFetchProductList();
 
   return (
     <div className="">
@@ -116,7 +115,7 @@ export default function ProductSlider({
         {isLoading && <CardSkeletal />}
 
         {!isLoading &&
-          productData?.data?.map(
+          data?.map(
             ({
               _id,
               reducedPrice,
@@ -124,6 +123,8 @@ export default function ProductSlider({
               price,
               featured_img,
               tag,
+              average_rating,
+              ratingCount,
             }) => (
               <SwiperSlide
                 key={title}
@@ -136,6 +137,8 @@ export default function ProductSlider({
                     img={featured_img}
                     {...{ price, reducedPrice, tag }}
                     title={productTitle}
+                    averageRating={average_rating}
+                    ratingCount={ratingCount}
                   />
                 ) : (
                   <SmallProductCard
@@ -144,6 +147,8 @@ export default function ProductSlider({
                     title={productTitle}
                     img={featured_img}
                     {...{ price, reducedPrice, tag }}
+                    averageRating={average_rating}
+                    ratingCount={ratingCount}
                   />
                 )}
               </SwiperSlide>

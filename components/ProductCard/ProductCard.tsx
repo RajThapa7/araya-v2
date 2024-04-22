@@ -1,13 +1,11 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
 import useAddProductToCart from "@/api/hooks/cart/useAddProductToCart";
-import useRemoveProductFromCart from "@/api/hooks/cart/useRemoveProductFromCart";
 import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
 import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import useRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import { montserrat } from "@/app/fonts";
 import ProductModal from "@/features/ProductModal/ProductModal";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import arayaLogo from "@/public/footer-logo.svg";
 import { IProductCard } from "@/types";
 import classNames from "@/utils/classNames";
@@ -28,12 +26,12 @@ export default function ProductCard({
   tag,
   className,
   id,
+  averageRating,
+  ratingCount,
 }: IProductCard) {
-  const dispatch = useAppDispatch();
-  const { wishlist } = useAppSelector((store) => store.wishlist);
+  const [clicked, setClicked] = useState(false);
   const { token, user } = useAuth();
   const isLoggedIn = !!token;
-  const [isFav, setIsFav] = useState(wishlist.some((item) => item._id === id));
 
   const discountPercentage =
     reducedPrice && Math.round(((price - reducedPrice) * 100) / price);
@@ -45,7 +43,6 @@ export default function ProductCard({
   const removeWishlistMutation = useRemoveProductFromWishlist();
 
   const cartMutation = useAddProductToCart();
-  const removeCartMutation = useRemoveProductFromCart();
 
   const { data: wishlistItems } = useFetchWishlist(user?._id);
   const isInWishlist = wishlistItems?.products.some((item) => item._id === id);
@@ -71,7 +68,7 @@ export default function ProductCard({
               router.push("/store/wishlist");
             },
           });
-          setIsFav(false);
+          setClicked(false);
           // dispatch(removeWishlistItem({ wishlist: data.list.products }));
         },
         onError: (error) => ErrorHandler(error),
@@ -99,7 +96,7 @@ export default function ProductCard({
             },
           });
           // dispatch(addWishlistItem({ wishlist: data.list.products }));
-          setIsFav(true);
+          setClicked(true);
         },
         onError: (error) => ErrorHandler(error),
       }
@@ -143,7 +140,7 @@ export default function ProductCard({
         onClick={(e) => handleParentClick(e, id)}
         className={classNames(
           className,
-          `cursor-pointer transition-smooth group relative block w-full max-w-sm overflow-hidden ring-primary-dark bg-white ring-[1px] hover:ring-accent pt-2 ${montserrat.className}`
+          `h-full cursor-pointer transition-smooth group relative block w-full max-w-sm overflow-hidden ring-primary-dark bg-white ring-[1px] hover:ring-accent pt-2 ${montserrat.className}`
         )}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
@@ -160,7 +157,9 @@ export default function ProductCard({
           <AiFillHeart
             className={`text-lg ${
               isInWishlist
-                ? "animate-grow-wiggle text-red-300"
+                ? clicked
+                  ? "animate-grow-wiggle text-red-300"
+                  : "text-red-300"
                 : "text-white animate-shrink-wiggle"
             }`}
           />
@@ -203,19 +202,25 @@ export default function ProductCard({
         </div>
         <div className="relative flex flex-row justify-between bg-white p-6">
           <div className="flex flex-col">
-            <span className="w-fit whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
-              {tag}
-            </span>
+            {tag && (
+              <span className="w-fit whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
+                {tag}
+              </span>
+            )}
 
             <h3 className="transition-smooth mt-4 text-left text-lg font-semibold text-header group-hover:text-accent-dark leading-tight">
               {title}
             </h3>
 
-            <div className=" inline-flex items-center gap-2 mt-1">
-              <IoIosStar size={14} className="text-yellow-700" />
-              <p className="text-sm text-gray-600">4.4/5 (23)</p>
-              <p className="text-sm text-gray-600">129 sold</p>
-            </div>
+            {ratingCount !== 0 && (
+              <div className=" inline-flex items-center gap-2 mt-1">
+                <IoIosStar size={14} className="text-yellow-700" />
+                <p className="text-sm text-gray-600">
+                  {averageRating.toFixed(2)}/5 ({ratingCount})
+                </p>
+                <p className="text-sm text-gray-600">129 sold</p>
+              </div>
+            )}
 
             {reducedPrice ? (
               <div className="mt-1.5 inline-flex gap-2">

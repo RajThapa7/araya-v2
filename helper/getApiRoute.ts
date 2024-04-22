@@ -37,11 +37,19 @@ const routes = {
   addCarouselItem: () => "/admin/carousel/add",
   removeCarouselItem: (id?: string) => `/admin/carousel/delete/${id}`,
   editCarouselItem: (id?: string) => `/admin/carousel/edit/${id}`,
+
+  getAllReviewsOnProduct: (productId?: string, userId?: string) =>
+    `/review/${productId}/${userId}`,
+  addReviewOnProduct: () => "/review/add",
+  editReviewOnProduct: (productId?: string, userId?: string) =>
+    `/review/edit/${productId}/${userId}`,
+  deleteReviewOnProduct: (productId?: string, userId?: string) =>
+    `/review/delete/${productId}/${userId}`,
 };
 
 const getApiRoute = (
   service: keyof typeof routes
-): ((id?: string) => string) => {
+): ((id?: string, id2?: string) => string) => {
   return routes[service];
 };
 
