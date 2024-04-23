@@ -11,7 +11,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <div className="relative bg-primary-dark flex flex-col min-h-screen">
         <SearchBar />
         <MyNavbar />
-        <div className="flex-grow mt-[130px]">{children}</div>
+        <div className="flex-grow mt-[75px] lg:mt-[130px]">{children}</div>
         <Footer />
       </div>
       <ScrollUp />

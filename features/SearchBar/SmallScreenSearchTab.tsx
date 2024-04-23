@@ -42,8 +42,8 @@ export const SmallScreenSearchTab = ({
     <MotionDiv
       ref={searchTabRef}
       transition={{ ease: "linear" }}
-      animate={isOpen ? { y: 0 } : { y: -200 }}
-      className={`absolute left-0 right-0 z-50 w-full bg-gray-200 shadow-lg lg:hidden`}
+      animate={isOpen ? { y: 70 } : { y: -200 }}
+      className={`absolute left-0 right-0 z-[999] w-full bg-gray-200 shadow-lg lg:hidden`}
     >
       <div className="relative flex flex-1 flex-col px-4 py-4">
         <input
