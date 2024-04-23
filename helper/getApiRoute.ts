@@ -11,6 +11,7 @@ const routes = {
   getAllCategories: () => "/category",
   getProductsUnderCategory: (categorySlug?: string) =>
     `/category/${categorySlug}`,
+  getProductsBySearchTerm: () => `/product/search`,
 
   getUserCartItems: (userId?: string) => `/cart/${userId}`,
   addProductToCart: () => "/cart/add",

@@ -107,22 +107,24 @@ export const SmallScreenSearchTab = ({
                 </div>
                 <table className="w-full border-collapse">
                   <tbody className="">
-                    {JSON.parse(recentSearches || "[]")?.map((key: string) => (
-                      <tr
-                        key={key}
-                        className="cursor-pointer border-b-2 border-gray-300 text-sm text-body last:border-none hover:bg-gray-200"
-                      >
-                        <td
-                          onClick={() => {
-                            router.push(`/store/search?query=${key}`);
-                            setIsOpen(false);
-                          }}
-                          className="w-full break-words px-5 pb-2 pt-3 font-semibold"
+                    {JSON.parse(recentSearches || "[]")
+                      ?.slice(0, 10)
+                      ?.map((key: string) => (
+                        <tr
+                          key={key}
+                          className="cursor-pointer border-b-2 border-gray-300 text-sm text-body last:border-none hover:bg-gray-200"
                         >
-                          {key}
-                        </td>
-                      </tr>
-                    ))}
+                          <td
+                            onClick={() => {
+                              router.push(`/store/search?query=${key}`);
+                              setIsOpen(false);
+                            }}
+                            className="w-full break-words px-5 pb-2 pt-3 font-semibold"
+                          >
+                            {key}
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </>
