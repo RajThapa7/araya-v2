@@ -24,11 +24,6 @@ const StoreHomeTabBar = () => {
       value: "top-discount",
       desc: <Desc />,
     },
-    {
-      label: "Top Selling",
-      value: "top-selling",
-      desc: <Desc />,
-    },
   ];
   return <MyTab data={tabData} />;
 };

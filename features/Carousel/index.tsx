@@ -5,7 +5,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import one from "/public/1.png";
+import one from "/public/1.jpeg";
 import two from "/public/2.png";
 import three from "/public/3.png";
 import four from "/public/4.png";
@@ -142,8 +142,13 @@ function LeftArrow(props: any) {
 
 function CarouselCard({ title, url }: { title: string; url: StaticImageData }) {
   return (
-    <div className="group cursor-pointer transition-all w-full aspect-video lg:aspect-[16/7] relative">
-      <Image fill src={url} alt={title} className="w-full object-fill h-full" />
+    <div className="group cursor-pointer transition-all w-full aspect-[16/7] relative">
+      <Image
+        fill
+        src={url}
+        alt={title}
+        className="w-full object-cover h-full"
+      />
     </div>
   );
 }
