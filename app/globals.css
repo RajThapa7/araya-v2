@@ -19,6 +19,7 @@
 
   body {
     overflow-x: hidden;
+    margin-right: calc(100vw - 100%);
   }
 
   /* dark mode according to the system preference */

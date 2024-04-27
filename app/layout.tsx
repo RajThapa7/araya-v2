@@ -11,7 +11,7 @@ import "./globals.css";
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={`${montserrat.className} ${
           process.env.NODE_ENV === "development" && "debug-screens"
@@ -25,6 +25,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           </QueryProvider>
         </ProgressBarProvider>
         <ToastContainer
+          className="z-[9999]"
           theme="colored"
           hideProgressBar
           autoClose={2000}

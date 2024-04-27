@@ -84,6 +84,25 @@ export default function Cart() {
     );
   };
 
+  const handleMultiCartItemsRemove = () => {
+    const selectedProductIds = selected.map((item) => item.id);
+    removeCartMutation.mutate(
+      { userId: user._id, productId: selectedProductIds },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message);
+          // after removing the item from cart also remove it from the selected items
+          setSelected(() => {
+            return selected.filter(
+              (item) => !selectedProductIds.includes(item.id)
+            );
+          });
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
+  };
+
   const handleCheckout = () => {
     if (selected.length === 0) {
       toast.warn("Please select at least one item to checkout");
@@ -144,7 +163,7 @@ export default function Cart() {
             <div className="flex flex-row gap-2 ml-1 md:ml-0">
               <button
                 className="inline-flex items-center gap-1 rounded-full p-1.5 text-body transition hover:text-accent"
-                // onClick={handleWishlistRemove}
+                onClick={handleMultiCartItemsRemove}
               >
                 <FiTrash2 className="text-lg text-gray-500" />
                 <p className="text-xs">REMOVE</p>

@@ -5,7 +5,7 @@ import { AxiosInstance } from "axios";
 
 interface IPostData {
   userId: string;
-  productId: string;
+  productId: string | string[];
 }
 
 const removeProductFromWishlist = async (

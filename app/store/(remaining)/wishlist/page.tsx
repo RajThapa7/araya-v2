@@ -1,9 +1,12 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import useAddProductToCart from "@/api/hooks/cart/useAddProductToCart";
 import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
+import useRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import { montserrat } from "@/app/fonts";
 import Empty from "@/components/Empty/Empty";
+import ErrorHandler from "@/components/ErrorHandler/ErrorHandler";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
@@ -16,6 +19,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const Category = () => {
   const [sortValue, setSortValue] = useState("price");
@@ -31,6 +35,36 @@ const Category = () => {
   const { wishlist } = useAppSelector((state) => state.wishlist);
 
   const { data, isLoading: isProductLoading } = useFetchProductList();
+
+  const removeWishlistMutation = useRemoveProductFromWishlist();
+  const addToCartMutation = useAddProductToCart();
+
+  const handleMultiWishlistRemove = () => {
+    removeWishlistMutation.mutate(
+      { userId: user._id, productId: selected },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message);
+          // after removing the item from wishlist also remove it from the selected items
+          setSelected([]);
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
+  };
+
+  const handleMultiItemAddToCart = () => {
+    addToCartMutation.mutate(
+      { userId: user._id, productId: selected },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message);
+          setSelected([]);
+        },
+        onError: (error) => ErrorHandler(error),
+      }
+    );
+  };
 
   if (!isLoggedIn) {
     return (
@@ -104,14 +138,14 @@ const Category = () => {
           <div className="flex flex-row gap-2 ml-1 md:ml-0">
             <button
               className="inline-flex items-center gap-1 rounded-full p-1.5 text-body transition hover:text-accent"
-              // onClick={handleWishlistClick}
+              onClick={handleMultiItemAddToCart}
             >
               <MdOutlineShoppingCart className="text-lg text-gray-500" />
               <p className="text-xs">ADD TO CART</p>
             </button>
             <button
               className="inline-flex items-center gap-1 rounded-full p-1.5 text-body transition hover:text-accent"
-              // onClick={handleWishlistClick}
+              onClick={handleMultiWishlistRemove}
             >
               <FiTrash2 className="text-lg text-gray-500" />
               <p className="text-xs">REMOVE</p>

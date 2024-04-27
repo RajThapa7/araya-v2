@@ -1,6 +1,7 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
 import useInititateKhaltiPayment from "@/api/hooks/checkout/useInititateKhaltiPayment";
+import ErrorHandler from "@/components/ErrorHandler/ErrorHandler";
 import MyButton from "@/components/MyButton";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -162,6 +163,7 @@ export default function Cart() {
               onSuccess: (data) => {
                 router.push(data.payment_url);
               },
+              onError: (error) => ErrorHandler(error),
             });
           }}
         >
