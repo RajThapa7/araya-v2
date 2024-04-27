@@ -11,7 +11,7 @@ import "./globals.css";
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${montserrat.className} ${
           process.env.NODE_ENV === "development" && "debug-screens"

@@ -84,6 +84,21 @@ export default function Cart() {
     );
   };
 
+  const handleCheckout = () => {
+    if (selected.length === 0) {
+      toast.warn("Please select at least one item to checkout");
+      return;
+    }
+    const query = JSON.stringify(
+      mergeTwoArray(cartData?.products || [], selected, "id").filter(
+        (item) => item.quantity >= 1
+      )
+    );
+
+    const encoded = encodeURIComponent(query);
+    router.push(`/store/checkout?products=${encoded}&totalPrice=${totalPrice}`);
+  };
+
   return (
     <div className="flex flex-col gap-20">
       <Empty
@@ -172,7 +187,9 @@ export default function Cart() {
               Rs. {totalPrice.toLocaleString("en-IN")}
             </p>
           </div>
-          <MyButton className="w-full !py-4">Proceed to Checkout</MyButton>
+          <MyButton className="w-full !py-4" onClick={() => handleCheckout()}>
+            Proceed to Checkout
+          </MyButton>
         </div>
       </div>
       <ProductSlider

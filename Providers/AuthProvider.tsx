@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next-nprogress-bar";
 import { PropsWithChildren, createContext, useContext } from "react";
 import { useCookies } from "react-cookie";
@@ -35,6 +36,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   ]);
 
   const router = useRouter();
+  const client = useQueryClient();
 
   const value: Value = {
     login: (
@@ -65,6 +67,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         removeAuthCookie("adminAccessToken");
         removeAuthCookie("admin");
       }
+      client.clear(); //clear all the queries on logout
       router.push(route);
     },
     token: authCookie.accessToken,

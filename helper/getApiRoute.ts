@@ -46,6 +46,9 @@ const routes = {
     `/review/edit/${productId}/${userId}`,
   deleteReviewOnProduct: (productId?: string, userId?: string) =>
     `/review/delete/${productId}/${userId}`,
+
+  initiateKhalitPayment: () => "/checkout/khalti",
+  verifyKhalitPayment: (id?: string) => `/checkout/khalti/verify/${id}`,
 };
 
 const getApiRoute = (

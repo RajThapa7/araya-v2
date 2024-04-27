@@ -1,11 +1,49 @@
 "use client";
+import { useAuth } from "@/Providers/AuthProvider";
+import useInititateKhaltiPayment from "@/api/hooks/checkout/useInititateKhaltiPayment";
 import MyButton from "@/components/MyButton";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Cart() {
   const reducedPrice = 100;
   const price = 200;
   const discountPercentage = 10;
+  const router = useRouter();
+
+  const mutation = useInititateKhaltiPayment();
+
+  const searchParams = useSearchParams();
+  const products = JSON.parse(
+    decodeURIComponent(searchParams.get("products") as string)
+  );
+
+  const { user } = useAuth();
+
+  const totalPrice = searchParams.get("totalPrice");
+  console.log(products);
+
+  const productBreakdown = products?.map((item: any) => ({
+    identity: item._id,
+    name: item.title,
+    total_price: item.quantity * item.price * 100,
+    quantity: item.quantity,
+    unit_price: item.price * 100,
+  }));
+  const amountBreakdown = products?.map((item: any) => ({
+    label: item.title,
+    amount: item.quantity * (item.reducedPrice || item.price) * 100,
+  }));
+
+  const data = {
+    customer: {
+      name: user.username,
+    },
+    amount: parseInt(totalPrice || "") * 100, //in pasia,
+    product_details: productBreakdown,
+    amount_breakdown: amountBreakdown,
+  };
+
   return (
     <div className="flex flex-col gap-4 lg:flex-row">
       <div className="flex flex-1 flex-col">
@@ -46,64 +84,89 @@ export default function Cart() {
         </div>
 
         <div className="rounded-xl shadow-sm">
-          {Array.from({ length: 2 }).map(() => (
-            <div
-              className="bg flex h-fit flex-1 flex-col items-start gap-6 border-b-2 bg-white px-6 pb-2 pt-5 last:border-b-0 md:flex-row"
-              key={"1"}
-            >
-              <div className="flex min-w-[50%] flex-row gap-2">
-                {/* <MyCheckbox /> */}
-                <div className="relative -mt-4 aspect-square min-w-[8rem]">
-                  <Image
-                    alt="item"
-                    fill
-                    className="object-contain"
-                    src={
-                      "https://transvelo.github.io/electro-html/2.0/assets/img/150X140/img1.jpg"
-                    }
-                  />
-                </div>
-                <p className="text-sm">
-                  Zeblaze GTR 3 Pro SmartWatch | Ultra HD Amoled Display |
-                  Bluetooth Calling | IP68 Water Resistance
-                </p>
-              </div>
+          {products.map(
+            ({
+              _id,
+              quantity,
+              featured_img,
+              title,
+              price,
+              reducedPrice,
+            }: any) => {
+              return (
+                <div
+                  className="bg flex h-fit flex-1 flex-col items-start gap-6 border-b-2 bg-white px-6 pb-2 pt-5 last:border-b-0 md:flex-row"
+                  key={_id}
+                >
+                  <div className="flex min-w-[50%] flex-row gap-2">
+                    {/* <MyCheckbox /> */}
+                    <div className="relative -mt-4 aspect-square min-w-[8rem]">
+                      <Image
+                        alt="item"
+                        fill
+                        className="object-contain"
+                        src={featured_img}
+                      />
+                    </div>
+                    <p className="text-sm">{title}</p>
+                  </div>
 
-              <div className="inline-flex w-full justify-between gap-8 pl-10 md:w-fit md:pl-0">
-                <div className="text-sm">
-                  <p>Qty:3</p>
-                </div>
+                  <div className="inline-flex w-full justify-between gap-8 pl-10 md:w-fit md:pl-0">
+                    <div className="text-sm">
+                      <p>Qty:{quantity}</p>
+                    </div>
 
-                <div className="flex flex-col gap-1">
-                  <p className="text-left text-lg text-red-500">
-                    Rs.{reducedPrice}
-                  </p>
-                  <div className="flex flex-row gap-2">
-                    <p className="text-sm text-gray-500 line-through">
-                      Rs.{price}
-                    </p>
-                    <p className="text-sm text-gray-900">
-                      -{discountPercentage}%
-                    </p>
+                    {reducedPrice ? (
+                      <div className=" flex flex-col gap-2">
+                        <p className="text-left text-lg text-red-500">
+                          Rs.{reducedPrice}
+                        </p>
+                        <div className="flex flex-row items-center justify-center gap-2">
+                          <p className="text-sm text-gray-500 line-through">
+                            Rs.{price}
+                          </p>
+                          <p className="text-sm text-gray-900">
+                            -{(100 * (price - reducedPrice)) / price}%
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-left text-lg text-gray-700">
+                        Rs.{price}
+                      </p>
+                    )}
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            }
+          )}
         </div>
       </div>
 
       <div className="flex h-fit w-full flex-col gap-3 rounded-md bg-white p-4 shadow-sm lg:w-[350px]">
         <p className="text-md font-semibold text-gray-800">Order Summary</p>
         <div className="flex flex-row justify-between">
-          <p className="text-sm text-gray-800">Subtotal (0 items)</p>
-          <p className="">Rs. 13,101</p>
+          <p className="text-sm text-gray-800">
+            Subtotal ({products.length} items)
+          </p>
+          <p className="">Rs. {totalPrice}</p>
         </div>
         <div className="flex flex-row justify-between">
           <p className="text-sm font-semibold">Total</p>
-          <p className="font-semibold text-red-500">Rs. 13,101</p>
+          <p className="font-semibold text-red-500">Rs. {totalPrice}</p>
         </div>
-        <MyButton className="w-full !py-4">Place Order</MyButton>
+        <MyButton
+          className="w-full !py-4"
+          onClick={() => {
+            mutation.mutate(data, {
+              onSuccess: (data) => {
+                router.push(data.payment_url);
+              },
+            });
+          }}
+        >
+          Place Order
+        </MyButton>
       </div>
     </div>
   );
