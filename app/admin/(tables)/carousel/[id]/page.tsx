@@ -1,18 +1,18 @@
 "use client";
 import useFetchCarouselById from "@/api/hooks/carousel/useFetchCarouselById";
 import Loading from "@/app/loading";
-import { Modal } from "@/components/Modal/Modal";
+import { openModal } from "@/lib/modal/modalSlice";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
-import { useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useDispatch } from "react-redux";
 
 const Page = ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const { data, isLoading } = useFetchCarouselById(id);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [image, setImage] = useState<string>();
+  const dispatch = useDispatch();
+
   const router = useRouter();
   return (
     <>
@@ -63,8 +63,22 @@ const Page = ({ params }: { params: { id: string } }) => {
                 <div
                   className="relative aspect-square w-32 hover:ring-1 ring-accent transition"
                   onClick={() => {
-                    setImage(data?.img);
-                    setIsModalOpen(true);
+                    dispatch(
+                      openModal({
+                        content: (
+                          <div className="flex items-center justify-center bg-transparent">
+                            <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                              <Image
+                                alt="featured_image"
+                                className="object-contain"
+                                fill
+                                src={data?.img || ""}
+                              />
+                            </div>
+                          </div>
+                        ),
+                      })
+                    );
                   }}
                 >
                   <Image
@@ -84,20 +98,6 @@ const Page = ({ params }: { params: { id: string } }) => {
               <p className="text-body font-semibold">Updated at</p>
               <p>{new Date(data?.updatedAt || "").toString()}</p>
             </div>
-
-            {/* image modal */}
-            <Modal open={isModalOpen} setOpen={setIsModalOpen}>
-              <div className="flex items-center justify-center bg-transparent">
-                <div className="relative h-[calc(100vh-10rem)] w-full flex">
-                  <Image
-                    alt="featured_image"
-                    className="object-contain"
-                    fill
-                    src={image || ""}
-                  />
-                </div>
-              </div>
-            </Modal>
           </div>
         </>
       )}

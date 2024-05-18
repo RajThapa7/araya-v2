@@ -1,8 +1,9 @@
+import { openModal } from "@/lib/modal/modalSlice";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { MdDelete } from "react-icons/md";
-import { Modal } from "../Modal/Modal";
+import { useDispatch } from "react-redux";
 
 const CloudImageManager = ({
   images,
@@ -15,9 +16,6 @@ const CloudImageManager = ({
   error: any;
   setValue: UseFormSetValue<any>;
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [image, setImage] = useState<string>(); //for modal
-
   const [cloudImageArray, setCloudImageArray] = useState<string[]>(images);
 
   useEffect(() => {
@@ -25,6 +23,8 @@ const CloudImageManager = ({
   }, []);
 
   const [removedArr, setRemovedArr] = useState<string[]>([]);
+
+  const dispatch = useDispatch();
 
   const handleImageRemove = (e: any, indexToRemove: number) => {
     setCloudImageArray((prevImages) =>
@@ -53,8 +53,22 @@ const CloudImageManager = ({
           <div
             className="relative aspect-square w-32 group hover:ring-1 ring-accent transition"
             onClick={() => {
-              setImage(item);
-              setIsModalOpen(true);
+              dispatch(
+                openModal({
+                  content: (
+                    <div className="flex items-center justify-center bg-transparent">
+                      <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                        <Image
+                          alt="featured_image"
+                          className="object-contain"
+                          fill
+                          src={item}
+                        />
+                      </div>
+                    </div>
+                  ),
+                })
+              );
             }}
             key={item}
           >
@@ -74,19 +88,6 @@ const CloudImageManager = ({
       </div>
       {/* error message */}
       <p className="text-sm text-red-400 mt-2">{error?.message}</p>
-      {/* image modal */}
-      <Modal open={isModalOpen} setOpen={setIsModalOpen}>
-        <div className="flex items-center justify-center bg-transparent">
-          <div className="relative h-[calc(100vh-10rem)] w-full flex">
-            <Image
-              alt="featured_image"
-              className="object-contain"
-              fill
-              src={image || ""}
-            />
-          </div>
-        </div>
-      </Modal>
     </div>
   );
 };

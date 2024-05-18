@@ -1,5 +1,5 @@
 "use client";
-import { Modal } from "@/components/Modal/Modal";
+import { openModal } from "@/lib/modal/modalSlice";
 import Image from "next/image";
 import {
   ChangeEvent,
@@ -10,6 +10,7 @@ import {
 } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import { useDispatch } from "react-redux";
 
 interface MyInputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -20,9 +21,8 @@ interface MyInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const MultipleImageUploader = forwardRef(
   (props: MyInputProps, ref: ForwardedRef<HTMLInputElement>) => {
     const [images, setImages] = useState<File[]>([]);
-    // for modal
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [image, setImage] = useState<string>();
+
+    const dispatch = useDispatch();
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
       const files = event.target.files;
@@ -75,8 +75,22 @@ const MultipleImageUploader = forwardRef(
             <div
               className="relative aspect-square w-32 group hover:ring-1 ring-accent transition"
               onClick={() => {
-                setImage(URL.createObjectURL(file));
-                setIsModalOpen(true);
+                dispatch(
+                  openModal({
+                    content: (
+                      <div className="flex items-center justify-center bg-transparent">
+                        <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                          <Image
+                            alt="featured_image"
+                            className="object-contain"
+                            fill
+                            src={URL.createObjectURL(file)}
+                          />
+                        </div>
+                      </div>
+                    ),
+                  })
+                );
               }}
               key={index}
             >
@@ -102,19 +116,6 @@ const MultipleImageUploader = forwardRef(
             </label>
           )}
         </div>
-        {/* image modal */}
-        <Modal open={isModalOpen} setOpen={setIsModalOpen}>
-          <div className="flex items-center justify-center bg-transparent">
-            <div className="relative h-[calc(100vh-10rem)] w-full flex">
-              <Image
-                alt="featured_image"
-                className="object-contain"
-                fill
-                src={image || ""}
-              />
-            </div>
-          </div>
-        </Modal>
       </div>
     );
   }

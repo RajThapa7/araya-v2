@@ -2,18 +2,19 @@
 import useDeleteProduct from "@/api/hooks/admin/useDeleteProduct";
 import useFetchUsers from "@/api/hooks/admin/useFetchUsers";
 import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
-import { Modal } from "@/components/Modal/Modal";
 import MyButton from "@/components/MyButton";
 import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import { Pagination } from "@/components/Pagination/Pagination";
 import TableSkeletal from "@/components/Skeletal/TableSkeletal";
+import { openModal } from "@/lib/modal/modalSlice";
 import { AxiosError } from "axios";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { FaEdit, FaEye } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 const Page = () => {
@@ -22,8 +23,7 @@ const Page = () => {
   const mutation = useDeleteProduct();
   const pathname = usePathname();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [image, setImage] = useState<string>();
+  const dispatch = useDispatch();
 
   const handleDelete = (id: any) => {
     mutation.mutate(id, {
@@ -138,8 +138,22 @@ const Page = () => {
                       alt="profile image"
                       className="rounded-[500px]"
                       onClick={() => {
-                        setImage(item.profile_image);
-                        setIsModalOpen(true);
+                        dispatch(
+                          openModal({
+                            content: (
+                              <div className="flex items-center justify-center bg-transparent">
+                                <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                                  <Image
+                                    alt="featured_image"
+                                    className="object-contain"
+                                    fill
+                                    src={item.profile_image || ""}
+                                  />
+                                </div>
+                              </div>
+                            ),
+                          })
+                        );
                       }}
                     />
                   </td>
@@ -201,19 +215,6 @@ const Page = () => {
         {...{ handleCountChange, handlePageClick }}
         totalPageCount={data?.totalPages || 1}
       />
-      {/* image modal */}
-      <Modal open={isModalOpen} setOpen={setIsModalOpen}>
-        <div className="flex items-center justify-center bg-transparent">
-          <div className="relative h-[calc(100vh-10rem)] w-full flex">
-            <Image
-              alt="featured_image"
-              className="object-contain"
-              fill
-              src={image || ""}
-            />
-          </div>
-        </div>
-      </Modal>
     </div>
   );
 };

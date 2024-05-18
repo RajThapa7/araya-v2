@@ -1,19 +1,19 @@
 "use client";
 import useFetchProductById from "@/api/hooks/products/useFetchProductById";
 import Loading from "@/app/loading";
-import { Modal } from "@/components/Modal/Modal";
+import { openModal } from "@/lib/modal/modalSlice";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
-import { useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useDispatch } from "react-redux";
 
 const Page = ({ params }: { params: { productId: string } }) => {
   const { productId } = params;
   const { data, isLoading } = useFetchProductById(productId);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [image, setImage] = useState<string>();
   const router = useRouter();
+
+  const dispatch = useDispatch();
   return (
     <>
       {isLoading ? (
@@ -72,8 +72,22 @@ const Page = ({ params }: { params: { productId: string } }) => {
               <div
                 className="relative aspect-square w-32 hover:ring-1 ring-accent transition"
                 onClick={() => {
-                  setImage(data?.featured_img);
-                  setIsModalOpen(true);
+                  dispatch(
+                    openModal({
+                      content: (
+                        <div className="flex items-center justify-center bg-transparent">
+                          <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                            <Image
+                              alt="featured_image"
+                              className="object-contain"
+                              fill
+                              src={data?.featured_img || ""}
+                            />
+                          </div>
+                        </div>
+                      ),
+                    })
+                  );
                 }}
               >
                 <Image
@@ -91,8 +105,22 @@ const Page = ({ params }: { params: { productId: string } }) => {
                   <div
                     className="relative aspect-square w-32 hover:ring-1 ring-accent transition"
                     onClick={() => {
-                      setImage(item);
-                      setIsModalOpen(true);
+                      dispatch(
+                        openModal({
+                          content: (
+                            <div className="flex items-center justify-center bg-transparent">
+                              <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                                <Image
+                                  alt="featured_image"
+                                  className="object-contain"
+                                  fill
+                                  src={item || ""}
+                                />
+                              </div>
+                            </div>
+                          ),
+                        })
+                      );
                     }}
                     key={item}
                   >
@@ -115,20 +143,6 @@ const Page = ({ params }: { params: { productId: string } }) => {
               <p className="text-body font-semibold">Updated at</p>
               <p>{new Date(data?.updatedAt || "").toString()}</p>
             </div>
-
-            {/* image modal */}
-            <Modal open={isModalOpen} setOpen={setIsModalOpen}>
-              <div className="flex items-center justify-center bg-transparent">
-                <div className="relative h-[calc(100vh-10rem)] w-full flex">
-                  <Image
-                    alt="featured_image"
-                    className="object-contain"
-                    fill
-                    src={image || ""}
-                  />
-                </div>
-              </div>
-            </Modal>
           </div>
         </>
       )}
