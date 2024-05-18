@@ -10,24 +10,6 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const images = [
-  {
-    id: 0,
-    alt: "image",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/720X660/img1.jpg",
-  },
-  {
-    id: 1,
-    alt: "image",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/720X660/img2.jpg",
-  },
-  {
-    id: 2,
-    alt: "image",
-    img: "https://transvelo.github.io/electro-html/2.0/assets/img/720X660/img3.jpg",
-  },
-];
-
 export default function ImageSlider({
   className,
   isMagnified = true,
@@ -88,12 +70,14 @@ export default function ImageSlider({
                       },
                       largeImage: {
                         src: img,
-                        width: 1200,
-                        height: 750,
+                        width: 1300,
+                        height: 800,
                       },
                       enlargedImageContainerDimensions: {
-                        width: "170%",
-                        height: "150%",
+                        // width: "190%",
+                        // height: "150%",
+                        width: 800,
+                        height: 580,
                       },
                     }}
                   />

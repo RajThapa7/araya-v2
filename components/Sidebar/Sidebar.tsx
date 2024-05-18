@@ -21,9 +21,9 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Image from "next/image";
-import logo from "public/footer-logo.svg";
 import React from "react";
 import { RiCloseFill } from "react-icons/ri";
+import logo from "/public/footer-logo.svg";
 
 export function Sidebar({ closeDrawer }: { closeDrawer: () => void }) {
   const [open, setOpen] = React.useState(0);

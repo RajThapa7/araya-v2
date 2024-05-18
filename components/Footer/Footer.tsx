@@ -1,6 +1,6 @@
 import Image from "next/image";
-import logo from "public/footer-logo.svg";
 import { footerMenuData, socialLinkData } from "./socialLinkData";
+import logo from "/public/footer-logo.svg";
 
 export default function Footer() {
   return (
