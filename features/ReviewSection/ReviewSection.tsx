@@ -15,7 +15,7 @@ export default function ReviewSection() {
 
   const { data, isLoading } = useFetchReviewsOnProduct(
     params.productId as string,
-    user._id || ""
+    user?._id || ""
   );
 
   const router = useRouter();
@@ -65,14 +65,16 @@ export default function ReviewSection() {
           />
         ))}
         {data?.data.length === 0 && (
-          <p className="font-semibold text-body text-center my-6">
+          <p className="font-semibold text-lg text-body text-center my-6">
             No reviews on the product
           </p>
         )}
-        <Pagination
-          {...{ handleCountChange, handlePageClick }}
-          totalPageCount={data?.totalPages || 0}
-        />
+        {data?.data.length !== 0 && (
+          <Pagination
+            {...{ handleCountChange, handlePageClick }}
+            totalPageCount={data?.totalPages || 0}
+          />
+        )}
       </div>
     </div>
   );

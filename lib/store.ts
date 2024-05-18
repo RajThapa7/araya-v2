@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import modalReducer from "./modal/modalSlice";
 import wishlistReducer from "./wishlist/wishlistSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       wishlist: wishlistReducer,
+      modal: modalReducer,
     },
   });
 };

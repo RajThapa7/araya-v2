@@ -6,6 +6,8 @@ import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import useRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import { montserrat } from "@/app/fonts";
 import ProductModal from "@/features/ProductModal/ProductModal";
+import { useAppDispatch } from "@/lib/hooks";
+import { openModal } from "@/lib/modal/modalSlice";
 import arayaLogo from "@/public/footer-logo.svg";
 import { IProductCard } from "@/types";
 import classNames from "@/utils/classNames";
@@ -51,6 +53,8 @@ export default function ProductCard({
     setImageSrc(arayaLogo);
   };
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
 
   const handleParentClick = (e: SyntheticEvent, id: string) => {
     router.push(`/store/product/${id}`);
@@ -104,7 +108,11 @@ export default function ProductCard({
   };
 
   const handleQuickViewClick = (e: SyntheticEvent) => {
-    setOpen(true);
+    dispatch(
+      openModal({
+        content: <ProductModal productId={id} />,
+      })
+    );
     e.stopPropagation();
   };
 
@@ -135,7 +143,7 @@ export default function ProductCard({
 
   return (
     <>
-      <ProductModal productId={id} {...{ open, setOpen }} />
+      {/* <ProductModal productId={id} {...{ open, setOpen }} /> */}
       <div
         onClick={(e) => handleParentClick(e, id)}
         className={classNames(

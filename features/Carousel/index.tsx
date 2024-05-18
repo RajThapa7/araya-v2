@@ -5,12 +5,11 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import one from "/public/1.jpeg";
+import one from "/public/1.png";
 import two from "/public/2.png";
 import three from "/public/3.png";
 import four from "/public/4.png";
 import five from "/public/5.png";
-import six from "/public/6.png";
 
 const data = [
   {
@@ -26,22 +25,17 @@ const data = [
   {
     _id: 2,
     url: three,
-    title: "Stitches",
+    title: "Our Books",
   },
   {
     _id: 3,
     url: four,
-    title: "Hardcover Books",
+    title: "Stories",
   },
   {
     _id: 4,
     url: five,
-    title: "Leather Books",
-  },
-  {
-    _id: 5,
-    url: six,
-    title: "Pocket Notebook",
+    title: "Tradition",
   },
 ];
 

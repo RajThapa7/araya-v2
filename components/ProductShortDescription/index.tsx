@@ -33,7 +33,6 @@ export default function ProductShortDescription({
 
   const productDescription = getDescriptionFromArray(data.productHighlight);
 
-  const discountPercentage = Math.round(((price - reducedPrice) * 100) / price);
   const [quantity, setQuantity] = useState(1);
 
   const [clicked, setClicked] = useState(false);
@@ -52,7 +51,6 @@ export default function ProductShortDescription({
   const router = useRouter();
 
   const handleWishlistRemove = (e: SyntheticEvent) => {
-    e.stopPropagation();
     removeWishlistMutation.mutate(
       { userId: user._id, productId: data._id },
       {
@@ -68,10 +66,10 @@ export default function ProductShortDescription({
         onError: (error) => ErrorHandler(error),
       }
     );
+    e.stopPropagation();
   };
 
   const handleWishlistClick = (e: SyntheticEvent) => {
-    e.stopPropagation();
     if (!isLoggedIn) {
       return toast.warn("log in to add item to wishlist", {
         onClick: () => {
@@ -89,16 +87,15 @@ export default function ProductShortDescription({
               router.push("/store/wishlist");
             },
           });
-          // dispatch(addWishlistItem({ wishlist: data.list.products }));
           setClicked(true);
         },
         onError: (error) => ErrorHandler(error),
       }
     );
+    e.stopPropagation();
   };
 
   const handleCartPress = (e: SyntheticEvent) => {
-    e.stopPropagation();
     if (!isLoggedIn) {
       return toast.warn("log in to add item to cart", {
         onClick: () => {
@@ -120,6 +117,7 @@ export default function ProductShortDescription({
         onError: (error) => ErrorHandler(error),
       }
     );
+    e.stopPropagation();
   };
   return (
     <div className={classNames(className, "")}>

@@ -25,7 +25,6 @@ const Layout = ({ children }: PropsWithChildren) => {
           </QueryProvider>
         </ProgressBarProvider>
         <ToastContainer
-          className="z-[9999]"
           theme="colored"
           hideProgressBar
           autoClose={2000}

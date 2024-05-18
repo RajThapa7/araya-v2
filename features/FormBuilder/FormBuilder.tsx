@@ -115,6 +115,11 @@ const FormBuilder = ({
                   name={item.name}
                   render={({ field: { onChange, value } }) => (
                     <MyRating
+                      value={
+                        typeof value === "string"
+                          ? parseInt(value || "")
+                          : value || 0
+                      }
                       onChange={onChange}
                       readonly={false}
                       error={errors[item.name]}

@@ -5,6 +5,8 @@ import useAddProductToWishlist from "@/api/hooks/wishlist/useAddProduct";
 import useFetchWishlist from "@/api/hooks/wishlist/useFetchWishlist";
 import useFetchRemoveProductFromWishlist from "@/api/hooks/wishlist/useRemoveProductFromWishlist";
 import ProductModal from "@/features/ProductModal/ProductModal";
+import { useAppDispatch } from "@/lib/hooks";
+import { openModal } from "@/lib/modal/modalSlice";
 import arayaLogo from "@/public/footer-logo.svg";
 import type { IProductCard } from "@/types";
 import classNames from "@/utils/classNames";
@@ -102,8 +104,15 @@ export default function SmallProductCard({
     );
   };
 
+  const dispatch = useAppDispatch();
+
   const handleQuickViewClick = (e: SyntheticEvent) => {
-    setOpen(true);
+    dispatch(
+      openModal({
+        content: <ProductModal productId={id} />,
+      })
+    );
+
     e.stopPropagation();
   };
 
@@ -134,7 +143,6 @@ export default function SmallProductCard({
 
   return (
     <>
-      <ProductModal productId={id} {...{ open, setOpen }} />
       <div
         onClick={handleParentClick}
         className={classNames(
