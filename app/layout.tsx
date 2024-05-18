@@ -29,6 +29,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           hideProgressBar
           autoClose={2000}
           position="bottom-right"
+          className={"z-[99999]"}
         />
       </body>
     </html>

@@ -9,22 +9,24 @@ export default function ProductModal({ productId }: { productId: string }) {
 
   return (
     <div className="relative flex flex-col gap-16">
-      <div className="flex flex-col justify-center gap-x-10 gap-y-10 md:flex-row">
-        <div className="w-full md:w-[50%] lg:w-[40%]">
-          <ImageSlider
-            data={data?.img || []}
-            className="max-w-md"
-            isMagnified={false}
-          />
+      {isLoading && <ProductDescriptionSkeletal />}
+      {!isLoading && (
+        <div className="flex flex-col justify-center gap-x-10 gap-y-10 md:flex-row">
+          <div className="w-full md:w-[50%] lg:w-[40%]">
+            <ImageSlider
+              data={data?.img || []}
+              className="max-w-md"
+              isMagnified={false}
+            />
+          </div>
+          {data && (
+            <ProductShortDescription
+              data={data}
+              className="w-full md:w-[50%] lg:w-[60%]"
+            />
+          )}
         </div>
-        {isLoading && <ProductDescriptionSkeletal />}
-        {data && (
-          <ProductShortDescription
-            data={data}
-            className="w-full md:w-[50%] lg:w-[60%]"
-          />
-        )}
-      </div>
+      )}
     </div>
   );
 }
