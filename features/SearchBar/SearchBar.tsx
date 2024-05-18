@@ -14,7 +14,6 @@ import {
 } from "@material-tailwind/react";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
-import logo from "public/footer-logo.svg";
 import { useEffect, useState } from "react";
 import { IoIosLogOut } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
@@ -25,6 +24,7 @@ import { NotificationsMenu } from "../../components/NotificationMenu/Notificatio
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import LargeScreensSearchTab from "./LargeScreenSearchTab";
 import { SmallScreenSearchTab } from "./SmallScreenSearchTab";
+import logo from "/public/footer-logo.svg";
 
 export default function SearchBar() {
   const [open, setOpen] = useState(false);
