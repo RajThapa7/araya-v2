@@ -2,6 +2,7 @@
 import AuthProvider from "@/Providers/AuthProvider";
 import QueryProvider from "@/Providers/QueryProvider";
 import StoreProvider from "@/Providers/StoreProvider";
+import { ScrollUp } from "@/components";
 import ProgressBarProvider from "@/components/Provider/ProgressBarProvider";
 import { PropsWithChildren } from "react";
 import { ToastContainer } from "react-toastify";
@@ -21,6 +22,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           <QueryProvider>
             <StoreProvider>
               <AuthProvider>{children}</AuthProvider>
+              <ScrollUp />
             </StoreProvider>
           </QueryProvider>
         </ProgressBarProvider>

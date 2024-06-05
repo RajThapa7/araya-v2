@@ -1,5 +1,4 @@
 "use client";
-import { ScrollUp } from "@/components";
 import Footer from "@/components/Footer/Footer";
 import { Modal } from "@/components/Modal/Modal";
 import { MyNavbar } from "@/components/Navbar";
@@ -16,7 +15,6 @@ export default function Layout({ children }: PropsWithChildren) {
         <div className="flex-grow mt-[75px] lg:mt-[130px]">{children}</div>
         <Footer />
       </div>
-      <ScrollUp />
     </>
   );
 }
