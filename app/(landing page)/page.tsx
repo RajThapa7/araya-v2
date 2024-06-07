@@ -1,8 +1,8 @@
+import LandingFooter from "@/components/LandingFooter";
 import {
   CTA,
   Carousel,
   FeaturedSection,
-  Footer,
   HeroSection,
   SecondFeaturedSection,
   Testimonials,
@@ -17,7 +17,7 @@ export default function Home() {
       <SecondFeaturedSection />
       <CTA />
       <Testimonials />
-      <Footer />
+      <LandingFooter />
     </div>
   );
 }

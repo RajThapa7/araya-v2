@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaStore } from "react-icons/fa";
 import { MdHome } from "react-icons/md";
-import { socialMediaData } from "../Footer/data";
+import { socialMediaData } from "../LandingFooter/data";
 
 const navLinks = [
   {
@@ -84,7 +84,7 @@ const item = {
   hidden: { opacity: 0, x: 100 },
 };
 
-export default function Navbar() {
+export default function LandingNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const router = useRouter();

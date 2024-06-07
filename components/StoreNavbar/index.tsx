@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export function MyNavbar() {
+export function StoreNavbar() {
   const [isNavbarVisible, setIsNavbarVisible] = useState<boolean>(true);
 
   const { data } = useFetchCategories();

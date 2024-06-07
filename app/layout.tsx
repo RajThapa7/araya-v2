@@ -1,4 +1,3 @@
-"use client";
 import AuthProvider from "@/Providers/AuthProvider";
 import QueryProvider from "@/Providers/QueryProvider";
 import StoreProvider from "@/Providers/StoreProvider";

@@ -1,3 +1,4 @@
+"use client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next-nprogress-bar";
 import { PropsWithChildren, createContext, useContext } from "react";

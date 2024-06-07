@@ -2,7 +2,7 @@ import Image from "next/image";
 import { footerMenuData, socialLinkData } from "./socialLinkData";
 import logo from "/public/footer-logo.svg";
 
-export default function Footer() {
+export default function StoreFooter() {
   return (
     <footer className="bg-gray-200">
       <div className="mx-auto w-full px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">

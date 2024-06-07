@@ -3,7 +3,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { footerLinks, socialMediaData } from "./data";
 
-export default function Footer() {
+export default function LandingFooter() {
   return (
     <footer className="green-background">
       <div className="mx-auto max-w-screen-xl px-6">

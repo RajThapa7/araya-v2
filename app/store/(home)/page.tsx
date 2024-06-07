@@ -1,5 +1,4 @@
 "use client";
-import { useAuth } from "@/Providers/AuthProvider";
 import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import GridView from "@/components/GridView/GridView";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
@@ -7,9 +6,7 @@ import useScrollToTop from "@/hooks/useScrollToTop";
 
 export default function Page() {
   useScrollToTop();
-  const { token, user } = useAuth();
 
-  const isLoggedIn = !!token;
   const { data: productData, isLoading } = useFetchProductList();
 
   return (
