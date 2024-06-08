@@ -82,7 +82,7 @@ export default function FeaturedSection() {
           </p>
         </MotionDiv>
         <section>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-stretch">
             <MotionDiv
               variants={title}
               className="grid place-content-center rounded pb-6"

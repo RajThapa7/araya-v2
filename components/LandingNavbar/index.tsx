@@ -1,62 +1,12 @@
 "use client";
 import { merriweather } from "@/app/fonts";
-import { HamburgMenu } from "@/components";
-import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next-nprogress-bar";
+import { HamburgMenu, MotionDiv } from "@/components";
+import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaStore } from "react-icons/fa";
-import { MdHome } from "react-icons/md";
 import { socialMediaData } from "../LandingFooter/data";
-
-const navLinks = [
-  {
-    id: 0,
-    title: "Home",
-    link: "/",
-  },
-  {
-    id: 1,
-    title: "Shop",
-    link: "/store",
-  },
-  {
-    id: 2,
-    title: "About us",
-    link: "/",
-  },
-  {
-    id: 3,
-    title: "Blog",
-    link: "/",
-  },
-  {
-    id: 4,
-    title: "FAQ",
-    link: "/",
-  },
-  {
-    id: 5,
-    title: "Portfolio",
-    link: "/",
-  },
-];
-
-const navItems = [
-  {
-    id: 0,
-    title: "Home",
-    icon: <MdHome className="text-2xl lg:text-xl" />,
-    link: "#",
-  },
-  {
-    id: 1,
-    title: "Shop",
-    icon: <FaStore className="text-xl lg:text-base" />,
-    link: "/store",
-  },
-];
+import { navItems, navLinks } from "./data";
 
 const list = {
   visible: {
@@ -86,8 +36,6 @@ const item = {
 
 export default function LandingNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const router = useRouter();
 
   const html =
     typeof document !== "undefined" && document.querySelector("html");
@@ -129,7 +77,7 @@ export default function LandingNavbar() {
       </div>
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
+          <MotionDiv
             layout
             transition={{ duration: 1 }}
             initial="hidden"
@@ -139,13 +87,13 @@ export default function LandingNavbar() {
             className=" fixed top-0 h-screen left-0 z-40"
           >
             <div className="flex">
-              <motion.div
+              <MotionDiv
                 layout
                 className="flex flex-col mobile-menu-background items-center justify-start w-full h-screen pt-32 lg:items-end"
               >
                 <div className="flex flex-col gap-6">
                   {navLinks.map(({ id, title, link }) => (
-                    <motion.div
+                    <MotionDiv
                       key={id}
                       className={`${merriweather.className} lg:even:hidden lg:pr-20 text-[22px] lg:text-2xl text-primary font-bold`}
                       variants={item}
@@ -157,9 +105,9 @@ export default function LandingNavbar() {
                       >
                         {title}
                       </Link>
-                    </motion.div>
+                    </MotionDiv>
                   ))}
-                  <motion.div
+                  <MotionDiv
                     variants={item}
                     className="flex flex-row gap-6 items-center lg:hidden text-primary"
                   >
@@ -173,17 +121,17 @@ export default function LandingNavbar() {
                         {icon}
                       </a>
                     ))}
-                  </motion.div>{" "}
+                  </MotionDiv>{" "}
                 </div>
-              </motion.div>
-              <motion.div
+              </MotionDiv>
+              <MotionDiv
                 layout
                 className="h-screen hidden lg:flex lg:w-[45%] bg-[#265e46]"
               >
                 <div className="flex flex-col items-center justify-start w-full h-screen pt-32 lg:items-start">
                   <div className="flex flex-col gap-6">
                     {navLinks.map(({ id, title, link }) => (
-                      <motion.div
+                      <MotionDiv
                         key={id}
                         className={`${merriweather.className} text-[22px] lg:pl-20 lg:text-2xl text-primary font-bold odd:hidden`}
                         variants={item}
@@ -195,9 +143,9 @@ export default function LandingNavbar() {
                         >
                           {title}
                         </Link>
-                      </motion.div>
+                      </MotionDiv>
                     ))}
-                    <motion.div
+                    <MotionDiv
                       variants={item}
                       className="flex flex-row gap-6 items-center lg:pl-20 text-primary"
                     >
@@ -211,12 +159,12 @@ export default function LandingNavbar() {
                           {icon}
                         </a>
                       ))}
-                    </motion.div>{" "}
+                    </MotionDiv>{" "}
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </AnimatePresence>
     </nav>

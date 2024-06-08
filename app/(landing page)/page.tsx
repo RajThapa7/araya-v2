@@ -1,23 +1,23 @@
-import LandingFooter from "@/components/LandingFooter";
-import {
-  CTA,
-  Carousel,
-  FeaturedSection,
-  HeroSection,
-  SecondFeaturedSection,
-  Testimonials,
-} from "@/features";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("@/features/HeroSection"));
+const FeaturedSection = dynamic(() => import("@/features/FeaturedSection"));
+const Carousel = dynamic(() => import("@/features/LandingCarousel"));
+const SecondFeaturedSection = dynamic(
+  () => import("@/features/SecondFeaturedSection")
+);
+const ClickToAction = dynamic(() => import("@/features/CTA"));
+const Testimonials = dynamic(() => import("@/features/Testimonials"));
 
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <HeroSection />
+      <Hero />
       <FeaturedSection />
       <Carousel />
       <SecondFeaturedSection />
-      <CTA />
+      <ClickToAction />
       <Testimonials />
-      <LandingFooter />
     </div>
   );
 }

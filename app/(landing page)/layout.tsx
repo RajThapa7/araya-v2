@@ -1,3 +1,4 @@
+import LandingFooter from "@/components/LandingFooter";
 import LandingNavbar from "@/components/LandingNavbar";
 import { Metadata } from "next";
 import "../globals.css";
@@ -19,9 +20,7 @@ export const metadata: Metadata = {
       "Araya Arts | Handmade Custom Notebooks and other art materials",
     url: "https://arayaarts.netlify.app/",
     images: {
-      width: 1100,
-      height: 600,
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRma2ct_w2jBSZrlyT9G5Uv_lXJBvWNnAsIoA&s",
+      url: "https://res.cloudinary.com/raj7/image/upload/v1715830737/araya-arts/fsbdsgty0lcqagmmqyth.png",
     },
   },
 };
@@ -35,6 +34,7 @@ export default function RootLayout({
     <>
       <LandingNavbar />
       {children}
+      <LandingFooter />
     </>
   );
 }

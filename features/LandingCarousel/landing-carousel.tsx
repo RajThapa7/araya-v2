@@ -1,47 +1,13 @@
 "use client";
-import { MotionDiv, MotionP } from "@/components";
-import Image, { StaticImageData } from "next/image";
-import { useState } from "react";
+import { MotionP } from "@/components";
+import { PropsWithChildren, useState } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
-import one from "/public/1.png";
-import two from "/public/2.png";
-import three from "/public/3.png";
-import four from "/public/4.png";
-import five from "/public/5.png";
+import { landingCarouselData } from "./data";
 
-const data = [
-  {
-    _id: 0,
-    url: one,
-    title: "BookBinding",
-  },
-  {
-    _id: 1,
-    url: two,
-    title: "Stitches",
-  },
-  {
-    _id: 2,
-    url: three,
-    title: "Our Books",
-  },
-  {
-    _id: 3,
-    url: four,
-    title: "Stories",
-  },
-  {
-    _id: 4,
-    url: five,
-    title: "Tradition",
-  },
-];
-
-export default function Carousel() {
+export default function LandingCarousel({ children }: PropsWithChildren) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [resetAnimation, setResetAnimation] = useState(false);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -60,31 +26,18 @@ export default function Carousel() {
       setResetAnimation(false);
     },
   };
-
   return (
-    <MotionDiv
-      initial={{ x: "-100%" }}
-      whileInView={{ x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1 }}
-      className="bg-primary pb-4 md:pb-6"
-    >
-      <Slider {...settings}>
-        {data?.map(({ _id, title, url }) => (
-          <>
-            <CarouselCard key={_id} {...{ title, url }} />
-          </>
-        ))}
-      </Slider>
+    <>
+      <Slider {...settings}>{children}</Slider>
       <div className="inline-flex pt-2 md:pt-4 pl-8 gap-4 text-sm text-header">
         <p>
-          {activeIndex + 1}/{data.length}
+          {activeIndex + 1}/{landingCarouselData.length}
         </p>
         <MotionP animate={resetAnimation ? { opacity: 0 } : { opacity: 100 }}>
-          {data[activeIndex].title}
+          {landingCarouselData[activeIndex].title}
         </MotionP>
       </div>
-    </MotionDiv>
+    </>
   );
 }
 
@@ -131,18 +84,5 @@ function LeftArrow(props: any) {
         <path d="M36.9,7.5H0v-1h36.9L35,0c2.6,2.8,6.7,5.4,10,7c-3.3,1.6-7.4,4.2-10,7L36.9,7.5z"></path>
       </svg>
     </button>
-  );
-}
-
-function CarouselCard({ title, url }: { title: string; url: StaticImageData }) {
-  return (
-    <div className="group cursor-pointer transition-all w-full aspect-[16/7] relative">
-      <Image
-        fill
-        src={url}
-        alt={title}
-        className="w-full object-cover h-full"
-      />
-    </div>
   );
 }
