@@ -23,9 +23,6 @@ export default function ProductShortDescription({
   className?: string;
   data: IProductData;
 }) {
-  const reducedPrice = 800;
-  const price = 999;
-
   const getDescriptionFromArray = useCallback((str: string): string[][] => {
     const array = str.split(";").map((item) => item.split(":"));
     return array;

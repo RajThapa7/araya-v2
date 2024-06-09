@@ -1,4 +1,5 @@
 import AuthProvider from "@/Providers/AuthProvider";
+import CookieProvider from "@/Providers/CookieProvider";
 import QueryProvider from "@/Providers/QueryProvider";
 import StoreProvider from "@/Providers/StoreProvider";
 import { ScrollUp } from "@/components";
@@ -18,12 +19,14 @@ const Layout = ({ children }: PropsWithChildren) => {
         }`}
       >
         <ProgressBarProvider>
-          <QueryProvider>
-            <StoreProvider>
-              <AuthProvider>{children}</AuthProvider>
-              <ScrollUp />
-            </StoreProvider>
-          </QueryProvider>
+          <CookieProvider>
+            <QueryProvider>
+              <StoreProvider>
+                <AuthProvider>{children}</AuthProvider>
+                <ScrollUp />
+              </StoreProvider>
+            </QueryProvider>
+          </CookieProvider>
         </ProgressBarProvider>
         <ToastContainer
           theme="colored"

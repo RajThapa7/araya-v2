@@ -1,3 +1,4 @@
+"use client";
 import empty from "@/public/empty.svg";
 import classNames from "@/utils/classNames";
 import { useRouter } from "next-nprogress-bar";

@@ -1,44 +1,38 @@
-"use client";
-import useFetchProductList from "@/api/hooks/products/useFetchProducts";
-import GridView from "@/components/GridView/GridView";
-import ProductSlider from "@/components/ProductSlider/ProductSlider";
-import useScrollToTop from "@/hooks/useScrollToTop";
+import { MyCarousel } from "@/components/Carousel/Carousel";
+import FlashCard from "@/components/FlashCard/FlashCard";
+import StoreFeaturedSection from "@/features/StoreFeaturedSection";
+import GridViewProduct from "@/features/store/(home)/GridViewProduct";
+import RecommendProducts from "@/features/store/(home)/RecommendedProducts";
+import StoreHomeTabBar from "@/features/store/(home)/TabBar";
+import TrendingProducts from "@/features/store/(home)/TrendingProducts";
+import {
+  fetchCarouselData,
+  fetchProductData,
+} from "@/features/store/(home)/server/initialDataFetch";
 
-export default function Page() {
-  useScrollToTop();
-
-  const { data: productData, isLoading } = useFetchProductList();
+export default async function Page() {
+  const data = await fetchProductData();
+  const carouselData = await fetchCarouselData();
 
   return (
-    <div className="flex flex-col gap-10 pt-24 pb-14">
-      <ProductSlider
-        title="Trending Products"
-        cardType="small"
-        breakpoints={{
-          850: {
-            slidesPerView: 2,
-            grid: {
-              fill: "row",
-              rows: 2,
-            },
-          },
-          1400: {
-            slidesPerView: 3,
-            grid: {
-              fill: "row",
-              rows: 2,
-            },
-          },
-        }}
-        data={productData?.data || []}
-        isLoading={isLoading}
-      />
-      <ProductSlider
-        title="Recommend for you"
-        data={productData?.data || []}
-        isLoading={isLoading}
-      />
-      {!isLoading && productData && <GridView data={productData?.data} />}
+    <div className="">
+      <MyCarousel initialData={carouselData} />
+      <div className="mx-auto max-w-7xl px-8 2xl:px-0 flex flex-col gap-12 mt-14">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-4">
+          <FlashCard />
+          <FlashCard />
+          <FlashCard />
+          <FlashCard />
+        </div>
+        <StoreHomeTabBar initialData={data} />
+      </div>
+      <StoreFeaturedSection initialData={data} />
+
+      <div className="flex flex-col gap-10 pt-24 pb-14 mx-auto max-w-7xl px-8 2xl:px-0">
+        <TrendingProducts initialData={data} />
+        <RecommendProducts initialData={data} />
+        <GridViewProduct initialData={data} />
+      </div>
     </div>
   );
 }

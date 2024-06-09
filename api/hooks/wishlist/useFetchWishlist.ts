@@ -4,7 +4,7 @@ import { IProductData } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
 
-interface IWishlist {
+export interface IWishlist {
   products: IProductData[];
   message?: string;
 }
@@ -17,12 +17,13 @@ const getWishlist = async (
   const result = await api.get(route);
   return result.data;
 };
-const useFetchWishlist = (userId: string) => {
+const useFetchWishlist = (userId: string, initialData?: IWishlist) => {
   const api = useCreateApi();
   const result = useQuery({
     queryKey: ["wishlist"],
     queryFn: () => getWishlist(api, userId),
     enabled: !!userId,
+    ...(initialData && { initialData }),
   });
   return result;
 };

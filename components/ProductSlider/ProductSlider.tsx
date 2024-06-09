@@ -28,14 +28,14 @@ const defaultBreakpoint: BreakPoint = {
     slidesPerView: 3,
     grid: {
       fill: "row",
-      rows: 1,
+      rows: 2,
     },
   },
   1160: {
     slidesPerView: 4,
     grid: {
       fill: "row",
-      rows: 1,
+      rows: 2,
     },
   },
 };

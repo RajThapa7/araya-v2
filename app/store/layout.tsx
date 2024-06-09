@@ -1,4 +1,3 @@
-"use client";
 import { Modal } from "@/components/Modal/Modal";
 import StoreFooter from "@/components/StoreFooter/Footer";
 import { StoreNavbar } from "@/components/StoreNavbar";

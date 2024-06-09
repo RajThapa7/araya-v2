@@ -2,10 +2,16 @@
 import useFetchProductList from "@/api/hooks/products/useFetchProducts";
 import { MyTab } from "@/components/MyTab/MyTab";
 import ProductSlider from "@/components/ProductSlider/ProductSlider";
+import { IProductListData } from "@/types";
+
 const Desc = () => <p>hello</p>;
 
-const StoreHomeTabBar = () => {
-  const { data, isLoading } = useFetchProductList();
+const StoreHomeTabBar = ({
+  initialData,
+}: {
+  initialData: IProductListData;
+}) => {
+  const { data, isLoading } = useFetchProductList(initialData);
   const tabData = [
     {
       label: "Top Rated",

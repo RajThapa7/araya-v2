@@ -16,7 +16,7 @@ const getAllProducts = async (
   return result.data;
 };
 
-const useFetchProductList = () => {
+const useFetchProductList = (initialData?: IProductListData) => {
   const api = useCreateApi();
   const searchParams = useSearchParams();
 
@@ -26,6 +26,7 @@ const useFetchProductList = () => {
   const result = useQuery({
     queryKey: ["products", limit, page],
     queryFn: () => getAllProducts(api, limit, page),
+    ...(initialData && { initialData: initialData }),
   });
   return result;
 };

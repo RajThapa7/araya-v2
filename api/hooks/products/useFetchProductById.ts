@@ -13,11 +13,12 @@ const getProductById = async (
   return result.data;
 };
 
-const useFetchProductById = (productId: string) => {
+const useFetchProductById = (productId: string, initialData?: IProductData) => {
   const api = useCreateApi();
   const result = useQuery({
     queryKey: ["products", productId],
     queryFn: () => getProductById(api, productId),
+    ...(initialData && { initialData: initialData }),
   });
   return result;
 };

@@ -1,13 +1,15 @@
 "use client";
-import useFetchCarouselItem from "@/api/hooks/carousel/useFetchCarouselItem";
+import useFetchCarouselItem, {
+  ICarouselResult,
+} from "@/api/hooks/carousel/useFetchCarouselItem";
 import classNames from "@/utils/classNames";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 
-export function MyCarousel() {
-  const { data, isLoading } = useFetchCarouselItem();
+export function MyCarousel({ initialData }: { initialData: ICarouselResult }) {
+  const { data, isLoading } = useFetchCarouselItem(initialData);
   const router = useRouter();
 
   if (isLoading) {
@@ -71,7 +73,6 @@ export function MyCarousel() {
             src={img}
             alt={title}
             className="h-full w-full object-fill"
-            // sizes="(min-width: 480px) 384px, calc(92.5vw - 42px)"
           />
         </div>
       ))}
