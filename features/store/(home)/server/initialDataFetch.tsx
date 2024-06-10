@@ -4,7 +4,10 @@ import { IProductListData } from "@/types";
 import fetcher from "@/utils/fetcher";
 
 const fetchProductData = async () => {
-  const data = await fetcher<IProductListData>(getApiRoute("getAllProducts")());
+  const data = await fetcher<IProductListData>(
+    getApiRoute("getAllProducts")(),
+    { cache: "no-store" }
+  );
   return data;
 };
 

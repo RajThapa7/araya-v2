@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Cart() {
+const Cart = async () => {
   const initialData = await fetchProductData();
   const cookie = cookies();
 
@@ -47,4 +47,6 @@ export default async function Cart() {
       <PicksForYou initialData={initialData} />
     </div>
   );
-}
+};
+
+export default Cart;

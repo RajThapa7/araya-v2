@@ -1,6 +1,6 @@
 "use client";
 import { useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next-nprogress-bar";
+import { useRouter } from "next/navigation";
 import { PropsWithChildren, createContext, useContext } from "react";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
@@ -53,6 +53,12 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         setAuthCookie("adminAccessToken", token);
         setAuthCookie("admin", user);
       }
+      //invalidate the wishlist and cart query on login
+      client.invalidateQueries({
+        predicate: (query) => {
+          return ["wishlist", "cart"].includes(query.queryKey[0] as string);
+        },
+      });
       router.push(route);
     },
     logout: (
@@ -60,15 +66,15 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       message: string,
       isAdminLogout: boolean = false
     ) => {
-      toast.success(message);
-
       removeAuthCookie("adminAccessToken");
       removeAuthCookie("admin");
       removeAuthCookie("accessToken");
       removeAuthCookie("user");
 
+      toast.success(message);
+
       client.clear(); //clear all the queries on logout
-      router.push(route);
+      router.push(route || "/store/login");
     },
     token: authCookie.accessToken,
     adminToken: authCookie.adminAccessToken,

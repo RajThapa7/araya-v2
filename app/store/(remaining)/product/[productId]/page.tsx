@@ -3,6 +3,30 @@ import DescriptionAndReviewTabBar from "@/features/store/product/DescriptionAndR
 import ProductDescriptionWithImageSlider from "@/features/store/product/ProductDescriptionWithImageSlider";
 import RecommendedProductsByProductId from "@/features/store/product/RecommendedProducts";
 import { fetchProductDataById } from "@/features/store/product/server/initialDataFetch";
+import { Metadata } from "next";
+
+type Props = {
+  params: { productId: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const product = await fetchProductDataById(params.productId);
+  return {
+    title: `${product.title} | Araya Arts Store`,
+    description:
+      "Araya Arts | Handmade Custom Notebooks and other art materials",
+    openGraph: {
+      type: "website",
+      siteName: "Araya Arts",
+      description:
+        "Araya Arts | Handmade Custom Notebooks and other art materials",
+      url: `https://arayaarts.netlify.app/store/product/${params.productId}/`,
+      images: {
+        url: product.featured_img,
+      },
+    },
+  };
+}
 
 export default async function ProductPage({
   params,
