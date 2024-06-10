@@ -27,7 +27,7 @@ export default async function Cart() {
         />
 
         <Link
-          href={"/store/login"}
+          href={"/store/login?redirect=/store/cart"}
           className="bg-accent text-white py-3 px-6 rounded-md"
         >
           Login

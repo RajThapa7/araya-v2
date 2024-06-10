@@ -61,13 +61,12 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       isAdminLogout: boolean = false
     ) => {
       toast.success(message);
-      if (!isAdminLogout) {
-        removeAuthCookie("accessToken");
-        removeAuthCookie("user");
-      } else {
-        removeAuthCookie("adminAccessToken");
-        removeAuthCookie("admin");
-      }
+
+      removeAuthCookie("adminAccessToken");
+      removeAuthCookie("admin");
+      removeAuthCookie("accessToken");
+      removeAuthCookie("user");
+
       client.clear(); //clear all the queries on logout
       router.push(route);
     },

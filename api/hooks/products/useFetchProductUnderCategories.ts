@@ -17,7 +17,10 @@ const getProductUnderCategories = async (
   return result.data;
 };
 
-const useFetchProductUnderCategories = (slug: string) => {
+const useFetchProductUnderCategories = (
+  slug: string,
+  initialData?: ICategoryListData
+) => {
   const api = useCreateApi();
   const searchParams = useSearchParams();
 
@@ -26,6 +29,7 @@ const useFetchProductUnderCategories = (slug: string) => {
   const result = useQuery({
     queryKey: ["categories", slug],
     queryFn: () => getProductUnderCategories(api, slug, limit, page),
+    ...(initialData && { initialData }),
   });
   return result;
 };

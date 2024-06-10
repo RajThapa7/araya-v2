@@ -26,7 +26,7 @@ const Category = async () => {
           height={200}
         />
         <Link
-          href={"/store/login"}
+          href={"/store/login?redirect=/store/wishlist"}
           className="bg-accent text-white py-3 px-6 rounded-md"
         >
           Login

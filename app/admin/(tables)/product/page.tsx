@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 
 const Page = () => {
   const router = useRouter();
-  const { data, isLoading } = useFetchProductList(null);
+  const { data, isLoading } = useFetchProductList();
   const mutation = useDeleteProduct();
   const pathname = usePathname();
 

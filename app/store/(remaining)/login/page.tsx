@@ -21,7 +21,11 @@ const defaultValue = {
   password: "",
 };
 
-export default function Login() {
+export default function Login({
+  searchParams,
+}: {
+  searchParams: Record<string, string>;
+}) {
   const router = useRouter();
   const [isPassword, setIsPassword] = useState(true);
   const { login } = useAuth();
@@ -42,7 +46,11 @@ export default function Login() {
     mutation.mutate(data, {
       onSuccess: () => {
         refetch().then((res) => {
-          login(res.data.user, res.data.token, "/store");
+          login(
+            res.data.user,
+            res.data.token,
+            searchParams.redirect || "/store"
+          );
         });
       },
       onError: (error) => {

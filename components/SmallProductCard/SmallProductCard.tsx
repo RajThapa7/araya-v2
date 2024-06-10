@@ -54,7 +54,7 @@ export default function SmallProductCard({
   };
 
   const handleParentClick = (e: SyntheticEvent) => {
-    router.push("/store/product");
+    router.push(`/store/product/${id}`);
     e.stopPropagation();
   };
 

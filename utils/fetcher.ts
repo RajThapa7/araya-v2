@@ -39,29 +39,19 @@ async function fetcher<T>(
   // merge them with the headers of the options
   const headers = mergeHeaders(defaultHeaders, options?.headers || {});
 
-  const response = await fetch(url, { ...options, headers });
-
-  //   error handling
-  if (!response.ok) {
-    // Attempt to parse the error response
-    let errorDetails;
-    try {
-      errorDetails = await response.json();
-      console.log("--- - - - ");
-      console.log("--- - - - ");
-      console.log(errorDetails, "error details");
-      console.log("--- - - - ");
-      console.log("--- - - - ");
-    } catch {
-      errorDetails = { message: response.statusText };
+  try {
+    const response = await fetch(url, { ...options, headers });
+    if (!response.ok) {
+      const error = new Error("An error occurred while fetching the data");
+      error.message = response.statusText;
+      throw error;
     }
-
-    const error = new Error("An error occurred while fetching the data");
-    error.message = errorDetails;
-    throw error;
+    return response.json();
+  } catch (error) {
+    console.error("Fetch error:", error);
+    const err = new Error("An error occurred while fetching the data");
+    throw err;
   }
-
-  return response.json();
 }
 
 export default fetcher;
