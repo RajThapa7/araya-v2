@@ -11,10 +11,10 @@ export default function StoreFeaturedSection({
 }) {
   const { data, isLoading } = useFetchProductList(initialData);
   return (
-    <div className=" bg-gray-200 flex flex-col justify-center py-20">
-      <div className="flex flex-col 2xl:flex-row max-w-7xl px-0 mx-auto justify-between">
+    <div className="justify-center bg-gray-200 py-12 md:py-20">
+      <div className="mx-auto flex max-w-7xl flex-col justify-between px-0 2xl:flex-row">
         <div className="flex flex-1">
-          <div className="relative w-full aspect-video ">
+          <div className="relative aspect-video w-full">
             <Image
               alt="featured-product-image"
               quality={100}
@@ -27,9 +27,9 @@ export default function StoreFeaturedSection({
             />
           </div>
         </div>
-        <div className="w-full 2xl:w-1/2">
+        <div className="w-full md:px-10 2xl:w-1/2 2xl:px-0">
           <ProductSlider
-            title="Television"
+            title="Featured Products"
             breakpoints={{
               700: {
                 slidesPerView: 2,

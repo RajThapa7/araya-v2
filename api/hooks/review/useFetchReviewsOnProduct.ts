@@ -46,7 +46,7 @@ const getAllReviewsOnProduct = async (
 const useFetchReviewsOnProduct = (productId: string, userId: string) => {
   const api = useCreateApi();
   const searchParams = useSearchParams();
-  const limit = searchParams.get("limit") || "10";
+  const limit = searchParams.get("limit") || "5";
   const page = searchParams.get("page") || "1";
   const result = useQuery({
     queryKey: ["review", productId, userId, limit, page],

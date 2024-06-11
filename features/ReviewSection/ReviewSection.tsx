@@ -5,6 +5,7 @@ import OverallRating from "@/components/OverallRating/OverallRating";
 import { Pagination } from "@/components/Pagination/Pagination";
 import ReviewForm from "@/components/ReviewForm/ReviewForm";
 import ReviewItem from "@/components/ReviewItem/ReviewItem";
+import NoData from "@/public/no-data";
 import { useRouter } from "next-nprogress-bar";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -43,7 +44,7 @@ export default function ReviewSection() {
   };
 
   return (
-    <div className="flex flex-col gap-16">
+    <div className="flex flex-col gap-16 bg-primary p-10 rounded-md">
       <div className="flex flex-col justify-between gap-12 gap-x-8 lg:flex-row">
         <OverallRating
           averageRating={data?.average_rating || 0}
@@ -65,9 +66,12 @@ export default function ReviewSection() {
           />
         ))}
         {data?.data.length === 0 && (
-          <p className="font-semibold text-lg text-body text-center my-6">
-            No reviews on the product
-          </p>
+          <div className="flex mt-6 flex-col items-center justify-center">
+            <NoData width={170} />
+            <p className="font-semibold text-xl text-body text-center my-6">
+              No reviews on the product
+            </p>
+          </div>
         )}
         {data?.data.length !== 0 && (
           <Pagination

@@ -16,22 +16,6 @@ const RecommendedProductsByProductId = ({
         data={data?.data || []}
         isLoading={isLoading}
         spaceBetween={10}
-        breakpoints={{
-          540: {
-            slidesPerView: 3,
-            grid: {
-              fill: "row",
-              rows: 1,
-            },
-          },
-          840: {
-            slidesPerView: 4,
-            grid: {
-              fill: "row",
-              rows: 1,
-            },
-          },
-        }}
       />
     </div>
   );

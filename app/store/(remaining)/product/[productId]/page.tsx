@@ -41,7 +41,7 @@ export default async function ProductPage({
   const initialData = await fetchProductData();
 
   return (
-    <div className="relative flex flex-col gap-14">
+    <div className="relative flex flex-col gap-10">
       <ProductDescriptionWithImageSlider
         productId={productId}
         initialData={initialProductData}

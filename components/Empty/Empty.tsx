@@ -11,14 +11,21 @@ const Empty = ({ title, className }: { title: string; className?: string }) => {
     <div
       className={classNames(
         className,
-        `flex flex-col items-center justify-start gap-10`
+        `flex flex-col items-center justify-start gap-10`,
       )}
     >
-      <Image src={empty} alt="empty" width={400} height={400} />
-      <div className="flex flex-col gap-4 items-center">
-        <p className="text-body font-semibold text-3xl text-center">{title}</p>
+      <div className="relative aspect-video w-72 md:w-96">
+        <Image
+          src={empty}
+          alt="empty"
+          fill
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <div className="flex flex-col items-center gap-6">
+        <p className="text-xl font-semibold text-header md:text-2xl">{title}</p>
         <MyButton
-          className="!py-4 !w-fit"
+          className="!w-fit !py-4"
           onClick={() => router.push("/store")}
         >
           Continue shopping

@@ -60,7 +60,7 @@ export default function ReviewForm() {
 
   const mutation = useAddReviewOnProduct(
     params.productId as string,
-    user?._id || ""
+    user?._id || "",
   );
 
   const router = useRouter();
@@ -80,24 +80,24 @@ export default function ReviewForm() {
       {
         onSuccess: (data) => {
           toast.success(data.message);
+          reset();
         },
         onError: (error) => {
           ErrorHandler(error);
-          console.log(error, "error ");
+          reset();
         },
-        onSettled: () => reset(),
-      }
+      },
     );
   };
 
   if (!isLoggedIn) {
     return (
-      <div className="flex flex-col items-center justify-center gap-6 flex-1 max-w-lg">
-        <p className="text-lg text-center text-body font-semibold">
+      <div className="flex max-w-lg flex-1 flex-col items-center justify-center gap-6">
+        <p className="text-center text-lg font-semibold text-body">
           Login to add review on product
         </p>
         <MyButton
-          className="!py-4 !px-8"
+          className="!px-8 !py-4"
           onClick={() => router.push(routes.loginRoute)}
         >
           Login
@@ -107,8 +107,8 @@ export default function ReviewForm() {
   }
 
   return (
-    <div className="flex flex-col gap-8 flex-1 max-w-lg">
-      <p className="text-gray-900 font-semibold text-lg">Add a Review</p>
+    <div className="flex max-w-lg flex-1 flex-col gap-8">
+      <p className="text-lg font-semibold text-gray-900">Add a Review</p>
       <FormBuilder
         buttonLabel="Add Review"
         {...{ errors, formData, handleSubmit, onSubmit, register, control }}

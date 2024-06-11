@@ -15,19 +15,22 @@ const Category = async () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="flex flex-col gap-8 items-center">
-        <p className="font-semibold text-header text-2xl">
+      <div className="flex flex-col items-center gap-8">
+        <p className="text-xl font-semibold text-header md:text-2xl">
           Login to access your wishlist
         </p>
-        <Image
-          src={require("@/public/login.svg")}
-          alt="login"
-          width={400}
-          height={200}
-        />
+        <div className="relative aspect-video w-72 md:w-96">
+          <Image
+            src={require("@/public/login.svg")}
+            alt="login"
+            fill
+            className="h-full w-full object-contain"
+          />
+        </div>
+
         <Link
-          href={"/store/login?redirect=/store/wishlist"}
-          className="bg-accent text-white py-3 px-6 rounded-md"
+          href={"/store/login?redirect=/store/cart"}
+          className="rounded-md bg-accent px-6 py-3 text-white"
         >
           Login
         </Link>

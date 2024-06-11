@@ -64,7 +64,7 @@ export default function ProductSlider({
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <div className="">
+    <div className="px-4 md:px-0">
       <div className="relative">
         <div className={`${isCategoryTitle ? "visible" : "invisible"}`}>
           <CategoryTitle title={title} />
@@ -142,7 +142,7 @@ export default function ProductSlider({
                   />
                 ) : (
                   <SmallProductCard
-                    className="sm:h-[200px]"
+                    className="min-h-[220px]"
                     id={_id}
                     title={productTitle}
                     img={featured_img}
@@ -152,7 +152,7 @@ export default function ProductSlider({
                   />
                 )}
               </SwiperSlide>
-            )
+            ),
           )}
       </Swiper>
     </div>

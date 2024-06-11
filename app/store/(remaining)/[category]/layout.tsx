@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Layout = ({ children }: PropsWithChildren) => {
-  return <>{children}</>;
+  return <div className="px-4 pt-12 md:px-0 md:pt-0">{children}</div>;
 };
 
 export default Layout;

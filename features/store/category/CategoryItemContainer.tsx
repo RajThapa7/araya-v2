@@ -20,14 +20,14 @@ const CategoryItemContainer = ({
 
   const { data, isLoading } = useFetchProductUnderCategories(
     category,
-    initialData
+    initialData,
   );
 
   const { handleCountChange, handlePageClick } = usePaginate();
   return (
     <div>
-      <div className="mb-8 flex flex-row justify-between items-center">
-        <p className="text-2xl text-body font-semibold capitalize">
+      <div className="mb-8 flex flex-row items-center justify-between">
+        <p className="text-xl font-semibold capitalize text-body md:text-2xl">
           {category}
         </p>
         <div>
@@ -45,7 +45,7 @@ const CategoryItemContainer = ({
       </div>
 
       {/* product lists */}
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {!isLoading &&
           data?.data.map(
             (
@@ -59,7 +59,7 @@ const CategoryItemContainer = ({
                 tag,
                 _id,
               },
-              index
+              index,
             ) => (
               <ProductCard
                 {...{ price, reducedPrice, tag, title }}
@@ -69,7 +69,7 @@ const CategoryItemContainer = ({
                 ratingCount={ratingCount}
                 key={index}
               />
-            )
+            ),
           )}
         {isLoading && <CardSkeletal />}
       </div>

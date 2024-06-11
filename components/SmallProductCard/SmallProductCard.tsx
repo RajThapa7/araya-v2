@@ -74,7 +74,7 @@ export default function SmallProductCard({
           setClicked(false);
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -100,7 +100,7 @@ export default function SmallProductCard({
           setClicked(true);
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -110,7 +110,7 @@ export default function SmallProductCard({
     dispatch(
       openModal({
         content: <ProductModal productId={id} />,
-      })
+      }),
     );
 
     e.stopPropagation();
@@ -137,7 +137,7 @@ export default function SmallProductCard({
           });
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -147,14 +147,14 @@ export default function SmallProductCard({
         onClick={handleParentClick}
         className={classNames(
           className,
-          "transition-smooth group relative flex w-full max-w-xl flex-row overflow-hidden bg-white outline outline-1 outline-gray-100 hover:outline-accent-dark cursor-pointer"
+          "transition-smooth group relative flex h-full w-full max-w-xl cursor-pointer flex-row overflow-hidden bg-white outline outline-1 outline-gray-100 hover:outline-accent-dark",
         )}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
         {/* fav buttons */}
         <button
-          className={` bg-red-50 absolute end-4 top-4 group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 z-50 active:bg-green-300 ${
+          className={`group/heart absolute end-4 top-4 z-50 rounded-full bg-red-50 p-1.5 text-gray-900 transition hover:text-gray-900/75 active:bg-green-300 ${
             isHover || isInWishlist ? "opacity-100" : "opacity-0"
           }`}
           onClick={(e) => {
@@ -167,14 +167,14 @@ export default function SmallProductCard({
                 ? clicked
                   ? "animate-grow-wiggle text-red-300"
                   : "text-red-300"
-                : "text-white animate-shrink-wiggle"
+                : "animate-shrink-wiggle text-white"
             }`}
           />
         </button>
         <button
           className={`bg-gray-50 ${
             isHover ? "opacity-100" : "opacity-0"
-          } absolute end-4 top-4 z-[99] group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
+          } group/heart absolute end-4 top-4 z-[99] rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
             isInWishlist ? "hidden" : "flex"
           }`}
           onClick={(e) => handleWishlistClick(e, id)}
@@ -188,7 +188,7 @@ export default function SmallProductCard({
         {/* fav buttons */}
         {/* quick view button */}
         <button
-          className={`absolute end-4 top-12 z-10 group/eye w-fit h-fit rounded-full bg-gray-50 p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
+          className={`group/eye absolute end-4 top-12 z-10 h-fit w-fit rounded-full bg-gray-50 p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
             isHover ? "opacity-100" : "opacity-0"
           }`}
           onClick={handleQuickViewClick}
@@ -198,11 +198,11 @@ export default function SmallProductCard({
         {/* quick view button */}
 
         <div className="flex w-1/2 flex-1">
-          <div className="relative aspect-video w-full">
+          <div className="relative aspect-square w-full">
             <Image
               src={imageSrc}
               onError={handleError}
-              alt="profile"
+              alt="product image"
               fill
               className="object-contain transition duration-500 group-hover:scale-105"
               sizes="(min-width: 480px) 384px, calc(92.5vw - 42px)"
@@ -218,11 +218,11 @@ export default function SmallProductCard({
               </span>
             )}
 
-            <h3 className="leading-tight transition-smooth mt-4 text-lg font-semibold text-header group-hover:text-accent-dark text-left">
+            <h3 className="transition-smooth mt-4 text-left text-lg font-semibold leading-tight text-header group-hover:text-accent-dark">
               {title}
             </h3>
             {ratingCount !== 0 && (
-              <div className=" inline-flex items-center gap-2 mt-1">
+              <div className="mt-1 inline-flex items-center gap-2">
                 <IoIosStar size={14} className="text-yellow-700" />
                 <p className="text-xs text-gray-600">
                   {averageRating.toFixed(2)}/5 ({ratingCount})
@@ -246,13 +246,13 @@ export default function SmallProductCard({
                 </div>
               </>
             ) : (
-              <p className=" mt-1.5 text-left text-lg text-gray-700">
+              <p className="mt-1.5 text-left text-lg text-gray-700">
                 Rs.{price}
               </p>
             )}
           </div>
         </div>
-        <div className="absolute bottom-8 right-4 transition-smooth h-fit w-fit rounded-full bg-gray-200 p-2 group-hover:bg-accent">
+        <div className="transition-smooth absolute bottom-8 right-4 h-fit w-fit rounded-full bg-gray-200 p-2 group-hover:bg-accent">
           <MyTooltip content="Add to cart">
             <ShoppingCartIcon
               width={20}

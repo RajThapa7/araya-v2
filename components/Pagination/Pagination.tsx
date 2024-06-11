@@ -18,18 +18,18 @@ export function Pagination({
   const page = searchParams.get("page") as string;
 
   return (
-    <div className="flex flex-row gap-10 mt-12 items-center justify-center">
+    <div className="mt-12 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-10">
       <ReactPaginate
         breakLabel="..."
-        nextLabel={<ArrowRightIcon strokeWidth={2} className="h-4 w-4 ml-4" />}
+        nextLabel={<ArrowRightIcon strokeWidth={2} className="ml-4 h-4 w-4" />}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={totalPageCount}
         previousLabel={
-          <ArrowLeftIcon strokeWidth={2} className="h-4 w-4 mr-4" />
+          <ArrowLeftIcon strokeWidth={2} className="mr-4 h-4 w-4" />
         }
         renderOnZeroPageCount={null}
-        className="flex flex-row w-fit items-center"
+        className="flex w-fit flex-row items-center"
         pageClassName=" font-semibold text-body"
         pageLinkClassName="!py-2 !px-4 hover:bg-gray-200"
         activeLinkClassName="bg-accent text-primary"
@@ -44,7 +44,7 @@ export function Pagination({
           name="resultPerPage"
           id=""
           defaultValue={parseInt(limit)}
-          className="p-2 rounded-md text-body"
+          className="rounded-md p-2 text-body"
           onChange={handleCountChange}
         >
           <option value={10}>10</option>

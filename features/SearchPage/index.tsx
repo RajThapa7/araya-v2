@@ -16,7 +16,7 @@ const SearchPage = () => {
 
   return (
     <div>
-      <div className="mb-8 flex flex-row justify-between items-center">
+      <div className="mb-8 flex flex-row items-center justify-between">
         <p>
           {data?.count} items found for{" "}
           <span className="text-accent-dark">{searchTerm}</span>
@@ -38,7 +38,7 @@ const SearchPage = () => {
       {isLoading && <CardSkeletal />}
 
       {/* product lists */}
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {!isLoading &&
           data?.data.map(
             ({
@@ -59,7 +59,7 @@ const SearchPage = () => {
                 img={featured_img}
                 key={_id}
               />
-            )
+            ),
           )}
       </div>
     </div>

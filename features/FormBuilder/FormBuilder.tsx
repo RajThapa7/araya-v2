@@ -38,7 +38,7 @@ const FormBuilder = ({
 }: IFormBuilderProps) => {
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex gap-6 flex-col">
+      <div className="flex flex-col gap-6">
         {formData.map((item) => (
           <>
             {item.type === undefined && (
@@ -74,7 +74,7 @@ const FormBuilder = ({
                       color="blue"
                       variant="outlined"
                       label={item.placeholder}
-                      className={` bg-gray-100 ${montserrat.className}`}
+                      className={`bg-gray-100 ${montserrat.className}`}
                       error={!!errors[item.name]}
                       onChange={onChange}
                       onBlur={onBlur}
@@ -150,7 +150,7 @@ const FormBuilder = ({
           <MyCheckbox onChange={() => {}} checked={false} />
         </div>
       )}
-      <MyButton className="!p-4 mt-8" type="submit">
+      <MyButton className="mt-8 !p-4" type="submit">
         {buttonLabel || "Add Product"}
       </MyButton>
     </form>

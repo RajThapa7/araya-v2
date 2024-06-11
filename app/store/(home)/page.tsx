@@ -22,7 +22,7 @@ export default async function Page() {
   return (
     <div className="">
       <MyCarousel initialData={carouselData} />
-      <div className="mx-auto max-w-7xl px-8 2xl:px-0 flex flex-col gap-12 mt-14">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 pb-14 pt-12 md:px-8 lg:pt-24 2xl:px-0">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-4">
           <FlashCard />
           <FlashCard />
@@ -33,7 +33,7 @@ export default async function Page() {
       </div>
       <StoreFeaturedSection initialData={data} />
 
-      <div className="flex flex-col gap-10 pt-24 pb-14 mx-auto max-w-7xl px-8 2xl:px-0">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 pb-14 pt-24 md:px-8 2xl:px-0">
         <TrendingProducts initialData={data} />
         <RecommendProducts initialData={data} />
         <GridViewProduct initialData={data} />

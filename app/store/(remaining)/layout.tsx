@@ -7,5 +7,7 @@ export const metadata = metaGenerator({
 });
 
 export default function Layout({ children }: PropsWithChildren) {
-  return <div className="mx-auto mb-12 mt-14 max-w-7xl px-8">{children}</div>;
+  return (
+    <div className="mx-auto mb-12 max-w-7xl md:mt-14 md:px-8">{children}</div>
+  );
 }

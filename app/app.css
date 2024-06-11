@@ -87,7 +87,7 @@ html {
 }
 
 .mySwiper .swiper-wrapper {
-  @apply justify-start;
+  @apply justify-center xl:justify-start;
 }
 
 /* skeletal css */

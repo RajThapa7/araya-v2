@@ -24,7 +24,6 @@ const addReviewOnProduct = async (data: IPostData, api: AxiosInstance) => {
   data.image && data.image.forEach((item) => formData.append("image", item));
 
   const result = await api.post(route, formData);
-  console.log(result, "result");
   return result.data;
 };
 
