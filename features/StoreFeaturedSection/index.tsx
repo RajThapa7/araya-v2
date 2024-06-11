@@ -11,8 +11,8 @@ export default function StoreFeaturedSection({
 }) {
   const { data, isLoading } = useFetchProductList(initialData);
   return (
-    <div className=" bg-gray-200 px-8 flex flex-col justify-center py-20">
-      <div className="flex flex-col 2xl:flex-row">
+    <div className=" bg-gray-200 flex flex-col justify-center py-20">
+      <div className="flex flex-col 2xl:flex-row max-w-7xl px-0 mx-auto justify-between">
         <div className="flex flex-1">
           <div className="relative w-full aspect-video ">
             <Image

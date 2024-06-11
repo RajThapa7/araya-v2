@@ -1,3 +1,4 @@
+import { metaGenerator } from "@/features/metagenerator/metagenerator";
 import { fetchProductData } from "@/features/store/(home)/server/initialDataFetch";
 import DescriptionAndReviewTabBar from "@/features/store/product/DescriptionAndReviewTabBar";
 import ProductDescriptionWithImageSlider from "@/features/store/product/ProductDescriptionWithImageSlider";
@@ -12,19 +13,19 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await fetchProductDataById(params.productId);
   return {
-    title: `${product.title} | Araya Arts Store`,
-    description:
-      "Araya Arts | Handmade Custom Notebooks and other art materials",
-    openGraph: {
-      type: "website",
-      siteName: "Araya Arts",
-      description:
-        "Araya Arts | Handmade Custom Notebooks and other art materials",
-      url: `https://arayaarts.netlify.app/store/product/${params.productId}/`,
-      images: {
-        url: product.featured_img,
+    ...metaGenerator({
+      title: `${product.title} | Araya Arts Store`,
+      openGraph: {
+        type: "website",
+        siteName: "Araya Arts",
+        description:
+          "Araya Arts | Handmade Custom Notebooks and other art materials",
+        url: `https://arayaarts.netlify.app/store/product/${params.productId}/`,
+        images: {
+          url: product.featured_img,
+        },
       },
-    },
+    }),
   };
 }
 

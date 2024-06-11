@@ -1,6 +1,7 @@
 import { MyCarousel } from "@/components/Carousel/Carousel";
 import FlashCard from "@/components/FlashCard/FlashCard";
 import StoreFeaturedSection from "@/features/StoreFeaturedSection";
+import { metaGenerator } from "@/features/metagenerator/metagenerator";
 import GridViewProduct from "@/features/store/(home)/GridViewProduct";
 import RecommendProducts from "@/features/store/(home)/RecommendedProducts";
 import StoreHomeTabBar from "@/features/store/(home)/TabBar";
@@ -9,29 +10,10 @@ import {
   fetchCarouselData,
   fetchProductData,
 } from "@/features/store/(home)/server/initialDataFetch";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata = metaGenerator({
   title: "Araya Arts | Store",
-  description: "Araya Arts | Handmade Custom Notebooks and other art materials",
-  keywords: [
-    "handmade diary",
-    "handmade notes",
-    "handmade",
-    "handmade arts",
-    "arts",
-  ],
-  openGraph: {
-    type: "website",
-    siteName: "Araya Arts",
-    description:
-      "Araya Arts | Handmade Custom Notebooks and other art materials",
-    url: "https://arayaarts.netlify.app/",
-    images: {
-      url: "https://res.cloudinary.com/raj7/image/upload/v1715830737/araya-arts/fsbdsgty0lcqagmmqyth.png",
-    },
-  },
-};
+});
 
 export default async function Page() {
   const data = await fetchProductData();

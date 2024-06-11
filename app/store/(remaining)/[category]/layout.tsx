@@ -1,3 +1,4 @@
+import { metaGenerator } from "@/features/metagenerator/metagenerator";
 import { Metadata } from "next";
 import { PropsWithChildren } from "react";
 
@@ -7,9 +8,9 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
-    title: `${params.category} | Araya Arts Store`,
-    description:
-      "Araya Arts | Handmade Custom Notebooks and other art materials",
+    ...metaGenerator({
+      title: `${params.category} | Araya Arts Store`,
+    }),
   };
 }
 

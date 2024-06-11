@@ -53,7 +53,7 @@ export function MyTab({
       <TabsBody
         className={classNames(
           className,
-          `p-0 ${isProductDescription && "md:p-8 mt-[1px]"} rounded-lg`
+          `p-0 ${isProductDescription && "md:!p-0 mt-[1px]"} rounded-lg`
         )}
       >
         {data.map(({ value, desc }) => (

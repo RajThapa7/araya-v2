@@ -7,9 +7,6 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Cart() {
-  const reducedPrice = 100;
-  const price = 200;
-  const discountPercentage = 10;
   const router = useRouter();
 
   const mutation = useInititateKhaltiPayment();

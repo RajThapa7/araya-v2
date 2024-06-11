@@ -1,4 +1,5 @@
 import { SearchPage } from "@/features";
+import { metaGenerator } from "@/features/metagenerator/metagenerator";
 import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
@@ -11,9 +12,9 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   return {
-    title: `${searchParams?.query} | Araya Arts Store`,
-    description:
-      "Araya Arts | Handmade Custom Notebooks and other art materials",
+    ...metaGenerator({
+      title: `${searchParams?.query} | Araya Arts Store`,
+    }),
   };
 }
 const Search = () => {
