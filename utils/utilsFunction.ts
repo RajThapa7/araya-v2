@@ -19,4 +19,10 @@ const mergeTwoArray = (arr1: any[], arr2: any[], key: string) => {
   return Array.from(map, ([_, value]) => ({ ...value }));
 };
 
-export { mergeTwoArray };
+const kebabCaseToTitle = (kebabString: string) => {
+  const arr = kebabString.split("-");
+  const newString = arr.join(" ");
+  return newString;
+};
+
+export { kebabCaseToTitle, mergeTwoArray };

@@ -19,35 +19,35 @@ const Page = ({ params }: { params: { productId: string } }) => {
         <Loading />
       ) : (
         <>
-          <div className="inline-flex items-center gap-2 mt-2 mb-4">
+          <div className="mb-4 mt-2 inline-flex items-center gap-2">
             <IoMdArrowRoundBack
               className="text-xl text-accent hover:text-accent-dark"
               onClick={() => router.push("/admin/product")}
             />
 
-            <h2 className=" font-semibold text-accent-dark text-xl">
+            <h2 className="text-xl font-semibold text-accent-dark">
               Product Description
             </h2>
           </div>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Product ID</p>
+              <p className="font-semibold text-body">Product ID</p>
               <p>{data?._id}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Product Name</p>
+              <p className="font-semibold text-body">Product Name</p>
               <p>{data?.title}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Category</p>
+              <p className="font-semibold text-body">Category</p>
               <p>{data?.category?.categoryName}</p>
             </div>
             <div className={`flex-col gap-2 ${data?.tag ? "flex" : "hidden"}`}>
-              <p className="text-body font-semibold">Tag</p>
+              <p className="font-semibold text-body">Tag</p>
               <p>{data?.tag}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Price</p>
+              <p className="font-semibold text-body">Price</p>
               <p>Rs. {data?.price}</p>
             </div>
             <div
@@ -55,7 +55,7 @@ const Page = ({ params }: { params: { productId: string } }) => {
                 data?.reducedPrice ? "flex" : "hidden"
               }`}
             >
-              <p className="text-body font-semibold">Reduced Price</p>
+              <p className="font-semibold text-body">Reduced Price</p>
               <p>Rs. {data?.reducedPrice}</p>
             </div>
             <div
@@ -63,27 +63,27 @@ const Page = ({ params }: { params: { productId: string } }) => {
                 data?.reducedPrice ? "flex" : "hidden"
               }`}
             >
-              <p className="text-body font-semibold">Discount Percentage</p>
+              <p className="font-semibold text-body">Discount Percentage</p>
               <p>{data?.discountPercentage}%</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Description</p>
+              <p className="font-semibold text-body">Description</p>
               <p>{data?.description}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Product Highlight</p>
+              <p className="font-semibold text-body">Product Highlight</p>
               <p>{data?.productHighlight}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Featured Image</p>
+              <p className="font-semibold text-body">Featured Image</p>
               <div
-                className="relative aspect-square w-32 hover:ring-1 ring-accent transition"
+                className="relative aspect-square w-32 ring-accent transition hover:ring-1"
                 onClick={() => {
                   dispatch(
                     openModal({
                       content: (
                         <div className="flex items-center justify-center bg-transparent">
-                          <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                          <div className="relative flex h-[calc(100vh-10rem)] w-full">
                             <Image
                               alt="featured_image"
                               className="object-contain"
@@ -93,7 +93,7 @@ const Page = ({ params }: { params: { productId: string } }) => {
                           </div>
                         </div>
                       ),
-                    })
+                    }),
                   );
                 }}
               >
@@ -106,17 +106,17 @@ const Page = ({ params }: { params: { productId: string } }) => {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Images</p>
+              <p className="font-semibold text-body">Images</p>
               <div className="flex flex-row gap-14">
                 {data?.img?.map((item) => (
                   <div
-                    className="relative aspect-square w-32 hover:ring-1 ring-accent transition"
+                    className="relative aspect-square w-32 ring-accent transition hover:ring-1"
                     onClick={() => {
                       dispatch(
                         openModal({
                           content: (
                             <div className="flex items-center justify-center bg-transparent">
-                              <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                              <div className="relative flex h-[calc(100vh-10rem)] w-full">
                                 <Image
                                   alt="featured_image"
                                   className="object-contain"
@@ -126,7 +126,7 @@ const Page = ({ params }: { params: { productId: string } }) => {
                               </div>
                             </div>
                           ),
-                        })
+                        }),
                       );
                     }}
                     key={item}
@@ -143,11 +143,11 @@ const Page = ({ params }: { params: { productId: string } }) => {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Created at</p>
+              <p className="font-semibold text-body">Created at</p>
               <p>{new Date(data?.createdAt || "").toString()}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-body font-semibold">Updated at</p>
+              <p className="font-semibold text-body">Updated at</p>
               <p>{new Date(data?.updatedAt || "").toString()}</p>
             </div>
           </div>

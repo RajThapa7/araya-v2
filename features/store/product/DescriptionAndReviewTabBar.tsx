@@ -1,30 +1,25 @@
 "use client";
 import useFetchProductById from "@/api/hooks/products/useFetchProductById";
 import ProductDetail from "@/components/ProductDetail/ProductDetail";
-import ReviewSection from "@/features/ReviewSection/ReviewSection";
 import { IProductData } from "@/types";
 
-export default function DescriptionAndReviewTabBar({
+export default function ProductDetailSection({
   initialData,
   productId,
 }: {
   initialData: IProductData;
   productId: string;
 }) {
-  const { data: productData, isLoading } = useFetchProductById(
-    productId,
-    initialData
-  );
+  const { data: productData } = useFetchProductById(productId, initialData);
 
   return (
     <>
       {productData && (
         <ProductDetail
           data={productData}
-          className="bg-primary p-10 rounded-md"
+          className="rounded-md bg-primary p-10"
         />
       )}
-      <ReviewSection />
     </>
   );
 }

@@ -1,4 +1,3 @@
-import { Modal } from "@/components/Modal/Modal";
 import StoreFooter from "@/components/StoreFooter/Footer";
 import { StoreNavbar } from "@/components/StoreNavbar";
 import SearchBar from "@/features/SearchBar/SearchBar";
@@ -12,11 +11,10 @@ export const metadata = metaGenerator({
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <>
-      <Modal />
-      <div className="relative bg-primary-dark flex flex-col min-h-screen">
+      <div className="relative flex min-h-screen flex-col bg-primary-dark">
         <SearchBar />
         <StoreNavbar />
-        <div className="flex-grow mt-[75px] lg:mt-[130px]">{children}</div>
+        <div className="mt-[75px] flex-grow lg:mt-[130px]">{children}</div>
         <StoreFooter />
       </div>
     </>

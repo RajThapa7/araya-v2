@@ -142,7 +142,7 @@ export default function ProductSlider({
                   />
                 ) : (
                   <SmallProductCard
-                    className="min-h-[220px]"
+                    className="h-[220px]"
                     id={_id}
                     title={productTitle}
                     img={featured_img}

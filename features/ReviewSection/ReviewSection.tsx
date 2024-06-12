@@ -1,6 +1,8 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
-import useFetchReviewsOnProduct from "@/api/hooks/review/useFetchReviewsOnProduct";
+import useFetchReviewsOnProduct, {
+  IReviewData,
+} from "@/api/hooks/review/useFetchReviewsOnProduct";
 import OverallRating from "@/components/OverallRating/OverallRating";
 import { Pagination } from "@/components/Pagination/Pagination";
 import ReviewForm from "@/components/ReviewForm/ReviewForm";
@@ -10,13 +12,18 @@ import { useRouter } from "next-nprogress-bar";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-export default function ReviewSection() {
+export default function ReviewSection({
+  initialData,
+}: {
+  initialData: IReviewData;
+}) {
   const { user } = useAuth();
   const params = useParams();
 
   const { data, isLoading } = useFetchReviewsOnProduct(
     params.productId as string,
-    user?._id || ""
+    user?._id || "",
+    initialData,
   );
 
   const router = useRouter();
@@ -30,7 +37,7 @@ export default function ReviewSection() {
 
       return params.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   const handlePageClick = (e: any) => {
@@ -44,7 +51,7 @@ export default function ReviewSection() {
   };
 
   return (
-    <div className="flex flex-col gap-16 bg-primary p-10 rounded-md">
+    <div className="flex flex-col gap-16 rounded-md bg-primary p-10">
       <div className="flex flex-col justify-between gap-12 gap-x-8 lg:flex-row">
         <OverallRating
           averageRating={data?.average_rating || 0}
@@ -66,9 +73,9 @@ export default function ReviewSection() {
           />
         ))}
         {data?.data.length === 0 && (
-          <div className="flex mt-6 flex-col items-center justify-center">
+          <div className="mt-6 flex flex-col items-center justify-center">
             <NoData width={170} />
-            <p className="font-semibold text-xl text-body text-center my-6">
+            <p className="my-6 text-center text-xl font-semibold text-body">
               No reviews on the product
             </p>
           </div>

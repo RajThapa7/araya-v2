@@ -1,3 +1,4 @@
+import { IReviewData } from "@/api/hooks/review/useFetchReviewsOnProduct";
 import getApiRoute from "@/helper/getApiRoute";
 import { IProductData } from "@/types";
 import fetcher from "@/utils/fetcher";
@@ -7,4 +8,12 @@ const fetchProductDataById = async (productId: string) => {
   return data;
 };
 
-export { fetchProductDataById };
+const fetchProductReview = async (productId: string, userId: string) => {
+  const data = fetcher<IReviewData>(
+    getApiRoute("getAllReviewsOnProduct")(productId, userId) +
+      "?sort=createdAt&limit=5",
+  );
+  return data;
+};
+
+export { fetchProductDataById, fetchProductReview };

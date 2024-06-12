@@ -3,6 +3,7 @@ import CookieProvider from "@/Providers/CookieProvider";
 import QueryProvider from "@/Providers/QueryProvider";
 import StoreProvider from "@/Providers/StoreProvider";
 import { ScrollUp } from "@/components";
+import { Modal } from "@/components/Modal/Modal";
 import ProgressBarProvider from "@/components/Provider/ProgressBarProvider";
 import { metaGenerator } from "@/features/metagenerator/metagenerator";
 import { PropsWithChildren } from "react";
@@ -26,6 +27,7 @@ const Layout = ({ children }: PropsWithChildren) => {
             <QueryProvider>
               <StoreProvider>
                 <AuthProvider>{children}</AuthProvider>
+                <Modal />
                 <ScrollUp />
               </StoreProvider>
             </QueryProvider>

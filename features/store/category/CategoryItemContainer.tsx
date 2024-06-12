@@ -6,6 +6,7 @@ import ProductCard from "@/components/ProductCard/ProductCard";
 import CardSkeletal from "@/components/Skeletal/CardSkeletal";
 import usePaginate from "@/hooks/usePaginate";
 import { ICategoryListData } from "@/types";
+import { kebabCaseToTitle } from "@/utils/utilsFunction";
 import { Option, Select } from "@material-tailwind/react";
 import { useState } from "react";
 
@@ -28,7 +29,7 @@ const CategoryItemContainer = ({
     <div>
       <div className="mb-8 flex flex-row items-center justify-between">
         <p className="text-xl font-semibold capitalize text-body md:text-2xl">
-          {category}
+          {kebabCaseToTitle(category)}
         </p>
         <div>
           <Select
