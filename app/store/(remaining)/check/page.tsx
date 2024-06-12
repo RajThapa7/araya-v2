@@ -1,17 +1,57 @@
-import Image from "next/image";
+"use client";
+import MyInput from "@/components/MyInput/MyInput";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-const page = () => {
+type FormInputs = {
+  firstName: string;
+  lastName: string;
+};
+
+const Page = () => {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
+  const onSubmit: SubmitHandler<FormInputs> = (
+    data: FormInputs,
+    e?: React.BaseSyntheticEvent,
+  ) => {
+    console.log("submit is called");
+    console.log(data, "data");
+    e?.target.reset(); // reset after form submit
+  };
+
   return (
-    <div className="flex items-center justify-center w-screen h-screen fixed top-0 left-0 bg-gray-700 bg-opacity-30">
-      <div className="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-accent-dark"></div>
-      <Image
-        alt="loader"
-        src={require("@/app/icon.svg")}
-        width={80}
-        height={80}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label>First name</label>
+      <MyInput {...register("firstName")} />
+      {errors.firstName && <p>This is required</p>}
+
+      <label>Last name</label>
+      <MyInput {...register("lastName")} />
+
+      <input type="submit" />
+      <input
+        style={{ display: "block", marginTop: 20 }}
+        type="reset"
+        value="Standard Reset Field Values"
       />
-    </div>
+      <input
+        style={{ display: "block", marginTop: 20 }}
+        type="button"
+        onClick={() =>
+          reset({
+            firstName: "bill",
+            lastName: "luo",
+          })
+        }
+        value="Reset with values"
+      />
+    </form>
   );
 };
 
-export default page;
+export default Page;

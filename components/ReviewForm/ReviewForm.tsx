@@ -65,10 +65,9 @@ export default function ReviewForm() {
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<any> = (data) => {
+  const onSubmit: SubmitHandler<any> = (data, e?: React.BaseSyntheticEvent) => {
     if (!isLoggedIn) {
       toast.warn("Please login to add review");
-      reset();
       return;
     }
     mutation.mutate(
@@ -80,10 +79,11 @@ export default function ReviewForm() {
       {
         onSuccess: (data) => {
           toast.success(data.message);
-          reset();
         },
         onError: (error) => {
           ErrorHandler(error);
+        },
+        onSettled: () => {
           reset();
         },
       },
