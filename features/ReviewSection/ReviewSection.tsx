@@ -42,12 +42,16 @@ export default function ReviewSection({
 
   const handlePageClick = (e: any) => {
     const activePageNumber = e.selected + 1;
-    router.push(pathname + "?" + createQueryString("page", activePageNumber));
+    router.push(pathname + "?" + createQueryString("page", activePageNumber), {
+      scroll: false,
+    });
   };
 
   const handleCountChange = (e: any) => {
     const resultPerPage = e.target.value;
-    router.push(pathname + "?" + createQueryString("limit", resultPerPage));
+    router.push(pathname + "?" + createQueryString("limit", resultPerPage), {
+      scroll: false,
+    });
   };
 
   return (

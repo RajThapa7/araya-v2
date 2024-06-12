@@ -53,9 +53,10 @@ const useFetchReviewsOnProduct = (
   const limit = searchParams.get("limit") || "5";
   const page = searchParams.get("page") || "1";
   const result = useQuery({
+    staleTime: 0,
     queryKey: ["review", productId, userId, limit, page],
     queryFn: () => getAllReviewsOnProduct(api, productId, userId, limit, page),
-    ...(initialData && { initialData }),
+    ...(initialData && { initialData: initialData }),
   });
   return result;
 };

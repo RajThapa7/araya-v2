@@ -45,7 +45,7 @@ export default async function ProductPage({
 
   const initialData = await fetchProductData();
 
-  const { isLoggedIn, token, userId } = getUserCookieData();
+  const { userId } = getUserCookieData();
 
   const initialReviewData = await fetchProductReview(productId, userId);
 
