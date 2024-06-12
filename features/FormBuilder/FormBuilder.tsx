@@ -24,6 +24,7 @@ interface IFormBuilderProps {
   onSubmit: SubmitHandler<FormInputType>;
   buttonLabel?: string;
   isEditPage?: boolean;
+  isLoading?: boolean;
 }
 
 const FormBuilder = ({
@@ -35,6 +36,7 @@ const FormBuilder = ({
   errors,
   buttonLabel,
   isEditPage = false,
+  isLoading = false,
 }: IFormBuilderProps) => {
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -150,7 +152,7 @@ const FormBuilder = ({
           <MyCheckbox onChange={() => {}} checked={false} />
         </div>
       )}
-      <MyButton className="mt-8 !p-4" type="submit">
+      <MyButton isLoading={isLoading} className="mt-8 !p-4" type="submit">
         {buttonLabel || "Add Product"}
       </MyButton>
     </form>

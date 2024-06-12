@@ -38,7 +38,7 @@ export default function SearchBar() {
   useEffect(() => {
     window.addEventListener(
       "resize",
-      () => window.innerWidth >= 960 && setOpen(false)
+      () => window.innerWidth >= 960 && setOpen(false),
     );
   }, []);
 
@@ -46,12 +46,12 @@ export default function SearchBar() {
     useComponentVisible(false);
   return (
     <div className="">
-      <div className="flex fixed top-0 left-0 bg-primary flex-row justify-between gap-x-12 z-[100] w-screen px-2 py-4 md:px-6 lg:justify-around shadow-sm">
+      <div className="fixed left-0 top-0 z-[100] flex w-screen flex-row justify-between gap-x-12 bg-primary px-2 py-4 shadow-sm md:px-6 lg:justify-around">
         {/* mobile menu  */}
         <div className="flex flex-row gap-4">
           <IconButton
             variant="text"
-            className="lg:hidden text-gray-500"
+            className="text-gray-500 lg:hidden"
             onClick={() => setOpen((prev) => !prev)}
           >
             {open ? (
@@ -75,7 +75,7 @@ export default function SearchBar() {
           {/* <ProfileMenu /> */}
           <button
             onClick={() => setIsComponentVisible((prev) => !prev)}
-            className="text-gray-500 lg:!hidden mr-1"
+            className="mr-1 text-gray-500 lg:!hidden"
           >
             {isComponentVisible ? (
               <RiCloseFill size={24} />
@@ -86,20 +86,20 @@ export default function SearchBar() {
 
           {!isLogin ? (
             <MyButton
-              className="text-gray-500 !bg-primary group"
+              className="group !min-w-fit !bg-primary text-gray-500"
               variant="text"
               onClick={() => router.push("/store/login")}
             >
               <UserIcon
                 width={20}
-                className="group-hover:text-accent transition-smooth"
+                className="transition-smooth group-hover:text-accent"
               />
             </MyButton>
           ) : (
             <Menu>
               <MenuHandler>
                 <Avatar
-                  className="mr-2 ml-4 w-8 h-8"
+                  className="ml-4 mr-2 h-8 w-8"
                   variant="circular"
                   alt="tania andrew"
                   src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -118,24 +118,27 @@ export default function SearchBar() {
           )}
 
           <MyButton
-            className="!hidden text-gray-500 lg:!flex !bg-primary"
+            className="!hidden !min-w-fit !bg-primary text-gray-500 lg:!flex"
             variant="text"
           >
             <NotificationsMenu />
           </MyButton>
 
           <MyButton
-            className=" text-gray-500 !bg-primary group"
+            className="group !min-w-fit !bg-primary text-gray-500"
             variant="text"
             onClick={() => router.push("/store/wishlist")}
           >
             <HeartIcon
               width={20}
-              className="group-hover:text-accent transition-smooth"
+              className="transition-smooth group-hover:text-accent"
             />
           </MyButton>
 
-          <MyButton className="group text-white !bg-primary" variant="text">
+          <MyButton
+            className="group !min-w-fit !bg-primary text-white"
+            variant="text"
+          >
             <BadgeIcon />
           </MyButton>
         </div>

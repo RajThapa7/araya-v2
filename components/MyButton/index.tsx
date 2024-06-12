@@ -1,7 +1,7 @@
 "use client";
 
 import classNames from "@/utils/classNames";
-import { Button } from "@material-tailwind/react";
+import { Button, Spinner } from "@material-tailwind/react";
 import { color } from "@material-tailwind/react/types/components/button";
 import { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
@@ -12,6 +12,7 @@ interface MyButtonProps
   className?: string;
   color?: color;
   isSecondary?: boolean;
+  isLoading?: boolean;
 }
 
 const MyButton = ({
@@ -20,6 +21,7 @@ const MyButton = ({
   className,
   color,
   isSecondary = false,
+  isLoading = false,
   ...props
 }: MyButtonProps) => {
   return (
@@ -27,16 +29,17 @@ const MyButton = ({
       color={color}
       {...props}
       variant={variant}
+      disabled={isLoading}
       className={classNames(
         className,
-        `flex items-center justify-center gap-x-2 px-4 py-1 transition-smooth ${
+        `transition-smooth flex min-w-[130px] items-center justify-center gap-x-2 px-4 py-1 ${
           isSecondary
-            ? "bg-primary hover:bg-accent hover:text-primary ring-1 ring-accent text-accent"
+            ? "bg-primary text-accent ring-1 ring-accent hover:bg-accent hover:text-primary"
             : "bg-accent hover:bg-accent-dark"
-        }`
+        }`,
       )}
     >
-      {children}
+      {isLoading ? <Spinner color="green" className="h-4" /> : children}
     </Button>
   );
 };

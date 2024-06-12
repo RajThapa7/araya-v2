@@ -111,6 +111,7 @@ export default function ReviewForm() {
       <p className="text-lg font-semibold text-gray-900">Add a Review</p>
       <FormBuilder
         buttonLabel="Add Review"
+        isLoading={mutation.isPending}
         {...{ errors, formData, handleSubmit, onSubmit, register, control }}
       />
     </div>
