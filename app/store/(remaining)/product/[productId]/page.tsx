@@ -36,10 +36,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({
   params,
+  searchParams,
 }: {
   params: { productId: string };
+  searchParams: Record<string, string>;
 }) {
   const { productId } = params;
+  const { page } = searchParams;
 
   const initialProductData = await fetchProductDataById(productId);
 
@@ -47,7 +50,7 @@ export default async function ProductPage({
 
   const { userId } = getUserCookieData();
 
-  const initialReviewData = await fetchProductReview(productId, userId);
+  const initialReviewData = await fetchProductReview(productId, userId, page);
 
   return (
     <div className="relative flex flex-col gap-10">

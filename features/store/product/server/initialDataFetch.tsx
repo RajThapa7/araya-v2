@@ -8,10 +8,14 @@ const fetchProductDataById = async (productId: string) => {
   return data;
 };
 
-const fetchProductReview = async (productId: string, userId: string) => {
+const fetchProductReview = async (
+  productId: string,
+  userId: string,
+  page: string,
+) => {
   const data = fetcher<IReviewData>(
     getApiRoute("getAllReviewsOnProduct")(productId, userId) +
-      "?sort=createdAt&limit=5",
+      `?sort=createdAt&limit=5&page=${page}`,
   );
   return data;
 };

@@ -86,6 +86,7 @@ export default function ReviewSection({
         )}
         {data?.data.length !== 0 && (
           <Pagination
+            hideCountDropdown
             {...{ handleCountChange, handlePageClick }}
             totalPageCount={data?.totalPages || 0}
           />

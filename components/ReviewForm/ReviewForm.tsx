@@ -110,6 +110,7 @@ export default function ReviewForm() {
     <div className="flex max-w-lg flex-1 flex-col gap-8">
       <p className="text-lg font-semibold text-gray-900">Add a Review</p>
       <FormBuilder
+        isFormSettled={mutation.isError || mutation.isSuccess}
         buttonLabel="Add Review"
         isLoading={mutation.isPending}
         {...{ errors, formData, handleSubmit, onSubmit, register, control }}

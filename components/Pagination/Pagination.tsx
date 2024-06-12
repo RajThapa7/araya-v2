@@ -7,10 +7,12 @@ export function Pagination({
   handlePageClick,
   handleCountChange,
   totalPageCount,
+  hideCountDropdown = false,
 }: {
   handlePageClick: (e: any) => void;
   handleCountChange: (e: any) => void;
   totalPageCount: number;
+  hideCountDropdown?: boolean;
 }) {
   const searchParams = useSearchParams();
 
@@ -38,7 +40,9 @@ export function Pagination({
         forcePage={parseInt(page || "1") - 1}
       />
       {/* result per page selector */}
-      <div className="flex flex-row items-center gap-2">
+      <div
+        className={`flex flex-row items-center gap-2 ${hideCountDropdown ? "hidden" : "flex"}`}
+      >
         <p className="text-sm font-semibold text-body">Result Per Page</p>
         <select
           name="resultPerPage"

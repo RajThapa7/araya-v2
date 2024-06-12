@@ -20,8 +20,8 @@ export default function ReviewItem({
 }) {
   const dispatch = useAppDispatch();
   return (
-    <div className="w-full pt-6 flex flex-col gap-3 border-b-2 border-gray-300 pb-3 last:border-none">
-      <div className="items-center justify-between flex flex-row">
+    <div className="flex w-full flex-col gap-3 border-b-2 border-gray-300 pb-3 pt-6 last:border-none">
+      <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-5">
           <MyRating value={rating} />
           <p className="text-sm font-semibold text-body">{username}</p>
@@ -36,13 +36,13 @@ export default function ReviewItem({
         <div className="flex flex-row gap-14">
           {img?.map((item) => (
             <div
-              className="relative aspect-square w-28 hover:ring-1 ring-accent transition"
+              className="relative aspect-square w-28 ring-accent transition hover:ring-1"
               onClick={() => {
                 dispatch(
                   openModal({
                     content: (
                       <div className="flex items-center justify-center bg-transparent">
-                        <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                        <div className="relative aspect-video w-full bg-transparent">
                           <Image
                             alt="featured_image"
                             className="object-contain"
@@ -52,7 +52,7 @@ export default function ReviewItem({
                         </div>
                       </div>
                     ),
-                  })
+                  }),
                 );
               }}
               key={item}

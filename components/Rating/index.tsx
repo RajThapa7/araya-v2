@@ -17,7 +17,7 @@ export function MyRating({
   return (
     <div>
       <Rating readonly={readonly} value={value} onChange={onChange} />
-      {error && <p className="text-sm text-red-400 mt-2">{error?.message}</p>}
+      {error && <p className="mt-2 text-sm text-red-400">{error?.message}</p>}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import {
   ForwardedRef,
   InputHTMLAttributes,
   forwardRef,
+  useEffect,
   useState,
 } from "react";
 import { IoMdAdd } from "react-icons/io";
@@ -16,11 +17,17 @@ interface MyInputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   // error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   error?: any;
+  isFormSettled?: boolean;
 }
 
 const MultipleImageUploader = forwardRef(
   (props: MyInputProps, ref: ForwardedRef<HTMLInputElement>) => {
     const [images, setImages] = useState<File[]>([]);
+
+    //clear the image preview data when the form is settled
+    useEffect(() => {
+      props.isFormSettled && setImages([]);
+    }, [props.isFormSettled]);
 
     const dispatch = useDispatch();
 
@@ -35,11 +42,11 @@ const MultipleImageUploader = forwardRef(
 
     const handleImageRemove = (e: any, indexToRemove: number) => {
       setImages((prevImages) =>
-        prevImages.filter((_, index) => index !== indexToRemove)
+        prevImages.filter((_, index) => index !== indexToRemove),
       );
       props.onChange &&
         props.onChange(
-          images.filter((_, index) => index !== indexToRemove) as any
+          images.filter((_, index) => index !== indexToRemove) as any,
         );
       e.stopPropagation();
     };
@@ -49,7 +56,7 @@ const MultipleImageUploader = forwardRef(
         {images.length === 0 && (
           <label
             htmlFor="fileInput"
-            className={`bg-gray-100 border-[1px] border-black border-dashed flex flex-col items-center cursor-pointer py-4 gap-1 ${
+            className={`flex cursor-pointer flex-col items-center gap-1 border-[1px] border-dashed border-black bg-gray-100 py-4 ${
               props.error && "border-red-500"
             }`}
           >
@@ -60,7 +67,7 @@ const MultipleImageUploader = forwardRef(
           </label>
         )}
         {/* error message */}
-        <p className="text-sm text-red-400 mt-2">{props.error?.message}</p>
+        <p className="mt-2 text-sm text-red-400">{props.error?.message}</p>
         <input
           ref={ref}
           type="file"
@@ -70,16 +77,16 @@ const MultipleImageUploader = forwardRef(
           accept="image/*"
           className="hidden"
         />
-        <div className="flex flex-wrap mt-4 gap-6">
+        <div className="mt-4 flex flex-wrap gap-6">
           {images.map((file, index) => (
             <div
-              className="relative aspect-square w-32 group hover:ring-1 ring-accent transition"
+              className="group relative aspect-square w-32 ring-accent transition hover:ring-1"
               onClick={() => {
                 dispatch(
                   openModal({
                     content: (
                       <div className="flex items-center justify-center bg-transparent">
-                        <div className="relative h-[calc(100vh-10rem)] w-full flex">
+                        <div className="relative aspect-video w-full bg-transparent">
                           <Image
                             alt="featured_image"
                             className="object-contain"
@@ -89,7 +96,7 @@ const MultipleImageUploader = forwardRef(
                         </div>
                       </div>
                     ),
-                  })
+                  }),
                 );
               }}
               key={index}
@@ -102,14 +109,14 @@ const MultipleImageUploader = forwardRef(
               />
               <MdDelete
                 onClick={(e: any) => handleImageRemove(e, index)}
-                className="absolute right-2 top-2 text-body cursor-pointer hidden group-hover:flex transition"
+                className="absolute right-2 top-2 hidden cursor-pointer text-body transition group-hover:flex"
               />
             </div>
           ))}
           {images.length !== 0 && (
             <label
               htmlFor="fileInput"
-              className="bg-gray-100 border-[1px] border-black border-dashed flex flex-col justify-center items-center cursor-pointer gap-2 px-10"
+              className="flex cursor-pointer flex-col items-center justify-center gap-2 border-[1px] border-dashed border-black bg-gray-100 px-10"
             >
               <IoMdAdd />
               <span className="text-accent-dark">Add Image</span>
@@ -118,7 +125,7 @@ const MultipleImageUploader = forwardRef(
         </div>
       </div>
     );
-  }
+  },
 );
 
 const imageStyles = {

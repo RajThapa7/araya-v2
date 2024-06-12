@@ -25,6 +25,7 @@ interface IFormBuilderProps {
   buttonLabel?: string;
   isEditPage?: boolean;
   isLoading?: boolean;
+  isFormSettled?: boolean;
 }
 
 const FormBuilder = ({
@@ -37,6 +38,7 @@ const FormBuilder = ({
   buttonLabel,
   isEditPage = false,
   isLoading = false,
+  isFormSettled = false,
 }: IFormBuilderProps) => {
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -101,6 +103,7 @@ const FormBuilder = ({
                   render={({ field: { onChange } }) => (
                     <MultipleImageUploader
                       onChange={onChange}
+                      isFormSettled={isFormSettled}
                       error={errors[item.name]}
                     />
                   )}
