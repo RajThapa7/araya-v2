@@ -48,7 +48,7 @@ const useAddProduct = () => {
       client.invalidateQueries({
         predicate: (query) => {
           return ["products", "categories"].includes(
-            query.queryKey[0] as string
+            query.queryKey[0] as string,
           );
         },
       });

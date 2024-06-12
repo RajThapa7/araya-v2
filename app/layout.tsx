@@ -26,8 +26,10 @@ const Layout = ({ children }: PropsWithChildren) => {
           <CookieProvider>
             <QueryProvider>
               <StoreProvider>
-                <AuthProvider>{children}</AuthProvider>
-                <Modal />
+                <AuthProvider>
+                  <Modal />
+                  {children}
+                </AuthProvider>
                 <ScrollUp />
               </StoreProvider>
             </QueryProvider>
