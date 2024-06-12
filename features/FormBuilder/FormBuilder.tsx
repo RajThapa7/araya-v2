@@ -120,6 +120,8 @@ const FormBuilder = ({
                   name={item.name}
                   render={({ field: { onChange, value } }) => (
                     <MyRating
+                      size={28}
+                      isFormSettled={isFormSettled}
                       value={
                         typeof value === "string"
                           ? parseInt(value || "")

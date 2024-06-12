@@ -127,3 +127,8 @@ html {
     background-position: 700px;
   }
 }
+
+svg.star-svg {
+  display: inline;
+  margin-bottom: 3px;
+}
