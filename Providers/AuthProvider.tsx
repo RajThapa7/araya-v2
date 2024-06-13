@@ -29,7 +29,7 @@ type Value = {
 const AuthContext = createContext<Value | undefined>(undefined);
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [authCookie, setAuthCookie, removeAuthCookie] = useCookies([
+  const [authCookie, setAuthCookie] = useCookies([
     "accessToken",
     "user",
     "adminAccessToken",
@@ -66,10 +66,13 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       message: string,
       isAdminLogout: boolean = false,
     ) => {
-      removeAuthCookie("adminAccessToken");
-      removeAuthCookie("admin");
-      removeAuthCookie("accessToken");
-      removeAuthCookie("user");
+      if (isAdminLogout) {
+        setAuthCookie("adminAccessToken", "");
+        setAuthCookie("admin", "");
+      } else {
+        setAuthCookie("accessToken", "");
+        setAuthCookie("user", "");
+      }
 
       toast.success(message);
 
