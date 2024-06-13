@@ -92,18 +92,18 @@ const Page = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="">
-      <div className="inline-flex items-center gap-2 mt-2 mb-4">
+      <div className="mb-4 mt-2 inline-flex items-center gap-2">
         <IoMdArrowRoundBack
           className="text-xl text-accent hover:text-accent-dark"
           onClick={() => router.push("/admin/carousel")}
         />
 
-        <h2 className=" font-semibold text-accent-dark text-xl">
+        <h2 className="text-xl font-semibold text-accent-dark">
           Edit Carousel Item
         </h2>
       </div>
       <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex gap-6 flex-col">
+        <div className="flex flex-col gap-6">
           {formData.map((item) => (
             <>
               {item.type === undefined && (
@@ -139,7 +139,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                         color="blue"
                         variant="outlined"
                         label={item.placeholder}
-                        className={` bg-gray-100 ${montserrat.className}`}
+                        className={`bg-gray-100 ${montserrat.className}`}
                         error={!!errors[item.name]}
                         onChange={onChange}
                         onBlur={onBlur}
@@ -202,7 +202,11 @@ const Page = ({ params }: { params: { id: string } }) => {
           />
         )}
 
-        <MyButton className="!p-4 mt-8" type="submit">
+        <MyButton
+          isLoading={mutation.isPending}
+          className="mt-8 !p-4"
+          type="submit"
+        >
           Edit Product
         </MyButton>
       </form>

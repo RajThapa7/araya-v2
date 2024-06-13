@@ -18,7 +18,7 @@ type Value = {
     user: IUser,
     token: string,
     route: string,
-    isAdminLogin?: boolean
+    isAdminLogin?: boolean,
   ) => void;
   logout: (route: string, message: string, isAdminLogout?: boolean) => void;
   token: string;
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       user: IUser,
       token: string,
       route: string,
-      isAdminLogin: boolean = false
+      isAdminLogin: boolean = false,
     ) => {
       if (!isAdminLogin) {
         setAuthCookie("accessToken", token);
@@ -64,7 +64,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     logout: (
       route: string,
       message: string,
-      isAdminLogout: boolean = false
+      isAdminLogout: boolean = false,
     ) => {
       removeAuthCookie("adminAccessToken");
       removeAuthCookie("admin");

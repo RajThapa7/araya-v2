@@ -40,7 +40,7 @@ export default function Login({
     resolver: yupResolver(loginSchema),
   });
 
-  const { data, refetch } = useCheckForAuthSuccess();
+  const { refetch, isLoading } = useCheckForAuthSuccess();
 
   const onSubmit = (data: any) => {
     mutation.mutate(data, {
@@ -49,7 +49,7 @@ export default function Login({
           login(
             res.data.user,
             res.data.token,
-            searchParams.redirect || "/store"
+            searchParams.redirect || "/store",
           );
         });
       },
@@ -62,7 +62,7 @@ export default function Login({
   };
   return (
     <div>
-      <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-2">
+      <div className="mb-4 flex flex-col justify-between gap-2 md:flex-row md:items-center">
         <p className="text-xl font-medium text-gray-800">
           Welcome to Araya Arts! Please login
         </p>
@@ -79,9 +79,9 @@ export default function Login({
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col md:flex-row gap-12 bg-white px-8 py-8"
+        className="flex flex-col gap-12 bg-white px-8 py-8 md:flex-row"
       >
-        <div className="flex md:w-1/2 flex-col gap-4">
+        <div className="flex flex-col gap-4 md:w-1/2">
           <div className="flex flex-col gap-2">
             <label htmlFor="email">Phone Number or Email*</label>
             <MyInput
@@ -112,7 +112,11 @@ export default function Login({
           </div>
         </div>
         <div className="md:w-1/2">
-          <MyButton className="w-full !py-4" type="submit">
+          <MyButton
+            isLoading={mutation.isPending || isLoading}
+            className="w-full !py-4"
+            type="submit"
+          >
             Login
           </MyButton>
           <p className="mb-3 mt-6">Or, Login with</p>

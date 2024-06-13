@@ -33,6 +33,13 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
   }
+  //if admin is authenticated and try to access the login page then redirect to product table page
+  if (
+    isAdminAuthenticated(request) &&
+    ["/admin/login", "/admin"].includes(pathname)
+  ) {
+    return NextResponse.redirect(new URL("/admin/product", request.url));
+  }
 }
 
 // path for which the middleware will be called

@@ -12,6 +12,7 @@ const useCreateApi = () => {
 
   const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    withCredentials: true,
   });
 
   api.interceptors.request.use(function (config) {
@@ -30,7 +31,7 @@ const useCreateApi = () => {
         logout("/store/login", "You have been logged out");
       }
       return Promise.reject(error);
-    }
+    },
   );
 
   return api;

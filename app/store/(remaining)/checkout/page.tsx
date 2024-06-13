@@ -13,7 +13,7 @@ export default function Cart() {
 
   const searchParams = useSearchParams();
   const products = JSON.parse(
-    decodeURIComponent(searchParams.get("products") as string)
+    decodeURIComponent(searchParams.get("products") as string),
   );
 
   const { user } = useAuth();
@@ -115,7 +115,7 @@ export default function Cart() {
                     </div>
 
                     {reducedPrice ? (
-                      <div className=" flex flex-col gap-2">
+                      <div className="flex flex-col gap-2">
                         <p className="text-left text-lg text-red-500">
                           Rs.{reducedPrice}
                         </p>
@@ -136,7 +136,7 @@ export default function Cart() {
                   </div>
                 </div>
               );
-            }
+            },
           )}
         </div>
       </div>
@@ -154,6 +154,7 @@ export default function Cart() {
           <p className="font-semibold text-red-500">Rs. {totalPrice}</p>
         </div>
         <MyButton
+          isLoading={mutation.isPending}
           className="w-full !py-4"
           onClick={() => {
             mutation.mutate(data, {

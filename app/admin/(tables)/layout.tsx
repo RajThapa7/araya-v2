@@ -40,21 +40,21 @@ const Layout = ({ children }: PropsWithChildren) => {
 
   //set the active index based on the current route that matches the route property in the above data
   const [activeIndex, setActiveIndex] = useState<number>(
-    data.findIndex(({ route }) => route === routeArray[1])
+    data.findIndex(({ route }) => route === routeArray[1]),
   );
   const router = useRouter();
   return (
     <div className="">
       {/* sidebar */}
-      <div className="bg-gray-100 h-screen w-64 py-8 flex flex-col absolute top-0 left-0">
+      <div className="absolute left-0 top-0 flex h-screen w-64 flex-col bg-gray-100 py-8">
         <Image
           alt="logo"
           width={100}
           height={100}
-          className="ml-6 mb-4"
+          className="mb-4 ml-6"
           src={require("@/public/footer-logo.svg")}
         />
-        <div className="flex flex-col mt-4 flex-1">
+        <div className="mt-4 flex flex-1 flex-col">
           {data.map(({ id, name, link }) => (
             <p
               key={id}
@@ -62,7 +62,7 @@ const Layout = ({ children }: PropsWithChildren) => {
                 setActiveIndex(id);
                 router.push(link);
               }}
-              className={`py-4 cursor-pointer transition-smooth hover:bg-accent hover:bg-opacity-20 hover:text-accent-dark pl-6 ${
+              className={`transition-smooth cursor-pointer py-4 pl-6 hover:bg-accent hover:bg-opacity-20 hover:text-accent-dark ${
                 activeIndex === id && "bg-accent bg-opacity-20 text-accent-dark"
               }`}
             >
@@ -71,7 +71,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           ))}
         </div>
         <MyButton
-          className="!py-4 mx-4"
+          className="mx-4 !py-4"
           onClick={() => {
             logout("/admin/login", "Logged out successfully", true);
           }}
@@ -81,7 +81,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       </div>
 
       {/* children */}
-      <div className="h-screen overflow-y-scroll flex-1 ml-64 p-10">
+      <div className="ml-64 h-screen flex-1 overflow-y-scroll p-10">
         {children}
       </div>
     </div>

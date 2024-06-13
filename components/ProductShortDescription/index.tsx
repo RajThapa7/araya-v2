@@ -224,7 +224,12 @@ export default function ProductShortDescription({
           <QuantityInput {...{ quantity, setQuantity }} />
           <div className="flex flex-row gap-4">
             <MyButton className="!py-4">Buy Now</MyButton>
-            <MyButton isSecondary className="!py-4" onClick={handleCartPress}>
+            <MyButton
+              isLoading={cartMutation.isPending}
+              isSecondary
+              className="!py-4"
+              onClick={handleCartPress}
+            >
               Add to cart
             </MyButton>
           </div>

@@ -49,10 +49,10 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen relative">
+    <div className="relative flex h-screen flex-col items-center justify-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col p-10 gap-4 rounded-md border-2"
+        className="flex flex-col gap-4 rounded-md border-2 p-10"
       >
         <Image
           alt="logo"
@@ -61,7 +61,7 @@ const AdminLogin = () => {
           height={100}
           className="mb-2 self-center"
         />
-        <p className="font-semibold text-2xl text-body">Admin Login</p>
+        <p className="text-2xl font-semibold text-body">Admin Login</p>
         <div className="flex flex-col gap-2">
           <label htmlFor="username">Username or Email</label>
           <MyInput
@@ -71,7 +71,7 @@ const AdminLogin = () => {
             error={errors.username}
           />
         </div>
-        <div className="flex flex-col gap-2 relative">
+        <div className="relative flex flex-col gap-2">
           <label htmlFor="username">Password</label>
           <MyInput
             id="username"
@@ -83,22 +83,26 @@ const AdminLogin = () => {
 
           {isPassword ? (
             <AiFillEyeInvisible
-              className="absolute top-11 end-3 text-2xl text-gray-500"
+              className="absolute end-3 top-11 text-2xl text-gray-500"
               onClick={() => setIsPassword(false)}
             />
           ) : (
             <AiFillEye
-              className="absolute top-11 end-3 text-2xl text-gray-500"
+              className="absolute end-3 top-11 text-2xl text-gray-500"
               onClick={() => setIsPassword(true)}
             />
           )}
         </div>
-        <MyButton className="!py-4" type="submit">
+        <MyButton
+          className="!py-4"
+          type="submit"
+          isLoading={mutation.isPending}
+        >
           Login
         </MyButton>
         <Link
           href={"/store"}
-          className="underline text-sm mt-2 transition hover:text-accent"
+          className="mt-2 text-sm underline transition hover:text-accent"
         >
           Go back home
         </Link>
