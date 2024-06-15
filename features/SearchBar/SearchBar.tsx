@@ -15,7 +15,8 @@ import {
 import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { IoIosLogOut } from "react-icons/io";
+import { GoInbox } from "react-icons/go";
+import { IoIosArrowDown, IoIosLogOut } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { RiCloseFill } from "react-icons/ri";
 import { BadgeIcon } from "../../components/BadgeIcon";
@@ -32,6 +33,7 @@ export default function SearchBar() {
   const router = useRouter();
 
   const { logout, user, token } = useAuth();
+  console.log(user, "user data");
 
   const isLogin = !!token;
 
@@ -98,14 +100,33 @@ export default function SearchBar() {
           ) : (
             <Menu>
               <MenuHandler>
-                <Avatar
-                  className="ml-4 mr-2 h-8 w-8"
-                  variant="circular"
-                  alt="tania andrew"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-                />
+                <div className="flex cursor-pointer flex-row items-center">
+                  <Avatar
+                    className="ml-4 mr-2 h-8 w-8"
+                    variant="circular"
+                    alt="profile picture"
+                    src={
+                      user.profile_image ||
+                      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                    }
+                  />
+                  <div className="hidden min-w-0 max-w-[100px] flex-col text-xs sm:flex">
+                    <p className="leading-tight">Hello</p>
+                    <p className="truncate font-semibold capitalize">
+                      {user.username}
+                    </p>
+                  </div>
+                  <IoIosArrowDown size={12} className="ml-2 hidden sm:block" />
+                </div>
               </MenuHandler>
               <MenuList className="flex flex-col gap-2">
+                <MenuItem
+                  onClick={() => logout("/store", "logged out successfully")}
+                  className="flex items-center gap-2 py-2"
+                >
+                  <GoInbox size={22} />
+                  My Orders
+                </MenuItem>
                 <MenuItem
                   onClick={() => logout("/store", "logged out successfully")}
                   className="flex items-center gap-2 py-2"

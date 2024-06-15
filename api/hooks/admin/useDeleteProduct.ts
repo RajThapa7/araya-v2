@@ -6,7 +6,9 @@ import useCreateApi from "../../useCreateApi";
 const deleteProduct = async (data: any, api: AxiosInstance) => {
   const route = getApiRoute("deleteProduct")(data);
 
-  const result = await api.delete(route);
+  const result = await api.post(route, {
+    productId: data,
+  });
   return result.data;
 };
 

@@ -13,8 +13,6 @@ const Cart = async () => {
   const token = cookie.get("accessToken")?.value;
   const isLoggedIn = !!token;
 
-  console.log(isLoggedIn, ">>is loggedin from cart>>");
-
   if (!isLoggedIn) {
     return (
       <div className="flex flex-col items-center gap-8">

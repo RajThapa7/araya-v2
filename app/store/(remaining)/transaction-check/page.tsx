@@ -24,26 +24,26 @@ const Page = () => {
       <LoadingOverlay isVisible={isLoading} />
       {!isLoading && (
         <>
-          <h2 className="text-center font-bold text-2xl mb-4">
+          <h2 className="mb-4 text-center text-2xl font-bold">
             Transaction Details
           </h2>
-          <div className="flex flex-col max-w-md mx-auto bg-primary p-8 gap-2 rounded-md">
+          <div className="mx-auto flex max-w-md flex-col gap-2 rounded-md bg-primary p-8">
             {isValid && (
-              <FaRegCheckCircle className="text-accent text-6xl self-center mb-6" />
+              <FaRegCheckCircle className="mb-6 self-center text-6xl text-accent" />
             )}
-            <div className="gap-4 flex flex-row justify-between">
+            <div className="flex flex-row justify-between gap-4">
               <p className="">Status</p>
               <p className="font-semibold">{data?.status}</p>
             </div>
-            <div className="gap-4 flex flex-row justify-between">
+            <div className="flex flex-row justify-between gap-4">
               <p className="">Transaction Id</p>
-              <p className="font-semibold break-all">{data?.transaction_id}</p>
+              <p className="break-all font-semibold">{data?.transaction_id}</p>
             </div>
-            <div className="flex gap-4 flex-row justify-between">
+            <div className="flex flex-row justify-between gap-4">
               <p className="">Purchase Order Id</p>
               <p className="font-semibold">{purchaseId}</p>
             </div>
-            <div className="flex flex-row gap-4 justify-between">
+            <div className="flex flex-row justify-between gap-4">
               <p className="">Mobile Number</p>
               <p className="font-semibold">{mobile}</p>
             </div>

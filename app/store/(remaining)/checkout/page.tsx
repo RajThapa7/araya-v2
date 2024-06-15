@@ -1,10 +1,13 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
 import useInititateKhaltiPayment from "@/api/hooks/checkout/useInititateKhaltiPayment";
-import ErrorHandler from "@/components/ErrorHandler/ErrorHandler";
 import MyButton from "@/components/MyButton";
+import PaymentMethodSelector from "@/features/store/checkout/paymentMethodSelector";
+import { openModal } from "@/lib/modal/modalSlice";
+import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 export default function Cart() {
   const router = useRouter();
@@ -19,7 +22,6 @@ export default function Cart() {
   const { user } = useAuth();
 
   const totalPrice = searchParams.get("totalPrice");
-  console.log(products);
 
   const productBreakdown = products?.map((item: any) => ({
     identity: item._id,
@@ -37,10 +39,12 @@ export default function Cart() {
     customer: {
       name: user.username,
     },
-    amount: parseInt(totalPrice || "") * 100, //in pasia,
+    amount: parseInt(totalPrice || "") * 100, //in paisa,
     product_details: productBreakdown,
     amount_breakdown: amountBreakdown,
   };
+
+  const dispatch = useDispatch();
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row">
@@ -153,7 +157,7 @@ export default function Cart() {
           <p className="text-sm font-semibold">Total</p>
           <p className="font-semibold text-red-500">Rs. {totalPrice}</p>
         </div>
-        <MyButton
+        {/* <MyButton
           isLoading={mutation.isPending}
           className="w-full !py-4"
           onClick={() => {
@@ -163,6 +167,18 @@ export default function Cart() {
               },
               onError: (error) => ErrorHandler(error),
             });
+          }}
+        >
+          Place Order
+        </MyButton> */}
+        <MyButton
+          className="w-full !py-4"
+          onClick={() => {
+            dispatch(
+              openModal({
+                content: <PaymentMethodSelector />,
+              }),
+            );
           }}
         >
           Place Order

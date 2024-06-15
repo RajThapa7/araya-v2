@@ -9,7 +9,7 @@ import MyCheckbox from "@/components/MyCheckbox/MyCheckbox";
 import MyInput from "@/components/MyInput/MyInput";
 import CartSkeletal from "@/components/Skeletal/CartSkeletal";
 import { mergeTwoArray } from "@/utils/utilsFunction";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar";
 import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
@@ -25,12 +25,12 @@ const CartItemContainer = ({
   const router = useRouter();
 
   const [selected, setSelected] = useState<{ id: string; quantity: number }[]>(
-    []
+    [],
   );
 
   const selectedItemCount = selected.reduce(
     (prev, curr) => prev + curr.quantity,
-    0
+    0,
   );
 
   const { isLoading, data: cartData } = useFetchCart(userId, initialData);
@@ -41,7 +41,7 @@ const CartItemContainer = ({
     })
     .reduce(
       (prev, curr) => prev + (curr.reducedPrice || curr.price) * curr.quantity,
-      0
+      0,
     );
 
   const removeCartMutation = useRemoveProductFromCart();
@@ -58,7 +58,7 @@ const CartItemContainer = ({
           });
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -72,12 +72,12 @@ const CartItemContainer = ({
           // after removing the item from cart also remove it from the selected items
           setSelected(() => {
             return selected.filter(
-              (item) => !selectedProductIds.includes(item.id)
+              (item) => !selectedProductIds.includes(item.id),
             );
           });
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -88,8 +88,8 @@ const CartItemContainer = ({
     }
     const query = JSON.stringify(
       mergeTwoArray(cartData?.products || [], selected, "id").filter(
-        (item) => item.quantity >= 1
-      )
+        (item) => item.quantity >= 1,
+      ),
     );
 
     const encoded = encodeURIComponent(query);
@@ -109,11 +109,11 @@ const CartItemContainer = ({
         } flex-col gap-4 lg:flex-row`}
       >
         <div className="flex flex-1 flex-col">
-          <p className="text-2xl text-body font-semibold capitalize mb-8">
+          <p className="mb-8 text-2xl font-semibold capitalize text-body">
             My Cart
           </p>
 
-          <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between bg-transparent py-1 pr-2">
+          <div className="mb-4 flex flex-col bg-transparent py-1 pr-2 md:flex-row md:items-center md:justify-between">
             <div className="inline-flex items-center">
               <MyCheckbox
                 color="green"
@@ -123,7 +123,7 @@ const CartItemContainer = ({
                       cartData?.products.map(({ _id }) => ({
                         id: _id,
                         quantity: 1,
-                      })) || []
+                      })) || [],
                     );
                   }
                   setSelected([]);
@@ -133,12 +133,12 @@ const CartItemContainer = ({
               <p
                 className={`${
                   selected.length !== 0 ? "flex" : "hidden"
-                } text-accent text-sm ml-4`}
+                } ml-4 text-sm text-accent`}
               >
                 {selected.length} items selected
               </p>
             </div>
-            <div className="flex flex-row gap-2 ml-1 md:ml-0">
+            <div className="ml-1 flex flex-row gap-2 md:ml-0">
               <button
                 className="inline-flex items-center gap-1 rounded-full p-1.5 text-body transition hover:text-accent"
                 onClick={handleMultiCartItemsRemove}
@@ -166,7 +166,7 @@ const CartItemContainer = ({
         </div>
 
         {/* checkout menu */}
-        <div className="flex h-fit w-full max-w-lg rounded-md flex-col gap-3 bg-white p-4 shadow-sm lg:mt-32 lg:w-fit">
+        <div className="flex h-fit w-full max-w-lg flex-col gap-3 rounded-md bg-white p-4 shadow-sm lg:mt-32 lg:w-fit">
           <p className="text-md font-semibold text-gray-800">Order Summary</p>
           <div className="flex flex-row justify-between">
             <p className="text-sm text-gray-800">

@@ -3,23 +3,24 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
 import useCreateApi from "../../useCreateApi";
 
-interface ILoginData {
+interface IRegisterData {
   username: string;
   password: string;
+  email: string;
 }
 
-const login = async (data: ILoginData, api: AxiosInstance) => {
-  const route = getApiRoute("login")();
+const registerUser = async (data: IRegisterData, api: AxiosInstance) => {
+  const route = getApiRoute("register")();
   const result = await api.post(route, data);
   return result.data;
 };
 
-const useLogin = () => {
+const useRegisterUser = () => {
   const api = useCreateApi();
   const mutation = useMutation({
-    mutationFn: (data: ILoginData) => login(data, api),
+    mutationFn: (data: IRegisterData) => registerUser(data, api),
   });
   return mutation;
 };
 
-export default useLogin;
+export default useRegisterUser;

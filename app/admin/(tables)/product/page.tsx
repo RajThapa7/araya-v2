@@ -43,7 +43,7 @@ const Page = () => {
 
       return params.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   const handlePageClick = (e: any) => {
@@ -67,15 +67,15 @@ const Page = () => {
     <div className="flex-flex-col">
       <LoadingOverlay isVisible={mutation.isPending} />
       <p className="text-2xl text-header">Products</p>
-      <div className="flex flex-row mt-6 items-center justify-between">
+      <div className="mt-6 flex flex-row items-center justify-between">
         <div className="text-sm">
           Showing results
-          <span className="text-accent font-semibold">
+          <span className="font-semibold text-accent">
             {" "}
             {initialLimit} - {finalLimit}{" "}
           </span>
           out of{" "}
-          <span className="text-accent font-semibold"> {data?.totalCount}</span>
+          <span className="font-semibold text-accent"> {data?.totalCount}</span>
         </div>
         <MyButton
           onClick={() => router.push(`/admin/product/add`)}
@@ -87,7 +87,7 @@ const Page = () => {
 
       {/* table */}
       <div className="overflow-x-scroll py-8">
-        <table className=" bg-white w-full font-[sans-serif]">
+        <table className="w-full bg-white font-[sans-serif]">
           <thead className="whitespace-nowrap">
             <tr>
               <th>
@@ -151,29 +151,29 @@ const Page = () => {
                   </td>
                   <td className="px-6 py-3 text-sm">
                     {item.isStockAvailable ? (
-                      <span className="w-fit text-primary whitespace-nowrap bg-blue-400 px-3 py-1.5 text-xs font-medium">
+                      <span className="w-fit whitespace-nowrap bg-blue-400 px-3 py-1.5 text-xs font-medium text-primary">
                         YES
                       </span>
                     ) : (
-                      <span className="w-fit whitespace-nowrap text-primary bg-red-400 px-3 py-1.5 text-xs font-medium">
+                      <span className="w-fit whitespace-nowrap bg-red-400 px-3 py-1.5 text-xs font-medium text-primary">
                         NO
                       </span>
                     )}
                   </td>
                   <td className="px-6 py-3 text-sm">
                     {item.isProductVisible ? (
-                      <span className="w-fit text-primary whitespace-nowrap bg-blue-400 px-3 py-1.5 text-xs font-medium">
+                      <span className="w-fit whitespace-nowrap bg-blue-400 px-3 py-1.5 text-xs font-medium text-primary">
                         YES
                       </span>
                     ) : (
-                      <span className="w-fit whitespace-nowrap text-primary bg-red-400 px-3 py-1.5 text-xs font-medium">
+                      <span className="w-fit whitespace-nowrap bg-red-400 px-3 py-1.5 text-xs font-medium text-primary">
                         NO
                       </span>
                     )}
                   </td>
 
                   <td className="px-6 py-3">
-                    <div className="flex flex-row gap-4 items-center">
+                    <div className="flex flex-row items-center gap-4">
                       <FaEye
                         size={18}
                         className="text-blue-600 hover:text-blue-800"

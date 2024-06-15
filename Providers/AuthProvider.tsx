@@ -11,6 +11,7 @@ interface IUser {
   provider: string;
   provider_id: string | null;
   isAdmin: boolean;
+  profile_image?: string;
 }
 
 type Value = {

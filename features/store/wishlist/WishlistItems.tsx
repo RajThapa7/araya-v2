@@ -28,7 +28,7 @@ const WishlistItems = ({
   const { token, user } = useAuth();
   const { isLoading, data: wishlistData } = useFetchWishlist(
     user?._id,
-    initialWishListData
+    initialWishListData,
   );
 
   const removeWishlistMutation = useRemoveProductFromWishlist();
@@ -44,7 +44,7 @@ const WishlistItems = ({
           setSelected([]);
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -57,7 +57,7 @@ const WishlistItems = ({
           setSelected([]);
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -69,8 +69,8 @@ const WishlistItems = ({
       />
       {isLoading && <CardSkeletal count={8} />}
       <div className={wishlistData?.products.length === 0 ? "hidden" : ""}>
-        <div className="mb-8 flex flex-row justify-between items-center">
-          <p className="text-2xl text-body font-semibold capitalize">
+        <div className="mb-8 flex flex-row items-center justify-between">
+          <p className="text-2xl font-semibold capitalize text-body">
             My Wishlist
           </p>
           <div>
@@ -87,14 +87,14 @@ const WishlistItems = ({
           </div>
         </div>
 
-        <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between bg-transparent py-1 pr-2">
+        <div className="mb-4 flex flex-col bg-transparent py-1 pr-2 md:flex-row md:items-center md:justify-between">
           <div className="inline-flex items-center">
             <MyCheckbox
               color="green"
               onChange={(e) => {
                 if (e.target.checked) {
                   return setSelected(
-                    wishlistData?.products.map((item) => item._id) || []
+                    wishlistData?.products.map((item) => item._id) || [],
                   );
                 }
                 setSelected([]);
@@ -104,12 +104,12 @@ const WishlistItems = ({
             <p
               className={`${
                 selected.length !== 0 ? "flex" : "hidden"
-              } text-accent text-sm ml-4`}
+              } ml-4 text-sm text-accent`}
             >
               {selected.length} items selected
             </p>
           </div>
-          <div className="flex flex-row gap-2 ml-1 md:ml-0">
+          <div className="ml-1 flex flex-row gap-2 md:ml-0">
             <button
               className="inline-flex items-center gap-1 rounded-full p-1.5 text-body transition hover:text-accent"
               onClick={handleMultiItemAddToCart}
@@ -129,7 +129,7 @@ const WishlistItems = ({
       </div>
       {/* product lists */}
       {!isLoading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {wishlistData?.products.map(
             ({
               featured_img,
@@ -163,10 +163,10 @@ const WishlistItems = ({
                   id={_id}
                   img={featured_img}
                   {...{ price, reducedPrice, tag, title }}
-                  className={`${selected.includes(_id) && "!outline-accent"}`}
+                  className={`${selected.includes(_id) && "!outline-accent"} h-[210px]`}
                 />
               </div>
-            )
+            ),
           )}
         </div>
       )}

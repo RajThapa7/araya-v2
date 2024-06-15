@@ -5,6 +5,7 @@ import useLogin from "@/api/hooks/auth/useLogin";
 import MyButton from "@/components/MyButton";
 import MyInput from "@/components/MyInput/MyInput";
 import loginSchema from "@/features/store/login/schema/schema";
+import getApiRoute from "@/helper/getApiRoute";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";
 import { useRouter } from "next-nprogress-bar";
@@ -79,7 +80,7 @@ export default function Login({
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-12 bg-white px-8 py-8 md:flex-row"
+        className="flex flex-col gap-12 bg-white px-8 py-8 md:flex-row md:items-center"
       >
         <div className="flex flex-col gap-4 md:w-1/2">
           <div className="flex flex-col gap-2">
@@ -123,9 +124,22 @@ export default function Login({
           <div className="flex flex-row items-center gap-6">
             <FcGoogle
               className="text-4xl"
-              onClick={() => router.push("http://localhost:4000/login/google")}
+              onClick={() =>
+                router.push(
+                  process.env.NEXT_PUBLIC_BASE_URL +
+                    getApiRoute("googleLogin")(),
+                )
+              }
             />
-            <FaFacebook className="text-4xl text-blue-500" />
+            <FaFacebook
+              className="text-4xl text-blue-500"
+              onClick={() =>
+                router.push(
+                  process.env.NEXT_PUBLIC_BASE_URL +
+                    getApiRoute("facebookLogin")(),
+                )
+              }
+            />
           </div>
         </div>
       </form>

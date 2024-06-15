@@ -3,7 +3,11 @@ import { PropsWithChildren } from "react";
 import { CookiesProvider } from "react-cookie";
 
 const CookieProvider = ({ children }: PropsWithChildren) => {
-  return <CookiesProvider>{children}</CookiesProvider>;
+  return (
+    <CookiesProvider defaultSetOptions={{ path: "/" }}>
+      {children}
+    </CookiesProvider>
+  );
 };
 
 export default CookieProvider;

@@ -14,7 +14,7 @@ export function MyCarousel({ initialData }: { initialData: ICarouselResult }) {
 
   if (isLoading) {
     return (
-      <div className="w-full aspect-[16/7] animate-shimmer bg-gray-400"></div>
+      <div className="animate-shimmer aspect-[16/7] w-full bg-gray-400"></div>
     );
   }
 
@@ -22,7 +22,8 @@ export function MyCarousel({ initialData }: { initialData: ICarouselResult }) {
     <Carousel
       loop={true}
       className=""
-      // autoplay
+      autoplay
+      transition={{ duration: 0.8 }}
       navigation={({ setActiveIndex, activeIndex, length }) => (
         <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
           {new Array(length).fill("").map((_, i) => (
@@ -42,7 +43,7 @@ export function MyCarousel({ initialData }: { initialData: ICarouselResult }) {
           color="white"
           size="lg"
           onClick={handlePrev}
-          className="!absolute top-2/4 left-4 -translate-y-2/4"
+          className="!absolute left-4 top-2/4 -translate-y-2/4"
         >
           <ChevronLeftIcon width={20} />
         </IconButton>
@@ -53,7 +54,7 @@ export function MyCarousel({ initialData }: { initialData: ICarouselResult }) {
           color="white"
           size="lg"
           onClick={handleNext}
-          className="!absolute top-2/4 !right-4 -translate-y-2/4"
+          className="!absolute !right-4 top-2/4 -translate-y-2/4"
         >
           <ChevronRightIcon width={20} />
         </IconButton>
@@ -65,7 +66,7 @@ export function MyCarousel({ initialData }: { initialData: ICarouselResult }) {
           key={_id}
           className={classNames(
             !isVisible && "hidden",
-            "relative aspect-[16/8] lg:aspect-[16/7] w-full"
+            "relative aspect-[16/8] w-full lg:aspect-[16/7]",
           )}
         >
           <Image

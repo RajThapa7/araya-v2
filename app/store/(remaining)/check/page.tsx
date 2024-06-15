@@ -1,5 +1,6 @@
 "use client";
 import MyInput from "@/components/MyInput/MyInput";
+import { Cookies } from "react-cookie";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type FormInputs = {
@@ -23,6 +24,9 @@ const Page = () => {
     console.log(data, "data");
     e?.target.reset(); // reset after form submit
   };
+
+  const cookie = new Cookies();
+  console.log(cookie.get("demo"), "demo cookie");
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
