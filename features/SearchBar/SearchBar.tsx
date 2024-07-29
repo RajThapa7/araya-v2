@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { GoInbox } from "react-icons/go";
 import { IoIosArrowDown, IoIosLogOut } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
+import { MdOutlineAccountCircle } from "react-icons/md";
 import { RiCloseFill } from "react-icons/ri";
 import { BadgeIcon } from "../../components/BadgeIcon";
 import MyButton from "../../components/MyButton";
@@ -121,7 +122,14 @@ export default function SearchBar() {
               </MenuHandler>
               <MenuList className="flex flex-col gap-2">
                 <MenuItem
-                  onClick={() => logout("/store", "logged out successfully")}
+                  onClick={() => router.push("/store/delivery-location")}
+                  className="flex items-center gap-2 py-2"
+                >
+                  <MdOutlineAccountCircle size={22} />
+                  My Account
+                </MenuItem>
+                <MenuItem
+                  onClick={() => router.push("/store/orders")}
                   className="flex items-center gap-2 py-2"
                 >
                   <GoInbox size={22} />

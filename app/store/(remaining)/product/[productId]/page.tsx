@@ -1,14 +1,9 @@
-import ReviewSection from "@/features/ReviewSection/ReviewSection";
 import { metaGenerator } from "@/features/metagenerator/metagenerator";
 import { fetchProductData } from "@/features/store/(home)/server/initialDataFetch";
 import ProductDetailSection from "@/features/store/product/DescriptionAndReviewTabBar";
 import ProductDescriptionWithImageSlider from "@/features/store/product/ProductDescriptionWithImageSlider";
 import RecommendedProductsByProductId from "@/features/store/product/RecommendedProducts";
-import {
-  fetchProductDataById,
-  fetchProductReview,
-} from "@/features/store/product/server/initialDataFetch";
-import { getUserCookieData } from "@/utils/getUserCookieData";
+import { fetchProductDataById } from "@/features/store/product/server/initialDataFetch";
 import { Metadata } from "next";
 
 type Props = {
@@ -48,9 +43,9 @@ export default async function ProductPage({
 
   const initialData = await fetchProductData();
 
-  const { userId } = getUserCookieData();
+  // const { userId } = getUserCookieData();
 
-  const initialReviewData = await fetchProductReview(productId, userId, page);
+  // const initialReviewData = await fetchProductReview(productId, userId, page);
 
   return (
     <div className="relative flex flex-col gap-10">
@@ -63,7 +58,7 @@ export default async function ProductPage({
         initialData={initialProductData}
         productId={productId}
       />
-      <ReviewSection initialData={initialReviewData} />
+      {/* <ReviewSection initialData={initialReviewData} /> */}
 
       <RecommendedProductsByProductId initialData={initialData} />
     </div>
