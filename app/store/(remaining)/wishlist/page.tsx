@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { fetchProductData } from "@/features/store/(home)/server/initialDataFetch";
 import PicksForYou from "@/features/store/wishlist/PicksForYou";
 import WishlistItems from "@/features/store/wishlist/WishlistItems";

@@ -73,7 +73,7 @@ export default function ReviewSection({
             date={item.createdAt}
             rating={item.rating}
             review={item.review}
-            username={item.user_id.username}
+            username={item?.user_id?.username}
           />
         ))}
         {data?.data.length === 0 && (

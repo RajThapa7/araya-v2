@@ -14,7 +14,7 @@ export default function ReviewItem({
 }: {
   review: string;
   rating: number;
-  username: string;
+  username?: string;
   date: Date;
   img: string[];
 }) {
