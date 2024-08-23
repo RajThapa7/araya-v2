@@ -26,7 +26,7 @@ const Page = () => {
   };
 
   const cookie = new Cookies();
-  console.log(cookie.get("demo"), "demo cookie");
+  console.log(cookie.get("user"), "demo cookie");
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

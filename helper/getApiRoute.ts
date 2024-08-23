@@ -1,5 +1,6 @@
 const routes = {
   login: () => "/login",
+  logout: () => "/logout",
   register: () => "/register",
   googleLogin: () => "/login/google",
   facebookLogin: () => "/login/facebook",

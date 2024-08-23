@@ -225,7 +225,7 @@ export default function SmallProductCard({
               <div className="mt-1 inline-flex items-center gap-2">
                 <IoIosStar size={14} className="text-yellow-700" />
                 <p className="text-xs text-gray-600">
-                  {averageRating.toFixed(2)}/5 ({ratingCount})
+                  {averageRating?.toFixed(2)}/5 ({ratingCount})
                 </p>
                 <p className="text-xs text-gray-600">129 sold</p>
               </div>

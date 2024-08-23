@@ -1,14 +1,16 @@
 import StoreFooter from "@/components/StoreFooter/Footer";
 import { StoreNavbar } from "@/components/StoreNavbar";
-import SearchBar from "@/features/SearchBar/SearchBar";
 import { metaGenerator } from "@/features/metagenerator/metagenerator";
+import SearchBar from "@/features/SearchBar/SearchBar";
 import { PropsWithChildren } from "react";
 
 export const metadata = metaGenerator({
   title: "Araya Arts | Store",
 });
 
-export default function Layout({ children }: PropsWithChildren) {
+export default async function Layout({ children }: PropsWithChildren) {
+  // const authsuccess = await getAuthSuccess();
+  // console.log(authsuccess, "auth success");
   return (
     <>
       <div className="relative flex min-h-screen flex-col bg-primary-dark">

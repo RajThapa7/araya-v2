@@ -76,7 +76,7 @@ export default function ProductCard({
           // dispatch(removeWishlistItem({ wishlist: data.list.products }));
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -103,7 +103,7 @@ export default function ProductCard({
           setClicked(true);
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -111,7 +111,7 @@ export default function ProductCard({
     dispatch(
       openModal({
         content: <ProductModal productId={id} />,
-      })
+      }),
     );
     e.stopPropagation();
   };
@@ -137,7 +137,7 @@ export default function ProductCard({
           });
         },
         onError: (error) => ErrorHandler(error),
-      }
+      },
     );
   };
 
@@ -148,14 +148,14 @@ export default function ProductCard({
         onClick={(e) => handleParentClick(e, id)}
         className={classNames(
           className,
-          `h-full cursor-pointer transition-smooth group relative block w-full max-w-sm overflow-hidden ring-primary-dark bg-white ring-[1px] hover:ring-accent pt-2 ${montserrat.className}`
+          `transition-smooth group relative block h-full w-full max-w-sm cursor-pointer overflow-hidden bg-white pt-2 ring-[1px] ring-primary-dark hover:ring-accent ${montserrat.className}`,
         )}
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
         {/* fav buttons */}
         <button
-          className={` bg-red-50 absolute end-4 top-3 group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 z-50 active:bg-green-300 ${
+          className={`group/heart absolute end-4 top-3 z-50 rounded-full bg-red-50 p-1.5 text-gray-900 transition hover:text-gray-900/75 active:bg-green-300 ${
             isHover || isInWishlist ? "opacity-100" : "opacity-0"
           }`}
           onClick={(e) => {
@@ -168,14 +168,14 @@ export default function ProductCard({
                 ? clicked
                   ? "animate-grow-wiggle text-red-300"
                   : "text-red-300"
-                : "text-white animate-shrink-wiggle"
+                : "animate-shrink-wiggle text-white"
             }`}
           />
         </button>
         <button
           className={`bg-gray-50 ${
             isHover ? "opacity-100" : "opacity-0"
-          } absolute end-4 top-3 z-[99] group/heart rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
+          } group/heart absolute end-4 top-3 z-[99] rounded-full p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
             isInWishlist ? "hidden" : "flex"
           }`}
           onClick={(e) => handleWishlistClick(e, id)}
@@ -189,7 +189,7 @@ export default function ProductCard({
         {/* fav buttons */}
         {/* quick view button */}
         <button
-          className={`absolute end-4 top-12 z-10 group/eye w-fit h-fit rounded-full bg-gray-50 p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
+          className={`group/eye absolute end-4 top-12 z-10 h-fit w-fit rounded-full bg-gray-50 p-1.5 text-gray-900 transition hover:text-gray-900/75 ${
             isHover ? "opacity-100" : "opacity-0"
           }`}
           onClick={handleQuickViewClick}
@@ -216,15 +216,15 @@ export default function ProductCard({
               </span>
             )}
 
-            <h3 className="transition-smooth mt-4 text-left text-lg font-semibold text-header group-hover:text-accent-dark leading-tight">
+            <h3 className="transition-smooth mt-4 text-left text-lg font-semibold leading-tight text-header group-hover:text-accent-dark">
               {title}
             </h3>
 
             {ratingCount !== 0 && (
-              <div className=" inline-flex items-center gap-2 mt-1">
+              <div className="mt-1 inline-flex items-center gap-2">
                 <IoIosStar size={14} className="text-yellow-700" />
                 <p className="text-sm text-gray-600">
-                  {averageRating.toFixed(2)}/5 ({ratingCount})
+                  {averageRating?.toFixed(2)}/5 ({ratingCount})
                 </p>
                 <p className="text-sm text-gray-600">129 sold</p>
               </div>

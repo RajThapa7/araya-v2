@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/Providers/AuthProvider";
+import useLogout from "@/api/hooks/auth/useLogout";
 import { useComponentVisible } from "@/hooks/useComponentVisible";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { HeartIcon, UserIcon } from "@heroicons/react/24/solid";
@@ -28,12 +29,12 @@ import { SmallScreenSearchTab } from "./SmallScreenSearchTab";
 import logo from "/public/footer-logo.svg";
 
 export default function SearchBar() {
+  const logoutMutation = useLogout();
   const [open, setOpen] = useState(false);
   const closeDrawer = () => setOpen(false);
   const router = useRouter();
 
   const { logout, user, token } = useAuth();
-  console.log(user, "user data");
 
   const isLogin = !!token;
 
@@ -128,7 +129,10 @@ export default function SearchBar() {
                   My Orders
                 </MenuItem>
                 <MenuItem
-                  onClick={() => logout("/store", "logged out successfully")}
+                  onClick={() => {
+                    logoutMutation.mutate();
+                    logout("/store", "logged out successfully");
+                  }}
                   className="flex items-center gap-2 py-2"
                 >
                   <IoIosLogOut size={22} color="red" />

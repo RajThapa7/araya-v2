@@ -1,7 +1,8 @@
 "use client";
+import { getAuthSuccess } from "@/features/store/(home)/server/getAuthSuccess";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { PropsWithChildren, createContext, useContext } from "react";
+import { PropsWithChildren, createContext, useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 
@@ -39,6 +40,21 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const router = useRouter();
   const client = useQueryClient();
+
+  //calling getAuthSuccess api to fetch token and user details if logged in
+  useEffect(() => {
+    (async () =>
+      await getAuthSuccess()
+        .then((res) => {
+          setAuthCookie("accessToken", res.token);
+          setAuthCookie("user", res.user);
+        })
+        .catch((err) => {
+          console.log(err?.response?.data?.message, "check auth error");
+          setAuthCookie("accessToken", "");
+          setAuthCookie("user", "");
+        }))();
+  }, [setAuthCookie]);
 
   const value: Value = {
     login: (
