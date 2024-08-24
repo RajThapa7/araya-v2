@@ -42,7 +42,7 @@ const FormBuilder = ({
 }: IFormBuilderProps) => {
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-1 gap-6">
         {formData.map((item) => (
           <>
             {item.type === undefined && (

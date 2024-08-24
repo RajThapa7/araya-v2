@@ -143,7 +143,6 @@ export default function ProductCard({
 
   return (
     <>
-      {/* <ProductModal productId={id} {...{ open, setOpen }} /> */}
       <div
         onClick={(e) => handleParentClick(e, id)}
         className={classNames(

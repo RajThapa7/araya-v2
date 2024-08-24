@@ -1,48 +1,18 @@
 "use client";
-import { useAuth } from "@/Providers/AuthProvider";
-import useInititateKhaltiPayment from "@/api/hooks/checkout/useInititateKhaltiPayment";
 import MyButton from "@/components/MyButton";
 import PaymentMethodSelector from "@/features/store/checkout/paymentMethodSelector";
 import { openModal } from "@/lib/modal/modalSlice";
-import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 export default function Cart() {
-  const router = useRouter();
-
-  const mutation = useInititateKhaltiPayment();
-
   const searchParams = useSearchParams();
   const products = JSON.parse(
     decodeURIComponent(searchParams.get("products") as string),
   );
 
-  const { user } = useAuth();
-
   const totalPrice = searchParams.get("totalPrice");
-
-  const productBreakdown = products?.map((item: any) => ({
-    identity: item._id,
-    name: item.title,
-    total_price: item.quantity * item.price * 100,
-    quantity: item.quantity,
-    unit_price: item.price * 100,
-  }));
-  const amountBreakdown = products?.map((item: any) => ({
-    label: item.title,
-    amount: item.quantity * (item.reducedPrice || item.price) * 100,
-  }));
-
-  const data = {
-    customer: {
-      name: user.username,
-    },
-    amount: parseInt(totalPrice || "") * 100, //in paisa,
-    product_details: productBreakdown,
-    amount_breakdown: amountBreakdown,
-  };
 
   const dispatch = useDispatch();
 
@@ -157,20 +127,6 @@ export default function Cart() {
           <p className="text-sm font-semibold">Total</p>
           <p className="font-semibold text-red-500">Rs. {totalPrice}</p>
         </div>
-        {/* <MyButton
-          isLoading={mutation.isPending}
-          className="w-full !py-4"
-          onClick={() => {
-            mutation.mutate(data, {
-              onSuccess: (data) => {
-                router.push(data.payment_url);
-              },
-              onError: (error) => ErrorHandler(error),
-            });
-          }}
-        >
-          Place Order
-        </MyButton> */}
         <MyButton
           className="w-full !py-4"
           onClick={() => {
