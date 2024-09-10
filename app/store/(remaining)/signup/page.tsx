@@ -11,7 +11,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
@@ -124,7 +123,7 @@ export default function Signup() {
                   )
                 }
               />
-              <FaFacebook
+              {/* <FaFacebook
                 onClick={() =>
                   router.push(
                     process.env.NEXT_PUBLIC_BASE_URL +
@@ -132,7 +131,7 @@ export default function Signup() {
                   )
                 }
                 className="text-4xl text-blue-500"
-              />
+              /> */}
             </div>
           </div>
         </div>

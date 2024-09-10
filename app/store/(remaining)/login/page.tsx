@@ -13,7 +13,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
@@ -131,7 +130,7 @@ export default function Login({
                 )
               }
             />
-            <FaFacebook
+            {/* <FaFacebook
               className="text-4xl text-blue-500"
               onClick={() =>
                 router.push(
@@ -139,7 +138,7 @@ export default function Login({
                     getApiRoute("facebookLogin")(),
                 )
               }
-            />
+            /> */}
           </div>
         </div>
       </form>
