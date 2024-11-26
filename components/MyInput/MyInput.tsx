@@ -33,7 +33,7 @@ const MyInput = forwardRef(
           onBlur={handleBlur}
           onChange={handleChange}
           className={classNames(
-            "z-1 w-full rounded-md border-none bg-gray-100 px-4 py-3 outline-none focus:ring-1",
+            "z-1 w-full rounded-md border-none bg-gray-100 px-4 py-3 outline-none placeholder:text-sm placeholder:text-gray-600 focus:ring-1",
             className,
             error ? "ring-1 ring-red-500" : "focus:ring-blue-500",
             props.disabled

@@ -26,6 +26,7 @@ interface IFormBuilderProps {
   isEditPage?: boolean;
   isLoading?: boolean;
   isFormSettled?: boolean;
+  cols?: number;
 }
 
 const FormBuilder = ({
@@ -39,10 +40,12 @@ const FormBuilder = ({
   isEditPage = false,
   isLoading = false,
   isFormSettled = false,
+  cols = 1,
 }: IFormBuilderProps) => {
+  const columns = `grid-cols-${cols}`;
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-1 gap-6">
+      <div className={`grid ${columns} gap-4`}>
         {formData.map((item) => (
           <>
             {item.type === undefined && (
@@ -75,10 +78,11 @@ const FormBuilder = ({
                   name={item.name}
                   render={({ field: { value, onChange, onBlur } }) => (
                     <Select
+                      size="lg"
                       color="blue"
                       variant="outlined"
                       label={item.placeholder}
-                      className={`bg-gray-100 ${montserrat.className}`}
+                      className={`bg-gray-100 ${montserrat.className} `}
                       error={!!errors[item.name]}
                       onChange={onChange}
                       onBlur={onBlur}

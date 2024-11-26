@@ -1,9 +1,13 @@
 "use client";
+import useFetchDeliveryAddress from "@/api/hooks/delivery-address/useFetchDeliveryAddress";
 import MyButton from "@/components/MyButton";
 import PaymentMethodSelector from "@/features/store/checkout/paymentMethodSelector";
+import AddNewAddress from "@/features/store/delivery-location/addNewAddress";
 import { openModal } from "@/lib/modal/modalSlice";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { IoIosAdd } from "react-icons/io";
 import { useDispatch } from "react-redux";
 
 export default function Cart() {
@@ -16,46 +20,57 @@ export default function Cart() {
 
   const dispatch = useDispatch();
 
+  const deliveryAddress = useFetchDeliveryAddress();
+
+  const [deliveryId, setDeliveryId] = useState<string>();
+
   return (
     <div className="flex flex-col gap-4 lg:flex-row">
       <div className="flex flex-1 flex-col">
-        <div className="mb-4 flex flex-col justify-between gap-4 rounded-md bg-white px-6 py-6 text-sm shadow-sm">
-          <p>Deliver to: Raj Thapa</p>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <div className="flex flex-row gap-3">
-              <p className="h-fit w-fit bg-accent/20 px-1.5 py-0.5 text-xs text-accent-dark">
-                Home
-              </p>
-              <div className="flex flex-row">
-                <p className="pr-1.5">9848741130</p>
-                <p className="border-l-[1px] border-gray-400 pl-1.5">
-                  Chunikhel, Kathmandu, Budhanilkantha - Chunikhel Buspark Area,
-                  Kathmandu Outside Ring Road, Bagmati Province, near Karuna
-                  Hospital
-                </p>
+        <div className="mb-4 flex flex-row justify-between">
+          <p className="mb-4 font-semibold">Please select a delivery address</p>
+          <p
+            onClick={() =>
+              dispatch(
+                openModal({
+                  content: <AddNewAddress />,
+                }),
+              )
+            }
+            className="flex cursor-pointer flex-row items-center gap-1 hover:text-accent"
+          >
+            <IoIosAdd size={22} className="text-accent" />
+            Add New Address
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {deliveryAddress.data?.data.map(
+            ({ _id, area, city, label, landmark, name, number, province }) => (
+              <div
+                onClick={() => setDeliveryId(_id)}
+                key={_id}
+                className={`flex cursor-pointer flex-col justify-between gap-4 rounded-md bg-white px-6 py-6 text-sm shadow-sm ${deliveryId === _id && "ring-1 ring-accent"}`}
+              >
+                <p>Deliver to: {name}</p>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <div className="flex flex-row gap-3">
+                    <p className="h-fit w-fit bg-accent/20 px-1.5 py-0.5 text-xs text-accent-dark">
+                      {label}
+                    </p>
+                    <div className="flex flex-row">
+                      <p className="pr-1.5">{number}</p>
+                      <p className="border-l-[1px] border-gray-400 pl-1.5">
+                        {area}, {city}, {province} Province, near {landmark}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <p className="transition-smooth w-fit cursor-pointer text-blue-700 hover:text-blue-900">
-              Change
-            </p>
-          </div>
-          <div className="mt-3 flex flex-col gap-1">
-            <div className="inline-flex gap-4">
-              <p>Bill to the same address</p>
-              <p className="transition-smooth cursor-pointer text-blue-700 hover:text-blue-900">
-                Edit
-              </p>
-            </div>
-            <div className="inline-flex gap-4">
-              <p>Email to jyangoraj@gmail.com</p>
-              <p className="transition-smooth cursor-pointer text-blue-700 hover:text-blue-900">
-                Edit
-              </p>
-            </div>
-          </div>
+            ),
+          )}
         </div>
 
-        <div className="rounded-xl shadow-sm">
+        <div className="mt-6 rounded-xl shadow-sm">
           {products.map(
             ({
               _id,
@@ -128,6 +143,7 @@ export default function Cart() {
           <p className="font-semibold text-red-500">Rs. {totalPrice}</p>
         </div>
         <MyButton
+          disabled={!deliveryId}
           className="w-full !py-4"
           onClick={() => {
             dispatch(

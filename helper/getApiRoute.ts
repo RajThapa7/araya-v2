@@ -48,6 +48,11 @@ const routes = {
   deleteReviewOnProduct: (productId?: string, userId?: string) =>
     `/review/delete/${productId}/${userId}`,
 
+  getAllDeliveryAddress: (userId?: string) => `/delivery-address/${userId}`,
+  addDeliveryAddress: () => `/delivery-address/add`,
+  deleteDeliveryAddress: (id?: string) => `/delivery-address/${id}`,
+  editDeliveryAddress: (id?: string) => `/delivery-address/edit/${id}`,
+
   initiateKhalitPayment: () => "/checkout/khalti",
   verifyKhalitPayment: (id?: string) => `/checkout/khalti/verify/${id}`,
 };

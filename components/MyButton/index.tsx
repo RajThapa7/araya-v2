@@ -29,7 +29,7 @@ const MyButton = ({
       color={color}
       {...props}
       variant={variant}
-      disabled={isLoading}
+      disabled={isLoading || props.disabled}
       className={classNames(
         className,
         `transition-smooth flex min-w-[130px] items-center justify-center gap-x-2 px-4 py-1 ${
